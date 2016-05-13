@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#eeD9CBC0</color>
+
+    <color name="colorAccentBasic">#FF4081</color>
+
+    <color name="colorMain">#eeD9CBC0</color>
+    <color name="colorWhite">#eeeeee</color>
+
+    <color name="colorGray">#888888</color>
+    <color name="colorBtnRegColor">#AD9D81</color>
+    <color name="colorBtnLogColor">#1ABC9C</color>
+    <color name="colorRelativeDark">#66888888</color>
+
+    <color name="toolbarColor">#AD9081</color>
+</resources>

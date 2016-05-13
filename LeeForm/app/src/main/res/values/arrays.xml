@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>가</item>
+        <item>나</item>
+        <item>다</item>
+        <item>라</item>
+        <item>마</item>
+    </string-array>
+
+    <string-array name="sort">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+</resources>

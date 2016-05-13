@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMain"
+    android:orientation="vertical"
+    tools:context="sungkyul.ac.kr.leeform.member.RegisterActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/logo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/activity_member_margin"
+            android:layout_marginLeft="@dimen/activity_member_margin_left"
+            android:layout_marginRight="@dimen/activity_member_margin_right"
+            android:layout_marginTop="@dimen/activity_member_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_email_black_24dp" />
+
+            <EditText
+                android:id="@+id/edtMemberRegEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="4dp"
+                android:background="@null"
+                android:hint="E-mail address"
+                android:padding="4dp"
+                android:textColorHint="@color/colorGray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/activity_member_margin"
+            android:layout_marginLeft="@dimen/activity_member_margin_left"
+            android:layout_marginRight="@dimen/activity_member_margin_right"
+            android:layout_marginTop="@dimen/activity_member_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_https_black_24dp" />
+
+            <EditText
+                android:id="@+id/edtMemberRegPwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="4dp"
+                android:background="@null"
+                android:hint="Password"
+                android:padding="4dp"
+                android:textColorHint="@color/colorGray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/activity_member_margin"
+            android:layout_marginLeft="@dimen/activity_member_margin_left"
+            android:layout_marginRight="@dimen/activity_member_margin_right"
+            android:layout_marginTop="@dimen/activity_member_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_https_black_24dp" />
+
+            <EditText
+                android:id="@+id/edtMemberRegPwdConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="4dp"
+                android:background="@null"
+                android:hint="Password Confirm"
+                android:padding="4dp"
+                android:textColorHint="@color/colorGray" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btnMemberRegOk"
+            android:text="회원가입"
+            android:background="@color/colorBtnRegColor"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/activity_member_margin_left"
+            android:layout_marginRight="@dimen/activity_member_margin_right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>
