@@ -41,18 +41,21 @@ public class HomeFragment extends Fragment {
         adapter = new MainListAdapter(getContext(), R.layout.item_list_main, listItem);
 
         mSpinnerCategory = (Spinner)mView.findViewById(R.id.spnKnowCategory);
+        //(Spinner)findViewById(R.id.spnKnowCategory); 오류=>보여줄 View가 없어
         mSpinnerSort = (Spinner)mView.findViewById(R.id.spnKnowSort);
 
-        String[] mCategory = getResources().getStringArray(R.array.category);
-        String[] mSort = getResources().getStringArray(R.array.sort);
+        String[] mCategory = getResources().getStringArray(R.array.category); //카테고리의 내용들을 배열(mCategory)에 저장
+        String[] mSort = getResources().getStringArray(R.array.sort); //정렬의 내용들을 배열(mSort)에 저장
 
         ArrayAdapter<String> mSpinnerCategoryAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mCategory);
+         //기본으로 제공하는 layout(simple_spinner_item), 리스트에 있는 내용을 mCategory의 내용으로 채우기 위해 ArrayAdapter 이용
         ArrayAdapter<String> mSpinnerSortAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mSort);
 
         mSpinnerCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter를 통해 리스트 형태로 늘리는 메소드
         mSpinnerSortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mSpinnerCategory.setAdapter(mSpinnerCategoryAdapter);
+        mSpinnerCategory.setAdapter(mSpinnerCategoryAdapter); //스피너에 adapter 설정
         mSpinnerSort.setAdapter(mSpinnerSortAdapter);
 
 
@@ -60,15 +63,16 @@ public class HomeFragment extends Fragment {
         lst.setAdapter(adapter);
 
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }
         });
 
-        init();
+        init(); //메소드호출
 
-        FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +80,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
@@ -88,7 +92,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //정렬 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
@@ -104,7 +108,7 @@ public class HomeFragment extends Fragment {
 
     void init() {
         for (int i = 0; i < 10; i++) {
-            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2));
+            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
     }
 }

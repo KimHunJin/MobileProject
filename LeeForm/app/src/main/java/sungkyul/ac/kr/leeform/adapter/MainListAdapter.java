@@ -47,7 +47,7 @@ public class MainListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
-        if (convertView == null) {
+        if (convertView == null) { //내용이 없을 때
 
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(layout, parent, false);

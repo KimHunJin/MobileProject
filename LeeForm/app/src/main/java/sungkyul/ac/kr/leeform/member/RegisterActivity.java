@@ -18,6 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Button btnRegist = (Button)findViewById(R.id.btnMemberRegOk);
+        /**등록하기 버튼 누르면 메인화면으로**/
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

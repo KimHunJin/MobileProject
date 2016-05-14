@@ -13,6 +13,6 @@
     <color name="colorBtnRegColor">#AD9D81</color>
     <color name="colorBtnLogColor">#1ABC9C</color>
     <color name="colorRelativeDark">#66888888</color>
-
+    <color name="colorBlack">#000000</color>
     <color name="toolbarColor">#AD9081</color>
 </resources>
