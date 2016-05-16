@@ -21,6 +21,10 @@
         <activity
             android:name=".member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
+
+        <activity android:name=".knowhow.KnowhowDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>

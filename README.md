@@ -5,20 +5,22 @@
 * Sign In
 * Sign Up
 * Search Password
-
-### To Do (Layout)
-* navigation
-* Detail List
-* Detail View
-
-### Doing (Layout)
 * Material List
 * Community
 
+### To Do (Layout)
+* navigation
+* Detail Know-How
+* Detail mMterial
+* Detail Community
+* create Know-How
+* create Community
+* Pay System
+
+### Doing (Layout)
+
 ### Hmm...
-* Home
 * Search
-* Payment View
 * Kakao Pay
 * Google Admob
 * Google push Alerm
