@@ -2,12 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorMain">
 
     <GridView
+        android:id="@+id/grvMaterial"
+        android:numColumns="2"
+        android:listSelector="@color/colorBtnLogColor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        android:paddingLeft="1dp"
+        android:paddingTop="1dp">
     </GridView>
 
 </LinearLayout>

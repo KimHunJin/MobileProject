@@ -21,7 +21,6 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mView = inflater.inflate(R.layout.fragment_community, container, false);
-        //fragment_community.xml을 가져와서 보여주겠다(VIew).
         return mView;
     }
 }
