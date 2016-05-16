@@ -9,8 +9,19 @@ public class CommunityItem {
     private String cCount;
     private String cContent;
     private int cImg;
+<<<<<<< HEAD
     public String getcName(){ return cName; }
     public String getcCount() { return cCount; }
+=======
+
+    public String getcName() {
+        return cName;
+    }
+
+    public String getcCount() {
+        return cCount;
+    }
+>>>>>>> 21848864a3767f175b95c88c6b67cac9dabb77f2
 
     public String getcContent() {
         return cContent;
@@ -20,10 +31,10 @@ public class CommunityItem {
         return cImg;
     }
 
-    public CommunityItem(String name, String count, String content,int img) {
-       cName=name;
-       cCount=count;
-       cContent=content;
-        cImg=img;
+    public CommunityItem(String name, String count, String content, int img) {
+        cName = name;
+        cCount = count;
+        cContent = content;
+        cImg = img;
     }
 }
