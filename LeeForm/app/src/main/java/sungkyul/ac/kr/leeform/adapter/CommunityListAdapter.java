@@ -7,22 +7,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import sungkyul.ac.kr.leeform.R;
-import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.items.CommunityItem;
 
 /**
- * Created by HunJin on 2016-04-06.
+ * Created by user on 2016-05-16.
  */
-public class MainListAdapter extends BaseAdapter {
 
+public class CommunityListAdapter extends BaseAdapter{
     private LayoutInflater inflater;
-    private ArrayList<MainListItem> item;
+    private ArrayList<CommunityItem> item;
     private int layout;
 
-    public MainListAdapter(Context context, int layout, ArrayList<MainListItem> item) {
+    public CommunityListAdapter(Context context, int layout, ArrayList<CommunityItem> item) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.item = item;
         this.layout = layout;
@@ -37,7 +35,6 @@ public class MainListAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return null;
     }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -51,27 +48,27 @@ public class MainListAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(layout, parent, false);
-            viewHolder.txtMainCost = (TextView) convertView.findViewById(R.id.txtListCost);
-            viewHolder.txtMainTime = (TextView) convertView.findViewById(R.id.txtListTime);
-            viewHolder.txtMainLike = (TextView) convertView.findViewById(R.id.txtListLike);
-            viewHolder.imgMainList = (ImageView) convertView.findViewById(R.id.imgListItem);
+            viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
+            viewHolder.content = (TextView) convertView.findViewById(R.id.contentCommunity);
+            viewHolder.replyCount = (TextView) convertView.findViewById(R.id.replyCount);
+            viewHolder.img=(ImageView)convertView.findViewById(R.id.img);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        MainListItem listItem = item.get(position);
-        viewHolder.imgMainList.setImageResource(listItem.getmImg());
-        viewHolder.txtMainCost.setText(listItem.getmCost());
-        viewHolder.txtMainLike.setText(listItem.getmLike());
-        viewHolder.txtMainTime.setText(listItem.getmTime());
+        CommunityItem listItem = item.get(position);
+        viewHolder.userName.setText(listItem.getcName());
+        viewHolder.content.setText(listItem.getcContent());
+        viewHolder.replyCount.setText(listItem.getcCount());
+        viewHolder.img.setImageResource(listItem.getcImg());
 
         return convertView;
     }
 
     class ViewHolder {
-        private ImageView imgMainList;
-        private TextView txtMainLike;
-        private TextView txtMainTime;
-        private TextView txtMainCost;
+        private TextView userName;
+        private TextView content;
+        private TextView replyCount;
+        private ImageView img;
     }
 }
