@@ -17,10 +17,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button btnMemberRegister = (Button)findViewById(R.id.btnMemberRegister);
-<<<<<<< HEAD
-=======
-
->>>>>>> ccd7ace25051646f65d19494cc1974ac83860dc0
         btnMemberRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

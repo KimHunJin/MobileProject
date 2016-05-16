@@ -32,10 +32,6 @@ public class CommunityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-<<<<<<< HEAD
-        mView = inflater.inflate(R.layout.fragment_community, container, false);
-        return mView;
-=======
 
         cView= inflater.inflate(R.layout.fragment_community,container,false);
         adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
@@ -60,6 +56,5 @@ public class CommunityFragment extends Fragment {
         for (int i = 0; i < 10; i++) {
             listItem.add(new CommunityItem("박현경","5","ㅏ하하하하ㅏㅎ",R.drawable.circle_img)); //리스트에 추가
         }
->>>>>>> ccd7ace25051646f65d19494cc1974ac83860dc0
     }
 }
