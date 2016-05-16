@@ -1,10 +1,10 @@
 # MobileProject
 
 ### Done (Layout)
-*Splash
-Sign In
-Sign Up
-Search Password
+* Splash
+* Sign In
+* Sign Up
+* Search Password
 
 ### To Do (Layout)
 * navigation
@@ -16,10 +16,9 @@ Search Password
 * Community
 
 ### Hmm...
-*Home
-Search
-Payment View
-Navigation
-Kakao Pay
-Google Admob
-Google push Alerm
+* Home
+* Search
+* Payment View
+* Kakao Pay
+* Google Admob
+* Google push Alerm
