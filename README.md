@@ -12,7 +12,7 @@
 * Detail View
 
 ### Doing (Layout)
-*Material List
+* Material List
 * Community
 
 ### Hmm...
