@@ -22,15 +22,17 @@
         android:orientation="horizontal"
         android:layout_marginTop="250dp">
         <ImageView
+            android:id="@+id/imgCamera"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_view_list_black_24dp"
+            android:src="@drawable/camera"
             android:scaleType="fitXY"/>
         <ImageView
+            android:id="@+id/imgAlbum"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"
-            android:src="@drawable/ic_mode_edit_white_24dp"
+            android:src="@drawable/album"
             android:scaleType="fitXY"/>
     </LinearLayout>
 </LinearLayout>
