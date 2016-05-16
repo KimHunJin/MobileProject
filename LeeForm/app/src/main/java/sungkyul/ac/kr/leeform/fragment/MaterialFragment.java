@@ -6,15 +6,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
+import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 /**
  * Created by HunJin on 2016-05-01.
  */
 public class MaterialFragment extends Fragment {
 
-    View mView;
+    private View mView;
+    private GridView grvMaterial;
+    private MaterialGridAdapter mAdapter;
+
+    ArrayList<MaterialGridItem> gridItems = new ArrayList<>();
 
     @Nullable
     @Override
@@ -22,6 +33,29 @@ public class MaterialFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mView = inflater.inflate(R.layout.fragment_material, container, false);
+
+        grvMaterial = (GridView)mView.findViewById(R.id.grvMaterial);
+
+        mAdapter = new MaterialGridAdapter(getContext(), R.layout.item_grid_material, gridItems);
+
+        grvMaterial.setAdapter(mAdapter);
+
+        init();
+
+        grvMaterial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),(position+1) + "선택", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return mView;
+    }
+
+    void init() {
+        for(int i=0;i<10;i++) {
+            gridItems.add(new MaterialGridItem(i,"판자",R.drawable.panza));
+        }
     }
 }

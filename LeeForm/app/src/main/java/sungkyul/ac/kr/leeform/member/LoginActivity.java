@@ -17,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button btnMemberRegister = (Button)findViewById(R.id.btnMemberRegister);
-        /**회원가입 버튼 누르면 회원가입 창으로**/
         btnMemberRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

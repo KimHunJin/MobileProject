@@ -1,17 +1,26 @@
 # MobileProject
 
-Splash
-Intro
-Sign In
-Sign Up
+### Done (Layout)
+* Splash
+* Sign In
+* Sign Up
+* Search Password
+* Material List
+* Community
 
-Home
-Search
-Detail List
-Detail View
-Payment View
-Navigation
+### To Do (Layout)
+* navigation
+* Detail Know-How
+* Detail mMterial
+* Detail Community
+* create Know-How
+* create Community
+* Pay System
 
-Kakao Pay
-Google Admob
-Google push Alerm
+### Doing (Layout)
+
+### Hmm...
+* Search
+* Kakao Pay
+* Google Admob
+* Google push Alerm
