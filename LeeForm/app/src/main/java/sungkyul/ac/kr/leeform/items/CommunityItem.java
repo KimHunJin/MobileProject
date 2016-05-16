@@ -4,13 +4,17 @@ package sungkyul.ac.kr.leeform.items;
  * Created by user on 2016-05-16.
  */
 public class CommunityItem {
+    private int cNumber;
     private String cName;
     private String cCount;
     private String cContent;
     private int cImg;
     public String getcName(){ return cName; }
     public String getcCount() { return cCount; }
-    public String getcContent(){ return cContent; }
+
+    public String getcContent() {
+        return cContent;
+    }
 
     public int getcImg() {
         return cImg;
