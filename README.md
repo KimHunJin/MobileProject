@@ -1,21 +1,21 @@
 # MobileProject
 
-## Done (Layout)
+### Done (Layout)
 *Splash
 Sign In
 Sign Up
 Search Password
 
-## To Do (Layout)
-*navigation
-Detail List
-Detail View
+### To Do (Layout)
+* navigation
+* Detail List
+* Detail View
 
-## Doing (Layout)
+### Doing (Layout)
 *Material List
-Community
+* Community
 
-## Hmm...
+### Hmm...
 *Home
 Search
 Payment View
