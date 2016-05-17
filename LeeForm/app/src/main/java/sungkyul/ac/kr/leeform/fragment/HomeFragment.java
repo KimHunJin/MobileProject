@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.items.MainListItem;
 
@@ -76,7 +78,7 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "나와라", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), CreateKnowHowActivity.class));
             }
         });
 
