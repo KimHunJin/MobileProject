@@ -20,6 +20,7 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.knowhow.KnowhowDetailActivity;
 
 /**
  * Created by HunJin on 2016-05-01.
@@ -68,7 +69,9 @@ public class HomeFragment extends Fragment {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
+                Intent itKnowhowDetail = new Intent(getActivity().getApplicationContext(), KnowhowDetailActivity.class);
+                startActivity(itKnowhowDetail);
+//                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
+import sungkyul.ac.kr.leeform.community.CommunityCreateActivity;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.items.MainListItem;
 
@@ -50,6 +52,7 @@ public class CommunityFragment extends Fragment {
         init();
 
         return cView;
+
 
     }
     void init() {
