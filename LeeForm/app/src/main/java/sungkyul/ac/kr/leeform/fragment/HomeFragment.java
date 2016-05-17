@@ -17,9 +17,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.KnowhowDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.items.MainListItem;
-import sungkyul.ac.kr.leeform.knowhow.KnowhowDetailActivity;
 
 /**
  * Created by HunJin on 2016-05-01.
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "나와라", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), CreateKnowHowActivity.class));
             }
         });
 

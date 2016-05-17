@@ -9,7 +9,6 @@
     </style>
 
     <style name="CustomNoActionBar" parent="Theme.AppCompat.NoActionBar">
-
     </style>
 
     <style name="AppTheme.NoActionBar">

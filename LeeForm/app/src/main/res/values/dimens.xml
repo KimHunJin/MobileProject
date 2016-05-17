@@ -6,5 +6,6 @@
     <dimen name="activity_member_margin_left">40dp</dimen>
     <dimen name="activity_member_margin_right">40dp</dimen>
     <dimen name="activity_member_edt_height">64dp</dimen>
+    <dimen name="activity_create_margin_top">32dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>
