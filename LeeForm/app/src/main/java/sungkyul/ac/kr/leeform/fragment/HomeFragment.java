@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.KnowhowDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.items.MainListItem;
-import sungkyul.ac.kr.leeform.knowhow.KnowhowDetailActivity;
 
 /**
  * Created by HunJin on 2016-05-01.
