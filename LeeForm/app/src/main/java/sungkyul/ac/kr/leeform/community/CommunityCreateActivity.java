@@ -1,4 +1,5 @@
 package sungkyul.ac.kr.leeform.community;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,16 +12,16 @@ import sungkyul.ac.kr.leeform.R;
 /**
  * Created by user on 2016-05-16.
  */
-public class CommunityCreateActivity extends AppCompatActivity{
 
+public class CommunityCreateActivity extends AppCompatActivity {
     ImageView camera,album;
-    private  static int TAKE_PICTURE=1;
-
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_create);
+
         camera=(ImageView)findViewById(R.id.imgCamera);
-        album=(ImageView)findViewById(R.id.imgAlbum);
+        album=(ImageView) findViewById(R.id.imgAlbum);
 
 
         camera.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +37,6 @@ public class CommunityCreateActivity extends AppCompatActivity{
 
             }
         });
+
     }
 }
