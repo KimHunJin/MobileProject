@@ -2,35 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp">
+    android:background="@color/colorWhite">
+    <include layout="@layout/toolbar_custom_form" />
+    <!--아이콘수정필요(뒤로가기,완료)-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:padding="10dp"
             android:background="@drawable/retangle_box"
-            android:hint="내가 꾸미는 우리집만의 스토리를 나누세요.
-
-- 제작해봤어요~ 인증샷!
-- 또 다른 제작 노하우
-- 소품 지식인! 묻고 답하기"/>
+            android:hint="@string/community"
+            android:textColorHint="@color/colorRelativeDark"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="250dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="200dp">
         <ImageView
             android:id="@+id/imgCamera"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/camera"
             android:scaleType="fitXY"/>
+
         <ImageView
             android:id="@+id/imgAlbum"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="25dp"
             android:src="@drawable/album"
             android:scaleType="fitXY"/>
