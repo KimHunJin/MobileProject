@@ -1,12 +1,13 @@
 package sungkyul.ac.kr.leeform.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -14,10 +15,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.community.CommunityCreateActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
-import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
-import sungkyul.ac.kr.leeform.items.MainListItem;
 
 /**
  * Created by HunJin on 2016-05-01.
@@ -49,7 +50,15 @@ public class CommunityFragment extends Fragment {
         });
         init();
 
+        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1); //작성하기 버튼
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CommunityCreateActivity.class));
+            }
+        });
         return cView;
+
 
     }
     void init() {

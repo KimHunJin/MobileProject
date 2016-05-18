@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".activity.knowhow.CreateKnowHowActivity">
+
+    <include layout="@layout/toolbar_custom_form" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_create_know_how_view" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/colorBlack" />
+
+            <LinearLayout
+                android:id="@+id/lineCreateView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <include layout="@layout/activity_create_know_how_add_view" />
+
+            </LinearLayout>
+
+            <include layout="@layout/activity_create_know_how_btn_p_m" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

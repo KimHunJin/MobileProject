@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorMain"
     android:orientation="vertical"
-    tools:context="sungkyul.ac.kr.leeform.member.RegisterActivity">
+    tools:context=".activity.member.RegisterActivity">
 
 
     <LinearLayout

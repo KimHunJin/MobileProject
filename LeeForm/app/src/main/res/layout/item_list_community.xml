@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+   >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
         <ImageView
             android:id="@+id/img"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:src="@drawable/circle_img"/>
         <TextView
@@ -18,9 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="작성자 닉네임"
-            android:textSize="20dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="16dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,12 +53,13 @@
                 android:layout_height="16dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_favorite_border_white_18dp"/>
+                android:src="@drawable/reply"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="13dp"
                 android:text="댓글"/>
         </LinearLayout>
         <LinearLayout
@@ -70,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="5"
-                android:textSize="16dp"/>
+                android:textColor="@color/colorBlack"
+                android:textSize="13dp"/>
         </LinearLayout>
 
     </LinearLayout>

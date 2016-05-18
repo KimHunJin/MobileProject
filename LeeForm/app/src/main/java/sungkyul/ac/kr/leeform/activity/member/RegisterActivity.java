@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.member;
+package sungkyul.ac.kr.leeform.activity.member;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
