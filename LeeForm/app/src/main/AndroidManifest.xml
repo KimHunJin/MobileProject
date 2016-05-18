@@ -25,7 +25,7 @@
             android:theme="@style/CustomNoActionBar"></activity>
         <activity android:name=".activity.knowhow.CreateKnowHowActivity"
             android:theme="@style/CustomNoActionBar"></activity>
-        <activity android:name=".community.CommunityCreateActivity"
+        <activity android:name=".activity.community.CommunityCreateActivity"
             android:theme="@style/CustomNoActionBar"></activity>
         <activity android:name=".community.CommunityDetailActivity"
             android:theme="@style/CustomNoActionBar"></activity>

@@ -1,11 +1,9 @@
 package sungkyul.ac.kr.leeform.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
->>>>>>> 6d7fd513157f8ca15e7e86a7d659af9f775490d0
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.community.CommunityCreateActivity;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
