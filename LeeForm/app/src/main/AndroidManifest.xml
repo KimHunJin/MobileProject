@@ -16,15 +16,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".member.LoginActivity"
+            android:name=".activity.member.LoginActivity"
             android:theme="@style/CustomNoActionBar" />
         <activity
-            android:name=".member.RegisterActivity"
+            android:name=".activity.member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
-
-        <activity android:name=".knowhow.KnowhowDetailActivity">
-
-        </activity>
+        <activity android:name=".activity.knowhow.KnowhowDetailActivity"
+            android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".activity.knowhow.CreateKnowHowActivity"
+            android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".community.CommunityCreateActivity"
+            android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".community.CommunityDetailActivity"
+            android:theme="@style/CustomNoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.knowhow;
+package sungkyul.ac.kr.leeform.activity.knowhow;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
