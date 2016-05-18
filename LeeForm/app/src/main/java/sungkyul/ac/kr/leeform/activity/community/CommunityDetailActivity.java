@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.community;
+package sungkyul.ac.kr.leeform.activity.community;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

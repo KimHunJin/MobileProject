@@ -1,5 +1,7 @@
 package sungkyul.ac.kr.leeform.activity.knowhow;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +61,9 @@ public class CreateKnowHowActivity extends AppCompatActivity implements View.OnC
                     LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, size * 20);
                     mainParams.setMargins(size, size, size, size);
 
+                    Bitmap bmA = BitmapFactory.decodeResource(getResources(), R.drawable.tables2);
+                    Bitmap bmB = BitmapFactory.decodeResource(getResources(), R.drawable.ic_collections_white_18dp);
+
                     // horizontal 형식의 리니어 레이아웃 생성
                     linePlusView[count] = new LinearLayout(this);
                     linePlusView[count].setOrientation(LinearLayout.HORIZONTAL);
@@ -66,12 +71,14 @@ public class CreateKnowHowActivity extends AppCompatActivity implements View.OnC
                     // 이미지를 위한 릴레이티브 레이아웃 (이미지 안에 이미지)
                     relPlusView[count] = new RelativeLayout(this); // 릴레이티브 레이아웃 생성
                     imgPlus[count] = new ImageView(this); // 이미지 뷰 생성 (꽉차야 하는 이미지)
-                    imgPlus[count].setImageDrawable(getDrawable(R.drawable.tables2));
+//                    imgPlus[count].setImageDrawable(getDrawable(R.drawable.tables2));
+                    imgPlus[count].setImageBitmap(bmA);
                     imgPlus[count].setScaleType(ImageView.ScaleType.FIT_XY); // 레이아웃에 꽉차게 함
 
                     // 사진을 얻기 위한 작은 이미지
                     imgAdd[count] = new ImageView(this); // 이미지 뷰 생성 (작은 이미지)
-                    imgAdd[count].setImageDrawable(getDrawable(R.drawable.ic_collections_white_18dp));
+//                    imgAdd[count].setImageDrawable(getDrawable(R.drawable.ic_collections_white_18dp));
+                    imgAdd[count].setImageBitmap(bmB);
 
                     // 작은 이미지가 항상 보이게 하기위한 리니어 레이아웃 설정
                     lineAddImg[count] = new LinearLayout(this);
@@ -96,7 +103,8 @@ public class CreateKnowHowActivity extends AppCompatActivity implements View.OnC
                     edtContents[count].setGravity(Gravity.TOP);
                     edtContents[count].setPadding(size, size, size, size);
                     edtContents[count].setTextColor(getResources().getColor(R.color.colorBlack));
-                    edtContents[count].setBackground(getDrawable(R.drawable.retangle_box));
+                  //  edtContents[count].setBackground(getDrawable(R.drawable.retangle_box));
+                    edtContents[count].setBackgroundResource(R.drawable.retangle_box);
 
                     // 가로 리니어 레이아웃에 이미지를 위한 릴레이티브 레이아웃과 에디트텍스트 삽입
                     linePlusView[count].addView(relPlusView[count], imgParams);
