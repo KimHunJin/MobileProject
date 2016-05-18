@@ -30,9 +30,9 @@ public class KnowhowDetailActivity extends AppCompatActivity{
 
     /**
      * 설명과 사진(동영상) 아이템을 넣는 메소드
-     * @param position  몇번째 아이템인지 알려줌
-     * @param explain   해당 아이템의 설명이 들어감
-     * @param url       사진이나 동영상의 url이 들어감
+     * @param position  해당 아이템이 몇번째인지
+     * @param explain   해당 아이템의 설명
+     * @param url       사진이나 동영상의 url
      */
     private void makeKnowhowItem(int position, String explain, String url){
         View itemView;
