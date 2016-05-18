@@ -1,10 +1,6 @@
-<<<<<<< HEAD:LeeForm/app/src/main/java/sungkyul/ac/kr/leeform/activity/community/CommunityCreateActivity.java
 package sungkyul.ac.kr.leeform.activity.community;
-=======
-package sungkyul.ac.kr.leeform.community;
 import android.content.Intent;
 import android.media.Image;
->>>>>>> 6d7fd513157f8ca15e7e86a7d659af9f775490d0:LeeForm/app/src/main/java/sungkyul/ac/kr/leeform/community/CommunityCreateActivity.java
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
