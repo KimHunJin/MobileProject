@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/btnContentsPlus"
+        android:id="@+id/btnContentsMinus"
         android:layout_alignParentRight="true"
         android:text="-"
         android:layout_width="wrap_content"
@@ -12,8 +12,8 @@
 
 
     <Button
-        android:layout_toLeftOf="@id/btnContentsPlus"
-        android:id="@+id/btnContentsMinus"
+        android:layout_toLeftOf="@id/btnContentsMinus"
+        android:id="@+id/btnContentsPlus"
         android:text="+"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

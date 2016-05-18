@@ -31,9 +31,8 @@
                 android:id="@+id/lineCreateView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include layout="@layout/activity_create_know_how_add_view" />
+                android:orientation="vertical"
+                android:padding="4dp">
 
                 <include layout="@layout/activity_create_know_how_add_view" />
 

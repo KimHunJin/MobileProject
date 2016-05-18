@@ -1,5 +1,4 @@
-package sungkyul.ac.kr.leeform.community;
-import android.media.Image;
+package sungkyul.ac.kr.leeform.activity.community;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
