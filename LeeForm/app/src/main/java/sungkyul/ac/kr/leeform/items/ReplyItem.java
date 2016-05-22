@@ -1,5 +1,9 @@
 package sungkyul.ac.kr.leeform.items;
 
+import android.graphics.drawable.Drawable;
+
+import java.util.Date;
+
 /**
  * Created by user on 2016-05-18.
  */
@@ -9,6 +13,7 @@ public class ReplyItem {
     private String rContent;
     private int rImg;
 
+
     public String getrName() {
         return rName;
     }
@@ -17,10 +22,9 @@ public class ReplyItem {
         return rContent;
     }
 
-    public int getrImg() {
+    public int getrImg(){
         return rImg;
     }
-
     public ReplyItem(String name, String content, int img){
         rName=name;
         rContent=content;
