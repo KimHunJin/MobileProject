@@ -38,19 +38,29 @@ public class CommunityDetailActivity extends AppCompatActivity {
         String name = intent.getStringExtra("Name");
         int image = intent.getIntExtra("Image", 0);
 
-        tv1 = (TextView) findViewById(R.id.contentCommunity);
-        tv1.setText(content);
-        tv2 = (TextView) findViewById(R.id.replyCount);
-        tv2.setText(count);
-        tv3 = (TextView) findViewById(R.id.userName);
-        tv3.setText(name);
-        img = (ImageView) findViewById(R.id.img);
-        img.setImageResource(image);
+        //item_list_community.xml 가져오기
+        final View header = getLayoutInflater().inflate(R.layout.item_list_community, null, false);
 
         adapter = new CommunityReplyLIstAdapter(getApplicationContext(), R.layout.item_list_reply, listItem);
 
         ListView lst = (ListView) findViewById(R.id.replyList);
         lst.setAdapter(adapter);
+
+        //리스트 윗부분에 넣기
+        lst.addHeaderView(header);
+
+        /***
+         * 클릭한 커뮤니티 리스트의 내용, 댓글수, 작성자, 이미지 가져오기
+         * */
+        tv1 = (TextView) header.findViewById(R.id.contentCommunity);
+        tv1.setText(content);
+        tv2 = (TextView) header.findViewById(R.id.replyCount);
+        tv2.setText(count);
+        tv3 = (TextView) header.findViewById(R.id.userName);
+        tv3.setText(name);
+        img = (ImageView) header.findViewById(R.id.img);
+        img.setImageResource(image);
+
 
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //리스트의 아이템 선택했을 때
@@ -59,6 +69,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), (position + 1) + "댓글 선택", Toast.LENGTH_SHORT).show();
             }
         });
+
         init();
 
     }
