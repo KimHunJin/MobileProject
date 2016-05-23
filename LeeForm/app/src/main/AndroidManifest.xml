@@ -35,7 +35,10 @@
             android:theme="@style/CustomNoActionBar"></activity>
         <activity android:name=".activity.community.CommunityCreateActivity"
             android:theme="@style/CustomNoActionBar"></activity>
-        <activity android:name=".activity.community.CommunityDetailActivity"
+        <activity
+            android:name=".activity.community.CommunityDetailActivity"
+            android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".activity.navigation.MyPageActivity"
             android:theme="@style/CustomNoActionBar"></activity>
     </application>
 

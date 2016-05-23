@@ -1,24 +1,29 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
+import sungkyul.ac.kr.leeform.items.ReplyItem;
 
 /**
  * Created by user on 2016-05-18.
  */
 public class CommunityReplyLIstAdapter extends BaseAdapter{
     private LayoutInflater inflater;
-    private ArrayList<CommunityItem> item;
+    private ArrayList<ReplyItem> item;
     private int layout;
 
-    public CommunityReplyLIstAdapter(Context context, int layout, ArrayList<CommunityItem> item) {
+    public CommunityReplyLIstAdapter(Context context, int layout, ArrayList<ReplyItem> item) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.item = item;
         this.layout = layout;
@@ -26,7 +31,7 @@ public class CommunityReplyLIstAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return 0;
+        return item.size();
     }
 
     @Override
@@ -36,11 +41,35 @@ public class CommunityReplyLIstAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ViewHolder viewHolder;
+
+        if (convertView == null) {
+
+            viewHolder = new ViewHolder();
+            convertView = inflater.inflate(layout, parent, false);
+            viewHolder.userName = (TextView) convertView.findViewById(R.id.rUserName);
+            viewHolder.content = (TextView) convertView.findViewById(R.id.rContent);
+            viewHolder.img=(ImageView)convertView.findViewById(R.id.rImg);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        ReplyItem listItem = item.get(position);
+        viewHolder.userName.setText(listItem.getrName());
+        viewHolder.content.setText(listItem.getrContent());
+        viewHolder.img.setImageResource(listItem.getrImg());
+
+        return convertView;
+    }
+
+    class ViewHolder {
+        private TextView userName;
+        private TextView content;
+        private ImageView img;
     }
 }

@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
 
@@ -15,7 +17,7 @@ import sungkyul.ac.kr.leeform.items.CommunityItem;
  * Created by user on 2016-05-16.
  */
 
-public class CommunityListAdapter extends BaseAdapter{
+public class CommunityListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<CommunityItem> item;
     private int layout;
@@ -26,6 +28,7 @@ public class CommunityListAdapter extends BaseAdapter{
         this.layout = layout;
     }
 
+    /** Getter **/
     @Override
     public int getCount() {
         return item.size();
@@ -35,6 +38,7 @@ public class CommunityListAdapter extends BaseAdapter{
     public Object getItem(int position) {
         return null;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -51,7 +55,7 @@ public class CommunityListAdapter extends BaseAdapter{
             viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
             viewHolder.content = (TextView) convertView.findViewById(R.id.contentCommunity);
             viewHolder.replyCount = (TextView) convertView.findViewById(R.id.replyCount);
-            viewHolder.img=(ImageView)convertView.findViewById(R.id.img);
+            viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
