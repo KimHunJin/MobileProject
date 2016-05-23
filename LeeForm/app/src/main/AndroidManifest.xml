@@ -23,6 +23,14 @@
             android:theme="@style/CustomNoActionBar" />
         <activity android:name=".activity.knowhow.KnowhowDetailActivity"
             android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".activity.material.MaterialDetailActivity">
+
+        </activity>
+        <activity android:name=".activity.member.PurchaseListActivity">
+
+        </activity>
+        <activity android:name=".activity.SettingActivity"
+            android:theme="@style/PreferencesTheme"></activity>
         <activity android:name=".activity.knowhow.CreateKnowHowActivity"
             android:theme="@style/CustomNoActionBar"></activity>
         <activity android:name=".activity.community.CommunityCreateActivity"

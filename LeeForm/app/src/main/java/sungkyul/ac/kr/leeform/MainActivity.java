@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -7,10 +8,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.navdrawer.SimpleSideDrawer;
 
+import sungkyul.ac.kr.leeform.activity.SettingActivity;
+import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
     private SimpleSideDrawer mSlidingMenu;
+    private ListView lstNavItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
+        lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+                    // 내 정보
+                    case 0:
+                        break;
+
+                    // 구매내역
+                    case 1:
+                        Intent itPurchaseList = new Intent(getApplicationContext(), PurchaseListActivity.class);
+                        startActivity(itPurchaseList);
+                        break;
+
+                    // 판매자 등록
+                    case 2:
+                        break;
+
+                    // 설정
+                    case 3:
+
+                        Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
+                        startActivity(itSetting);
+                        break;
+                }
+            }
+        });
 
 //        mDrawer.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
