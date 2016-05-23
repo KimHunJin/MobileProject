@@ -5,12 +5,11 @@
     android:background="@color/colorWhite">
 
     <include layout="@layout/toolbar_custom_ok" />
-    <!--아이콘수정필요(뒤로가기,완료)-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <EditText
@@ -20,7 +19,7 @@
             android:background="@drawable/retangle_box"
             android:hint="@string/community"
             android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorRelativeDark"/>
+            android:textColorHint="@color/colorGray"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
