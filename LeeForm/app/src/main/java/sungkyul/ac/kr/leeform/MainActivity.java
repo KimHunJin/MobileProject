@@ -7,27 +7,18 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-<<<<<<< HEAD
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.navdrawer.SimpleSideDrawer;
-
-import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
-import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
-=======
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
->>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
+import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
+import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,12 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
     private SimpleSideDrawer mSlidingMenu;
-<<<<<<< HEAD
     private TabLayout tabLayout;
     private TabLayout.Tab tab;
-=======
     private ListView lstNavItem;
->>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-=======
         lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
         lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
->>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
 
 //        mDrawer.setOnTouchListener(new View.OnTouchListener() {
 //            @Override

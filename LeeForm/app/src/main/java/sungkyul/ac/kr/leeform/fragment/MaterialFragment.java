@@ -46,13 +46,9 @@ public class MaterialFragment extends Fragment {
         grvMaterial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
-                Toast.makeText(getActivity(), (position + 1) + "선택", Toast.LENGTH_SHORT).show();
-=======
                 Intent itMaterialDetail = new Intent(getActivity().getApplicationContext(), MaterialDetailActivity.class);
                 startActivity(itMaterialDetail);
 //                Toast.makeText(getActivity(),(position+1) + "선택", Toast.LENGTH_SHORT).show();
->>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
             }
         });
 
