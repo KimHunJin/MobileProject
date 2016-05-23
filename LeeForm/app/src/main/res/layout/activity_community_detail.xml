@@ -8,7 +8,7 @@
     <include layout="@layout/toolbar_custom_form" />
     <!-- 아이콘수정필요 뒤로가기버튼 -->
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:id="@+id/replyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/item_list_community"/>

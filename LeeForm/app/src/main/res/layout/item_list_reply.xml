@@ -11,6 +11,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/rImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -18,6 +19,7 @@
             android:src="@drawable/circle_img" />
 
         <TextView
+            android:id="@+id/rUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
@@ -25,11 +27,13 @@
             android:textColor="@color/colorBlack" />
 
         <TextView
+            android:id="@+id/rContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="0.5"
             android:text="댓글 내용"
             android:textColor="@color/colorBlack" />
+
 
     </LinearLayout>
 

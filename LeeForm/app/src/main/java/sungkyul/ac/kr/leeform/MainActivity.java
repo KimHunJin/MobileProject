@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,6 +18,16 @@ import com.navdrawer.SimpleSideDrawer;
 
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
+=======
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.navdrawer.SimpleSideDrawer;
+
+import sungkyul.ac.kr.leeform.activity.SettingActivity;
+import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
+>>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
     private SimpleSideDrawer mSlidingMenu;
+<<<<<<< HEAD
     private TabLayout tabLayout;
     private TabLayout.Tab tab;
+=======
+    private ListView lstNavItem;
+>>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
         ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +77,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+=======
+        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
+        lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+                    // 내 정보
+                    case 0:
+                        break;
+
+                    // 구매내역
+                    case 1:
+                        Intent itPurchaseList = new Intent(getApplicationContext(), PurchaseListActivity.class);
+                        startActivity(itPurchaseList);
+                        break;
+
+                    // 판매자 등록
+                    case 2:
+                        break;
+
+                    // 설정
+                    case 3:
+
+                        Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
+                        startActivity(itSetting);
+                        break;
+                }
+            }
+        });
+>>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
 
 //        mDrawer.setOnTouchListener(new View.OnTouchListener() {
 //            @Override

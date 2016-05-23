@@ -47,7 +47,7 @@ public class KnowhowDetailActivity extends AppCompatActivity{
     }
 
     /**
-     * xml 파일로부터 컴포넌트들의 아이디 가져오는 메소드
+     * 화면에 보여줄 정보 초기화
      */
     private void initializeLayout() {
         layKnowhowDetail = findViewById(R.id.layKnowhowDetail);

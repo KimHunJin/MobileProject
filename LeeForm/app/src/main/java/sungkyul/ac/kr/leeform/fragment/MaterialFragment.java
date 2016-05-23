@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.material.MaterialDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
@@ -45,10 +46,15 @@ public class MaterialFragment extends Fragment {
         grvMaterial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
                 Toast.makeText(getActivity(), (position + 1) + "선택", Toast.LENGTH_SHORT).show();
+=======
+                Intent itMaterialDetail = new Intent(getActivity().getApplicationContext(), MaterialDetailActivity.class);
+                startActivity(itMaterialDetail);
+//                Toast.makeText(getActivity(),(position+1) + "선택", Toast.LENGTH_SHORT).show();
+>>>>>>> b3bcd3f96604e05bc0aa5c6ca653f62042bc0aa6
             }
         });
-
 
         return mView;
     }
