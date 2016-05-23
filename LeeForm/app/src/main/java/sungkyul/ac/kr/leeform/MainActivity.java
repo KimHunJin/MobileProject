@@ -1,16 +1,22 @@
 package sungkyul.ac.kr.leeform;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
+import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
+import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
     private SimpleSideDrawer mSlidingMenu;
+    private TabLayout tabLayout;
+    private TabLayout.Tab tab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSlidingMenu.toggleLeftDrawer();
+            }
+        });
+
+        ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tabLayout.getSelectedTabPosition()==0) {
+                    Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
+                    startActivity(it);
+                } else if(tabLayout.getSelectedTabPosition()==1) {
+                    startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(),"커뮤니티에선 지원하지 않는 기능입니다.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -87,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mainFragmentAdapter);
 
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.mainTab);
+        tabLayout = (TabLayout) findViewById(R.id.mainTab);
         tabLayout.setupWithViewPager(viewPager);
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab = tabLayout.getTabAt(i);
             tab.setCustomView(mainFragmentAdapter.getTabView(i));
         }
     }

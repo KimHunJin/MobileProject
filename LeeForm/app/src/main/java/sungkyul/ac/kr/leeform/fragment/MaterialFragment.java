@@ -34,7 +34,7 @@ public class MaterialFragment extends Fragment {
 
         mView = inflater.inflate(R.layout.fragment_material, container, false);
 
-        grvMaterial = (GridView)mView.findViewById(R.id.grvMaterial);
+        grvMaterial = (GridView) mView.findViewById(R.id.grvMaterial);
 
         mAdapter = new MaterialGridAdapter(getContext(), R.layout.item_grid_material, gridItems);
 
@@ -45,7 +45,7 @@ public class MaterialFragment extends Fragment {
         grvMaterial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),(position+1) + "선택", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), (position + 1) + "선택", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -54,8 +54,8 @@ public class MaterialFragment extends Fragment {
     }
 
     void init() {
-        for(int i=0;i<10;i++) {
-            gridItems.add(new MaterialGridItem(i,"판자",R.drawable.panza));
+        for (int i = 0; i < 10; i++) {
+            gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
         }
     }
 }

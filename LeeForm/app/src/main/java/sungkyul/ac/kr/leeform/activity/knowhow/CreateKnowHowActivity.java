@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.activity.knowhow;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBar;
@@ -10,13 +11,21 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.adapter.CreateKnowHowGridAdapter;
+import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
+import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
+import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 public class CreateKnowHowActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,13 +38,18 @@ public class CreateKnowHowActivity extends AppCompatActivity implements View.OnC
     LinearLayout lineAddImg[];
     int count = 0;
 
+    private GridView grvCreate;
+    private CreateKnowHowGridAdapter cAdapter;
+
+    ArrayList<CreateKnowHowItem> gridItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_know_how);
 
-        btnPlusKnowHow = (Button) findViewById(R.id.btnContentsPlus);
-        btnMinusKnowHow = (Button) findViewById(R.id.btnContentsMinus);
+//        btnPlusKnowHow = (Button) findViewById(R.id.btnContentsPlus);
+//      btnMinusKnowHow = (Button) findViewById(R.id.btnContentsMinus);
         lineCreateView = (LinearLayout) findViewById(R.id.lineCreateView);
 
         linePlusView = new LinearLayout[100];
@@ -45,9 +59,37 @@ public class CreateKnowHowActivity extends AppCompatActivity implements View.OnC
         edtContents = new EditText[100];
         lineAddImg = new LinearLayout[100];
 
-        btnPlusKnowHow.setOnClickListener(this);
+        grvCreate = (GridView)findViewById(R.id.grvCreateView);
+        cAdapter = new CreateKnowHowGridAdapter(getApplicationContext(),R.layout.item_grid_create,gridItems);
+        grvCreate.setAdapter(cAdapter);
+
+        init();
+
+        grvCreate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == gridItems.size()-1) {
+                    Intent it = new Intent(getApplicationContext(),CreateKnowHowExplainActivity.class);
+                    startActivityForResult(it,1000);
+                }
+            }
+        });
+    //    btnPlusKnowHow.setOnClickListener(this);
     }
 
+    void init() {
+        for(int i=0;i<10;i++) {
+            gridItems.add(new CreateKnowHowItem(i,R.drawable.tables2,"테스트"));
+        }
+        gridItems.add(new CreateKnowHowItem(gridItems.size(),R.drawable.ic_control_point_black_36dp,"클릭"));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1000) {
+        }
+    }
 
     @Override
     public void onClick(View v) {
