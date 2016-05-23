@@ -35,7 +35,7 @@ public class MaterialFragment extends Fragment {
 
         mView = inflater.inflate(R.layout.fragment_material, container, false);
 
-        grvMaterial = (GridView)mView.findViewById(R.id.grvMaterial);
+        grvMaterial = (GridView) mView.findViewById(R.id.grvMaterial);
 
         mAdapter = new MaterialGridAdapter(getContext(), R.layout.item_grid_material, gridItems);
 
@@ -56,8 +56,8 @@ public class MaterialFragment extends Fragment {
     }
 
     void init() {
-        for(int i=0;i<10;i++) {
-            gridItems.add(new MaterialGridItem(i,"판자",R.drawable.panza));
+        for (int i = 0; i < 10; i++) {
+            gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
         }
     }
 }

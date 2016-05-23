@@ -78,7 +78,6 @@ public class CommunityFragment extends Fragment {
         });
         return cView;
 
-
     }
 
     void init() {

@@ -11,11 +11,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
+import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
+import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
     private SimpleSideDrawer mSlidingMenu;
+    private TabLayout tabLayout;
+    private TabLayout.Tab tab;
     private ListView lstNavItem;
 
     @Override
@@ -41,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSlidingMenu.toggleLeftDrawer();
+            }
+        });
+
+        ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tabLayout.getSelectedTabPosition()==0) {
+                    Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
+                    startActivity(it);
+                } else if(tabLayout.getSelectedTabPosition()==1) {
+                    startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(),"커뮤니티에선 지원하지 않는 기능입니다.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -121,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mainFragmentAdapter);
 
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.mainTab);
+        tabLayout = (TabLayout) findViewById(R.id.mainTab);
         tabLayout.setupWithViewPager(viewPager);
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab = tabLayout.getTabAt(i);
             tab.setCustomView(mainFragmentAdapter.getTabView(i));
         }
     }

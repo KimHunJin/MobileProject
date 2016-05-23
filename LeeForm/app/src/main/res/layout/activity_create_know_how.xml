@@ -29,17 +29,19 @@
 
             <LinearLayout
                 android:id="@+id/lineCreateView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="4dp">
 
-                <include layout="@layout/activity_create_know_how_add_view" />
+                <GridView
+                    android:id="@+id/grvCreateView"
+                    android:numColumns="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </GridView>
 
             </LinearLayout>
-
-            <include layout="@layout/activity_create_know_how_btn_p_m" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
