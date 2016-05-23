@@ -17,6 +17,7 @@ import com.navdrawer.SimpleSideDrawer;
 
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
+import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 switch(i){
                     // 내 정보
                     case 0:
+                        Intent intent=new Intent(getApplicationContext(), MyPageActivity.class);
+                        startActivity(intent);
                         break;
 
                     // 구매내역
