@@ -15,9 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
-import sungkyul.ac.kr.leeform.activity.community.CommunityDetailActivity;
-import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.community.CommunityCreateActivity;
+import sungkyul.ac.kr.leeform.activity.community.CommunityDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
 
