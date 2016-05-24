@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
-import java.util.ArrayList;
-
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
@@ -123,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
     //취소버튼 눌렀을 때
     @Override
     public void onBackPressed() {
+        // 네비게이션이 열려있으면
+        if(!mSlidingMenu.isClosed()){
+            mSlidingMenu.closeLeftSide();
+            return;
+        }
         //핸들러 작동
         backPressCloseHandler.onBackPressed();
         Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();

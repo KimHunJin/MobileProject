@@ -1,7 +1,6 @@
 package sungkyul.ac.kr.leeform.util;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 /**
  * Created by Kim on 2016-05-24.
@@ -9,7 +8,6 @@ import android.widget.Toast;
 public class BackPressCloseHandler {
 
     private long backKeyPressedTime = 0;
-    private Toast toast;
 
     private Activity activity;
 
@@ -17,20 +15,14 @@ public class BackPressCloseHandler {
         this.activity = context;
     }
 
-    public void showGuide() {
-        toast = Toast.makeText(activity,"\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
 
     public void onBackPressed() {
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            showGuide();
             return;
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
             activity.finish();
-            toast.cancel();
         }
     }
 }

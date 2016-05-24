@@ -19,6 +19,12 @@
     <PreferenceCategory android:title="고객지원" >
 
         <Preference
+            android:title="이용약관"
+            />
+        <Preference
+            android:title="만든 사람들"
+            />
+        <Preference
             android:title="이폼 탈퇴" />
 
     </PreferenceCategory>

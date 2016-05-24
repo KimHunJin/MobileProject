@@ -1,7 +1,6 @@
 package sungkyul.ac.kr.leeform.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -27,13 +26,30 @@ import sungkyul.ac.kr.leeform.items.MainListItem;
  * Created by HunJin on 2016-05-01.
  */
 public class HomeFragment extends Fragment {
-
+    private int check=0;
     private View mView;
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
 
     ArrayList<MainListItem> listItem = new ArrayList<>();
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // 다른 프래그먼트 가면 초기화
+        check = 1;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 다른 프래그먼트에 갔다가 오면
+        if(check == 1){
+            check = 0;
+        }else{
+            check = 1;
+        }
+    }
 
     @Nullable
     @Override
@@ -89,7 +105,11 @@ public class HomeFragment extends Fragment {
         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                check++;
+                // 처음에는 실행 안되게
+                if(check>2){
+                    Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -101,7 +121,10 @@ public class HomeFragment extends Fragment {
         mSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //정렬 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                // 처음에는 실행 안되게
+                if(check>2){
+                    Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
