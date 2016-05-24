@@ -8,25 +8,26 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
+import java.util.ArrayList;
+
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
-import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
+import sungkyul.ac.kr.leeform.util.BackPressCloseHandler;
+import sungkyul.ac.kr.leeform.util.LoadActivityList;
 
 public class MainActivity extends AppCompatActivity {
-
+    private BackPressCloseHandler backPressCloseHandler;
     private DrawerLayout mDrawer;
     private NavigationView mNavigationView;
 
@@ -39,12 +40,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tabInitialization();
 
+        // 로그아웃 할 때 열려있는 액티비티 모두 닫기 위해 리스트에 저장
+        new LoadActivityList().actList.add(MainActivity.this);
+
+        tabInitialization();
+        initializeLayout();
+        setListener();
+
+    }
+
+    /**
+     * 화면에 보여줄 정보 초기화
+     */
+    private void initializeLayout(){
         mDrawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         mSlidingMenu = new SimpleSideDrawer(MainActivity.this);
         mSlidingMenu.setLeftBehindContentView( R.layout.nav_view );
+        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
 
+        // 취소버튼 눌렀을 때 핸들러
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+
+    /**
+     * 리스너 설정
+     */
+    private void setListener(){
         ImageView imgNav = (ImageView)findViewById(R.id.imgNav);
         imgNav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
-
         lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -92,55 +112,21 @@ public class MainActivity extends AppCompatActivity {
 
                     // 설정
                     case 3:
-
                         Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
                         startActivity(itSetting);
                         break;
                 }
             }
         });
-
-//        mDrawer.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                mSlidingMenu.toggleLeftDrawer();
-//
-//                return true;
-//            }
-//        });
-//        mNavigationView = (NavigationView) findViewById(R.id.nvView);
-//        initDrawerContent(mNavigationView);
-
-
     }
 
-
-//    private void SelectDrawerItem(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_home_fragment: {
-//                startActivity(new Intent(getApplication(), LoginActivity.class));
-//                break;
-//            }
-//            case R.id.menu_list_fargment: {
-//                startActivity(new Intent(getApplication(), RegisterActivity.class));
-//                break;
-//            }
-//        }
-//
-//        item.setChecked(true);
-//        setTitle(item.getTitle());
-//        mDrawer.closeDrawers();
-//    }
-
-//    private void initDrawerContent(NavigationView nView) {
-//        nView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//                SelectDrawerItem(menuItem);
-//                return true;
-//            }
-//        });
-//    }
+    //취소버튼 눌렀을 때
+    @Override
+    public void onBackPressed() {
+        //핸들러 작동
+        backPressCloseHandler.onBackPressed();
+        Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+    }
 
     private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
