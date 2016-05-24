@@ -10,8 +10,8 @@
     <color name="colorAccentBasic">#FF4081</color>
 
     <color name="colorMain">#eeD9CBC0</color>
-    <color name="colorWhite">#eeeeee</color>
-
+    <color name="colorWhite">#ffffff</color>
+    <color name="tabColor">#eefffbf6</color>
     <color name="colorGray">#888888</color>
     <color name="colorBtnRegColor">#AD9D81</color>
     <color name="colorBtnLogColor">#1ABC9C</color>

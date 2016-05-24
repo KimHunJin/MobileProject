@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import sungkyul.ac.kr.leeform.R;
 
@@ -21,6 +22,10 @@ public class CommunityCreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_create);
+
+        //툴바 텍스트 변경
+        TextView tv=(TextView)findViewById(R.id.txtToolBarTitle);
+        tv.setText("커뮤니티 작성");
 
         camera=(ImageView)findViewById(R.id.imgCamera);
         album=(ImageView) findViewById(R.id.imgAlbum);

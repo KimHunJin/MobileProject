@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.knowhow.CreateKnowHowActivity">
 
-    <include layout="@layout/toolbar_custom_form" />
+    <include layout="@layout/toolbar_custom_ok" />
 
 
     <include layout="@layout/activity_create_know_how_view" />

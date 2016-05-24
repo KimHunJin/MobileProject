@@ -4,20 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="10dp">
-
+    android:background="@color/tabColor">
+    <include layout="@layout/nav_header_form"/>
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:background="@drawable/circle_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:text="돼지"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
 
-        <include layout="@layout/nav_header_form" />
         <ListView
+            android:layout_margin="5dp"
             android:id="@+id/lstNavItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:entries="@array/nav">
+            android:layout_height="match_parent">
+            android:entries="@array/nav"
+
+
         </ListView>
 
 
