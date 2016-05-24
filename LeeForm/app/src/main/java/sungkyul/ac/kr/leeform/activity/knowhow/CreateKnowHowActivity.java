@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,10 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_know_how);
+
+        //툴바 텍스트 변경
+        TextView tv=(TextView)findViewById(R.id.txtToolBarTitle);
+        tv.setText("노하우 작성");
 
 //        btnPlusKnowHow = (Button) findViewById(R.id.btnContentsPlus);
 //      btnMinusKnowHow = (Button) findViewById(R.id.btnContentsMinus);

@@ -58,6 +58,17 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         btnOk = (Button)findViewById(R.id.btnExplainOk);
         btnCancel = (Button)findViewById(R.id.btnExplainCancel);
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                    추가작업
+                    취소 했을 시 저장이 된 파일이 있다면 삭제
+                 */
+                finish();
+            }
+        });
+
         edtContents = (EditText)findViewById(R.id.edtCreateExplain);
 
         // 이미지 클릭 했을 때

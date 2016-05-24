@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/tabColor">
-    <include layout="@layout/nav_header_form"/>
+    <include layout="@layout/nav_header_form" />
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
@@ -14,7 +13,7 @@
         <LinearLayout
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -33,15 +32,15 @@
         </LinearLayout>
 
         <ListView
-            android:layout_margin="5dp"
+            android:divider="@color/colorGrayBright"
+            android:dividerHeight="1dp"
+            android:layout_margin="10dp"
             android:id="@+id/lstNavItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/nav">
-
+            >
 
         </ListView>
-
 
     </LinearLayout>
 
