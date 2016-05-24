@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
+import java.util.ArrayList;
+
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
 
         lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

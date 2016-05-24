@@ -49,6 +49,8 @@ public class CommunityDetailActivity extends AppCompatActivity {
         //리스트 윗부분에 넣기
         lst.addHeaderView(header);
 
+
+
         /***
          * 클릭한 커뮤니티 리스트의 내용, 댓글수, 작성자, 이미지 가져오기
          * */

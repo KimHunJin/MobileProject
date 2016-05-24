@@ -1,6 +1,7 @@
 package sungkyul.ac.kr.leeform.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -69,7 +70,8 @@ public class CommunityFragment extends Fragment {
         });
         init();
 
-        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1); //작성하기 버튼
+        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);//작성하기 버튼
+
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
