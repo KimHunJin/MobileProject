@@ -13,6 +13,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="tabColor">#eefffbf6</color>
     <color name="colorGray">#888888</color>
+    <color name="colorGrayBright">#d4d4d4</color>
     <color name="colorBtnRegColor">#AD9D81</color>
    <color name="colorBtnLogColor">#eeD9CBC0</color>
     <color name="colorRelativeDark">#66888888</color>

@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -89,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        String[] item=getResources().getStringArray(R.array.nav);
+
+        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
+        ArrayAdapter<String> yada= new ArrayAdapter<String>(this,R.layout.nav_item,item);
+        lstNavItem.setAdapter(yada);
 
         lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
