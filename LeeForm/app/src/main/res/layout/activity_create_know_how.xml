@@ -9,39 +9,28 @@
 
     <include layout="@layout/toolbar_custom_form" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
+    <include layout="@layout/activity_create_know_how_view" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorBlack" />
+
+    <LinearLayout
+        android:id="@+id/lineCreateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <GridView
+            android:id="@+id/grvCreateView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:numColumns="2"></GridView>
 
-            <include layout="@layout/activity_create_know_how_view" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="40dp"
-                android:background="@color/colorBlack" />
-
-            <LinearLayout
-                android:id="@+id/lineCreateView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="4dp">
-
-                <GridView
-                    android:id="@+id/grvCreateView"
-                    android:numColumns="2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </GridView>
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </LinearLayout>

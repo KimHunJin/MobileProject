@@ -1,6 +1,8 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +61,14 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         }
 
         CreateKnowHowItem gridItem = item.get(position);
-        gridViewHolder.imgGridCreate.setImageResource(gridItem.getmImg());
-
+        Log.e("test",gridItem.getmImg()+"");
+        Log.e("test",gridItem.getImgUrl()+"");
+        if(gridItem.getmImg()!=0) {
+            gridViewHolder.imgGridCreate.setImageResource(gridItem.getmImg());
+        }
+        if(gridItem.getImgUrl()!=null) {
+            gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
+        }
         return convertView;
     }
 
