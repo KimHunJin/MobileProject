@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,11 +19,9 @@ import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-=======
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
->>>>>>> 3db2ed5df75916253e4d728f779ab8fcbf5aa870
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.utils.DataProvider;

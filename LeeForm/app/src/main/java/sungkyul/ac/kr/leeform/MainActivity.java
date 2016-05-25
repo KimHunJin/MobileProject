@@ -158,12 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
-<<<<<<< HEAD
-                } else if (tabLayout.getSelectedTabPosition() == 1) {
-=======
-                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
                 } else if(tabLayout.getSelectedTabPosition()==1) {
->>>>>>> 3db2ed5df75916253e4d728f779ab8fcbf5aa870
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
                     overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
                 } else {
