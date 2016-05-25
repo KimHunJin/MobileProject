@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'mos_key'
             keyPassword 'ahrl7520'
-            storeFile file('D:/mos_key/mos_key.jks')
+            storeFile file('../mos_key.jks')
             storePassword 'ahrl7520'
         }
     }
