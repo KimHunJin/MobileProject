@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- 상단바 -->
@@ -39,7 +40,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:background="@color/testBlue"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.hkm.slider.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    custom:auto_cycle="true"
+                    custom:image_button_l="@drawable/myarrowl"
+                    custom:indicator_visibility="visible"
+                    custom:lns_use_presentation="Smart"
+                    custom:pager_animation="Accordion"
+                    custom:pager_animation_span="1100"
+                    custom:slider_side_buttons="false" />
+
+
+                <com.hkm.slider.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator2"
+                    style="@style/AndroidImageSlider_Corner_Oval_Orange"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp" />
 
             </LinearLayout>
 

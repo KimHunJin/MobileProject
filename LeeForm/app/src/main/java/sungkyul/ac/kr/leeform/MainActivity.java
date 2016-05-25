@@ -1,20 +1,32 @@
 package sungkyul.ac.kr.leeform;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
+
+import org.w3c.dom.Text;
+
+import java.io.InputStream;
+import java.net.URL;
 
 import sungkyul.ac.kr.leeform.activity.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
@@ -35,11 +47,22 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout.Tab tab;
     private ListView lstNavItem;
 
+    private ImageView imgNavUser;
+    private TextView txtNavUserNickName;
+
+    private long userId;
+    private String userNickName, userImagePath;
+
+    private LinearLayout lineMain;
+
+    Handler handler = new Handler();
+
     /**
      * getIntent 값
      * UserId : 유저 식별 키
      * NickName : 카카오 사용자 닉네임
      * Image : 유저 썸네일 이미지
+     *
      * @param savedInstanceState
      */
     @Override
@@ -53,30 +76,74 @@ public class MainActivity extends AppCompatActivity {
         tabInitialization();
         initializeLayout();
         setListener();
+        navigationSetting();
 
+    }
+
+    /**
+     * 네비게이션 세팅 (사용자 이미지, 닉네임)
+     */
+    private void navigationSetting() {
+        Intent it = getIntent();
+        userId = it.getExtras().getLong("UserId");
+        userNickName = it.getExtras().getString("NickName");
+        userImagePath = it.getExtras().getString("Image");
+
+        txtNavUserNickName.setText(userNickName);
+        Log.e("userImagePath", userImagePath);
+        if (userImagePath != null) {
+            userImageSetting();
+        }
+    }
+
+    /**
+     * 스레드를 사용하여 이미지 가져오기
+     */
+    private void userImageSetting() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(userImagePath);
+                    InputStream inputStream = url.openStream();
+                    final Bitmap bm = BitmapFactory.decodeStream(inputStream);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgNavUser.setImageBitmap(bm);
+                        }
+                    });
+                    imgNavUser.setImageBitmap(bm);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 
     /**
      * 화면에 보여줄 정보 초기화
      */
-    private void initializeLayout(){
+    private void initializeLayout() {
         mDrawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         mSlidingMenu = new SimpleSideDrawer(MainActivity.this);
-        mSlidingMenu.setLeftBehindContentView( R.layout.nav_view );
+        mSlidingMenu.setLeftBehindContentView(R.layout.nav_view);
         lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
 
         // 취소버튼 눌렀을 때 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        // 네비게이션에 들어갈 이미지 설정
-
+        // 네비게이션 정보 설정
+        imgNavUser = (ImageView) findViewById(R.id.imgNavUser);
+        txtNavUserNickName = (TextView) findViewById(R.id.txtNavUserNickName);
     }
 
     /**
      * 리스너 설정
      */
-    private void setListener(){
-        ImageView imgNav = (ImageView)findViewById(R.id.imgNav);
+    private void setListener() {
+        ImageView imgNav = (ImageView) findViewById(R.id.imgNav);
         imgNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,34 +151,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
+        ImageView imgSearch = (ImageView) findViewById(R.id.imgSearch);
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tabLayout.getSelectedTabPosition()==0) {
+                if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
-                } else if(tabLayout.getSelectedTabPosition()==1) {
+                } else if (tabLayout.getSelectedTabPosition() == 1) {
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
                 } else {
-                    Toast.makeText(getApplicationContext(),"커뮤니티에선 지원하지 않는 기능입니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "커뮤니티에선 지원하지 않는 기능입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        String[] item=getResources().getStringArray(R.array.nav);
+        String[] item = getResources().getStringArray(R.array.nav);
 
         lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
-        ArrayAdapter<String> yada= new ArrayAdapter<String>(this,R.layout.nav_item,item);
+        ArrayAdapter<String> yada = new ArrayAdapter<String>(this, R.layout.nav_item, item);
         lstNavItem.setAdapter(yada);
 
         lstNavItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch(i){
+                switch (i) {
                     // 내 정보
                     case 0:
-                        Intent intent=new Intent(getApplicationContext(), MyPageActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
                         startActivity(intent);
                         break;
 
@@ -139,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // 네비게이션이 열려있으면
-        if(!mSlidingMenu.isClosed()){
+        if (!mSlidingMenu.isClosed()) {
             mSlidingMenu.closeLeftSide();
             return;
         }

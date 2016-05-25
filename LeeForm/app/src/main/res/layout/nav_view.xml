@@ -33,13 +33,15 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <sungkyul.ac.kr.leeform.utils.RoundImageView
+                android:id="@+id/imgNavUser"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:background="@drawable/circle_img" />
 
             <TextView
+                android:id="@+id/txtNavUserNickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
