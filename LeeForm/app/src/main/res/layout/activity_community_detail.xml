@@ -7,7 +7,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_custom_form" />
+    <include layout="@layout/toolbar_custom_ok" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
