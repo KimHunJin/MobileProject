@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.util;
+package sungkyul.ac.kr.leeform.utils;
 
 import android.app.Activity;
 

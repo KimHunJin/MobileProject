@@ -27,6 +27,15 @@ public class CommunityCreateActivity extends AppCompatActivity {
         TextView tv=(TextView)findViewById(R.id.txtToolBarTitle);
         tv.setText("커뮤니티 작성");
 
+        //뒤로가기 버튼
+        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         camera=(ImageView)findViewById(R.id.imgCamera);
         album=(ImageView) findViewById(R.id.imgAlbum);
 

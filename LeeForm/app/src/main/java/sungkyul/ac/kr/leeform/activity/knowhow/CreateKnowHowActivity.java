@@ -56,6 +56,15 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         TextView tv=(TextView)findViewById(R.id.txtToolBarTitle);
         tv.setText("노하우 작성");
 
+        //뒤로가기 버튼
+        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 //        btnPlusKnowHow = (Button) findViewById(R.id.btnContentsPlus);
 //      btnMinusKnowHow = (Button) findViewById(R.id.btnContentsMinus);
         lineCreateView = (LinearLayout) findViewById(R.id.lineCreateView);
