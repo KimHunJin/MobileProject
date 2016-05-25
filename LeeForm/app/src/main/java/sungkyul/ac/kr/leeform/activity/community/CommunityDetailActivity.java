@@ -68,7 +68,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), (position + 1) + "댓글 선택", Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getApplicationContext(), (position + 1) + "댓글 선택", Toast.LENGTH_SHORT).show();*/
             }
         });
 
