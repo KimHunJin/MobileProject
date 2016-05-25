@@ -2,6 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        config {
+            keyAlias 'mos_key'
+            keyPassword 'ahrl7520'
+            storeFile file('../mos_key.jks')
+            storePassword 'ahrl7520'
+        }
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -17,7 +23,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
+        debug {
+            signingConfig signingConfigs.config
+        }
     }
 }
 
