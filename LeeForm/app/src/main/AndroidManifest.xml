@@ -5,14 +5,16 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".utils.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/CustomNoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.member.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.member.LoginActivity"
+            android:name=".MainActivity"
             android:theme="@style/CustomNoActionBar" />
         <activity
             android:name=".activity.member.RegisterActivity"
@@ -46,6 +48,10 @@
             android:theme="@style/PreferencesTheme"></activity>
         <activity android:name=".activity.navigation.MyPageActivity"
             android:theme="@style/CustomNoActionBar"></activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key"/>
     </application>
 
 </manifest>
