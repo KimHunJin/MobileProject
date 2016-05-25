@@ -37,7 +37,7 @@
             android:textColor="@color/colorWhite"
             android:textSize="24sp" />
         <TextView
-            android:id="@+id/imgOk"
+            android:id="@+id/tvOk"
             android:background="@null"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,6 @@ public class MaterialSearchActivity extends AppCompatActivity {
     private LinearLayout linMain, linSearch;
     private EditText edtSearch;
     private ImageView imgSearch;
-
     private GridView grvMaterial;
     private MaterialGridAdapter mAdapter;
 
@@ -29,14 +29,27 @@ public class MaterialSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material_search);
 
-        linMain = (LinearLayout) findViewById(R.id.linMainToolbar);
+        //뒤로가기 버튼
+        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        //완료를 검색으로 텍스트 변경
+        TextView tvOk=(TextView)findViewById(R.id.tvOk);
+        tvOk.setText("검색");
+
+       /* linMain = (LinearLayout) findViewById(R.id.linMainToolbar);
         linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
 
         linMain.setVisibility(View.GONE);
         linSearch.setVisibility(View.VISIBLE);
 
         imgSearch = (ImageView) findViewById(R.id.imgSearch2);
-        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
+        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);*/
 
         grvMaterial = (GridView)findViewById(R.id.grvMaterialSearch);
         mAdapter = new MaterialGridAdapter(getApplicationContext(), R.layout.item_grid_material, gridItems);

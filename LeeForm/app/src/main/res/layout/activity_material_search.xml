@@ -7,7 +7,7 @@
     android:background="@color/colorMain"
     tools:context="sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity">
 
-    <include layout="@layout/toolbar_custom_form" />
+    <include layout="@layout/toolbar_custom_ok" />
 
     <GridView
         android:id="@+id/grvMaterialSearch"

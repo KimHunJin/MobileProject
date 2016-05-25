@@ -7,7 +7,7 @@
     android:background="@color/colorMain"
     tools:context=".activity.search.KnowHowSearchActivity">
 
-    <include layout="@layout/toolbar_custom_form"/>
+    <include layout="@layout/toolbar_custom_ok"/>
 
     <ListView
         android:id="@+id/listKnowHowSearch"
