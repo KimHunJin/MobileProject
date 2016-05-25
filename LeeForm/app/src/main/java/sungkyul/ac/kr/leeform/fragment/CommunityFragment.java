@@ -45,7 +45,7 @@ public class CommunityFragment extends Fragment {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), (position + 1) + "선택", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), (position + 1) + "선택", Toast.LENGTH_SHORT).show();
                 CommunityItem item = listItem.get(position + 1); //선택한 아이템(작성자,사진,내용,댓글수)
 
                 /**
@@ -59,24 +59,19 @@ public class CommunityFragment extends Fragment {
                 intent.putExtra("Name", item.getcName());
 
                 startActivity(intent);
-                /**
-                 * 내 정보 테스트
-                 Intent intent=new Intent(getContext(),MyPageActivity.class);
-                 startActivity(intent);
-                  */
 
             }
         });
         init();
 
         FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);//작성하기 버튼
-
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), CommunityCreateActivity.class));
             }
         });
+
         return cView;
 
     }

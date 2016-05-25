@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="알림" >
+    <PreferenceCategory android:title="알림">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="useNotice"
@@ -17,8 +17,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="고객지원" >
-
+    <PreferenceCategory android:title="고객지원"  >
         <Preference
             android:title="이용약관"
             />
@@ -27,6 +26,5 @@
             />
         <Preference
             android:title="이폼 탈퇴" />
-
     </PreferenceCategory>
 </PreferenceScreen>
