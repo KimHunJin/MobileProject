@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout.Tab tab;
     private ListView lstNavItem;
 
+    /**
+     * getIntent 값
+     * UserId : 유저 식별 키
+     * NickName : 카카오 사용자 닉네임
+     * Image : 유저 썸네일 이미지
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 취소버튼 눌렀을 때 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        // 네비게이션에 들어갈 이미지 설정
+
     }
 
     /**

@@ -3,6 +3,7 @@ package sungkyul.ac.kr.leeform.activity.member;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+//        setContentView(R.layout.activity_register);
 
         requestMe();
 
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         UserManagement.requestMe(new MeResponseCallback() {
             @Override
             public void onFailure(ErrorResult errorResult) {
+                Log.e("Failure",errorResult+"");
                 String message = "failed to get user info. msg=" + errorResult;
                 Logger.d(message);
 
@@ -67,13 +69,20 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserProfile userProfile) {  //성공 시 userProfile 형태로 반환
                 Logger.d("UserProfile : " + userProfile);
-                redirectMainActivity(); // 로그인 성공시 MainActivity로
+                Log.e("Sucess",userProfile+"");
+                Log.e("Userid",userProfile.getId()+"");
+                redirectMainActivity(userProfile.getId(),userProfile.getNickname(), userProfile.getThumbnailImagePath()); // 로그인 성공시 MainActivity로
             }
         });
     }
 
-    private void redirectMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
+    // 로그인 성공시
+    private void redirectMainActivity(long userId, String nickName, String imagePath) {
+        Intent it = new Intent(this, MainActivity.class);
+        it.putExtra("UserId",userId);
+        it.putExtra("NickName",nickName);
+        it.putExtra("Image",imagePath);
+        startActivity(it);
         finish();
     }
     protected void redirectLoginActivity() {
