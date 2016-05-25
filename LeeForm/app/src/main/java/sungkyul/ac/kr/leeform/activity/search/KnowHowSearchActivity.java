@@ -68,4 +68,10 @@ public class KnowHowSearchActivity extends AppCompatActivity {
             listItems.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.commons_slide_from_left,R.anim.commons_slide_to_right);
+    }
 }

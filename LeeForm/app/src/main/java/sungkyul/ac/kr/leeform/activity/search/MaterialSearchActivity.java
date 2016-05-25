@@ -64,4 +64,10 @@ public class MaterialSearchActivity extends AppCompatActivity {
             gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.commons_slide_from_left,R.anim.commons_slide_to_right);
+    }
 }

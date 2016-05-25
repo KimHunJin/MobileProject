@@ -22,8 +22,8 @@ import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
-import sungkyul.ac.kr.leeform.util.BackPressCloseHandler;
-import sungkyul.ac.kr.leeform.util.LoadActivityList;
+import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
+import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
@@ -81,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 if(tabLayout.getSelectedTabPosition()==0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
+                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
                 } else if(tabLayout.getSelectedTabPosition()==1) {
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
+                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
                 } else {
                     Toast.makeText(getApplicationContext(),"커뮤니티에선 지원하지 않는 기능입니다.",Toast.LENGTH_SHORT).show();
                 }
