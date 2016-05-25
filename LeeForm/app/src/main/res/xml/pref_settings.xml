@@ -5,7 +5,8 @@
             android:defaultValue="true"
             android:key="useNotice"
             android:summary="알림을 킵니다"
-            android:title="알림 켜기" />
+            android:title="알림 켜기"
+            />
 
         <CheckBoxPreference
             android:defaultValue="true"
