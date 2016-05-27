@@ -21,7 +21,8 @@ public class KnowHowSearchActivity extends AppCompatActivity {
 
     private LinearLayout linMain, linSearch;
     private EditText edtSearch;
-    private ImageView imgSearch;
+    private TextView tvOk2;
+    private ImageView imgBack2;
     private MainListAdapter adapter;
     private ListView lst;
 
@@ -46,14 +47,22 @@ public class KnowHowSearchActivity extends AppCompatActivity {
         tvOk.setText("검색");
 
 
-//        linMain = (LinearLayout) findViewById(R.id.linMainToolbar);
-//        linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
-//
-//        linMain.setVisibility(View.GONE);
-//        linSearch.setVisibility(View.VISIBLE);
-//
-//        imgSearch = (ImageView) findViewById(R.id.imgSearch2);
-//        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
+        linMain = (LinearLayout) findViewById(R.id.backToolbar);
+        linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
+        linMain.setVisibility(View.GONE);
+        linSearch.setVisibility(View.VISIBLE);
+
+     //   imgBack2=(ImageView)findViewById(R.id.imgBack2);
+        tvOk2 = (TextView) findViewById(R.id.tvOk2);
+        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
+        //검색화면의 뒤로가기 버튼
+        ImageView imgBack2=(ImageView)findViewById(R.id.imgBack2);
+        imgBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         adapter = new MainListAdapter(getApplicationContext(), R.layout.item_list_main, listItems);
 
