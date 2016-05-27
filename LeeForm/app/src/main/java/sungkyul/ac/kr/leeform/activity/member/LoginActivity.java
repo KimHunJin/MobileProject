@@ -40,10 +40,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });*/
 
-        Log.e("hash",getKeyHash(getApplicationContext()));
+        Log.e("Session",Session.getCurrentSession()+"");
+        Log.e("hash",getKeyHash(getApplicationContext())+"");
 
-        callback = new SessionCallback();                  // 이 두개의 함수 중요함
-        Session.getCurrentSession().addCallback(callback);
+        if(Session.getCurrentSession().implicitOpen()) {
+            callback = new SessionCallback();                  // 이 두개의 함수 중요함
+            Session.getCurrentSession().addCallback(callback);
+            callback.onSessionOpened();
+        } else {
+            callback = new SessionCallback();                  // 이 두개의 함수 중요함
+            Session.getCurrentSession().addCallback(callback);
+        }
     }
 
     @Override
@@ -83,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    // HashKey 값을 알아보는 메서드 입니다.
     public static String getKeyHash(final Context context) {
         PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
         if (packageInfo == null)

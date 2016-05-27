@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,12 +22,10 @@ import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
 
-import org.w3c.dom.Text;
-
 import java.io.InputStream;
 import java.net.URL;
 
-import sungkyul.ac.kr.leeform.activity.SettingActivity;
+import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
@@ -199,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(itSetting);
                         break;
                 }
+                mSlidingMenu.closeLeftSide();
             }
         });
     }
