@@ -19,6 +19,7 @@ public class MaterialSearchActivity extends AppCompatActivity {
     private LinearLayout linMain, linSearch;
     private EditText edtSearch;
     private ImageView imgSearch;
+    private TextView tvOk2;
     private GridView grvMaterial;
     private MaterialGridAdapter mAdapter;
 
@@ -50,6 +51,24 @@ public class MaterialSearchActivity extends AppCompatActivity {
 
         imgSearch = (ImageView) findViewById(R.id.imgSearch2);
         edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);*/
+
+        linMain = (LinearLayout) findViewById(R.id.backToolbar);
+        linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
+        linMain.setVisibility(View.GONE);
+        linSearch.setVisibility(View.VISIBLE);
+
+        //   imgBack2=(ImageView)findViewById(R.id.imgBack2);
+        tvOk2 = (TextView) findViewById(R.id.tvOk2);
+        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
+        //검색화면의 뒤로가기 버튼
+        ImageView imgBack2=(ImageView)findViewById(R.id.imgBack2);
+        imgBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         grvMaterial = (GridView)findViewById(R.id.grvMaterialSearch);
         mAdapter = new MaterialGridAdapter(getApplicationContext(), R.layout.item_grid_material, gridItems);
