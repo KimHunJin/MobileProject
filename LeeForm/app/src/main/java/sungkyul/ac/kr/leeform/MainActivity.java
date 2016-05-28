@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
-
-import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
