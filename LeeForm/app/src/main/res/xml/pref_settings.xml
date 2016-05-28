@@ -20,11 +20,13 @@
     <PreferenceCategory android:title="고객지원"  >
         <Preference
             android:title="이용약관"
+            android:key="notice"
             />
         <Preference
             android:title="만든 사람들"
             />
         <Preference
-            android:title="이폼 탈퇴" />
+            android:title="이폼 탈퇴"
+            android:key="leaveLeeForm"/>
     </PreferenceCategory>
 </PreferenceScreen>

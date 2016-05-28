@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".utils.GlobalApplication"
@@ -14,9 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/CustomNoActionBar">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".activity.member.LoginActivity"
             android:theme="@style/CustomNoActionBar">
@@ -43,17 +41,21 @@
             android:theme="@style/CustomNoActionBar" />
         <activity android:name=".activity.knowhow.CreateKnowHowExplainActivity" />
         <activity android:name=".activity.search.KnowHowSearchActivity" />
-        <activity android:name=".activity.material.MaterialDetailActivity"/>
-        <activity android:name=".activity.search.MaterialSearchActivity"></activity>
-        <activity android:name=".activity.member.PurchaseListActivity"></activity>
-        <activity android:name=".activity.SettingActivity"
-            android:theme="@style/PreferencesTheme"></activity>
-        <activity android:name=".activity.navigation.MyPageActivity"
-            android:theme="@style/CustomNoActionBar"></activity>
+        <activity android:name=".activity.material.MaterialDetailActivity" />
+        <activity android:name=".activity.search.MaterialSearchActivity" />
+        <activity android:name=".activity.member.PurchaseListActivity" />
+        <activity
+            android:name=".activity.settings.SettingActivity"
+            android:theme="@style/PreferencesTheme" />
+        <activity
+            android:name=".activity.navigation.MyPageActivity"
+            android:theme="@style/CustomNoActionBar" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key"/>
+            android:value="@string/kakao_app_key" />
+
+        <activity android:name=".activity.settings.NoticeActivity"></activity>
     </application>
 
 </manifest>

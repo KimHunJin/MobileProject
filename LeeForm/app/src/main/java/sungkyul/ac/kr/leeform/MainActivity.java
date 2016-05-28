@@ -25,7 +25,7 @@ import com.navdrawer.SimpleSideDrawer;
 import java.io.InputStream;
 import java.net.URL;
 
-import sungkyul.ac.kr.leeform.activity.SettingActivity;
+import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(itSetting);
                         break;
                 }
+                mSlidingMenu.closeLeftSide();
             }
         });
     }
