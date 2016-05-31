@@ -17,7 +17,6 @@ public class MyPageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
-
         //툴바 완료버튼 보이지 않게 하기
         TextView tvOK=(TextView)findViewById(R.id.tvOk);
         tvOK.setVisibility(View.INVISIBLE);
