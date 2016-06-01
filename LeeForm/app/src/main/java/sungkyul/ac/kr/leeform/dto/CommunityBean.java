@@ -9,6 +9,7 @@ public class CommunityBean {
     private String err;
     private String count;
     private List<CommunityBeanItem> community_list;
+    private List<CommunityBeanReplyItem> community_reply;
 
     public String getErr() {
         return err;
@@ -32,5 +33,13 @@ public class CommunityBean {
 
     public void setCommunity_list(List<CommunityBeanItem> community_list) {
         this.community_list = community_list;
+    }
+
+    public List<CommunityBeanReplyItem> getCommunity_reply() {
+        return community_reply;
+    }
+
+    public void setCommunity_reply(List<CommunityBeanReplyItem> community_reply) {
+        this.community_reply = community_reply;
     }
 }
