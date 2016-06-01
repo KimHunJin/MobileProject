@@ -9,6 +9,13 @@ public class CommunityItem {
     private String cCount;
     private String cContent;
     private int cImg;
+    public int getcNumber() {
+        return cNumber;
+    }
+
+    public void setcNumber(int cNumber) {
+        this.cNumber = cNumber;
+    }
 
     public String getcName() {
         return cName;
@@ -25,7 +32,8 @@ public class CommunityItem {
         return cImg;
     }
 
-    public CommunityItem(String name, String count, String content, int img) {
+    public CommunityItem(int number ,String name, String count, String content, int img) {
+        cNumber=number;
         cName = name;
         cCount = count;
         cContent = content;

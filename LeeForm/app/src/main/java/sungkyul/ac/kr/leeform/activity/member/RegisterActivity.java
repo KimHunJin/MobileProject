@@ -1,12 +1,9 @@
 package sungkyul.ac.kr.leeform.activity.member;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
@@ -16,7 +13,6 @@ import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.helper.log.Logger;
 
 import sungkyul.ac.kr.leeform.MainActivity;
-import sungkyul.ac.kr.leeform.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -83,12 +79,14 @@ public class RegisterActivity extends AppCompatActivity {
         it.putExtra("NickName",nickName);
         it.putExtra("Image",imagePath);
         startActivity(it);
+        overridePendingTransition(0,0);
         finish();
     }
     protected void redirectLoginActivity() {
         final Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        overridePendingTransition(0,0);
         finish();
     }
 }

@@ -7,9 +7,15 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 
 /**
@@ -18,6 +24,8 @@ import sungkyul.ac.kr.leeform.R;
 
 public class CommunityCreateActivity extends AppCompatActivity {
     ImageView camera,album;
+    EditText edtCommunity;
+    private static String URL = "http://14.63.196.255/api/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,5 +63,17 @@ public class CommunityCreateActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void create(){
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        edtCommunity=(EditText)findViewById(R.id.edtCommunity);
+        String content=edtCommunity.getText().toString();
+
+        Map<String,String> data= new HashMap<>();
+        data.put("user_unique_key","2"); //user_unique_key 가져오기
+        data.put("community_writing_contents",content);
     }
 }

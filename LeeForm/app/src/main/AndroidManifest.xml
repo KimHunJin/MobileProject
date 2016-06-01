@@ -56,6 +56,7 @@
             android:value="@string/kakao_app_key" />
 
         <activity android:name=".activity.settings.NoticeActivity"></activity>
+        <activity android:name=".activity.member.RegistSellerActivity"></activity>
     </application>
 
 </manifest>
