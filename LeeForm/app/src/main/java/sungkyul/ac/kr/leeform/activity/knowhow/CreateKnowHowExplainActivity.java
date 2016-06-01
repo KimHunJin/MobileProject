@@ -180,7 +180,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
                 final Bundle extras = data.getExtras();
 
                 // 경로에 이미지 저장 (임시 파일)
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/LeeForm/"+ System.currentTimeMillis()+".jpg";
+                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/LeeForm/"+ System.currentTimeMillis()+".jpeg";
 
                 if(extras!=null) {
                     Log.e("extras",extras+"");

@@ -90,7 +90,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 //            // initialize a SliderLayout
 //            textSliderView
 //                    .description(name)
-//                    .image(maps.get(name))
+//                    .image(maps.getCommunityList(name))
 //                    .setScaleType(BaseSliderView.ScaleType.Fit)
 //                    .enableSaveImageByLongClick(getFragmentManager())
 //                    .setOnSliderClickListener(this);

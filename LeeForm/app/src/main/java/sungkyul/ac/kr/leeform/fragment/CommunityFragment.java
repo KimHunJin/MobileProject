@@ -1,7 +1,6 @@
 package sungkyul.ac.kr.leeform.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -107,7 +105,7 @@ public class CommunityFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<CommunityBean> call = connectService.get();
+        Call<CommunityBean> call = connectService.getCommunityList();
         call.enqueue(new Callback<CommunityBean>() {
             @Override
             public void onResponse(Call<CommunityBean> call, Response<CommunityBean> response) {

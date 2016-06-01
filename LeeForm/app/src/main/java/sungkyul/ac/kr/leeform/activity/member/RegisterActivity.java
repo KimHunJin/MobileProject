@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(ErrorResult errorResult) {
                 Log.e("Failure",errorResult+"");
-                String message = "failed to get user info. msg=" + errorResult;
+                String message = "failed to getCommunityList user info. msg=" + errorResult;
                 Logger.d(message);
 
                 ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());

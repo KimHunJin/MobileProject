@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 md.update(signature.toByteArray());
                 return android.util.Base64.encodeToString(md.digest(), android.util.Base64.NO_WRAP);
             } catch (NoSuchAlgorithmException e) {
-                Log.w("error", "Unable to get MessageDigest. signature=" + signature, e);
+                Log.w("error", "Unable to getCommunityList MessageDigest. signature=" + signature, e);
             }
         }
         return null;
