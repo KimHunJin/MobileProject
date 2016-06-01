@@ -25,6 +25,7 @@ import com.navdrawer.SimpleSideDrawer;
 import java.io.InputStream;
 import java.net.URL;
 
+import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
 import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
@@ -33,6 +34,7 @@ import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
+import sungkyul.ac.kr.leeform.utils.SaveData;
 
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
@@ -155,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
+                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
                 } else if(tabLayout.getSelectedTabPosition()==1) {
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
                     overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
@@ -165,6 +168,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         String[] item = getResources().getStringArray(R.array.nav);
+
+        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+            item[2] = "판매 내역";
+        }
 
         lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
         ArrayAdapter<String> yada = new ArrayAdapter<String>(this, R.layout.nav_item, item);
@@ -188,6 +195,16 @@ public class MainActivity extends AppCompatActivity {
 
                     // 판매자 등록
                     case 2:
+                        // 판매자 등록이 된상태면 판매내역으로
+                        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+                            Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
+                            startActivity(itSetting);
+                        }
+                        // 판매자 등록이 안되어 있으면 판매자 등록으로
+                        else{
+                            Intent itRegistSeller = new Intent(getApplicationContext(), RegistSellerActivity.class);
+                            startActivity(itRegistSeller);
+                        }
                         break;
 
                     // 설정
