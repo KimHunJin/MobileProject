@@ -23,9 +23,8 @@ import sungkyul.ac.kr.leeform.activity.community.CommunityCreateActivity;
 import sungkyul.ac.kr.leeform.activity.community.CommunityDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityBean;
+import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
-import sungkyul.ac.kr.leeform.items.ReplyItem;
 
 /**
  * Created by HunJin on 2016-05-01.
@@ -34,7 +33,6 @@ public class CommunityFragment extends Fragment {
 
     private View cView;
     private CommunityListAdapter adapter;
-
     private static String URL = "http://14.63.196.255/api/";
 
     ArrayList<CommunityItem> listItem = new ArrayList<>();
@@ -43,24 +41,31 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        /**
+         * inflater를 통해 xml을 가져온다.
+         * adapter를 통해 xml을 ArrayList에 설정한다.
+         * lst에 adqpter를 등록한다.
+         * **/
         cView = inflater.inflate(R.layout.fragment_community, container, false);
         adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
-
-
         final ListView lst = (ListView) cView.findViewById(R.id.listCommunity);
         lst.setAdapter(adapter);
+
+        //커뮤니티 목록 중 선택한 넘버 보내기
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(getContext(),CommunityDetailActivity.class);
-                intent.putExtra("Number",listItem.get(position).getcNumber());
+                /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
+                intent.putExtra("Number",position);
                 startActivity(intent);
             }
         });
 
-        leeformParsing();
+        communityDetailList();
 
-        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);//작성하기 버튼
+        //작성버튼 클릭시 커뮤니티작성화면으로 이동
+        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +77,6 @@ public class CommunityFragment extends Fragment {
 
     }
 
-    void init() {
-        for (int i = 0; i < 10; i++) {
-            listItem.add(new CommunityItem(i,"박현경", "5", "ㅏ하하하하ㅏㅎ", R.drawable.circle_img)); //리스트에 추가
-        }
-    }
 
     @Override
     public void onResume() {
@@ -84,33 +84,35 @@ public class CommunityFragment extends Fragment {
         super.onResume();
     }
 
-    private void leeformParsing() {
+    private void communityDetailList() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<CommunityBean> call = connectService.getCommunityList();
-        call.enqueue(new Callback<CommunityBean>() {
+        // http://14.63.196.255/api/community_list.php
+        Call<CommunityBeanList> call = connectService.getCommunityList();
+        call.enqueue(new Callback<CommunityBeanList>() {
             @Override
-            public void onResponse(Call<CommunityBean> call, Response<CommunityBean> response) {
+            public void onResponse(Call<CommunityBeanList> call, Response<CommunityBeanList> response) {
                 Log.e("resonpse", response.code() + "");
-                CommunityBean decode = response.body();
+                CommunityBeanList decode = response.body(); //CommunityBeanList 형식으로 디코딩
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getCommunity_list().size() + "");
                 listItem.clear();
+                //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
-                    listItem.add(new CommunityItem(Integer.parseInt(decode.getCommunity_list().get(i).getCommunity_unique_key()),decode.getCommunity_list().get(i).getCommunity_writing_name(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), R.drawable.circle_img));
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), R.drawable.circle_img));
 
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<CommunityBean> call, Throwable t) {
+            public void onFailure(Call<CommunityBeanList> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });

@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * Created by HunJin on 2016-05-30.
  */
-public class CommunityBean {
+public class CommunityBeanDetail {
     private String err;
     private String count;
-    private List<CommunityBeanItem> community_list;
+    private List<CommunityBeanDetailItem> community_detail;
     private List<CommunityBeanReplyItem> community_reply;
 
     public String getErr() {
@@ -27,12 +27,12 @@ public class CommunityBean {
         this.count = count;
     }
 
-    public List<CommunityBeanItem> getCommunity_list() {
-        return community_list;
+    public List<CommunityBeanDetailItem> getCommunity_detail() {
+        return community_detail;
     }
 
-    public void setCommunity_list(List<CommunityBeanItem> community_list) {
-        this.community_list = community_list;
+    public void setCommunity_detail(List<CommunityBeanDetailItem> community_detail) {
+        this.community_detail = community_detail;
     }
 
     public List<CommunityBeanReplyItem> getCommunity_reply() {

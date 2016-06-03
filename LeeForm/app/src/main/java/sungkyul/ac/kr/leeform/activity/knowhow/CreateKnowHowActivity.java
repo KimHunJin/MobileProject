@@ -32,9 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.CreateKnowHowGridAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
-import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
 import sungkyul.ac.kr.leeform.utils.Util;
 
