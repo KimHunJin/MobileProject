@@ -36,6 +36,7 @@ import sungkyul.ac.kr.leeform.dto.CommunityBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
+import sungkyul.ac.kr.leeform.utils.Util;
 
 public class CreateKnowHowActivity extends AppCompatActivity {
 
@@ -46,14 +47,12 @@ public class CreateKnowHowActivity extends AppCompatActivity {
 
     String uploadFilePath; // 파일 경로
     String uploadFileName; // 파일 이름
+    String writingUniqueKey;
+
+    EditText edtName, edtVideoUrl, edtMakingTime;
 
     TextView txtOk;
     LinearLayout lineCreateView;
-    LinearLayout linePlusView[];
-    RelativeLayout relPlusView[];
-    ImageView imgPlus[], imgAdd[];
-    EditText edtContents[];
-    LinearLayout lineAddImg[];
 
     private GridView grvCreate;
     private CreateKnowHowGridAdapter cAdapter;
@@ -72,30 +71,16 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.txtToolBarTitle);
         tv.setText("노하우 작성");
 
+        layoutSetting();
 
         txtOk = (TextView) findViewById(R.id.tvOk);
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("strUrl", strUrl.size() + "");
-                for (int i = 0; i < strUrl.size(); i++) { // 생성한 노하우의 수만큼 반복
-                    File file = new File(strUrl.get(i));  // 파일을 만듬
-                    final String contents = strExplain.get(i); // 설명 추출
-                    uploadFileName = file.getName(); // 파일의 이름 추출
-                    uploadFilePath = file.getPath(); // 파일의 경로 추출
-                    Log.e("file Name", file.getName());
 
-                    // writing_unique_key를 가져오는 함수가 필요하다.
+                saveKnowGetKey();
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            uploadFile(uploadFilePath); // 파일 업로드
-                        }
-                    }).start();
-                    // 파일이미지, 설명, 우선순위, writing_unique_key
-                    leeformParsing(uploadFileName, contents, (i + 1), 3 + ""); // 데이터베이스에 저장
-                }
                 finish();
             }
         });
@@ -109,16 +94,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
             }
         });
 
-//        btnPlusKnowHow = (Button) findViewById(R.id.btnContentsPlus);
-//      btnMinusKnowHow = (Button) findViewById(R.id.btnContentsMinus);
         lineCreateView = (LinearLayout) findViewById(R.id.lineCreateView);
-
-        linePlusView = new LinearLayout[100];
-        relPlusView = new RelativeLayout[100];
-        imgPlus = new ImageView[100];
-        imgAdd = new ImageView[100];
-        edtContents = new EditText[100];
-        lineAddImg = new LinearLayout[100];
 
         grvCreate = (GridView) findViewById(R.id.grvCreateView);
         cAdapter = new CreateKnowHowGridAdapter(getApplicationContext(), R.layout.item_grid_create, gridItems);
@@ -137,6 +113,12 @@ public class CreateKnowHowActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    void layoutSetting() {
+        edtName = (EditText) findViewById(R.id.edtKnowHowName);
+        edtMakingTime = (EditText) findViewById(R.id.edtMakingTime);
+        edtVideoUrl = (EditText) findViewById(R.id.edtVideoUrl);
     }
 
     void init() {
@@ -161,6 +143,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         }
     }
 
+    // 이미지 올리는 메서드
     public int uploadFile(String sourceFileUri) {
 
         String fileName = sourceFileUri;
@@ -311,6 +294,76 @@ public class CreateKnowHowActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<KnowHowWritingBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
+            }
+        });
+    }
+
+    /**
+     * parameter
+     * user_unique_key
+     * writing_category_key
+     * writing_name
+     * check_video
+     * video_url
+     * making_time
+     * price
+     * level
+     * writing_explanation
+     * amount
+     */
+    private void saveKnowGetKey() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        String userUniqueKey = Util.getAppPreferences(getApplicationContext(), "user_key");
+        Log.e("userUniqueKey", userUniqueKey);
+        Map<String, String> data = new HashMap<>();
+
+        data.put("user_unique_key", userUniqueKey);
+        data.put("writing_category_key", "1"); // 변경 필요
+        data.put("writing_name", edtName.getText().toString());
+        data.put("check_video", "1"); // 변경 필요
+        data.put("video_url", edtVideoUrl.getText().toString());
+        data.put("price", "10000"); // 변경 필요
+        data.put("making_time", edtMakingTime.getText().toString());
+        data.put("level", "상"); // 변경 필요
+        data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
+        data.put("amount", "1"); // 변경 필요
+
+        Call<KnowHowWritingBean> call = connectService.setKnowGetKey(data);
+        call.enqueue(new Callback<KnowHowWritingBean>() {
+            @Override
+            public void onResponse(Call<KnowHowWritingBean> call, Response<KnowHowWritingBean> response) {
+                KnowHowWritingBean decode = response.body();
+                Log.e("err", decode.getErr());
+                writingUniqueKey = decode.getWriting_unique_key().get(0).getWriting_unique_key();
+                Log.e("writing_key", writingUniqueKey);
+
+                for (int i = 0; i < strUrl.size(); i++) { // 생성한 노하우의 수만큼 반복
+                    File file = new File(strUrl.get(i));  // 파일을 만듬
+                    final String contents = strExplain.get(i); // 설명 추출
+                    uploadFileName = file.getName(); // 파일의 이름 추출
+                    uploadFilePath = file.getPath(); // 파일의 경로 추출
+                    Log.e("file Name", file.getName());
+
+                    // writing_unique_key를 가져오는 함수가 필요하다.
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            uploadFile(uploadFilePath); // 파일 업로드
+                        }
+                    }).start();
+                    // 파일이미지, 설명, 우선순위, writing_unique_key
+                    leeformParsing(uploadFileName, contents, (i + 1), writingUniqueKey); // 데이터베이스에 저장
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KnowHowWritingBean> call, Throwable t) {
+                Log.e("Failure Writing Knowhow", t.getMessage());
             }
         });
     }

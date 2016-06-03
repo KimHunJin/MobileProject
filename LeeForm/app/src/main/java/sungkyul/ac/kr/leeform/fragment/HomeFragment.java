@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
 
     void init() {
         for (int i = 0; i < 10; i++) {
-            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
+//            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
     }
 
@@ -172,8 +172,8 @@ public class HomeFragment extends Fragment {
                 Log.e("list size", decode.getWriting_list().size() + "");
                 listItem.clear();
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-
-                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(),decode.getWriting_list().get(i).getWriting_name(),R.drawable.tables2));
+                    Log.e("imgUrl",decode.getWriting_list().get(i).getPicture_url());
+                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(),decode.getWriting_list().get(i).getWriting_name(),decode.getWriting_list().get(i).getPicture_url()));
                 }
                 adapter.notifyDataSetChanged();
             }

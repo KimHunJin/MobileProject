@@ -1,5 +1,7 @@
 package sungkyul.ac.kr.leeform.dao;
 
+import com.kakao.usermgmt.response.model.User;
+
 import java.util.Map;
 
 import retrofit2.Call;
@@ -8,6 +10,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import sungkyul.ac.kr.leeform.dto.CommunityBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
+import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.WritingBean;
 
 /**
@@ -34,7 +37,22 @@ public interface ConnectService {
     );
 
     @GET("api_explanation.php")
-    Call<CommunityBean> get(
+    Call<CommunityBean> getexpl(
             @QueryMap Map<String , String> options
+    );
+
+    @GET("get.php")
+    Call<UserInfoBean> getUserInfo(
+            @Query("kakao_unique_key") String kakao_unique_key
+    );
+
+    @GET("set.php")
+    Call<UserInfoBean> setUserInfo(
+            @QueryMap Map<String, String> options
+    );
+
+    @GET("know_how_writing_get_key.php")
+    Call<KnowHowWritingBean> setKnowGetKey(
+            @QueryMap Map<String, String> options
     );
 }

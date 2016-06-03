@@ -8,7 +8,7 @@ public class WritingBeanItem {
     String writing_name;
     String price;
     String making_time;
-    String pitcure_url;
+    String picture_url;
 
     public String getWriting_unique_key() {
         return writing_unique_key;
@@ -42,11 +42,11 @@ public class WritingBeanItem {
         this.making_time = making_time;
     }
 
-    public String getPitcure_url() {
-        return pitcure_url;
+    public String getPicture_url() {
+        return picture_url;
     }
 
-    public void setPitcure_url(String pitcure_url) {
-        this.pitcure_url = pitcure_url;
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
     }
 }

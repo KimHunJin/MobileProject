@@ -113,7 +113,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
         Log.e("num",number+"");
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<CommunityBean> call = connectService.get();
+        Call<CommunityBean> call = connectService.getCommunityList();
         call.enqueue(new Callback<CommunityBean>() {
             @Override
             public void onResponse(Call<CommunityBean> call, Response<CommunityBean> response) {
