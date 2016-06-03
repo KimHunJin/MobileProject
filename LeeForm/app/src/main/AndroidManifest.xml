@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/CustomNoActionBar">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".activity.member.LoginActivity"
             android:theme="@style/CustomNoActionBar">
@@ -55,8 +55,9 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".activity.settings.NoticeActivity"></activity>
-        <activity android:name=".activity.member.RegistSellerActivity"></activity>
+        <activity android:name=".activity.settings.NoticeActivity" />
+        <activity android:name=".activity.member.RegistSellerActivity" />
+        <activity android:name=".activity.intro.SplashActivity"></activity>
     </application>
 
 </manifest>
