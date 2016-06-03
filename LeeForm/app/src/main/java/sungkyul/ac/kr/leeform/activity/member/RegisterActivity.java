@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         UserManagement.requestMe(new MeResponseCallback() {
             @Override
             public void onFailure(ErrorResult errorResult) {
-                Log.e("Failure",errorResult+"");
+                Log.e("Failure", errorResult + "");
                 String message = "failed to getCommunityList user info. msg=" + errorResult;
                 Logger.d(message);
 
@@ -60,14 +60,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNotSignedUp() {} // 카카오톡 회원이 아닐 시 showSignup(); 호출해야함
+            public void onNotSignedUp() {
+            } // 카카오톡 회원이 아닐 시 showSignup(); 호출해야함
 
             @Override
             public void onSuccess(UserProfile userProfile) {  //성공 시 userProfile 형태로 반환
                 Logger.d("UserProfile : " + userProfile);
-                Log.e("Sucess",userProfile+"");
-                Log.e("Userid",userProfile.getId()+"");
-                redirectMainActivity(userProfile.getId(),userProfile.getNickname(), userProfile.getThumbnailImagePath()); // 로그인 성공시 MainActivity로
+                Log.e("Sucess", userProfile + "");
+                Log.e("Userid", userProfile.getId() + "");
+                redirectMainActivity(userProfile.getId(), userProfile.getNickname(), userProfile.getThumbnailImagePath()); // 로그인 성공시 MainActivity로
             }
         });
     }
@@ -75,18 +76,19 @@ public class RegisterActivity extends AppCompatActivity {
     // 로그인 성공시
     private void redirectMainActivity(long userId, String nickName, String imagePath) {
         Intent it = new Intent(this, MainActivity.class);
-        it.putExtra("UserId",userId);
-        it.putExtra("NickName",nickName);
-        it.putExtra("Image",imagePath);
+        it.putExtra("UserId", userId);
+        it.putExtra("NickName", nickName);
+        it.putExtra("Image", imagePath);
         startActivity(it);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
     protected void redirectLoginActivity() {
         final Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
 }

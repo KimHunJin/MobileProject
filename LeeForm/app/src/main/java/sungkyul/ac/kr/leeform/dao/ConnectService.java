@@ -1,6 +1,4 @@
-﻿package sungkyul.ac.kr.leeform.dao;
-
-import com.kakao.usermgmt.response.model.User;
+package sungkyul.ac.kr.leeform.dao;
 
 import java.util.Map;
 
@@ -34,12 +32,7 @@ public interface ConnectService {
 
     @GET("community_detail.php")
     Call<CommunityBeanDetail> get(
-            @Query("community_unique_key") String  community_unique_key
-    );
-
-    @GET("write_community.php")
-    Call<CommunityBeanDetail> get(
-            @QueryMap Map<String , String> options
+            @Query("community_unique_key") String community_unique_key
     );
 
     @GET("get.php")

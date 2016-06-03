@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.navdrawer.SimpleSideDrawer;
-import com.nostra13.universalimageloader.utils.L;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -33,17 +32,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
-import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
+import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
+import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
-import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 import sungkyul.ac.kr.leeform.utils.SaveData;
@@ -98,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         userImagePath = it.getExtras().getString("Image");
 
 
-        Log.e("userIdMain",userId + " : " + userNickName + " : " + userImagePath);
+        Log.e("userIdMain", userId + " : " + userNickName + " : " + userImagePath);
 
         checkUser();
 
@@ -113,38 +110,38 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         Map<String, String> data = new HashMap<>();
-        data.put("kakao_unique_key",userId+"");
-        data.put("img",userImagePath);
-        data.put("name",userNickName);
+        data.put("kakao_unique_key", userId + "");
+        data.put("img", userImagePath);
+        data.put("name", userNickName);
 
         ConnectService connectService = retrofit.create(ConnectService.class);
         Call<UserInfoBean> call = connectService.setUserInfo(data);
         call.enqueue(new Callback<UserInfoBean>() {
             @Override
             public void onResponse(Call<UserInfoBean> call, Response<UserInfoBean> response) {
-                Log.e("setUser",response.code()+"");
+                Log.e("setUser", response.code() + "");
                 checkUser();
             }
 
             @Override
             public void onFailure(Call<UserInfoBean> call, Throwable t) {
-                Log.e("failure",t.getMessage());
+                Log.e("failure", t.getMessage());
             }
         });
 
     }
 
     private void checkUser() {
-        Log.e("userid",userId+"");
+        Log.e("userid", userId + "");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Log.e("abcd","abcd" + userNickName + " " + userImagePath);
+        Log.e("abcd", "abcd" + userNickName + " " + userImagePath);
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<UserInfoBean> call = connectService.getUserInfo(userId+"");
-        Log.e("call","call");
+        Call<UserInfoBean> call = connectService.getUserInfo(userId + "");
+        Log.e("call", "call");
         call.enqueue(new Callback<UserInfoBean>() {
             @Override
             public void onResponse(Call<UserInfoBean> call, Response<UserInfoBean> response) {
@@ -153,23 +150,23 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("err", decode.getErr());
                 String err = decode.getErr();
                 errorCode = err;
-                if(err.equals("0")) {
-                    Log.e("yse","yes");
+                if (err.equals("0")) {
+                    Log.e("yse", "yes");
                     userUniqueKey = decode.getKakao_user_info().get(0).getUser_unique_key();
                     userNickNameIn = decode.getKakao_user_info().get(0).getName();
                     userImagePathIn = decode.getKakao_user_info().get(0).getImg();
 
-                    Util.setAppPreferences(getApplicationContext(),"user_key",userUniqueKey);
-                    Log.e("user_key",Util.getAppPreferences(getApplicationContext(),"user_key"));
+                    Util.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
+                    Log.e("user_key", Util.getAppPreferences(getApplicationContext(), "user_key"));
 
                     tabInitialization();
                     initializeLayout();
                     setListener();
                     navigationSetting();
 
-                } else if(err.equals("4")) {
-                    Log.e("sibar","sibar");
-                    setUser(userId,userNickName,userImagePath);
+                } else if (err.equals("4")) {
+                    Log.e("sibar", "sibar");
+                    setUser(userId, userNickName, userImagePath);
                 }
 
             }
@@ -189,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
 //        userId = it.getExtras().getLong("UserId");
 //        userNickName = it.getExtras().getString("NickName");
 //        userImagePath = it.getExtras().getString("Image");
-        Log.e("userUniqueKeyIn",userUniqueKey);
-        Log.e("userNickNameIn",userNickNameIn);
-        Log.e("userImagePathIn",userImagePathIn);
+        Log.e("userUniqueKeyIn", userUniqueKey);
+        Log.e("userNickNameIn", userNickNameIn);
+        Log.e("userImagePathIn", userImagePathIn);
 
         txtNavUserNickName.setText(userNickNameIn);
         Log.e("userImagePath", userImagePathIn);
@@ -262,10 +259,10 @@ public class MainActivity extends AppCompatActivity {
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
-                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
-                } else if(tabLayout.getSelectedTabPosition()==1) {
+                    overridePendingTransition(R.anim.commons_slide_from_right, R.anim.commons_slide_to_left);
+                } else if (tabLayout.getSelectedTabPosition() == 1) {
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
-                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
+                    overridePendingTransition(R.anim.commons_slide_from_right, R.anim.commons_slide_to_left);
                 } else {
                     Toast.makeText(getApplicationContext(), "커뮤니티에선 지원하지 않는 기능입니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -274,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
         String[] item = getResources().getStringArray(R.array.nav);
 
-        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
             item[2] = "판매 내역";
         }
 
@@ -301,12 +298,12 @@ public class MainActivity extends AppCompatActivity {
                     // 판매자 등록
                     case 2:
                         // 판매자 등록이 된상태면 판매내역으로
-                        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+                        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
                             Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
                             startActivity(itSetting);
                         }
                         // 판매자 등록이 안되어 있으면 판매자 등록으로
-                        else{
+                        else {
                             Intent itRegistSeller = new Intent(getApplicationContext(), RegistSellerActivity.class);
                             startActivity(itRegistSeller);
                         }
