@@ -14,9 +14,11 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
 
 /**
  * Created by user on 2016-05-16.
@@ -43,6 +45,7 @@ public class CommunityCreateActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
         camera=(ImageView)findViewById(R.id.imgCamera);
         album=(ImageView) findViewById(R.id.imgAlbum);
@@ -73,7 +76,11 @@ public class CommunityCreateActivity extends AppCompatActivity {
         String content=edtCommunity.getText().toString();
 
         Map<String,String> data= new HashMap<>();
+        // http://14.63.196.255/api/write_community.php?user_unique_key=2&community_writing_contents=content
         data.put("user_unique_key","2"); //user_unique_key 가져오기
         data.put("community_writing_contents",content);
+
+        ConnectService connectService=retrofit.create(ConnectService.class);
+
     }
 }

@@ -32,11 +32,18 @@ public class CommunityItem {
         return cImg;
     }
 
-    public CommunityItem(int number ,String name, String count, String content, int img) {
+/*   public CommunityItem(int number ,String name, String count, String content, int img) {
         cNumber=number;
         cName = name;
         cCount = count;
         cContent = content;
         cImg = img;
-    }
+    }*/
+ public CommunityItem(String name, String count, String content, int img) {
+
+     cName = name;
+     cCount = count;
+     cContent = content;
+     cImg = img;
+ }
 }
