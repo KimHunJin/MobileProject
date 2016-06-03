@@ -28,6 +28,9 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
+/**
+ * 노하우의 사진과 설명을 작성
+ * */
 public class CreateKnowHowExplainActivity extends AppCompatActivity {
 
     private static final int PICK_FROM_CAMERA = 0;

@@ -32,6 +32,7 @@ import sungkyul.ac.kr.leeform.items.MainListItem;
 
 /**
  * Created by HunJin on 2016-05-01.
+ * 노하우리스트화면
  */
 public class HomeFragment extends Fragment {
     private int check=0;

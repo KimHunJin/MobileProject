@@ -16,9 +16,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.utils.Util;
 
 /**
- * Created by user on 2016-05-16.
+ * Created by miseon on 2016-05-16.
+ * 커뮤니티 작성
  */
 
 public class CommunityCreateActivity extends AppCompatActivity {
@@ -74,7 +76,8 @@ public class CommunityCreateActivity extends AppCompatActivity {
 
         Map<String,String> data= new HashMap<>();
         // http://14.63.196.255/api/write_community.php?user_unique_key=2&community_writing_contents=content
-        data.put("user_unique_key","2"); //user_unique_key 가져오기
+        String key = Util.getAppPreferences(getApplicationContext(),"user_key");
+        data.put("user_unique_key",key); //user_unique_key 가져오기
         data.put("community_writing_contents",content);
 
         ConnectService connectService=retrofit.create(ConnectService.class);

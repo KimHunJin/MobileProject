@@ -35,6 +35,9 @@ import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
 import sungkyul.ac.kr.leeform.utils.Util;
 
+/**
+ * 노하우의 제목,간단한 설명, 제작 시간 등 작성
+ */
 public class CreateKnowHowActivity extends AppCompatActivity {
 
     String upLoadServerUri = "http://14.63.196.255/api/upload.php"; // 파일 업로드를 위한 php url 이다.
@@ -71,6 +74,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         layoutSetting();
 
         txtOk = (TextView) findViewById(R.id.tvOk);
+        //완료버튼 누를시
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,9 +95,10 @@ public class CreateKnowHowActivity extends AppCompatActivity {
             }
         });
 
+        //사진추가 되는 LinearLayout
         lineCreateView = (LinearLayout) findViewById(R.id.lineCreateView);
-
         grvCreate = (GridView) findViewById(R.id.grvCreateView);
+        //GridView 방식으로 사진이 추가되는 adapter 생성
         cAdapter = new CreateKnowHowGridAdapter(getApplicationContext(), R.layout.item_grid_create, gridItems);
         grvCreate.setAdapter(cAdapter);
 
@@ -118,21 +123,37 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         edtVideoUrl = (EditText) findViewById(R.id.edtVideoUrl);
     }
 
+    /**
+     * GridView에 선택한 사진의 URL과 설명추가
+     * **/
     void init() {
         gridItems.clear();
         for (int i = 0; i < strUrl.size(); i++) {
             gridItems.add(new CreateKnowHowItem(i, strUrl.get(i), strExplain.get(i)));
         }
+        //사진 추가한 후 +이미지가 뜨도록 +이미지를 GridView에 추가
         gridItems.add(new CreateKnowHowItem(gridItems.size(), R.drawable.ic_control_point_black_36dp, "클릭"));
         cAdapter.notifyDataSetChanged();
     }
 
     // 액티비티로 돌아왔을 때
+
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     *
+     * parameter
+     * StringArrayList image
+     * StringArrayList explain
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
+                //URL과 노하우 설명 가져오기
                 strUrl = data.getStringArrayListExtra("image");
                 strExplain = data.getStringArrayListExtra("explain");
                 init();
@@ -141,6 +162,12 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     }
 
     // 이미지 올리는 메서드
+
+    /**
+     *
+     * @param sourceFileUri
+     * @return
+     */
     public int uploadFile(String sourceFileUri) {
 
         String fileName = sourceFileUri;
@@ -296,6 +323,8 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     }
 
     /**
+     * 작성한 내용들을 보내기
+     *
      * parameter
      * user_unique_key
      * writing_category_key
