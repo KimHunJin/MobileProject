@@ -22,6 +22,7 @@ import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanDetail;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
 import sungkyul.ac.kr.leeform.items.ReplyItem;
+import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by miseon on 2016-05-17.
@@ -115,6 +116,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 tv1.setText(decode.getCommunity_list().get(number).getCommunity_writing_contents()); //선택한 커뮤니티 내용
                 tv3.setText(decode.getCommunity_list().get(number).getName()); //선택한 커뮤니티 작성자 이름
                 Log.e("url",decode.getCommunity_list().get(number).getImg()+"");
+                new DownloadImageTask(img).execute(decode.getCommunity_list().get(number).getImg());
                 //img.setImageResource(decode.getCommunity_list().get(0).getCommunity_picture_url()); //이미지
                 //decode.getCommunity_list().get(0).getCommunity_writing_date(); //날짜
 

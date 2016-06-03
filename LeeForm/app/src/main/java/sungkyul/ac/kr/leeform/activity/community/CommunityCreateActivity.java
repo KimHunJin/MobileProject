@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
@@ -45,6 +46,7 @@ public class CommunityCreateActivity extends AppCompatActivity {
             }
         });
 
+        edtCommunity=(EditText)findViewById(R.id.edtCommunity);
 
         camera=(ImageView)findViewById(R.id.imgCamera);
         album=(ImageView) findViewById(R.id.imgAlbum);
@@ -71,7 +73,7 @@ public class CommunityCreateActivity extends AppCompatActivity {
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        edtCommunity=(EditText)findViewById(R.id.edtCommunity);
+
         String content=edtCommunity.getText().toString();
 
         Map<String,String> data= new HashMap<>();

@@ -91,6 +91,7 @@ public class CommunityFragment extends Fragment {
     public void onResume() {
         Log.e("resume","resume");
         super.onResume();
+        communityDetailList();
     }
 
     private void communityDetailList() {

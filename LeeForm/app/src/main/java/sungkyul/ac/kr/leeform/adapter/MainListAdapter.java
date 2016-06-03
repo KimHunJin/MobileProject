@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by HunJin on 2016-04-06.
@@ -80,32 +81,6 @@ public class MainListAdapter extends BaseAdapter {
         viewHolder.txtMainTime.setText(listItem.getmTime());
 
         return convertView;
-    }
-
-    // 비동기식으로 이미지를 가지고 온다.
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
     }
 
     class ViewHolder {
