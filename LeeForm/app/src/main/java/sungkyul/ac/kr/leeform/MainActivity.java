@@ -182,10 +182,7 @@ public class MainActivity extends AppCompatActivity {
      * 네비게이션 세팅 (사용자 이미지, 닉네임)
      */
     private void navigationSetting() {
-//        Intent it = getIntent();
-//        userId = it.getExtras().getLong("UserId");
-//        userNickName = it.getExtras().getString("NickName");
-//        userImagePath = it.getExtras().getString("Image");
+
         Log.e("userUniqueKeyIn", userUniqueKey);
         Log.e("userNickNameIn", userNickNameIn);
         Log.e("userImagePathIn", userImagePathIn);

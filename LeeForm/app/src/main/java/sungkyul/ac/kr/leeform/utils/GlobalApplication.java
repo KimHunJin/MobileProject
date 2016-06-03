@@ -15,6 +15,7 @@ import sungkyul.ac.kr.leeform.adapter.KakaoSDKAdapter;
 
 /**
  * Created by HunJin on 2016-05-25.
+ * 카카오 로그인 시 필요한 클래스
  */
 public class GlobalApplication extends Application {
 

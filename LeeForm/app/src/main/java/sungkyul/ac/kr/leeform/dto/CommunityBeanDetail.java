@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * Created by HunJin on 2016-05-30.
+ * json을 받아줄 클래스를 생성
+ * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
 public class CommunityBeanDetail {
     private String err;

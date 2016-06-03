@@ -20,19 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_register);
-
         requestMe();
-
-/*        Button btnRegist = (Button)findViewById(R.id.btnMemberRegOk);
-        *//**등록하기 버튼 누르면 메인화면으로**//*
-        btnRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"회원가입",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });*/
-
     }
 
     /**

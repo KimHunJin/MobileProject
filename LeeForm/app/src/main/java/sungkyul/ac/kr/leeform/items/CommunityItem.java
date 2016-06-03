@@ -8,7 +8,9 @@ public class CommunityItem {
     private String cName;
     private String cCount;
     private String cContent;
-    private int cImg;
+    private String cImageURL;
+    //private int cImg;
+
     public int getcNumber() {
         return cNumber;
     }
@@ -21,29 +23,39 @@ public class CommunityItem {
         return cName;
     }
 
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
+
     public String getcCount() {
         return cCount;
     }
+
+    public void setcCount(String cCount) {
+        this.cCount = cCount;
+    }
+
     public String getcContent() {
         return cContent;
     }
 
-    public int getcImg() {
-        return cImg;
+    public void setcContent(String cContent) {
+        this.cContent = cContent;
     }
 
-/*   public CommunityItem(int number ,String name, String count, String content, int img) {
-        cNumber=number;
+    public String getcImageURL() {
+        return cImageURL;
+    }
+
+    public void setcImageURL(String cImageURL) {
+        this.cImageURL = cImageURL;
+    }
+
+    public CommunityItem(String name, String count, String content, String img) {
+
         cName = name;
         cCount = count;
         cContent = content;
-        cImg = img;
-    }*/
- public CommunityItem(String name, String count, String content, int img) {
-
-     cName = name;
-     cCount = count;
-     cContent = content;
-     cImg = img;
- }
+        cImageURL = img;
+    }
 }

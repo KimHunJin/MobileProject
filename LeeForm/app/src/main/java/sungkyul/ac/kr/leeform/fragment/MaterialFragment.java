@@ -48,7 +48,6 @@ public class MaterialFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent itMaterialDetail = new Intent(getActivity().getApplicationContext(), MaterialDetailActivity.class);
                 startActivity(itMaterialDetail);
-//                Toast.makeText(getActivity(),(position+1) + "선택", Toast.LENGTH_SHORT).show();
             }
         });
 

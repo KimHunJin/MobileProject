@@ -28,29 +28,28 @@ import sungkyul.ac.kr.leeform.items.CommunityItem;
 
 /**
  * Created by HunJin on 2016-05-01.
+ * 커뮤니티 리스트가 뜬다.
  */
 public class CommunityFragment extends Fragment {
 
     private View cView;
     private CommunityListAdapter adapter;
     private static String URL = "http://14.63.196.255/api/";
-
-    ArrayList<CommunityItem> listItem = new ArrayList<>();
+    ListView lst;
+    ArrayList<CommunityItem> listItem;
+    FloatingActionButton fab1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        /**
-         * inflater를 통해 xml을 가져온다.
-         * adapter를 통해 xml을 ArrayList에 설정한다.
-         * lst에 adqpter를 등록한다.
-         * **/
+        //inflater를 통해 xml을 가져온다.
         cView = inflater.inflate(R.layout.fragment_community, container, false);
-        adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
-        final ListView lst = (ListView) cView.findViewById(R.id.listCommunity);
-        lst.setAdapter(adapter);
 
+        layoutSetting();
+
+        //lst에 adqpter를 등록한다.
+        lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,10 +61,7 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        communityDetailList();
-
         //작성버튼 클릭시 커뮤니티작성화면으로 이동
-        FloatingActionButton fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,8 +69,21 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+        communityDetailList();
+
         return cView;
 
+    }
+
+    /**
+     * Layout Setting
+     */
+    public void layoutSetting(){
+        listItem = new ArrayList<>();
+        //adapter를 통해 xml을 ArrayList에 설정한다.
+        adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
+        lst = (ListView) cView.findViewById(R.id.listCommunity);
+        fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
     }
 
 
@@ -105,7 +114,7 @@ public class CommunityFragment extends Fragment {
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
-                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), R.drawable.circle_img));
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg()));
 
                 }
                 adapter.notifyDataSetChanged();

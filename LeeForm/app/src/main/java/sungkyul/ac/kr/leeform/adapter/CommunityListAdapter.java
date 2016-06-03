@@ -1,6 +1,10 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
@@ -64,9 +69,34 @@ public class CommunityListAdapter extends BaseAdapter {
         viewHolder.userName.setText(listItem.getcName());
         viewHolder.content.setText(listItem.getcContent());
         viewHolder.replyCount.setText(listItem.getcCount());
-        viewHolder.img.setImageResource(listItem.getcImg());
-
+       // viewHolder.img.setImageResource(listItem.getcImg());
+        new DownloadImageTask(viewHolder.img).execute(listItem.getcImageURL());
         return convertView;
+    }
+    // 비동기식으로 이미지를 가지고 온다.
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     class ViewHolder {

@@ -43,15 +43,6 @@ public class MaterialSearchActivity extends AppCompatActivity {
         TextView tvOk=(TextView)findViewById(R.id.tvOk);
         tvOk.setText("검색");
 
-       /* linMain = (LinearLayout) findViewById(R.id.linMainToolbar);
-        linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
-
-        linMain.setVisibility(View.GONE);
-        linSearch.setVisibility(View.VISIBLE);
-
-        imgSearch = (ImageView) findViewById(R.id.imgSearch2);
-        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);*/
-
         linMain = (LinearLayout) findViewById(R.id.backToolbar);
         linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
         linMain.setVisibility(View.GONE);
