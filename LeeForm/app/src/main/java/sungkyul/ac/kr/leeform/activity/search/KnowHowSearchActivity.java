@@ -74,7 +74,7 @@ public class KnowHowSearchActivity extends AppCompatActivity {
 
     void init() {
         for (int i = 0; i < 10; i++) {
-            listItems.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
+//            listItems.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
     }
 

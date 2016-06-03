@@ -24,19 +24,32 @@ import com.navdrawer.SimpleSideDrawer;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
-import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
+import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
+import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 import sungkyul.ac.kr.leeform.utils.SaveData;
+import sungkyul.ac.kr.leeform.utils.Util;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static String URL = "http://14.63.196.255/api/";
+
     private BackPressCloseHandler backPressCloseHandler;
     private DrawerLayout mDrawer;
     private NavigationView mNavigationView;
@@ -50,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtNavUserNickName;
 
     private long userId;
+    private String userUniqueKey;
     private String userNickName, userImagePath;
+    private String userNickNameIn, userImagePathIn;
+    private String errorCode = "-1";
+
 
     private LinearLayout lineMain;
 
@@ -72,24 +89,106 @@ public class MainActivity extends AppCompatActivity {
         // 로그아웃 할 때 열려있는 액티비티 모두 닫기 위해 리스트에 저장
         new LoadActivityList().actList.add(MainActivity.this);
 
-        tabInitialization();
-        initializeLayout();
-        setListener();
-        navigationSetting();
+        Intent it = getIntent();
+        userId = it.getExtras().getLong("UserId");
+        userNickName = it.getExtras().getString("NickName");
+        userImagePath = it.getExtras().getString("Image");
 
+
+        Log.e("userIdMain", userId + " : " + userNickName + " : " + userImagePath);
+
+        checkUser();
+
+
+    }
+
+    // 유저 등록 (미완성)
+    private void setUser(final long userId, String userNickName, String userImagePath) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Map<String, String> data = new HashMap<>();
+        data.put("kakao_unique_key", userId + "");
+        data.put("img", userImagePath);
+        data.put("name", userNickName);
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<UserInfoBean> call = connectService.setUserInfo(data);
+        call.enqueue(new Callback<UserInfoBean>() {
+            @Override
+            public void onResponse(Call<UserInfoBean> call, Response<UserInfoBean> response) {
+                Log.e("setUser", response.code() + "");
+                checkUser();
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
+
+    }
+
+    private void checkUser() {
+        Log.e("userid", userId + "");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Log.e("abcd", "abcd" + userNickName + " " + userImagePath);
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<UserInfoBean> call = connectService.getUserInfo(userId + "");
+        Log.e("call", "call");
+        call.enqueue(new Callback<UserInfoBean>() {
+            @Override
+            public void onResponse(Call<UserInfoBean> call, Response<UserInfoBean> response) {
+                Log.e("resonpse", response.code() + "");
+                UserInfoBean decode = response.body();
+                Log.e("err", decode.getErr());
+                String err = decode.getErr();
+                errorCode = err;
+                if (err.equals("0")) {
+                    Log.e("yse", "yes");
+                    userUniqueKey = decode.getKakao_user_info().get(0).getUser_unique_key();
+                    userNickNameIn = decode.getKakao_user_info().get(0).getName();
+                    userImagePathIn = decode.getKakao_user_info().get(0).getImg();
+
+                    Util.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
+                    Log.e("user_key", Util.getAppPreferences(getApplicationContext(), "user_key"));
+
+                    tabInitialization();
+                    initializeLayout();
+                    setListener();
+                    navigationSetting();
+
+                } else if (err.equals("4")) {
+                    Log.e("sibar", "sibar");
+                    setUser(userId, userNickName, userImagePath);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
     }
 
     /**
      * 네비게이션 세팅 (사용자 이미지, 닉네임)
      */
     private void navigationSetting() {
-        Intent it = getIntent();
-        userId = it.getExtras().getLong("UserId");
-        userNickName = it.getExtras().getString("NickName");
-        userImagePath = it.getExtras().getString("Image");
 
-        txtNavUserNickName.setText(userNickName);
-        Log.e("userImagePath", userImagePath);
+        Log.e("userUniqueKeyIn", userUniqueKey);
+        Log.e("userNickNameIn", userNickNameIn);
+        Log.e("userImagePathIn", userImagePathIn);
+
+        txtNavUserNickName.setText(userNickNameIn);
+        Log.e("userImagePath", userImagePathIn);
         if (userImagePath != null) {
             userImageSetting();
         }
@@ -157,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent it = new Intent(getApplicationContext(), KnowHowSearchActivity.class);
                     startActivity(it);
-                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
-                } else if(tabLayout.getSelectedTabPosition()==1) {
+                    overridePendingTransition(R.anim.commons_slide_from_right, R.anim.commons_slide_to_left);
+                } else if (tabLayout.getSelectedTabPosition() == 1) {
                     startActivity(new Intent(getApplicationContext(), MaterialSearchActivity.class));
-                    overridePendingTransition(R.anim.commons_slide_from_right,R.anim.commons_slide_to_left);
+                    overridePendingTransition(R.anim.commons_slide_from_right, R.anim.commons_slide_to_left);
                 } else {
                     Toast.makeText(getApplicationContext(), "커뮤니티에선 지원하지 않는 기능입니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -169,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
         String[] item = getResources().getStringArray(R.array.nav);
 
-        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
             item[2] = "판매 내역";
         }
 
@@ -196,12 +295,12 @@ public class MainActivity extends AppCompatActivity {
                     // 판매자 등록
                     case 2:
                         // 판매자 등록이 된상태면 판매내역으로
-                        if(SaveData.getAppPreferences(getApplicationContext(),"isSeller").equals("true")){
+                        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
                             Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
                             startActivity(itSetting);
                         }
                         // 판매자 등록이 안되어 있으면 판매자 등록으로
-                        else{
+                        else {
                             Intent itRegistSeller = new Intent(getApplicationContext(), RegistSellerActivity.class);
                             startActivity(itRegistSeller);
                         }

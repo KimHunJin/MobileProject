@@ -77,7 +77,7 @@ public class PurchaseListActivity extends AppCompatActivity{
 
     private void addItem(){
         for (int i = 0; i < 10; i++) {
-            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
+//            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
 
         adapter.notifyDataSetChanged();

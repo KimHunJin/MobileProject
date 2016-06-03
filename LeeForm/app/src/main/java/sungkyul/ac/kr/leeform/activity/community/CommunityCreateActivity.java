@@ -1,23 +1,32 @@
 package sungkyul.ac.kr.leeform.activity.community;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.utils.Util;
 
 /**
- * Created by user on 2016-05-16.
+ * Created by miseon on 2016-05-16.
+ * 커뮤니티 작성
  */
 
 public class CommunityCreateActivity extends AppCompatActivity {
     ImageView camera,album;
+    EditText edtCommunity;
+    private static String URL = "http://14.63.196.255/api/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,7 @@ public class CommunityCreateActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
         camera=(ImageView)findViewById(R.id.imgCamera);
         album=(ImageView) findViewById(R.id.imgAlbum);
@@ -54,6 +64,23 @@ public class CommunityCreateActivity extends AppCompatActivity {
                 startActivity(albumIntent);
             }
         });
+
+    }
+    private void create(){
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        edtCommunity=(EditText)findViewById(R.id.edtCommunity);
+        String content=edtCommunity.getText().toString();
+
+        Map<String,String> data= new HashMap<>();
+        // http://14.63.196.255/api/write_community.php?user_unique_key=2&community_writing_contents=content
+        String key = Util.getAppPreferences(getApplicationContext(),"user_key");
+        data.put("user_unique_key",key); //user_unique_key 가져오기
+        data.put("community_writing_contents",content);
+
+        ConnectService connectService=retrofit.create(ConnectService.class);
 
     }
 }

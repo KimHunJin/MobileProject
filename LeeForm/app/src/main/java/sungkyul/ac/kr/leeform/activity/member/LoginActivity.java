@@ -32,16 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-/*        Button btnMemberRegister = (Button)findViewById(R.id.btnMemberRegister);
-        btnMemberRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
-            }
-        });*/
-
         Log.e("Session",Session.getCurrentSession()+"");
         Log.e("hash",getKeyHash(getApplicationContext())+"");
+        Log.e("session use",Session.getCurrentSession().isOpenable()+"");
 
         if(Session.getCurrentSession().implicitOpen()) {
             callback = new SessionCallback();                  // 이 두개의 함수 중요함
@@ -102,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 md.update(signature.toByteArray());
                 return android.util.Base64.encodeToString(md.digest(), android.util.Base64.NO_WRAP);
             } catch (NoSuchAlgorithmException e) {
-                Log.w("error", "Unable to get MessageDigest. signature=" + signature, e);
+                Log.w("error", "Unable to getCommunityList MessageDigest. signature=" + signature, e);
             }
         }
         return null;

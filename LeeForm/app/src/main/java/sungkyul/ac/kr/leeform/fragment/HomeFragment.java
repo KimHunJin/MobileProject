@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +17,30 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.activity.knowhow.KnowhowDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.WritingBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
 
 /**
  * Created by HunJin on 2016-05-01.
+ * 노하우리스트화면
  */
 public class HomeFragment extends Fragment {
     private int check=0;
     private View mView;
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
+
+    private static String URL = "http://14.63.196.255/api/";
 
     ArrayList<MainListItem> listItem = new ArrayList<>();
 
@@ -92,7 +103,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        init(); //메소드호출
+//        init(); //메소드호출
+        leeformParsing();
 
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
         fab.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +149,38 @@ public class HomeFragment extends Fragment {
 
     void init() {
         for (int i = 0; i < 10; i++) {
-            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
+//            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
         }
+    }
+
+    private void leeformParsing() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<WritingBean> call = connectService.getWritingList();
+        call.enqueue(new Callback<WritingBean>() {
+            @Override
+            public void onResponse(Call<WritingBean> call, Response<WritingBean> response) {
+                Log.e("resonpse", response.code() + "");
+                WritingBean decode = response.body();
+                Log.e("err", decode.getErr());
+                Log.e("count", decode.getCount());
+                Log.e("list size", decode.getWriting_list().size() + "");
+                listItem.clear();
+                for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
+                    Log.e("imgUrl",decode.getWriting_list().get(i).getPicture_url());
+                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(),decode.getWriting_list().get(i).getWriting_name(),decode.getWriting_list().get(i).getPicture_url()));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<WritingBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
     }
 }
