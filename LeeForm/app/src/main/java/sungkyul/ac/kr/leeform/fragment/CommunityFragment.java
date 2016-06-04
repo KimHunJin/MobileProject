@@ -97,12 +97,16 @@ public class CommunityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+<<<<<<< HEAD
         // 다른 프래그먼트에 갔다가 오면
         if(check == 1){
             check = 0;
         }else{
             check = 1;
         }
+=======
+        communityDetailList();
+>>>>>>> cdf23c9ab449981ff835a9e3702e0d82b7b6f3d9
     }
    /* @Override
     public void onResume() {

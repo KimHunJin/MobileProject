@@ -30,6 +30,7 @@ import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanDetail;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
 import sungkyul.ac.kr.leeform.items.ReplyItem;
+import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by miseon on 2016-05-17.
@@ -118,14 +119,17 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 CommunityBeanList decode = response.body();
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
+
                 Log.e("urllll", decode.getCommunity_list().get(number).getImg()+"");
                 //선택한 커뮤니티 내용을 텍스트뷰에 설정
                 content.setText(decode.getCommunity_list().get(number).getCommunity_writing_contents());
                 //선택한 커뮤니티 작성자 이름을 텍스트뷰에 설정
                 userName.setText(decode.getCommunity_list().get(number).getName());
                 //가져온 이미지를 이미지뷰에 설정
-                new DownloadImageTask(userImg)
+                new sungkyul.ac.kr.leeform.utils.DownloadImageTask(userImg)
                         .execute(decode.getCommunity_list().get(number).getImg());
+
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -176,29 +180,5 @@ public class CommunityDetailActivity extends AppCompatActivity {
             }
         });
     }
-    // 비동기식으로 이미지를 가지고 온다.
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 }

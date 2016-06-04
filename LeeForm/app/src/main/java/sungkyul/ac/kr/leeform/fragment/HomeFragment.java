@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
         }else{
             check = 1;
         }
+        leeformParsing();
     }
 
     @Nullable

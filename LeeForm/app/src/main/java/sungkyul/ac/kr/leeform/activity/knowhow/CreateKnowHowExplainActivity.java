@@ -39,7 +39,6 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
 
     private String absoultePath;
 
-
     private Uri mImageCpatureUri;
     private String strContents;
     private Button btnOk, btnCancel;

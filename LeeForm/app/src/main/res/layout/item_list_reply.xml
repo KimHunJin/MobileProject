@@ -10,13 +10,13 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <ImageView
+        <sungkyul.ac.kr.leeform.utils.RoundImageView
             android:id="@+id/rImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
-            android:src="@drawable/circle_img" />
+            android:background="@drawable/circle_img"/>
 
         <TextView
             android:id="@+id/rUserName"
