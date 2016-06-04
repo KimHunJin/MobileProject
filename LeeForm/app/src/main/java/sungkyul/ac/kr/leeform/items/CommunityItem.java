@@ -1,5 +1,7 @@
 package sungkyul.ac.kr.leeform.items;
 
+import android.net.Uri;
+
 /**
  * Created by user on 2016-05-16.
  */
@@ -43,7 +45,7 @@ public class CommunityItem {
         this.cContent = cContent;
     }
 
-    public String getcImageURL() {
+   public String getcImageURL() {
         return cImageURL;
     }
 

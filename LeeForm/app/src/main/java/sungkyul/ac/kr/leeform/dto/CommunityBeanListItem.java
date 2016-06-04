@@ -1,5 +1,7 @@
 package sungkyul.ac.kr.leeform.dto;
 
+import android.net.Uri;
+
 /**
  * Created by user on 2016-06-03.
  *  json을 받아줄 클래스를 생성
@@ -10,7 +12,8 @@ public class CommunityBeanListItem {
     private String name;
     private String community_writing_contents;
 
-    public String getImg() {
+
+public String getImg() {
         return img;
     }
 
