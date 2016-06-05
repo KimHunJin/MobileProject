@@ -27,7 +27,7 @@ import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.activity.knowhow.KnowHowDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.WritingBean;
+import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -162,12 +162,12 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<WritingBean> call = connectService.getWritingList();
-        call.enqueue(new Callback<WritingBean>() {
+        Call<KnowHowBean> call = connectService.getWritingList();
+        call.enqueue(new Callback<KnowHowBean>() {
             @Override
-            public void onResponse(Call<WritingBean> call, Response<WritingBean> response) {
+            public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
                 Log.e("resonpse", response.code() + "");
-                WritingBean decode = response.body();
+                KnowHowBean decode = response.body();
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getWriting_list().size() + "");
@@ -180,7 +180,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<WritingBean> call, Throwable t) {
+            public void onFailure(Call<KnowHowBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });

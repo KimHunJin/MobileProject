@@ -11,7 +11,7 @@ import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
-import sungkyul.ac.kr.leeform.dto.WritingBean;
+import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 
 /**
  * Created by HunJin on 2016-05-22.
@@ -28,7 +28,7 @@ public interface ConnectService {
     );
 
     @GET("writing_list.php")
-    Call<WritingBean> getWritingList(
+    Call<KnowHowBean> getWritingList(
     );
 
     @GET("community_writing.php")
