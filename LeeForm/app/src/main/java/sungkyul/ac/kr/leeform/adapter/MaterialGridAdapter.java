@@ -14,9 +14,10 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 /**
- * Created by HunJin on 2016-05-11.
+ * Created by KyungHee on 2016-05-12.
+ * 재료 리스트 어댑터
  */
-public class MaterialGridAdapter extends BaseAdapter{
+public class MaterialGridAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<MaterialGridItem> item;
@@ -47,14 +48,14 @@ public class MaterialGridAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         GridViewHolder gridViewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             gridViewHolder = new GridViewHolder();
             convertView = inflater.inflate(layout, parent, false);
-            gridViewHolder.txtGridMaterial = (TextView)convertView.findViewById(R.id.txtGridMaterialName);
-            gridViewHolder.imgGridMaterial = (ImageView)convertView.findViewById(R.id.imgGridMaterial);
+            gridViewHolder.txtGridMaterial = (TextView) convertView.findViewById(R.id.txtGridMaterialName);
+            gridViewHolder.imgGridMaterial = (ImageView) convertView.findViewById(R.id.imgGridMaterial);
             convertView.setTag(gridViewHolder);
         } else {
-            gridViewHolder = (GridViewHolder)convertView.getTag();
+            gridViewHolder = (GridViewHolder) convertView.getTag();
         }
 
         MaterialGridItem gridItem = item.get(position);

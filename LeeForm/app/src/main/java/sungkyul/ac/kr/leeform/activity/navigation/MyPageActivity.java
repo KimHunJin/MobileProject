@@ -10,7 +10,7 @@ import android.widget.TextView;
 import sungkyul.ac.kr.leeform.R;
 
 /**
- * Created by user on 2016-05-22.
+ * Created by KyungHee on 2016-05-21.
  */
 public class MyPageActivity extends AppCompatActivity {
     @Override
@@ -18,11 +18,11 @@ public class MyPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
         //툴바 완료버튼 보이지 않게 하기
-        TextView tvOK=(TextView)findViewById(R.id.tvOk);
+        TextView tvOK = (TextView) findViewById(R.id.tvOk);
         tvOK.setVisibility(View.INVISIBLE);
 
         //뒤로가기 버튼
-        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

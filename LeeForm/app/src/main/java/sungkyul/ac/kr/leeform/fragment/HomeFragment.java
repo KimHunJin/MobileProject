@@ -24,23 +24,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
-import sungkyul.ac.kr.leeform.activity.knowhow.KnowhowDetailActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.KnowHowDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.WritingBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
- * Created by HunJin on 2016-05-01.
+ * Created by HunJin on 2016-05-10.
  * 노하우리스트화면
  */
 public class HomeFragment extends Fragment {
-    private int check=0;
+    private int check = 0;
     private View mView;
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
 
-    private static String URL = "http://14.63.196.255/api/";
+    private static String URL = StaticURL.BASE_URL;
 
     ArrayList<MainListItem> listItem = new ArrayList<>();
 
@@ -55,9 +56,9 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // 다른 프래그먼트에 갔다가 오면
-        if(check == 1){
+        if (check == 1) {
             check = 0;
-        }else{
+        } else {
             check = 1;
         }
         leeformParsing();
@@ -72,16 +73,16 @@ public class HomeFragment extends Fragment {
 
         adapter = new MainListAdapter(getContext(), R.layout.item_list_main, listItem);
 
-        mSpinnerCategory = (Spinner)mView.findViewById(R.id.spnKnowCategory);
+        mSpinnerCategory = (Spinner) mView.findViewById(R.id.spnKnowCategory);
         //(Spinner)findViewById(R.id.spnKnowCategory); 오류=>보여줄 View가 없어
-        mSpinnerSort = (Spinner)mView.findViewById(R.id.spnKnowSort);
+        mSpinnerSort = (Spinner) mView.findViewById(R.id.spnKnowSort);
 
         String[] mCategory = getResources().getStringArray(R.array.category); //카테고리의 내용들을 배열(mCategory)에 저장
         String[] mSort = getResources().getStringArray(R.array.sort); //정렬의 내용들을 배열(mSort)에 저장
 
-        ArrayAdapter<String> mSpinnerCategoryAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mCategory);
-         //기본으로 제공하는 layout(simple_spinner_item), 리스트에 있는 내용을 mCategory의 내용으로 채우기 위해 ArrayAdapter 이용
-        ArrayAdapter<String> mSpinnerSortAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mSort);
+        ArrayAdapter<String> mSpinnerCategoryAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mCategory);
+        //기본으로 제공하는 layout(simple_spinner_item), 리스트에 있는 내용을 mCategory의 내용으로 채우기 위해 ArrayAdapter 이용
+        ArrayAdapter<String> mSpinnerSortAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mSort);
 
         mSpinnerCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //adapter를 통해 리스트 형태로 늘리는 메소드
@@ -98,7 +99,7 @@ public class HomeFragment extends Fragment {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent itKnowhowDetail = new Intent(getActivity().getApplicationContext(), KnowhowDetailActivity.class);
+                Intent itKnowhowDetail = new Intent(getActivity().getApplicationContext(), KnowHowDetailActivity.class);
                 startActivity(itKnowhowDetail);
 //                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }
@@ -120,8 +121,8 @@ public class HomeFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 check++;
                 // 처음에는 실행 안되게
-                if(check>2){
-                    Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                if (check > 2) {
+                    Toast.makeText(getActivity(), parent.getItemAtPosition(position) + "", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -135,8 +136,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행 안되게
-                if(check>2){
-                    Toast.makeText(getActivity(),parent.getItemAtPosition(position)+"",Toast.LENGTH_SHORT).show();
+                if (check > 2) {
+                    Toast.makeText(getActivity(), parent.getItemAtPosition(position) + "", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -172,8 +173,8 @@ public class HomeFragment extends Fragment {
                 Log.e("list size", decode.getWriting_list().size() + "");
                 listItem.clear();
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-                    Log.e("imgUrl",decode.getWriting_list().get(i).getPicture_url());
-                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(),decode.getWriting_list().get(i).getWriting_name(),decode.getWriting_list().get(i).getPicture_url()));
+                    Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
+                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(), decode.getWriting_list().get(i).getWriting_name(), decode.getWriting_list().get(i).getPicture_url()));
                 }
                 adapter.notifyDataSetChanged();
             }

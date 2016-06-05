@@ -11,8 +11,4 @@
 
     <string name="kakao_app_key">6c0a3d60cf5f9f507b1147e3de03b630</string>
 
-    <string name="s3_secret">AKIAJCS2B4IRNMSCTZBQ</string>
-    <string name="s3_access_key">8N6Bpf8/+oMMkFE9P7F+6DNpgTYX0fDNssj11+R5</string>
-    <string name="s3_bucket">leeform</string>
-    <string name="url">http://14.63.196.255/api/</string>
 </resources>

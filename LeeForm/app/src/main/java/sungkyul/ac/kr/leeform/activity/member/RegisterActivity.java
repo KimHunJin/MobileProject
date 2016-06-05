@@ -14,6 +14,10 @@ import com.kakao.util.helper.log.Logger;
 
 import sungkyul.ac.kr.leeform.MainActivity;
 
+/**
+ * Created by HunJin on 2016-05-14.
+ * 로그인 - 회원가입 (카카오)
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     @Override

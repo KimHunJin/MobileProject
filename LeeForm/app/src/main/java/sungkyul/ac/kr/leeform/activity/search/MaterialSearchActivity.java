@@ -1,7 +1,7 @@
 package sungkyul.ac.kr.leeform.activity.search;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -15,6 +15,10 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
+/**
+ * Created by KyungHee on 2016-05-22.
+ * 재료 검색
+ */
 public class MaterialSearchActivity extends AppCompatActivity {
     private LinearLayout linMain, linSearch;
     private EditText edtSearch;
@@ -31,7 +35,7 @@ public class MaterialSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_material_search);
 
         //뒤로가기 버튼
-        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +44,7 @@ public class MaterialSearchActivity extends AppCompatActivity {
         });
 
         //완료를 검색으로 텍스트 변경
-        TextView tvOk=(TextView)findViewById(R.id.tvOk);
+        TextView tvOk = (TextView) findViewById(R.id.tvOk);
         tvOk.setText("검색");
 
         linMain = (LinearLayout) findViewById(R.id.backToolbar);
@@ -52,7 +56,7 @@ public class MaterialSearchActivity extends AppCompatActivity {
         tvOk2 = (TextView) findViewById(R.id.tvOk2);
         edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
         //검색화면의 뒤로가기 버튼
-        ImageView imgBack2=(ImageView)findViewById(R.id.imgBack2);
+        ImageView imgBack2 = (ImageView) findViewById(R.id.imgBack2);
         imgBack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +65,7 @@ public class MaterialSearchActivity extends AppCompatActivity {
         });
 
 
-        grvMaterial = (GridView)findViewById(R.id.grvMaterialSearch);
+        grvMaterial = (GridView) findViewById(R.id.grvMaterialSearch);
         mAdapter = new MaterialGridAdapter(getApplicationContext(), R.layout.item_grid_material, gridItems);
 
         grvMaterial.setAdapter(mAdapter);
@@ -78,6 +82,6 @@ public class MaterialSearchActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.commons_slide_from_left,R.anim.commons_slide_to_right);
+        overridePendingTransition(R.anim.commons_slide_from_left, R.anim.commons_slide_to_right);
     }
 }

@@ -14,7 +14,7 @@ import com.kakao.auth.KakaoSDK;
 import sungkyul.ac.kr.leeform.adapter.KakaoSDKAdapter;
 
 /**
- * Created by HunJin on 2016-05-25.
+ * Created by HunJin on 2016-05-26.
  * 카카오 로그인 시 필요한 클래스
  */
 public class GlobalApplication extends Application {
@@ -33,10 +33,11 @@ public class GlobalApplication extends Application {
 
     /**
      * singleton 애플리케이션 객체를 얻는다.
+     *
      * @return singleton 애플리케이션 객체
      */
     public static GlobalApplication getGlobalApplicationContext() {
-        if(instance == null)
+        if (instance == null)
             throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
         return instance;
     }
@@ -72,6 +73,7 @@ public class GlobalApplication extends Application {
 
     /**
      * 이미지 로더를 반환한다.
+     *
      * @return 이미지 로더
      */
     public ImageLoader getImageLoader() {
@@ -86,22 +88,23 @@ public class GlobalApplication extends Application {
         super.onTerminate();
         instance = null;
     }
+
     public static Display mDisplay;
 
     public static void setDisplay(Display display) {
         mDisplay = display;
     }
 
-    public static int getDisplayWidth(){
+    public static int getDisplayWidth() {
         return mDisplay.getWidth();
     }
 
-    public static int getDisplayHeight(){
+    public static int getDisplayHeight() {
         return mDisplay.getHeight();
     }
 
-    public int resize_Height(int width, int height, int resize_width){
-        return (this.getDisplayHeight()*resize_width)/getDisplayWidth();
+    public int resize_Height(int width, int height, int resize_width) {
+        return (this.getDisplayHeight() * resize_width) / getDisplayWidth();
     }
 
 }

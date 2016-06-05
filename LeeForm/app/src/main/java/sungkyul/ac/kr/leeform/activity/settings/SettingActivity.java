@@ -22,7 +22,8 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.member.LoginActivity;
 
 /**
- * Created by Kim on 2016-05-22.
+ * 설정
+ * Created by MiSeon on 2016-06-02.
  */
 public class SettingActivity extends PreferenceActivity {
     @Override
@@ -58,7 +59,7 @@ public class SettingActivity extends PreferenceActivity {
         notice.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(getApplicationContext(),NoticeActivity.class));
+                startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
                 return true;
             }
         });
@@ -66,7 +67,7 @@ public class SettingActivity extends PreferenceActivity {
 
     private void redirectLoginActivity() {
         Intent it = new Intent(getApplicationContext(), LoginActivity.class);
-        Log.e("redi Session ",Session.getCurrentSession()+"");
+        Log.e("redi Session ", Session.getCurrentSession() + "");
         startActivity(it);
         finish();
     }

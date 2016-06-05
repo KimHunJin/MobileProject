@@ -6,21 +6,22 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-import sungkyul.ac.kr.leeform.dto.CommunityBeanDetail;
-import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
+import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
+import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.WritingBean;
 
 /**
- * Created by HunJin on 2016-05-30.
+ * Created by HunJin on 2016-05-22.
  */
 public interface ConnectService {
     //쿼리가 하나인 경우
     @GET("community_list.php")
-    Call<CommunityBeanList> getCommunityList(
+    Call<CommunityListBean> getCommunityList(
     );
+
     @GET("know_how_writing.php")
     Call<KnowHowWritingBean> setKnowHow(
             @QueryMap Map<String, String> options
@@ -36,7 +37,7 @@ public interface ConnectService {
     );
 
     @GET("community_detail.php")
-    Call<CommunityBeanDetail> get(
+    Call<CommunityDetailBean> get(
             @Query("community_unique_key") String community_unique_key
     );
 

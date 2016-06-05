@@ -1,7 +1,7 @@
 package sungkyul.ac.kr.leeform.dto;
 
 /**
- * Created by user on 2016-06-04.
+ * Created by MiSeon on 2016-06-04.
  */
 public class CommunityWritingBean {
     private String err;

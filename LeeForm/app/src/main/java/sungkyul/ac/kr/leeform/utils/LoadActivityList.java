@@ -5,7 +5,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 /**
- * Created by Kim on 2016-05-24.
+ * Created by YongHoon on 2016-05-22.
  */
 public class LoadActivityList {
     //onCreate되는 액티비티들 저장

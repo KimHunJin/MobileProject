@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -23,6 +21,10 @@ import sungkyul.ac.kr.leeform.R;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
+/**
+ * Created by HunJin on 2016-05-14.
+ * 로그인 (카카오)
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private SessionCallback callback;
@@ -32,11 +34,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Log.e("Session",Session.getCurrentSession()+"");
-        Log.e("hash",getKeyHash(getApplicationContext())+"");
-        Log.e("session use",Session.getCurrentSession().isOpenable()+"");
+        Log.e("Session", Session.getCurrentSession() + "");
+        Log.e("hash", getKeyHash(getApplicationContext()) + "");
+        Log.e("session use", Session.getCurrentSession().isOpenable() + "");
 
-        if(Session.getCurrentSession().implicitOpen()) {
+        if (Session.getCurrentSession().implicitOpen()) {
             callback = new SessionCallback();                  // 이 두개의 함수 중요함
             Session.getCurrentSession().addCallback(callback);
             callback.onSessionOpened();
@@ -69,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            if(exception != null) {
+            if (exception != null) {
                 Logger.e(exception);
             }
             setContentView(R.layout.activity_login); // 세션 연결이 실패했을때

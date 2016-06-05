@@ -12,7 +12,8 @@ import com.kakao.auth.KakaoAdapter;
 import sungkyul.ac.kr.leeform.utils.GlobalApplication;
 
 /**
- * Created by HunJin on 2016-05-25.
+ * Created by HunJin on 2016-05-26.
+ * 카카오 연동을 위한 SDK 어댑터
  */
 public class KakaoSDKAdapter extends KakaoAdapter {
     @Override
@@ -20,7 +21,7 @@ public class KakaoSDKAdapter extends KakaoAdapter {
         return new ISessionConfig() {
             @Override
             public AuthType[] getAuthTypes() {
-                return new AuthType[] {AuthType.KAKAO_TALK};
+                return new AuthType[]{AuthType.KAKAO_TALK};
             }
 
             @Override

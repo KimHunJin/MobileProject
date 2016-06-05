@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,16 +32,18 @@ import sungkyul.ac.kr.leeform.adapter.CreateKnowHowGridAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
-import sungkyul.ac.kr.leeform.utils.Util;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
+import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 
 /**
+ * Created by HunJin on 2016-05-18.
  * 노하우의 제목,간단한 설명, 제작 시간 등 작성
  */
 public class CreateKnowHowActivity extends AppCompatActivity {
 
-    String upLoadServerUri = "http://14.63.196.255/api/upload.php"; // 파일 업로드를 위한 php url 이다.
-    String URL = "http://14.63.196.255/api/"; // api 기본 베이스 주소
-    String imageStorageUrl = "http://14.63.196.255/image/"; // 이미지 저장 위치
+    String upLoadServerUri = StaticURL.IMAGE_UPLOAD_URL; // 파일 업로드를 위한 php url 이다.
+    String URL = StaticURL.BASE_URL; // api 기본 베이스 주소
+    String imageStorageUrl = StaticURL.IMAGE_URL; // 이미지 저장 위치
     int serverResponseCode = 0;
 
     String uploadFilePath; // 파일 경로
@@ -125,7 +126,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
 
     /**
      * GridView에 선택한 사진의 URL과 설명추가
-     * **/
+     **/
     void init() {
         gridItems.clear();
         for (int i = 0; i < strUrl.size(); i++) {
@@ -136,10 +137,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         cAdapter.notifyDataSetChanged();
     }
 
-    // 액티비티로 돌아왔을 때
-
     /**
-     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -147,6 +145,8 @@ public class CreateKnowHowActivity extends AppCompatActivity {
      * parameter
      * StringArrayList image
      * StringArrayList explain
+     *
+     * 액티비티로 돌아왔을 때 이미지와 설명을 추가한다.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -164,7 +164,6 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     // 이미지 올리는 메서드
 
     /**
-     *
      * @param sourceFileUri
      * @return
      */
@@ -191,11 +190,11 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         } else {
             try {
 
-                // URL 생성
+                // StaticURL 생성
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL(upLoadServerUri);
+                java.net.URL url = new java.net.URL(upLoadServerUri);
 
-                // HTTP를 열고 URL 연결
+                // HTTP를 열고 StaticURL 연결
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true); // Allow Inputs
                 conn.setDoOutput(true); // Allow Outputs
@@ -324,7 +323,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
 
     /**
      * 작성한 내용들을 보내기
-     *
+     * <p/>
      * parameter
      * user_unique_key
      * writing_category_key
@@ -343,7 +342,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ConnectService connectService = retrofit.create(ConnectService.class);
-        String userUniqueKey = Util.getAppPreferences(getApplicationContext(), "user_key");
+        String userUniqueKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
         Log.e("userUniqueKey", userUniqueKey);
         Map<String, String> data = new HashMap<>();
 

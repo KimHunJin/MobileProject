@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hkm.slider.Animations.DescriptionAnimation;
@@ -17,20 +20,16 @@ import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.utils.DataProvider;
-import sungkyul.ac.kr.leeform.utils.NumZero;
+import sungkyul.ac.kr.leeform.utils.NumZeroForm;
 
 /**
- * Created by Kim on 2016-05-22.
+ * Created by KyungHee on 2016-05-19.
  */
-public class MaterialDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+public class MaterialDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
     DataProvider dataProvider;
@@ -41,11 +40,11 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         setContentView(R.layout.activity_material_detail);
 
         //툴바 완료버튼 보이지 않게 하기
-        TextView tvOK=(TextView)findViewById(R.id.tvOk);
+        TextView tvOK = (TextView) findViewById(R.id.tvOk);
         tvOK.setVisibility(View.INVISIBLE);
 
         //뒤로가기 버튼
-        ImageView imgBack=(ImageView)findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +59,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
     /**
      * 화면에 보여줄 정보 초기화
      */
-    private void initializeLayout(){
+    private void initializeLayout() {
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
         dataProvider = new DataProvider();
@@ -75,9 +74,9 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
     private void getMaterialImageUrl() {
         // dataProvider에 이미지를 저장합니다.
 
-        Log.e("getMaterial","getMaterial");
-        for(int i=0;i<4;i++) {
-            dataProvider.setHashFile((3-i)+1+")",R.drawable.panza);
+        Log.e("getMaterial", "getMaterial");
+        for (int i = 0; i < 4; i++) {
+            dataProvider.setHashFile((3 - i) + 1 + ")", R.drawable.panza);
         }
     }
 
@@ -126,7 +125,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
     @SuppressLint("ResourceAsColor")
     private void setupSlider() {
         // remember setup first
-        Log.e("setup","setup slider");
+        Log.e("setup", "setup slider");
         mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -134,7 +133,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         mDemoSlider.setOffscreenPageLimit(4);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.colorAccent, R.color.colorAccentBasic);
-        final NumZero n = new NumZero(this);
+        final NumZeroForm n = new NumZeroForm(this);
         mDemoSlider.setNumLayout(n);
 //        mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
         mDemoSlider.setPresetTransformer("Accordion");

@@ -1,12 +1,7 @@
 package sungkyul.ac.kr.leeform.items;
 
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-
-import sungkyul.ac.kr.leeform.R;
-
 /**
- * Created by HunJin on 2016-04-06.
+ * Created by HunJin on 2016-05-10.
  */
 public class MainListItem {
 

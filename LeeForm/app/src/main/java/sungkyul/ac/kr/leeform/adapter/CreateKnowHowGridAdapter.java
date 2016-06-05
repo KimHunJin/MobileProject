@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CreateKnowHowItem;
-import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 /**
  * Created by HunJin on 2016-05-21.
+ * 노하우 작성 상세 어댑터
  */
 public class CreateKnowHowGridAdapter extends BaseAdapter {
 
@@ -25,7 +25,7 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
     private int layout;
 
     public CreateKnowHowGridAdapter(Context context, int layout, ArrayList<CreateKnowHowItem> item) {
-        this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.item = item;
         this.layout = layout;
     }
@@ -51,22 +51,22 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
 
         GridViewHolder gridViewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             gridViewHolder = new GridViewHolder();
             convertView = inflater.inflate(layout, parent, false);
-            gridViewHolder.imgGridCreate = (ImageView)convertView.findViewById(R.id.imgCreate);
+            gridViewHolder.imgGridCreate = (ImageView) convertView.findViewById(R.id.imgCreate);
             convertView.setTag(gridViewHolder);
         } else {
-            gridViewHolder = (GridViewHolder)convertView.getTag();
+            gridViewHolder = (GridViewHolder) convertView.getTag();
         }
 
         CreateKnowHowItem gridItem = item.get(position);
-        Log.e("test",gridItem.getmImg()+"");
-        Log.e("test",gridItem.getImgUrl()+"");
-        if(gridItem.getmImg()!=0) {
+        Log.e("test", gridItem.getmImg() + "");
+        Log.e("test", gridItem.getImgUrl() + "");
+        if (gridItem.getmImg() != 0) {
             gridViewHolder.imgGridCreate.setImageResource(gridItem.getmImg());
         }
-        if(gridItem.getImgUrl()!=null) {
+        if (gridItem.getImgUrl() != null) {
             gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
         }
         return convertView;

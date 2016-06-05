@@ -18,7 +18,7 @@ import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 /**
- * Created by HunJin on 2016-05-01.
+ * Created by KyungHee on 2016-05-12.
  */
 public class MaterialFragment extends Fragment {
 

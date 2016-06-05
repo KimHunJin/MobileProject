@@ -2,10 +2,12 @@ package sungkyul.ac.kr.leeform.dto;
 
 import java.util.List;
 
+import sungkyul.ac.kr.leeform.items.WritingBeanItem;
+
 /**
- * Created by HunJin on 2016-05-31.
- *  json을 받아줄 클래스를 생성
- *  json의 키에 해당하는 값들을 변수 이름으로 지정
+ * Created by HunJin on 2016-05-25.
+ * json을 받아줄 클래스를 생성
+ * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
 public class WritingBean {
     String err;

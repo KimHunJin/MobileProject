@@ -8,10 +8,10 @@ import com.hkm.slider.Indicators.NumContainer;
 import sungkyul.ac.kr.leeform.R;
 
 /**
- * Created by hesk on 7/7/15.
+ * Created by YongHoon on 2016-05-21.
  */
-public class NumZero extends NumContainer<TextView> {
-    public NumZero(Context c) {
+public class NumZeroForm extends NumContainer<TextView> {
+    public NumZeroForm(Context c) {
         super(c, R.layout.numfield);
     }
 }
