@@ -11,6 +11,24 @@ public class WritingBeanItem {
     String price;
     String making_time;
     String picture_url;
+    String scrap_amount;
+    String explanation;
+
+    public String getScrap_amount() {
+        return scrap_amount;
+    }
+
+    public void setScrap_amount(String scrap_amount) {
+        this.scrap_amount = scrap_amount;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 
     public String getWriting_unique_key() {
         return writing_unique_key;

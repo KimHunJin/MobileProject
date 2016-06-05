@@ -19,5 +19,10 @@
    <color name="colorBtnLogColor">#eeD9CBC0</color>
     <color name="colorRelativeDark">#66888888</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorToolBarTextColor">#a0a0a0</color>
     <color name="toolbarColor">#AD9081</color>
+    <color name="colorUpdateToolbar">#0097a7</color>
+    <color name="colorLittleDarkWhite">#eeeeee</color>
+
+    <color name="colorLikeBackground">#44666666</color>
 </resources>

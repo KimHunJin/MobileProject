@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -40,6 +43,7 @@ public class HomeFragment extends Fragment {
     private View mView;
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
+    private FloatingActionButton fab;
 
     private static String URL = StaticURL.BASE_URL;
 
@@ -80,9 +84,9 @@ public class HomeFragment extends Fragment {
         String[] mCategory = getResources().getStringArray(R.array.category); //카테고리의 내용들을 배열(mCategory)에 저장
         String[] mSort = getResources().getStringArray(R.array.sort); //정렬의 내용들을 배열(mSort)에 저장
 
-        ArrayAdapter<String> mSpinnerCategoryAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mCategory);
+        ArrayAdapter<String> mSpinnerCategoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.item_spinner, mCategory);
         //기본으로 제공하는 layout(simple_spinner_item), 리스트에 있는 내용을 mCategory의 내용으로 채우기 위해 ArrayAdapter 이용
-        ArrayAdapter<String> mSpinnerSortAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mSort);
+        ArrayAdapter<String> mSpinnerSortAdapter = new ArrayAdapter<String>(getContext(), R.layout.item_spinner, mSort);
 
         mSpinnerCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //adapter를 통해 리스트 형태로 늘리는 메소드
@@ -91,9 +95,16 @@ public class HomeFragment extends Fragment {
         mSpinnerCategory.setAdapter(mSpinnerCategoryAdapter); //스피너에 adapter 설정
         mSpinnerSort.setAdapter(mSpinnerSortAdapter);
 
-
         ListView lst = (ListView) mView.findViewById(R.id.listMain);
         lst.setAdapter(adapter);
+
+        fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreateKnowHowActivity.class));
+            }
+        });
 
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //리스트의 아이템 선택했을 때
@@ -105,16 +116,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        lst.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    fab.setVisibility(View.VISIBLE);
+                } else {
+                    fab.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 //        init(); //메소드호출
         leeformParsing();
 
-        FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CreateKnowHowActivity.class));
-            }
-        });
+
 
         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
@@ -174,7 +194,13 @@ public class HomeFragment extends Fragment {
                 listItem.clear();
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
-                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(), decode.getWriting_list().get(i).getMaking_time(), decode.getWriting_list().get(i).getWriting_name(), decode.getWriting_list().get(i).getPicture_url()));
+                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(),
+                            decode.getWriting_list().get(i).getMaking_time(),
+                            decode.getWriting_list().get(i).getScrap_amount(),
+                            decode.getWriting_list().get(i).getPicture_url(),
+                            decode.getWriting_list().get(i).getWriting_name(),
+                            decode.getWriting_list().get(i).getExplanation()
+                    ));
                 }
                 adapter.notifyDataSetChanged();
             }

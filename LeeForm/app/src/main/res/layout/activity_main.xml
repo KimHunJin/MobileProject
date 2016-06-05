@@ -12,7 +12,9 @@
         android:id="@+id/mainTab"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/tabColor" />
+        app:tabTextColor="@color/colorToolBarTextColor"
+        app:tabSelectedTextColor="@color/colorUpdateToolbar"
+        android:background="@color/colorWhite" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"

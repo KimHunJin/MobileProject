@@ -60,6 +60,8 @@ public class MainListAdapter extends BaseAdapter {
             viewHolder.txtMainTime = (TextView) convertView.findViewById(R.id.txtListTime);
             viewHolder.txtMainLike = (TextView) convertView.findViewById(R.id.txtListLike);
             viewHolder.imgMainList = (ImageView) convertView.findViewById(R.id.imgListItem);
+            viewHolder.txtMainName = (TextView)convertView.findViewById(R.id.txtListName);
+            viewHolder.txtMainKeyWord = (TextView)convertView.findViewById(R.id.txtListKeyWord);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -71,6 +73,8 @@ public class MainListAdapter extends BaseAdapter {
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());
         viewHolder.txtMainTime.setText(listItem.getmTime());
+        viewHolder.txtMainName.setText(listItem.getmName());
+        viewHolder.txtMainKeyWord.setText(listItem.getmKeyWord());
 
         return convertView;
     }
@@ -80,5 +84,7 @@ public class MainListAdapter extends BaseAdapter {
         private TextView txtMainLike;
         private TextView txtMainTime;
         private TextView txtMainCost;
+        private TextView txtMainName;
+        private TextView txtMainKeyWord;
     }
 }

@@ -1,6 +1,7 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -40,11 +41,9 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
     }
 
 
-    public View getTabView(int position) {
-        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-        View v = LayoutInflater.from(context).inflate(R.layout.item_tab_layout, null);
-        TextView tv = (TextView) v.findViewById(R.id.txtTab);
-        tv.setText(tabTitles[position]);
-        return v;
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
     }
 }

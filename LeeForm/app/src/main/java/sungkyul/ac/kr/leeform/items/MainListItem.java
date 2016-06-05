@@ -9,8 +9,26 @@ public class MainListItem {
     private String mCost;
     private String mTime;
     private String mLike;
+    private String mName;
+    private String mKeyWord;
     private int mImg;
     private String mUrl;
+
+    public String getmKeyWord() {
+        return mKeyWord;
+    }
+
+    public void setmKeyWord(String mKeyWord) {
+        this.mKeyWord = mKeyWord;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
 
     public int getmNumber() {
         return mNumber;
@@ -60,11 +78,13 @@ public class MainListItem {
         this.mUrl = mUrl;
     }
 
-    public MainListItem(int number, String cost, String time, String like, String url) {
+    public MainListItem(int number, String cost, String time, String like, String url, String name, String keyWord) {
         mNumber = number;
         mCost = cost;
         mTime = time;
         mLike = like;
         mUrl = url;
+        mKeyWord = keyWord;
+        mName = name;
     }
 }
