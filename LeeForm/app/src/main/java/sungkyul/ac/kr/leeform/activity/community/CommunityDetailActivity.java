@@ -1,6 +1,11 @@
 package sungkyul.ac.kr.leeform.activity.community;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -34,9 +42,9 @@ public class CommunityDetailActivity extends AppCompatActivity {
     private CommunityReplyLIstAdapter adapter;
     ArrayList<ReplyItem> listItem = new ArrayList<>();
     private static String URL = "http://14.63.196.255/api/";
-    int number, count;
-    TextView tv1, tv2, tv3;
-    ImageView img;
+    int number;
+    TextView content, replyCount, userName;
+    ImageView userImg;
     ListView lst;
 
     @Override
@@ -57,7 +65,6 @@ public class CommunityDetailActivity extends AppCompatActivity {
             }
         });
 
-
         //inflater를 통해 item_list_community.xml을 가져온다.
         final View header = getLayoutInflater().inflate(R.layout.item_list_community, null, false);
         //adapter를 통해 item.list.reply.xml을 ArrayList(listItem)에 설정한다.
@@ -69,10 +76,10 @@ public class CommunityDetailActivity extends AppCompatActivity {
         //리스트 윗부분에 넣기
         lst.addHeaderView(header);
 
-        tv1 = (TextView) header.findViewById(R.id.contentCommunity);
-        tv2 = (TextView) findViewById(R.id.replyCount);
-        tv3 = (TextView) header.findViewById(R.id.userName);
-        img = (ImageView) header.findViewById(R.id.img);
+        content = (TextView) header.findViewById(R.id.contentCommunity);
+        replyCount = (TextView) findViewById(R.id.replyCount);
+        userName = (TextView) header.findViewById(R.id.userName);
+        userImg = (ImageView) header.findViewById(R.id.img);
 
         layoutSetting();
         communityDetail();
@@ -85,8 +92,8 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
     /**
      * 커뮤니티 디테일부분
-     * 선택한 커뮤니티의 작성자이름,내용 등 가져오기
-     * 가져온 내용을 TextView에 뿌리기
+     * 선택한 커뮤니티의 작성자이름,내용,이미지 가져오는 부분
+     * 가져온 내용을 TextView나 ImageView에 설정
      * parameter
      * int Number
      */
@@ -97,7 +104,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 .build();
 
         //CommunityFragment에서 보낸 Intent값 가져오기
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         number = intent.getExtras().getInt("Number");
         Log.e("num", number + ""); //선택한 커뮤니티 넘버
 
@@ -113,12 +120,15 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
 
-                tv1.setText(decode.getCommunity_list().get(number).getCommunity_writing_contents()); //선택한 커뮤니티 내용
-                tv3.setText(decode.getCommunity_list().get(number).getName()); //선택한 커뮤니티 작성자 이름
-                Log.e("url",decode.getCommunity_list().get(number).getImg()+"");
-                new DownloadImageTask(img).execute(decode.getCommunity_list().get(number).getImg());
-                //img.setImageResource(decode.getCommunity_list().get(0).getCommunity_picture_url()); //이미지
-                //decode.getCommunity_list().get(0).getCommunity_writing_date(); //날짜
+                Log.e("urllll", decode.getCommunity_list().get(number).getImg()+"");
+                //선택한 커뮤니티 내용을 텍스트뷰에 설정
+                content.setText(decode.getCommunity_list().get(number).getCommunity_writing_contents());
+                //선택한 커뮤니티 작성자 이름을 텍스트뷰에 설정
+                userName.setText(decode.getCommunity_list().get(number).getName());
+                //가져온 이미지를 이미지뷰에 설정
+                new sungkyul.ac.kr.leeform.utils.DownloadImageTask(userImg)
+                        .execute(decode.getCommunity_list().get(number).getImg());
+
 
                 adapter.notifyDataSetChanged();
             }
@@ -155,11 +165,12 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 //CommunityBeanDetail로 디코딩
                 CommunityBeanDetail decode = response.body();
                 //선택한 커뮤니티의 댓글수를 TextView에 설정
-                tv2.setText(decode.getCommunity_reply().size()+"");
+                replyCount.setText(decode.getCommunity_reply().size()+"");
 
                 //listItem에 ReplyItem(댓글작성한닉네임,내용,작성자 이미지)를 추가
                 for (int i = 0; i < decode.getCommunity_reply().size(); i++) {
                     listItem.add(new ReplyItem(decode.getCommunity_reply().get(i).getName(), decode.getCommunity_reply().get(i).getReply_writing_contents(),decode.getCommunity_reply().get(i).getImg()));
+
                 }
             }
 
@@ -169,4 +180,5 @@ public class CommunityDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanDetail;
 import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
+import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.WritingBean;
@@ -20,13 +21,17 @@ public interface ConnectService {
     @GET("community_list.php")
     Call<CommunityBeanList> getCommunityList(
     );
+    @GET("know_how_writing.php")
+    Call<KnowHowWritingBean> setKnowHow(
+            @QueryMap Map<String, String> options
+    );
 
     @GET("writing_list.php")
     Call<WritingBean> getWritingList(
     );
 
-    @GET("know_how_writing.php")
-    Call<KnowHowWritingBean> setKnowHow(
+    @GET("community_writing.php")
+    Call<CommunityWritingBean> setCommunity(
             @QueryMap Map<String, String> options
     );
 

@@ -31,13 +31,14 @@ import sungkyul.ac.kr.leeform.items.CommunityItem;
  * 커뮤니티 리스트가 뜬다.
  */
 public class CommunityFragment extends Fragment {
-
+    private int check=0;
     private View cView;
     private CommunityListAdapter adapter;
     private static String URL = "http://14.63.196.255/api/";
     ListView lst;
     ArrayList<CommunityItem> listItem;
     FloatingActionButton fab1;
+    Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,14 +48,14 @@ public class CommunityFragment extends Fragment {
         cView = inflater.inflate(R.layout.fragment_community, container, false);
 
         layoutSetting();
-
+        intent=new Intent(getContext(),CommunityDetailActivity.class);
         //lst에 adqpter를 등록한다.
         lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getContext(),CommunityDetailActivity.class);
+
                 /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
                 intent.putExtra("Number",position);
                 startActivity(intent);
@@ -86,15 +87,21 @@ public class CommunityFragment extends Fragment {
         fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // 다른 프래그먼트 가면 초기화
+        check = 1;
+    }
 
     @Override
     public void onResume() {
-        Log.e("resume","resume");
         super.onResume();
         communityDetailList();
+
     }
 
-    private void communityDetailList() {
+    public void communityDetailList() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -116,7 +123,7 @@ public class CommunityFragment extends Fragment {
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
                     listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg()));
-
+                 //   decode.getCommunity_list().get(i).get
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -127,6 +134,7 @@ public class CommunityFragment extends Fragment {
             }
         });
     }
+
 
 
 }
