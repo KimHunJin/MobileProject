@@ -3,7 +3,7 @@ package sungkyul.ac.kr.leeform.utils;
 import android.app.Activity;
 
 /**
- * Created by Kim on 2016-05-24.
+ * Created by YongHoon on 2016-05-19.
  */
 public class BackPressCloseHandler {
 

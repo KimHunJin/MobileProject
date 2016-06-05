@@ -1,11 +1,11 @@
-package sungkyul.ac.kr.leeform.dto;
+package sungkyul.ac.kr.leeform.items;
 
 /**
- * Created by user on 2016-05-31.
- *  json을 받아줄 클래스를 생성
- *  json의 키에 해당하는 값들을 변수 이름으로 지정
+ * Created by MiSeon on 2016-05-29.
+ * json을 받아줄 클래스를 생성
+ * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
-public class CommunityBeanReplyItem {
+public class CommunityReplyBeanItem {
     String name;
     String img;
     String reply_writing_contents;

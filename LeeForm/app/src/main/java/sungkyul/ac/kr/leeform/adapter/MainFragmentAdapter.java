@@ -15,7 +15,8 @@ import sungkyul.ac.kr.leeform.fragment.MaterialFragment;
 
 
 /**
- * Created by HunJin on 2016-01-16.
+ * Created by HunJin on 2016-05-10.
+ * 가장 기본이 되는 메인 페이지 어댑터
  */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;

@@ -1,11 +1,7 @@
 package sungkyul.ac.kr.leeform.items;
 
-import android.graphics.drawable.Drawable;
-
-import java.util.Date;
-
 /**
- * Created by user on 2016-05-18.
+ * Created by MiSeon on 2016-05-26.
  */
 public class ReplyItem {
     private int rNumber;
@@ -45,10 +41,10 @@ public class ReplyItem {
         this.rImg = rImg;
     }
 
-    public ReplyItem(String name, String content, String img){
-        rName=name;
-        rContent=content;
-        rImg=img;
+    public ReplyItem(String name, String content, String img) {
+        rName = name;
+        rContent = content;
+        rImg = img;
     }
 
 }

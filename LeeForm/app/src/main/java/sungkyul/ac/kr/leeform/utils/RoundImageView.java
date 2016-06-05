@@ -14,9 +14,9 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * Created by HunJin on 2016-05-25.
+ * Created by MiSeon on 2016-05-20.
  */
-public class RoundImageView extends ImageView{
+public class RoundImageView extends ImageView {
     public RoundImageView(Context context) {
         super(context);
     }

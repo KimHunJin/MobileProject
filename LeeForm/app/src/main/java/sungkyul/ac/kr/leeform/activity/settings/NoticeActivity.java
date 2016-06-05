@@ -6,6 +6,10 @@ import android.widget.TextView;
 
 import sungkyul.ac.kr.leeform.R;
 
+/**
+ * Created by MiSeon on 2016-06-02.
+ * 공지사항
+ */
 public class NoticeActivity extends AppCompatActivity {
 
     TextView txtNotice;

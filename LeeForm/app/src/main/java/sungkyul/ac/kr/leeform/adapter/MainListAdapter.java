@@ -1,10 +1,6 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,11 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
@@ -26,7 +17,8 @@ import sungkyul.ac.kr.leeform.items.MainListItem;
 import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
- * Created by HunJin on 2016-04-06.
+ * Created by HunJin on 2016-05-12.
+ * 노하우 리스트 어댑터
  */
 public class MainListAdapter extends BaseAdapter {
 
@@ -74,7 +66,7 @@ public class MainListAdapter extends BaseAdapter {
         }
         MainListItem listItem = item.get(position);
 //        mairListImageSetting(viewHolder.imgMainList,listItem.getmUrl());
-        Log.e("real url",listItem.getmUrl());
+        Log.e("real url", listItem.getmUrl());
         new DownloadImageTask(viewHolder.imgMainList).execute(listItem.getmUrl());
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());

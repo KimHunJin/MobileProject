@@ -4,11 +4,11 @@ package sungkyul.ac.kr.leeform.utils;
 import java.util.HashMap;
 
 /**
- * Created by hesk on 19/8/15.
+ * Created by YongHoon on 2016-05-21.
  */
 public class DataProvider {
 
-    // URL 파싱을 하기 위해서는 이 부분을 사용하세요.
+    // StaticURL 파싱을 하기 위해서는 이 부분을 사용하세요.
     HashMap<String, String> file_maps;
 
     // 이미지로부터 가져오기 위해서는 이 부분을 사용하세요.
@@ -23,7 +23,7 @@ public class DataProvider {
         return file_maps;
     }
 
-    public HashMap<String, Integer>getFileSrc() {
+    public HashMap<String, Integer> getFileSrc() {
         return file_maps_src;
     }
 

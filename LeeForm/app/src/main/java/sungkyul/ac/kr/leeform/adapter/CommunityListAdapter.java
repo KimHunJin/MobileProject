@@ -1,10 +1,6 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
@@ -20,7 +15,8 @@ import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
- * Created by user on 2016-05-16.
+ * Created by MiSeon on 2016-05-16.
+ * 커뮤니티 리스트 어댑터
  */
 
 public class CommunityListAdapter extends BaseAdapter {
@@ -34,7 +30,9 @@ public class CommunityListAdapter extends BaseAdapter {
         this.layout = layout;
     }
 
-    /** Getter **/
+    /**
+     * Getter
+     **/
     @Override
     public int getCount() {
         return item.size();
@@ -70,11 +68,10 @@ public class CommunityListAdapter extends BaseAdapter {
         viewHolder.userName.setText(listItem.getcName());
         viewHolder.content.setText(listItem.getcContent());
         viewHolder.replyCount.setText(listItem.getcCount());
-       // viewHolder.img.setImageResource(listItem.getcImg());
+        // viewHolder.img.setImageResource(listItem.getcImg());
         new DownloadImageTask(viewHolder.img).execute(listItem.getcImageURL());
         return convertView;
     }
-    // 비동기식으로 이미지를 가지고 온다.
 
     class ViewHolder {
         private TextView userName;

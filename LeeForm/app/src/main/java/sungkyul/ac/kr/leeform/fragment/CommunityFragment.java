@@ -23,18 +23,19 @@ import sungkyul.ac.kr.leeform.activity.community.CommunityCreateActivity;
 import sungkyul.ac.kr.leeform.activity.community.CommunityDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.CommunityListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityBeanList;
+import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
- * Created by HunJin on 2016-05-01.
+ * Created by MiSeon on 2016-05-10.
  * 커뮤니티 리스트가 뜬다.
  */
 public class CommunityFragment extends Fragment {
-    private int check=0;
+    private int check = 0;
     private View cView;
     private CommunityListAdapter adapter;
-    private static String URL = "http://14.63.196.255/api/";
+    private static String URL = StaticURL.BASE_URL;
     ListView lst;
     ArrayList<CommunityItem> listItem;
     FloatingActionButton fab1;
@@ -48,7 +49,7 @@ public class CommunityFragment extends Fragment {
         cView = inflater.inflate(R.layout.fragment_community, container, false);
 
         layoutSetting();
-        intent=new Intent(getContext(),CommunityDetailActivity.class);
+        intent = new Intent(getContext(), CommunityDetailActivity.class);
         //lst에 adqpter를 등록한다.
         lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
@@ -57,7 +58,7 @@ public class CommunityFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
-                intent.putExtra("Number",position);
+                intent.putExtra("Number", position);
                 startActivity(intent);
             }
         });
@@ -79,7 +80,7 @@ public class CommunityFragment extends Fragment {
     /**
      * Layout Setting
      */
-    public void layoutSetting(){
+    public void layoutSetting() {
         listItem = new ArrayList<>();
         //adapter를 통해 xml을 ArrayList에 설정한다.
         adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
@@ -109,12 +110,12 @@ public class CommunityFragment extends Fragment {
 
         ConnectService connectService = retrofit.create(ConnectService.class);
         // http://14.63.196.255/api/community_list.php
-        Call<CommunityBeanList> call = connectService.getCommunityList();
-        call.enqueue(new Callback<CommunityBeanList>() {
+        Call<CommunityListBean> call = connectService.getCommunityList();
+        call.enqueue(new Callback<CommunityListBean>() {
             @Override
-            public void onResponse(Call<CommunityBeanList> call, Response<CommunityBeanList> response) {
+            public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
                 Log.e("resonpse", response.code() + "");
-                CommunityBeanList decode = response.body(); //CommunityBeanList 형식으로 디코딩
+                CommunityListBean decode = response.body(); //CommunityListBean 형식으로 디코딩
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getCommunity_list().size() + "");
@@ -123,18 +124,17 @@ public class CommunityFragment extends Fragment {
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
                     listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg()));
-                 //   decode.getCommunity_list().get(i).get
+                    //   decode.getCommunity_list().get(i).get
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<CommunityBeanList> call, Throwable t) {
+            public void onFailure(Call<CommunityListBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });
     }
-
 
 
 }

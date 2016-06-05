@@ -1,7 +1,7 @@
 package sungkyul.ac.kr.leeform.items;
 
 /**
- * Created by HunJin on 2016-05-21.
+ * Created by HunJin on 2016-05-18.
  */
 public class CreateKnowHowItem {
     private int number;

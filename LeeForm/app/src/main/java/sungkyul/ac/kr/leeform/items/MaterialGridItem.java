@@ -1,7 +1,7 @@
 package sungkyul.ac.kr.leeform.items;
 
 /**
- * Created by HunJin on 2016-05-11.
+ * Created by KyungHee on 2016-05-12.
  */
 public class MaterialGridItem {
 

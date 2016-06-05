@@ -1,19 +1,17 @@
-package sungkyul.ac.kr.leeform.dto;
-
-import android.net.Uri;
+package sungkyul.ac.kr.leeform.items;
 
 /**
- * Created by user on 2016-06-03.
- *  json을 받아줄 클래스를 생성
- *  json의 키에 해당하는 값들을 변수 이름으로 지정
+ * Created by MiSeon on 2016-05-26.
+ * json을 받아줄 클래스를 생성
+ * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
-public class CommunityBeanListItem {
+public class CommunityListBeanItem {
     private String img;
     private String name;
     private String community_writing_contents;
 
 
-public String getImg() {
+    public String getImg() {
         return img;
     }
 

@@ -5,17 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,21 +41,23 @@ import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 import sungkyul.ac.kr.leeform.utils.SaveData;
-import sungkyul.ac.kr.leeform.utils.Util;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
+import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 
+/**
+ * Created by HunJin on 2016-05-09.
+ *
+ * 애플리케이션의 기본이 되는 메인 액티비티입니다.
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private static String URL = "http://14.63.196.255/api/";
+    private static String URL = StaticURL.BASE_URL;
 
     private BackPressCloseHandler backPressCloseHandler;
-    private DrawerLayout mDrawer;
-    private NavigationView mNavigationView;
 
-    private SimpleSideDrawer mSlidingMenu;
+    private SimpleSideDrawer slidingMenu;
     private TabLayout tabLayout;
-    private TabLayout.Tab tab;
     private ListView lstNavItem;
-
     private ImageView imgNavUser;
     private TextView txtNavUserNickName;
 
@@ -66,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
     private String userUniqueKey;
     private String userNickName, userImagePath;
     private String userNickNameIn, userImagePathIn;
-    private String errorCode = "-1";
-
-
-    private LinearLayout lineMain;
 
     Handler handler = new Handler();
 
@@ -102,7 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 유저 등록 (미완성)
+    /**
+     * 회원의 기본적인 정보를 저장하는 메서드입니다.
+     * 첫 로그인일 경우 디비에 저장을 하고,
+     * 이후에는 디비로부터 데이터를 가져옵니다.
+     *
+     * @param userId
+     * @param userNickName
+     * @param userImagePath
+     */
     private void setUser(final long userId, String userNickName, String userImagePath) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -131,6 +134,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 회원이 등록이 되어있는지 체크를 합니다.
+     * 등록이 되어있을 경우 회원정보를 가져오며,
+     * 등록이 되지 않은 경우 등록을 하는
+     * setUser() 메서드를 호출합니다.
+     */
     private void checkUser() {
         Log.e("userid", userId + "");
         Retrofit retrofit = new Retrofit.Builder()
@@ -149,15 +158,14 @@ public class MainActivity extends AppCompatActivity {
                 UserInfoBean decode = response.body();
                 Log.e("err", decode.getErr());
                 String err = decode.getErr();
-                errorCode = err;
                 if (err.equals("0")) {
                     Log.e("yse", "yes");
                     userUniqueKey = decode.getKakao_user_info().get(0).getUser_unique_key();
                     userNickNameIn = decode.getKakao_user_info().get(0).getName();
                     userImagePathIn = decode.getKakao_user_info().get(0).getImg();
 
-                    Util.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
-                    Log.e("user_key", Util.getAppPreferences(getApplicationContext(), "user_key"));
+                    SaveDataMemberInfo.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
+                    Log.e("user_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
 
                     tabInitialization();
                     initializeLayout();
@@ -182,10 +190,6 @@ public class MainActivity extends AppCompatActivity {
      * 네비게이션 세팅 (사용자 이미지, 닉네임)
      */
     private void navigationSetting() {
-
-        Log.e("userUniqueKeyIn", userUniqueKey);
-        Log.e("userNickNameIn", userNickNameIn);
-        Log.e("userImagePathIn", userImagePathIn);
 
         txtNavUserNickName.setText(userNickNameIn);
         Log.e("userImagePath", userImagePathIn);
@@ -224,10 +228,9 @@ public class MainActivity extends AppCompatActivity {
      * 화면에 보여줄 정보 초기화
      */
     private void initializeLayout() {
-        mDrawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mSlidingMenu = new SimpleSideDrawer(MainActivity.this);
-        mSlidingMenu.setLeftBehindContentView(R.layout.nav_view);
-        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
+        slidingMenu = new SimpleSideDrawer(MainActivity.this);
+        slidingMenu.setLeftBehindContentView(R.layout.nav_view);
+        lstNavItem = (ListView) slidingMenu.findViewById(R.id.lstNavItem);
 
         // 취소버튼 눌렀을 때 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
@@ -245,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         imgNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSlidingMenu.toggleLeftDrawer();
+                slidingMenu.toggleLeftDrawer();
             }
         });
 
@@ -272,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
             item[2] = "판매 내역";
         }
 
-        lstNavItem = (ListView) mSlidingMenu.findViewById(R.id.lstNavItem);
+        lstNavItem = (ListView) slidingMenu.findViewById(R.id.lstNavItem);
         ArrayAdapter<String> yada = new ArrayAdapter<String>(this, R.layout.nav_item, item);
         lstNavItem.setAdapter(yada);
 
@@ -312,17 +315,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(itSetting);
                         break;
                 }
-                mSlidingMenu.closeLeftSide();
+                slidingMenu.closeLeftSide();
             }
         });
     }
 
-    //취소버튼 눌렀을 때
+    /**
+     * 뒤로가기 키를 눌렀을 때
+     */
     @Override
     public void onBackPressed() {
         // 네비게이션이 열려있으면
-        if (!mSlidingMenu.isClosed()) {
-            mSlidingMenu.closeLeftSide();
+        if (!slidingMenu.isClosed()) {
+            slidingMenu.closeLeftSide();
             return;
         }
         //핸들러 작동
@@ -330,6 +335,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 탭 뷰 초기화
+     */
     private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -340,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tab = tabLayout.getTabAt(i);
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(mainFragmentAdapter.getTabView(i));
         }
     }
