@@ -49,11 +49,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="40dp">
+            android:layout_height="match_parent">
 
             <ListView
                 android:id="@+id/listMain"
+                android:scrollbars="none"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"

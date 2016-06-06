@@ -9,12 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="164dp">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="164dp">
         <ImageView
             android:id="@+id/imgListItem"
-            android:layout_width="match_parent"
-            android:layout_height="164dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/tables2" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY" />
+            <ImageView
+                android:src="@drawable/main_list_image_background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY" />
+        </FrameLayout>
 
         <RelativeLayout
             android:layout_width="33dp"
@@ -46,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorWhite"
         android:gravity="center"
         android:orientation="horizontal">
 
