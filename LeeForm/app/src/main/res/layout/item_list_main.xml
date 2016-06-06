@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="214dp"
-    android:background="@drawable/main_list_background"
-    android:orientation="vertical">
+    android:layout_height="234dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="vertical"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="214dp"
+        android:background="@drawable/main_list_background"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -140,3 +147,4 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+    </LinearLayout>
