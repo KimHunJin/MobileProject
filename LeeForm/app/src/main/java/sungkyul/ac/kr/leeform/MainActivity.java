@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private String userUniqueKey;
     private String userNickName, userImagePath;
     private String userNickNameIn, userImagePathIn;
+
+    private Toolbar toolbar;
 
     Handler handler = new Handler();
 
@@ -238,6 +241,9 @@ public class MainActivity extends AppCompatActivity {
         // 네비게이션 정보 설정
         imgNavUser = (ImageView) findViewById(R.id.imgNavUser);
         txtNavUserNickName = (TextView) findViewById(R.id.txtNavUserNickName);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0,0);
     }
 
     /**
@@ -347,9 +353,5 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.mainTab);
         tabLayout.setupWithViewPager(viewPager);
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(mainFragmentAdapter.getTabView(i));
-        }
     }
 }

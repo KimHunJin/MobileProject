@@ -4,51 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorWhite"
+    android:orientation="vertical"
     tools:context="sungkyul.ac.kr.leeform.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#d28e87"
+        android:layout_height="30dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spnKnowCategory"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.499"
+            android:dropDownSelector="@color/colorBlack"
+            android:textAlignment="center" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.002"
+            android:background="@color/colorBlack" />
 
         <Spinner
             android:id="@+id/spnKnowSort"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.499"
+            android:textAlignment="center" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLittleDarkWhite"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-        <ListView
-            android:id="@+id/listMain"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp">
 
+            <ListView
+                android:id="@+id/listMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorLittleDarkWhite"
+                android:dividerHeight="10dp"></ListView>
+
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            app:backgroundTint="@color/mainColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_mode_edit_white_24dp" />
+            android:src="@drawable/ic_mode_edit_white_24dp"
+            app:backgroundTint="@color/colorUpdateToolbar" />
     </RelativeLayout>
 </LinearLayout>

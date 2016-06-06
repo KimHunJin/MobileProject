@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:background="@color/toolbarColor"
+    android:layout_height="42dp"
+    android:background="@color/colorUpdateToolbar"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linMainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,76 +17,29 @@
 
         <ImageView
             android:id="@+id/imgNav"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.1"
-            android:src="@drawable/ic_menu_white_24dp" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/main_menu" />
 
         <TextView
             android:id="@+id/txtToolBarTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.8"
-            android:gravity="center"
             android:text="LeeForm"
             android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
         <ImageView
+            android:layout_alignParentRight="true"
             android:id="@+id/imgSearch"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="0.1"
-            android:src="@drawable/ic_search_white_24dp" />
-    </LinearLayout>
-
-    <!--<LinearLayout
-        android:id="@+id/linSearchToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/imgNav2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.1"
-            android:src="@drawable/kakao_cancel_button_background" />
-
-        <EditText
-            android:id="@+id/edtToolBarTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.8"
-            android:gravity="center"
-            android:text="LeeForm"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/imgSearch2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="0.1"
-            android:text="검색" />
-    </LinearLayout>-->
-
+            android:layout_centerVertical="true"
+            android:src="@drawable/main_search" />
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>
