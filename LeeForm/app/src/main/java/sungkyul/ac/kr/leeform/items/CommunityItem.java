@@ -9,7 +9,17 @@ public class CommunityItem {
     private String cCount;
     private String cContent;
     private String cImageURL;
+    private String cTime;
     //private int cImg;
+
+
+    public String getcTime() {
+        return cTime;
+    }
+
+    public void setcTime(String cTime) {
+        this.cTime = cTime;
+    }
 
     public int getcNumber() {
         return cNumber;
@@ -51,11 +61,12 @@ public class CommunityItem {
         this.cImageURL = cImageURL;
     }
 
-    public CommunityItem(String name, String count, String content, String img) {
+    public CommunityItem(String name, String count, String content, String img, String time) {
 
         cName = name;
         cCount = count;
         cContent = content;
         cImageURL = img;
+        cTime = time;
     }
 }

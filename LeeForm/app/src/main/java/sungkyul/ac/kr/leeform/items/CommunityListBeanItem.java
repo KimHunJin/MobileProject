@@ -9,7 +9,15 @@ public class CommunityListBeanItem {
     private String img;
     private String name;
     private String community_writing_contents;
+    private String community_writing_date;
 
+    public String getCommunity_writing_date() {
+        return community_writing_date;
+    }
+
+    public void setCommunity_writing_date(String community_writing_date) {
+        this.community_writing_date = community_writing_date;
+    }
 
     public String getImg() {
         return img;
