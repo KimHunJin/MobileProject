@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorMain"
+    android:background="@color/colorWhite"
     tools:context=".activity.search.KnowHowSearchActivity">
 
-    <include layout="@layout/toolbar_custom_ok"/>
+    <include layout="@layout/toolbar_custom_search"/>
 
     <ListView
         android:id="@+id/listKnowHowSearch"

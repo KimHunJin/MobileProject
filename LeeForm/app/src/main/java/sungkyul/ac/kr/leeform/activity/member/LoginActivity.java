@@ -8,6 +8,7 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -18,6 +19,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
@@ -28,11 +30,15 @@ import static com.kakao.util.helper.Utility.getPackageInfo;
 public class LoginActivity extends AppCompatActivity {
 
     private SessionCallback callback;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // 취소버튼 눌렀을 때 핸들러
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         Log.e("Session", Session.getCurrentSession() + "");
         Log.e("hash", getKeyHash(getApplicationContext()) + "");
@@ -101,6 +107,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    /**
+     * 뒤로가기 키를 눌렀을 때
+     */
+    @Override
+    public void onBackPressed() {
+        //핸들러 작동
+        backPressCloseHandler.onBackPressed();
+        Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
     }
 
 }

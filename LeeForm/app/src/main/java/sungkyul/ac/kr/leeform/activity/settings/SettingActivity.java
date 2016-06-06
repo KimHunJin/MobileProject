@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -20,6 +19,7 @@ import com.kakao.util.helper.log.Logger;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.member.LoginActivity;
+import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 
 /**
  * 설정
@@ -32,12 +32,10 @@ public class SettingActivity extends PreferenceActivity {
         setContentView(R.layout.custom_preference_screen_layout);
         addPreferencesFromResource(R.xml.pref_settings);
 
-        //툴바 완료버튼 보이지 않게 하기
-        TextView tvOK = (TextView) findViewById(R.id.tvOk);
-        tvOK.setVisibility(View.INVISIBLE);
+        LoadActivityList.actList.add(SettingActivity.this);
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +67,8 @@ public class SettingActivity extends PreferenceActivity {
         Intent it = new Intent(getApplicationContext(), LoginActivity.class);
         Log.e("redi Session ", Session.getCurrentSession() + "");
         startActivity(it);
-        finish();
+        LoadActivityList loadActivityList = new LoadActivityList();
+        loadActivityList.closeActivity();
     }
 
     private void destory() {

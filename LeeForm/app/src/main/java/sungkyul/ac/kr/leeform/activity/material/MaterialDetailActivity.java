@@ -40,11 +40,11 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         setContentView(R.layout.activity_material_detail);
 
         //툴바 완료버튼 보이지 않게 하기
-        TextView tvOK = (TextView) findViewById(R.id.tvOk);
-        tvOK.setVisibility(View.INVISIBLE);
+        ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
+        imgOk.setVisibility(View.INVISIBLE);
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

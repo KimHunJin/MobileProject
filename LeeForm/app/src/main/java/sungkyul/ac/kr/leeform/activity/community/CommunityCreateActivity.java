@@ -2,6 +2,7 @@ package sungkyul.ac.kr.leeform.activity.community;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 public class CommunityCreateActivity extends AppCompatActivity {
     ImageView camera, album;
     EditText edtCommunity;
+    Toolbar toolbar;
     private static String URL = StaticURL.BASE_URL;
 
     @Override
@@ -37,12 +39,15 @@ public class CommunityCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_create);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
+
         //툴바 텍스트 변경
         TextView tv = (TextView) findViewById(R.id.txtToolBarTitle);
         tv.setText("커뮤니티 작성");
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +57,7 @@ public class CommunityCreateActivity extends AppCompatActivity {
 
         edtCommunity = (EditText) findViewById(R.id.edtCommunity);
 
-        TextView tv2 = (TextView) findViewById(R.id.tvOk);
+        ImageView tv2 = (ImageView) findViewById(R.id.imgOk);
         tv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

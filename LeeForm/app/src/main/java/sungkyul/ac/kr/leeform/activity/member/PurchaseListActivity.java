@@ -32,11 +32,11 @@ public class PurchaseListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_purchase_list);
 
         //툴바 완료버튼 보이지 않게 하기
-        TextView tvOK = (TextView) findViewById(R.id.tvOk);
+        TextView tvOK = (TextView) findViewById(R.id.imgOk);
         tvOK.setVisibility(View.INVISIBLE);
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

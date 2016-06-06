@@ -20,8 +20,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical">
+        android:layout_height="50dp">
 
         <TextView
             android:id="@+id/txtGridMaterialName"
@@ -30,8 +29,11 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:text="판자"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="4dp"
             android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
+
 
         <TextView
             android:id="@+id/txtGridMaterialCost"
@@ -39,9 +41,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"
             android:text="3,000"
             android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
+
+        <ImageView
+            android:src="@drawable/knowhow_item_money"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_toLeftOf="@id/txtGridMaterialCost"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 

@@ -2,12 +2,11 @@ package sungkyul.ac.kr.leeform.activity.search;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -19,12 +18,11 @@ import sungkyul.ac.kr.leeform.items.MainListItem;
  * Created by YongHoon on 2016-05-23.
  * 노하우 검색
  */
-public class KnowHowSearchActivity extends AppCompatActivity {
+public class KnowHowSearchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private LinearLayout linMain, linSearch;
+    private Toolbar toolbar;
     private EditText edtSearch;
-    private TextView tvOk;
-    private ImageView imgBack2;
+    private ImageView imgBack, imgSearch;
     private MainListAdapter mainListAdapter;
     private ListView lst;
 
@@ -35,30 +33,14 @@ public class KnowHowSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_know_how_search);
 
-        //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        //완료를 검색으로 텍스트 변경
-        tvOk.setText("검색");
-
         layoutSetting();
 
-        linMain.setVisibility(View.GONE);
-        linSearch.setVisibility(View.VISIBLE);
+        toolbar.setContentInsetsAbsolute(0, 0);
+        //뒤로가기 버튼
+        imgBack.setOnClickListener(this);
+        imgSearch.setOnClickListener(this);
 
-        //검색화면의 뒤로가기 버튼
-        imgBack2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        edtSearch.setHint("노하우를 입력하세요.");
 
         mainListAdapter = new MainListAdapter(getApplicationContext(), R.layout.item_list_main, listItems);
 
@@ -75,16 +57,29 @@ public class KnowHowSearchActivity extends AppCompatActivity {
     }
 
     void layoutSetting() {
-        linMain = (LinearLayout) findViewById(R.id.backToolbar);
-        linSearch = (LinearLayout) findViewById(R.id.linSearchToolbar);
-        tvOk = (TextView) findViewById(R.id.tvOk);
-        edtSearch = (EditText) findViewById(R.id.edtToolBarTitle);
-        ImageView imgBack2 = (ImageView) findViewById(R.id.imgBack2);
+        imgSearch = (ImageView) findViewById(R.id.imgSearchOk);
+        edtSearch = (EditText) findViewById(R.id.edtToolBarSearch);
+        imgBack = (ImageView) findViewById(R.id.imgBackSearch);
+        toolbar = (Toolbar) findViewById(R.id.toolbarSearch);
     }
 
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.commons_slide_from_left, R.anim.commons_slide_to_right);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgBackSearch: {
+                finish();
+                break;
+            }
+            case R.id.imgSearchOk: {
+                // 검색
+                break;
+            }
+        }
     }
 }

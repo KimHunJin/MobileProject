@@ -42,8 +42,8 @@ import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
 import sungkyul.ac.kr.leeform.utils.SaveData;
-import sungkyul.ac.kr.leeform.utils.StaticURL;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by HunJin on 2016-05-09.
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 로그아웃 할 때 열려있는 액티비티 모두 닫기 위해 리스트에 저장
-        new LoadActivityList().actList.add(MainActivity.this);
+        LoadActivityList.actList.add(MainActivity.this);
 
         Intent it = getIntent();
         userId = it.getExtras().getLong("UserId");
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     /**
      * 회원의 기본적인 정보를 저장하는 메서드입니다.
@@ -348,7 +349,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), MainActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
-
 
         tabLayout = (TabLayout) findViewById(R.id.mainTab);
         tabLayout.setupWithViewPager(viewPager);

@@ -52,7 +52,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
 
     EditText edtName, edtVideoUrl, edtMakingTime;
 
-    TextView txtOk;
+    ImageView imgOk;
     LinearLayout lineCreateView;
 
     private GridView grvCreate;
@@ -74,9 +74,9 @@ public class CreateKnowHowActivity extends AppCompatActivity {
 
         layoutSetting();
 
-        txtOk = (TextView) findViewById(R.id.tvOk);
+        imgOk = (ImageView) findViewById(R.id.imgOk);
         //완료버튼 누를시
-        txtOk.setOnClickListener(new View.OnClickListener() {
+        imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("strUrl", strUrl.size() + "");
@@ -88,7 +88,7 @@ public class CreateKnowHowActivity extends AppCompatActivity {
         });
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
