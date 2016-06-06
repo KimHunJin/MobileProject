@@ -109,6 +109,7 @@ public class HomeFragment extends Fragment {
         leeformParsing();
 
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
