@@ -77,7 +77,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
     private void layoutSetting() {
         content = (TextView) header.findViewById(R.id.contentCommunity);
-        replyCount = (TextView) findViewById(R.id.replyCount);
+        replyCount = (TextView) header.findViewById(R.id.replyCount);
         userName = (TextView) header.findViewById(R.id.userName);
         userImg = (ImageView) header.findViewById(R.id.img);
     }
@@ -155,6 +155,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
                 //CommunityBeanDetail로 디코딩
                 CommunityDetailBean decode = response.body();
+                Log.e("replycount", decode.getCommunity_reply().size() + "");
                 //선택한 커뮤니티의 댓글수를 TextView에 설정
                 replyCount.setText(decode.getCommunity_reply().size() + "");
 
