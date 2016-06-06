@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android.support.design="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorLittleDarkWhite">
 
     <RelativeLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:background="@color/colorWhite">
 
         <ListView
             android:id="@+id/listCommunity"
-            android:divider="@color/colorGray"
-            android:dividerHeight="1dp"
+            android:dividerHeight="10dp"
+            android:divider="@color/colorLittleDarkWhite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab1"
-            app:backgroundTint="@color/mainColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorUpdateToolbar"
+            android:layout_width="71dp"
+            android:layout_height="71dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/ic_mode_edit_white_24dp" />
     </RelativeLayout>
 </LinearLayout>

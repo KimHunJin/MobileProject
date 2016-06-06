@@ -77,8 +77,8 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
     private void layoutSetting() {
         content = (TextView) header.findViewById(R.id.contentCommunity);
-        replyCount = (TextView) findViewById(R.id.replyCount);
-        userName = (TextView) header.findViewById(R.id.userName);
+        replyCount = (TextView) findViewById(R.id.txtReplyCount);
+        userName = (TextView) header.findViewById(R.id.txtCommunityUserName);
         userImg = (ImageView) header.findViewById(R.id.img);
     }
 

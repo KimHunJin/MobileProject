@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -26,6 +28,7 @@ import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
+import sungkyul.ac.kr.leeform.utils.TimeTransForm;
 
 /**
  * Created by MiSeon on 2016-05-10.
@@ -60,6 +63,22 @@ public class CommunityFragment extends Fragment {
                 /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
                 intent.putExtra("Number", position);
                 startActivity(intent);
+            }
+        });
+
+        lst.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    fab1.setVisibility(View.VISIBLE);
+                } else {
+                    fab1.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
             }
         });
 
@@ -123,7 +142,13 @@ public class CommunityFragment extends Fragment {
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
-                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg()));
+                    String date = decode.getCommunity_list().get(i).getCommunity_writing_date();
+                    try {
+                        date = TimeTransForm.formatTimeString(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
                     //   decode.getCommunity_list().get(i).get
                 }
                 adapter.notifyDataSetChanged();

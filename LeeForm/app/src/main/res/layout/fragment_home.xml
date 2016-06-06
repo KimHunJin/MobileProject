@@ -53,18 +53,18 @@
 
             <ListView
                 android:id="@+id/listMain"
-                android:scrollbars="none"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorLittleDarkWhite"
                 android:dividerHeight="-10dp"
-                android:background="@color/colorLittleDarkWhite"></ListView>
+                android:scrollbars="none"></ListView>
 
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="71dp"
+            android:layout_height="71dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"

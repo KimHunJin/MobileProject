@@ -56,27 +56,30 @@ public class CommunityListAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(layout, parent, false);
-            viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
-            viewHolder.content = (TextView) convertView.findViewById(R.id.contentCommunity);
-            viewHolder.replyCount = (TextView) convertView.findViewById(R.id.replyCount);
-            viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
+            viewHolder.txtUserName = (TextView) convertView.findViewById(R.id.txtCommunityUserName);
+            viewHolder.txtContent = (TextView) convertView.findViewById(R.id.contentCommunity);
+            viewHolder.txtReplyCount = (TextView) convertView.findViewById(R.id.txtReplyCount);
+            viewHolder.txtImg = (ImageView) convertView.findViewById(R.id.img);
+            viewHolder.txtCommunityTime = (TextView)convertView.findViewById(R.id.txtCommunityTime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         CommunityItem listItem = item.get(position);
-        viewHolder.userName.setText(listItem.getcName());
-        viewHolder.content.setText(listItem.getcContent());
-        viewHolder.replyCount.setText(listItem.getcCount());
-        // viewHolder.img.setImageResource(listItem.getcImg());
-        new DownloadImageTask(viewHolder.img).execute(listItem.getcImageURL());
+        viewHolder.txtUserName.setText(listItem.getcName());
+        viewHolder.txtContent.setText(listItem.getcContent());
+        viewHolder.txtReplyCount.setText(listItem.getcCount());
+        viewHolder.txtCommunityTime.setText(listItem.getcTime());
+        // viewHolder.txtImg.setImageResource(listItem.getcImg());
+        new DownloadImageTask(viewHolder.txtImg).execute(listItem.getcImageURL());
         return convertView;
     }
 
     class ViewHolder {
-        private TextView userName;
-        private TextView content;
-        private TextView replyCount;
-        private ImageView img;
+        private TextView txtUserName;
+        private TextView txtContent;
+        private TextView txtReplyCount;
+        private ImageView txtImg;
+        private TextView txtCommunityTime;
     }
 }
