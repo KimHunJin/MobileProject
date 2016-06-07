@@ -59,4 +59,10 @@ public class MaterialFragment extends Fragment {
             gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
 }

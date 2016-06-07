@@ -2,149 +2,152 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="214dp"
         android:background="@drawable/main_list_background"
         android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="164dp">
-
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="164dp">
-        <ImageView
-            android:id="@+id/imgListItem"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scaleType="fitXY" />
-            <ImageView
-                android:src="@drawable/main_list_image_background"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:scaleType="fitXY" />
-        </FrameLayout>
 
-        <RelativeLayout
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgMainListLike"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/main_list_unlike" />
+                android:layout_height="164dp">
 
-            <TextView
-                android:id="@+id/txtListLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="4dp"
-                android:text="4000"
-                android:textColor="@color/colorWhite"
-                android:textSize="10sp" />
+                <ImageView
+                    android:id="@+id/imgListItem"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_list_image_background" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgMainListLike"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/main_list_unlike" />
+
+                <TextView
+                    android:id="@+id/txtListLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="4dp"
+                    android:text="4000"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp" />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingLeft="13dp">
-
-            <TextView
-                android:id="@+id/txtListName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="노하우의 제목"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtListKeyWord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="노하우의 간단한 키워드"
-                android:textColor="@color/colorToolBarTextColor"
-                android:textSize="13sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|right"
-            android:orientation="vertical"
-            android:paddingRight="9dp">
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="80dp"
-                    android:src="@drawable/knowhow_item_time" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="13dp">
 
                 <TextView
-                    android:id="@+id/txtListTime"
+                    android:id="@+id/txtListName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="4dp"
-                    android:text="4 시간"
-                    android:textColor="@color/colorUpdateToolbar"
-                    android:textSize="13sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="80dp"
-                    android:src="@drawable/knowhow_item_money" />
+                    android:text="노하우의 제목"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtListCost"
+                    android:id="@+id/txtListKeyWord"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="4dp"
-                    android:text="23,000 원"
-                    android:textColor="@color/colorUpdateToolbar"
+                    android:layout_marginTop="8dp"
+                    android:text="노하우의 간단한 키워드"
+                    android:textColor="@color/colorToolBarTextColor"
                     android:textSize="13sp" />
-            </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical"
+                android:paddingRight="9dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="80dp"
+                        android:src="@drawable/knowhow_item_time" />
+
+                    <TextView
+                        android:id="@+id/txtListTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="4dp"
+                        android:text="4 시간"
+                        android:textColor="@color/colorUpdateToolbar"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="80dp"
+                        android:src="@drawable/knowhow_item_money" />
+
+                    <TextView
+                        android:id="@+id/txtListCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="4dp"
+                        android:text="23,000 원"
+                        android:textColor="@color/colorUpdateToolbar"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
-    </LinearLayout>

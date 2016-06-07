@@ -76,7 +76,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
         Log.e("getMaterial", "getMaterial");
         for (int i = 0; i < 4; i++) {
-            dataProvider.setHashFile((3 - i) + 1 + ")", R.drawable.panza);
+            dataProvider.setHashFile("판자",R.drawable.panza);
         }
     }
 
@@ -132,7 +132,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(4);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.colorAccent, R.color.colorAccentBasic);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.colorAccentBasic,R.color.colorAccent);
         final NumZeroForm n = new NumZeroForm(this);
         mDemoSlider.setNumLayout(n);
 //        mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);

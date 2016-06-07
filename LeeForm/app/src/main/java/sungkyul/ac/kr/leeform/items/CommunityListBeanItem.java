@@ -11,6 +11,15 @@ public class CommunityListBeanItem {
     private String name;
     private String community_writing_contents;
     private String community_writing_date;
+    private String reply_community_amount;
+
+    public String getReply_community_amount() {
+        return reply_community_amount;
+    }
+
+    public void setReply_community_amount(String reply_community_amount) {
+        this.reply_community_amount = reply_community_amount;
+    }
 
     public int getCommunity_unique_key() {
         return community_unique_key;

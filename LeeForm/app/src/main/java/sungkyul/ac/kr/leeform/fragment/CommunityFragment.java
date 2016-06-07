@@ -153,7 +153,7 @@ public class CommunityFragment extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(),decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(),decode.getCommunity_list().get(i).getName(), decode.getCommunity_list().get(i).getReply_community_amount(), decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
                     //   decode.getCommunity_list().get(i).get
                 }
                 adapter.notifyDataSetChanged();

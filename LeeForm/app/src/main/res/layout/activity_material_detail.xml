@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- 상단바 -->
-    <include layout="@layout/toolbar_custom_ok"/>
+    <include layout="@layout/toolbar_custom_ok" />
 
     <!-- 컨텐츠 -->
     <ScrollView
@@ -33,7 +33,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     custom:auto_cycle="true"
-                    custom:image_button_l="@drawable/myarrowl"
                     custom:indicator_visibility="visible"
                     custom:lns_use_presentation="Smart"
                     custom:pager_animation="Accordion"
@@ -53,99 +52,138 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="25dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtMaterialDetailName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:text="재료 이름"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/txtMaterialDetailExplain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="10dp"
                     android:text="재료 설명"
-                    android:textColor="#8e8e8e" />
+                    android:textColor="@color/colorToolBarTextColor"
+                    android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="가격"
-                    android:textColor="#8e8e8e" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/txtMaterialDetailCostName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="30dp"
+                        android:text="가격 : "
+                        android:textColor="@color/colorUpdateToolbar" />
 
+                    <TextView
+                        android:id="@+id/txtMaterialDetailCost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/txtMaterialDetailCostName"
+                        android:text="1,0000원"
+                        android:textColor="@color/colorUpdateToolbar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="18dp"
+                        android:background="@drawable/buying_btn" />
+
+                </RelativeLayout>
             </LinearLayout>
 
-            <ImageView
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:background="#000000" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@color/mainColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="9dp"
-                    android:text="판매처 이름"
-                    android:textColor="#000000" />
+                    android:text="판매처 정보"
+                    android:textColor="@color/colorBlack" />
 
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <sungkyul.ac.kr.leeform.utils.RoundImageView
+                        android:id="@+id/imgMaterialDetailSellerName"
+                        android:src="@drawable/circle_img"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="@color/mainColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:text="판매처 이름"
+                        android:textColor="#000000" />
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="판매자가 파는 다른 상품"
-                android:textColor="#000000"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:background="@color/mainColor"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
-        </LinearLayout>
+                android:textColor="#000000" />
 
-        <ImageView
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="#000000" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/mainColor"
+                android:orientation="horizontal"></LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:layout_marginTop="16dp"
+                android:background="#000000" />
 
             <TextView
-                android:text="다른 고객님들이 이 상품과 함께 본 상품"
-                android:textColor="#000000"
-                android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="다른 고객님들이 이 상품과 함께 본 상품"
+                android:textColor="#000000" />
+
             <LinearLayout
-                android:orientation="horizontal"
-                android:background="@color/mainColor"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
-            </LinearLayout>
+                android:layout_height="70dp"
+                android:background="@color/mainColor"
+                android:orientation="horizontal"></LinearLayout>
 
         </LinearLayout>
     </ScrollView>
