@@ -1,7 +1,6 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,10 +25,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
-import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -85,11 +83,13 @@ public class MainListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         MainListItem listItem = item.get(position);
+
+        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).into(viewHolder.imgMainList);
+
         checkLike(listItem.getmNumber()+"",viewHolder.imgMainLike);
         Log.e("real number", listItem.getmNumber()+"");
 //        mairListImageSetting(viewHolder.imgMainList,listItem.getmUrl());
         Log.e("real url", listItem.getmUrl());
-        new DownloadImageTask(viewHolder.imgMainList).execute(listItem.getmUrl());
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());
         viewHolder.txtMainTime.setText(listItem.getmTime());

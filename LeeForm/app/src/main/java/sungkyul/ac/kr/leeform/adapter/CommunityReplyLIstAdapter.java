@@ -8,11 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.ReplyItem;
-import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by misun on 2016-05-18.
@@ -63,7 +64,7 @@ public class CommunityReplyLIstAdapter extends BaseAdapter {
         ReplyItem listItem = item.get(position);
         viewHolder.userName.setText(listItem.getrName());
         viewHolder.content.setText(listItem.getrContent());
-        new DownloadImageTask(viewHolder.img).execute(listItem.getrImg());
+        Picasso.with(inflater.getContext()).load(listItem.getrImg()).into(viewHolder.img);
         viewHolder.txtReplyTime.setText(listItem.getrTime());
 
         return convertView;
