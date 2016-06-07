@@ -10,11 +10,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.MainListItem;
-import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by HunJin on 2016-05-12.
@@ -67,9 +68,9 @@ public class MainListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         MainListItem listItem = item.get(position);
+        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).into(viewHolder.imgMainList);
 //        mairListImageSetting(viewHolder.imgMainList,listItem.getmUrl());
         Log.e("real url", listItem.getmUrl());
-        new DownloadImageTask(viewHolder.imgMainList).execute(listItem.getmUrl());
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());
         viewHolder.txtMainTime.setText(listItem.getmTime());

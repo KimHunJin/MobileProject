@@ -8,11 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
-import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by MiSeon on 2016-05-16.
@@ -71,7 +72,7 @@ public class CommunityListAdapter extends BaseAdapter {
         viewHolder.txtReplyCount.setText(listItem.getcCount());
         viewHolder.txtCommunityTime.setText(listItem.getcTime());
         // viewHolder.txtImg.setImageResource(listItem.getcImg());
-        new DownloadImageTask(viewHolder.txtImg).execute(listItem.getcImageURL());
+        Picasso.with(inflater.getContext()).load(listItem.getcImageURL()).into(viewHolder.txtImg);
         return convertView;
     }
 

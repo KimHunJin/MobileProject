@@ -95,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("userIdMain", userId + " : " + userNickName + " : " + userImagePath);
 
+        tabInitialization();
+        initializeLayout();
+        setListener();
         checkUser();
 
 
@@ -171,9 +174,6 @@ public class MainActivity extends AppCompatActivity {
                     SaveDataMemberInfo.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
                     Log.e("user_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
 
-                    tabInitialization();
-                    initializeLayout();
-                    setListener();
                     navigationSetting();
 
                 } else if (err.equals("4")) {
@@ -219,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
                             imgNavUser.setImageBitmap(bm);
                         }
                     });
-                    imgNavUser.setImageBitmap(bm);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
