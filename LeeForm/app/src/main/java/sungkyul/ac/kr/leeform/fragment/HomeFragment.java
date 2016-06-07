@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     fab.setVisibility(View.VISIBLE);
                 } else {
                     fab.setVisibility(View.INVISIBLE);
@@ -133,7 +133,6 @@ public class HomeFragment extends Fragment {
         });
 //        init(); //메소드호출
         leeformParsing();
-
 
 
         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
@@ -194,7 +193,7 @@ public class HomeFragment extends Fragment {
                 listItem.clear();
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
-                    listItem.add(new MainListItem(i, decode.getWriting_list().get(i).getPrice(),
+                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getPrice(),
                             decode.getWriting_list().get(i).getMaking_time(),
                             decode.getWriting_list().get(i).getScrap_amount(),
                             decode.getWriting_list().get(i).getPicture_url(),

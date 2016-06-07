@@ -35,12 +35,12 @@
         <ImageView
             android:id="@+id/imgSearchOk"
             android:layout_width="0dp"
-            android:src="@drawable/main_search"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
             android:layout_weight="0.1"
+            android:src="@drawable/main_search"
             android:text="검색" />
     </LinearLayout>
 

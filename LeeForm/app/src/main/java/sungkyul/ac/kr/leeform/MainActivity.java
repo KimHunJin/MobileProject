@@ -47,7 +47,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by HunJin on 2016-05-09.
- *
+ * <p/>
  * 애플리케이션의 기본이 되는 메인 액티비티입니다.
  */
 public class MainActivity extends AppCompatActivity {
@@ -94,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         Log.e("userIdMain", userId + " : " + userNickName + " : " + userImagePath);
-
+        tabInitialization();
+        initializeLayout();
+        setListener();
         checkUser();
-
-
     }
 
 
@@ -171,9 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     SaveDataMemberInfo.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
                     Log.e("user_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
 
-                    tabInitialization();
-                    initializeLayout();
-                    setListener();
+
                     navigationSetting();
 
                 } else if (err.equals("4")) {
@@ -219,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
                             imgNavUser.setImageBitmap(bm);
                         }
                     });
-                    imgNavUser.setImageBitmap(bm);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -243,8 +240,8 @@ public class MainActivity extends AppCompatActivity {
         imgNavUser = (ImageView) findViewById(R.id.imgNavUser);
         txtNavUserNickName = (TextView) findViewById(R.id.txtNavUserNickName);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setContentInsetsAbsolute(0,0);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0);
     }
 
     /**
