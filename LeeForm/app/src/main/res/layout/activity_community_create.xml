@@ -7,24 +7,20 @@
 
     <include layout="@layout/toolbar_custom_ok" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp">
-
         <EditText
             android:id="@+id/edtCommunity"
             android:layout_width="match_parent"
-            android:layout_height="181dp"
+            android:layout_height="wrap_content"
+            android:minHeight="181dp"
             android:background="@drawable/retangle_box"
             android:gravity="start"
             android:hint="@string/community"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:padding="10dp"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorToolBarTextColor" />
-    </LinearLayout>
 
 </LinearLayout>
