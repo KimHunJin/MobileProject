@@ -58,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorLittleDarkWhite"
                 android:dividerHeight="-10dp"
+                android:listSelector="@android:color/transparent"
                 android:scrollbars="none"></ListView>
 
         </RelativeLayout>
