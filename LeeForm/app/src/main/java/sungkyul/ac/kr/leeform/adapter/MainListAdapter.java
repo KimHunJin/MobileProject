@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -41,6 +42,7 @@ public class MainListAdapter extends BaseAdapter {
     private int layout;
     Handler handler = new Handler();
     String errCode = "0";
+    MainListItem listItem;
 
     public MainListAdapter(Context context, int layout, ArrayList<MainListItem> item) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,7 +67,7 @@ public class MainListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
 
         if (convertView == null) {
 
@@ -82,7 +84,7 @@ public class MainListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        MainListItem listItem = item.get(position);
+        listItem = item.get(position);
 
         Picasso.with(inflater.getContext()).load(listItem.getmUrl()).into(viewHolder.imgMainList);
 
@@ -97,12 +99,12 @@ public class MainListAdapter extends BaseAdapter {
         viewHolder.txtMainKeyWord.setText(listItem.getmKeyWord());
 
 
-//        Log.e("errMainCheck",errCode);
-//        if(errCode.equals("3")) {
-//            viewHolder.imgMainLike.setImageDrawable(convertView.getResources().getDrawable(R.drawable.main_list_like));
-//        } else {
-//            viewHolder.imgMainLike.setImageDrawable(convertView.getResources().getDrawable(R.drawable.main_list_unlike));
-//        }
+        viewHolder.imgMainLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkUncheck(listItem.getmNumber()+"",viewHolder.imgMainLike, viewHolder.txtMainLike, Integer.parseInt(listItem.getmLike()));
+            }
+        });
 
 
         return convertView;
@@ -124,7 +126,6 @@ public class MainListAdapter extends BaseAdapter {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
         Log.e("key", key);
@@ -144,6 +145,111 @@ public class MainListAdapter extends BaseAdapter {
                     img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
                 } else {
                     img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+                Log.e("onFailure", t.getMessage());
+            }
+        });
+    }
+
+    private void likeWrite(String writingKey, final ImageView img) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Map<String, String> data = new HashMap<>();
+        String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
+        Log.e("key", key);
+        Log.e("writing_key",writingKey);
+        data.put("user_unique_key", key); //user_unique_key 가져오기
+        data.put("writing_unique_key", writingKey);
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<OnlyErrBean> call = connectService.setScrap(data);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+                OnlyErrBean decodedResponse = response.body();
+                errCode = decodedResponse.getErr();
+                Log.e("like err",errCode);
+                img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+                Log.e("onFailure", t.getMessage());
+            }
+        });
+    }
+
+    private void unLikeWrite(String writingKey, final ImageView img) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Map<String, String> data = new HashMap<>();
+        String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
+        Log.e("key", key);
+        Log.e("writing_key",writingKey);
+        data.put("user_unique_key", key); //user_unique_key 가져오기
+        data.put("writing_unique_key", writingKey);
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<OnlyErrBean> call = connectService.unScrap(data);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+                OnlyErrBean decodedResponse = response.body();
+                errCode = decodedResponse.getErr();
+                Log.e("unlike err",errCode);
+                img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+                Log.e("onFailure", t.getMessage());
+            }
+        });
+    }
+
+    private void checkUncheck(final String writingKey, final ImageView img, final TextView txt, final int like) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Map<String, String> data = new HashMap<>();
+        String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
+        Log.e("key", key);
+        Log.e("writing_key",writingKey);
+        data.put("user_unique_key", key); //user_unique_key 가져오기
+        data.put("writing_unique_key", writingKey);
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<OnlyErrBean> call = connectService.getCheckScrap(data);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+                OnlyErrBean decodedResponse = response.body();
+                errCode = decodedResponse.getErr();
+                Log.e("real err", decodedResponse.getErr());
+                if(decodedResponse.getErr().equals("3")) {
+                    // 삭제 구문
+                    unLikeWrite(writingKey,img);
+//                    img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
+                    listItem.setmLike(like-1+"");
+                    txt.setText(like-1+"");
+                } else {
+                    // 좋아요 구문
+                    likeWrite(writingKey,img);
+//                    img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
+                    listItem.setmLike(like+1+"");
+                    txt.setText(like+1+"");
                 }
             }
 
