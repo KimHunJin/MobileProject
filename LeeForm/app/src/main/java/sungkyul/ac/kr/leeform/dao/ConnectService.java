@@ -66,4 +66,14 @@ public interface ConnectService {
     Call<OnlyErrBean> getCheckScrap(
             @QueryMap Map<String, String> options
     );
+
+    @GET("scrap.php")
+    Call<OnlyErrBean> setScrap(
+            @QueryMap Map<String, String> options
+    );
+
+    @GET("cancel_scrap.php")
+    Call<OnlyErrBean> unScrap(
+            @QueryMap Map<String, String> options
+    );
 }
