@@ -8,6 +8,15 @@ public class ReplyItem {
     private String rName;
     private String rContent;
     private String rImg;
+    private String rTime;
+
+    public String getrTime() {
+        return rTime;
+    }
+
+    public void setrTime(String rTime) {
+        this.rTime = rTime;
+    }
 
     public int getrNumber() {
         return rNumber;
@@ -41,10 +50,11 @@ public class ReplyItem {
         this.rImg = rImg;
     }
 
-    public ReplyItem(String name, String content, String img) {
+    public ReplyItem(String name, String content, String img, String time) {
         rName = name;
         rContent = content;
         rImg = img;
+        rTime = time;
     }
 
 }

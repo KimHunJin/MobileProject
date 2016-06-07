@@ -52,16 +52,21 @@ public class CommunityFragment extends Fragment {
         cView = inflater.inflate(R.layout.fragment_community, container, false);
 
         layoutSetting();
-        intent = new Intent(getContext(), CommunityDetailActivity.class);
+
         //lst에 adqpter를 등록한다.
         lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                intent = new Intent(getContext(), CommunityDetailActivity.class);
+                Log.e("Number",listItem.get(position).getcNumber()+"");
                 /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
-                intent.putExtra("Number", position);
+                intent.putExtra("Number", listItem.get(position).getcNumber());
+                intent.putExtra("image",listItem.get(position).getcImageURL());
+                intent.putExtra("name",listItem.get(position).getcName());
+                intent.putExtra("time",listItem.get(position).getcTime());
+                intent.putExtra("contents",listItem.get(position).getcContent());
                 startActivity(intent);
             }
         });
@@ -148,7 +153,7 @@ public class CommunityFragment extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(),decode.getCommunity_list().get(i).getName(), "5", decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
                     //   decode.getCommunity_list().get(i).get
                 }
                 adapter.notifyDataSetChanged();

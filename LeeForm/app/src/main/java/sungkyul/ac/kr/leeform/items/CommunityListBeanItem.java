@@ -6,10 +6,19 @@ package sungkyul.ac.kr.leeform.items;
  * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
 public class CommunityListBeanItem {
+    private int community_unique_key;
     private String img;
     private String name;
     private String community_writing_contents;
     private String community_writing_date;
+
+    public int getCommunity_unique_key() {
+        return community_unique_key;
+    }
+
+    public void setCommunity_unique_key(int community_unique_key) {
+        this.community_unique_key = community_unique_key;
+    }
 
     public String getCommunity_writing_date() {
         return community_writing_date;

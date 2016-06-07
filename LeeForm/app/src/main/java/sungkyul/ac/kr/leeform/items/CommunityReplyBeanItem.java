@@ -8,7 +8,24 @@ package sungkyul.ac.kr.leeform.items;
 public class CommunityReplyBeanItem {
     String name;
     String img;
-    String reply_writing_contents;
+    String reply_community_contents;
+    String reply_date;
+
+    public String getReply_date() {
+        return reply_date;
+    }
+
+    public void setReply_date(String reply_date) {
+        this.reply_date = reply_date;
+    }
+
+    public String getReply_community_contents() {
+        return reply_community_contents;
+    }
+
+    public void setReply_community_contents(String reply_community_contents) {
+        this.reply_community_contents = reply_community_contents;
+    }
 
     public String getName() {
         return name;
@@ -26,11 +43,4 @@ public class CommunityReplyBeanItem {
         this.img = img;
     }
 
-    public String getReply_writing_contents() {
-        return reply_writing_contents;
-    }
-
-    public void setReply_writing_contents(String reply_writing_contents) {
-        this.reply_writing_contents = reply_writing_contents;
-    }
 }

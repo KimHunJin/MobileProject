@@ -55,6 +55,7 @@ public class CommunityReplyLIstAdapter extends BaseAdapter {
             viewHolder.userName = (TextView) convertView.findViewById(R.id.rUserName);
             viewHolder.content = (TextView) convertView.findViewById(R.id.rContent);
             viewHolder.img = (ImageView) convertView.findViewById(R.id.rImg);
+            viewHolder.txtReplyTime = (TextView) convertView.findViewById(R.id.txtReplyTime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -62,8 +63,8 @@ public class CommunityReplyLIstAdapter extends BaseAdapter {
         ReplyItem listItem = item.get(position);
         viewHolder.userName.setText(listItem.getrName());
         viewHolder.content.setText(listItem.getrContent());
-        //viewHolder.img.setImageResource(listItem.getrImg());
         new DownloadImageTask(viewHolder.img).execute(listItem.getrImg());
+        viewHolder.txtReplyTime.setText(listItem.getrTime());
 
         return convertView;
     }
@@ -72,5 +73,6 @@ public class CommunityReplyLIstAdapter extends BaseAdapter {
         private TextView userName;
         private TextView content;
         private ImageView img;
+        private TextView txtReplyTime;
     }
 }

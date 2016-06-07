@@ -55,4 +55,9 @@ public interface ConnectService {
     Call<KnowHowWritingBean> setKnowGetKey(
             @QueryMap Map<String, String> options
     );
+
+    @GET("reply_community.php")
+    Call<CommunityListBean> setCommunityReply(
+            @QueryMap Map<String, String> options
+    );
 }

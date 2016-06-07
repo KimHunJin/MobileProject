@@ -61,8 +61,9 @@ public class CommunityItem {
         this.cImageURL = cImageURL;
     }
 
-    public CommunityItem(String name, String count, String content, String img, String time) {
+    public CommunityItem(int number, String name, String count, String content, String img, String time) {
 
+        cNumber = number;
         cName = name;
         cCount = count;
         cContent = content;

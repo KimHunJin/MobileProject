@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +27,10 @@ import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.items.ReplyItem;
+import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
+import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
+import sungkyul.ac.kr.leeform.utils.TimeTransForm;
 
 /**
  * Created by MiSeon on 2016-05-18.
@@ -35,8 +43,9 @@ public class CommunityDetailActivity extends AppCompatActivity {
     ArrayList<ReplyItem> listItem = new ArrayList<>();
     private static String URL = StaticURL.BASE_URL;
     int number;
-    TextView content, replyCount, userName;
+    TextView content, replyCount, userName, txtReplyRegister;
     ImageView userImg, imgBack;
+    EditText edtContents;
     ListView lst;
     View header;
 
@@ -59,29 +68,41 @@ public class CommunityDetailActivity extends AppCompatActivity {
         });
 
         //inflater를 통해 item_list_community.xml을 가져온다.
-        header = getLayoutInflater().inflate(R.layout.item_list_community, null, false);
+        header = getLayoutInflater().inflate(R.layout.header_community_detail, null, false);
         //adapter를 통해 item.list.reply.xml을 ArrayList(listItem)에 설정한다.
         adapter = new CommunityReplyLIstAdapter(getApplicationContext(), R.layout.item_list_reply, listItem);
         lst = (ListView) findViewById(R.id.replyList);
         //lst에 adapter를 등록한다.
+        lst.addHeaderView(header);
         lst.setAdapter(adapter);
 
         //리스트 윗부분에 넣기
-        lst.addHeaderView(header);
-
 
         layoutSetting();
         getCommunityDetail();
         getCommunityReply();
+
+        txtReplyRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtContents.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    setCommunityReply();
+                    edtContents.setText("");
+                }
+            }
+        });
     }
 
     private void layoutSetting() {
-        content = (TextView) header.findViewById(R.id.contentCommunity);
-
-        replyCount = (TextView) findViewById(R.id.txtReplyCount);
-        userName = (TextView) header.findViewById(R.id.txtCommunityUserName);
-
-        userImg = (ImageView) header.findViewById(R.id.img);
+        content = (TextView) header.findViewById(R.id.txtHeaderContentCommunity);
+        replyCount = (TextView) findViewById(R.id.txtHeaderReplyCount);
+        userName = (TextView) header.findViewById(R.id.txtHeaderCommunityUserName);
+        userImg = (ImageView) header.findViewById(R.id.imgHeaderCommunityDetail);
+        txtReplyRegister = (TextView) findViewById(R.id.txtCommunityReplyRegister);
+        edtContents = (EditText) findViewById(R.id.edtCommunityReplyContents);
     }
 
     /**
@@ -90,48 +111,22 @@ public class CommunityDetailActivity extends AppCompatActivity {
      * 가져온 내용을 TextView나 ImageView에 설정
      * parameter
      * int Number
+     * String name
+     * String image
+     * String time
+     * String contents
      */
     private void getCommunityDetail() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        //CommunityFragment에서 보낸 Intent값 가져오기
-        final Intent intent = getIntent();
-        number = intent.getExtras().getInt("Number");
-        Log.e("num", number + ""); //선택한 커뮤니티 넘버
+        Intent it = getIntent();
+        number = it.getExtras().getInt("Number");
+        Log.e("number",number+"");
+        content.setText(it.getExtras().getString("contents"));
+        userName.setText(it.getExtras().getString("name"));
+        new DownloadImageTask(userImg).execute(it.getExtras().getString("image"));
 
-        ConnectService connectService = retrofit.create(ConnectService.class);
-        //http://14.63.196.255/api/community_list.php?
-        Call<CommunityListBean> call = connectService.getCommunityList();
-        call.enqueue(new Callback<CommunityListBean>() {
-            @Override
-            public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
-                Log.e("response", response.code() + "");
-                //CommunityListBean 형식으로 디코딩
-                CommunityListBean decode = response.body();
-                Log.e("err", decode.getErr());
-                Log.e("count", decode.getCount());
+        adapter.notifyDataSetChanged();
 
-                Log.e("urllll", decode.getCommunity_list().get(number).getImg() + "");
-                //선택한 커뮤니티 내용을 텍스트뷰에 설정
-                content.setText(decode.getCommunity_list().get(number).getCommunity_writing_contents());
-                //선택한 커뮤니티 작성자 이름을 텍스트뷰에 설정
-                userName.setText(decode.getCommunity_list().get(number).getName());
-                //가져온 이미지를 이미지뷰에 설정
-                new sungkyul.ac.kr.leeform.utils.DownloadImageTask(userImg)
-                        .execute(decode.getCommunity_list().get(number).getImg());
-
-
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<CommunityListBean> call, Throwable t) {
-                Log.e("failure", t.getMessage());
-            }
-        });
     }
 
     /**
@@ -147,7 +142,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
         ConnectService connectService = retrofit.create(ConnectService.class);
 
-        final Call<CommunityDetailBean> call = connectService.get(number + 1 + "");
+        final Call<CommunityDetailBean> call = connectService.get(number + "");
 
         call.enqueue(new Callback<CommunityDetailBean>() {
             @Override
@@ -161,15 +156,58 @@ public class CommunityDetailActivity extends AppCompatActivity {
                 //선택한 커뮤니티의 댓글수를 TextView에 설정
                 replyCount.setText(decode.getCommunity_reply().size() + "");
 
+                listItem.clear();
                 //listItem에 ReplyItem(댓글작성한닉네임,내용,작성자 이미지)를 추가
                 for (int i = 0; i < decode.getCommunity_reply().size(); i++) {
-                    listItem.add(new ReplyItem(decode.getCommunity_reply().get(i).getName(), decode.getCommunity_reply().get(i).getReply_writing_contents(), decode.getCommunity_reply().get(i).getImg()));
-
+                    try {
+                        listItem.add(new ReplyItem(decode.getCommunity_reply().get(i).getName(), decode.getCommunity_reply().get(i).getReply_community_contents(), decode.getCommunity_reply().get(i).getImg(), TimeTransForm.formatTimeString(decode.getCommunity_reply().get(i).getReply_date())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<CommunityDetailBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
+    }
+
+    private void setCommunityReply() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+
+        Map<String, String> data = new HashMap<>();
+        Log.e("community_unique_key",number+"");
+        data.put("user_unique_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
+        data.put("community_unique_key", number +"");
+        data.put("reply_community_contents", edtContents.getText().toString());
+
+
+        Call<CommunityListBean> call = connectService.setCommunityReply(data);
+
+        call.enqueue(new Callback<CommunityListBean>() {
+            @Override
+            public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
+                Log.e("response", response.code() + "");
+                Log.e("selectnumber", number + "");
+
+                //CommunityBeanDetail로 디코딩
+                CommunityListBean decode = response.body();
+                Log.e("err",decode.getErr());
+                if (decode.getErr().equals("0")) {
+                    getCommunityReply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommunityListBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });
