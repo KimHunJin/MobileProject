@@ -13,6 +13,7 @@
         android:background="@color/colorWhite">
 
         <ListView
+            android:scrollbars="none"
             android:id="@+id/listCommunity"
             android:dividerHeight="10dp"
             android:divider="@color/colorLittleDarkWhite"

@@ -10,6 +10,7 @@ import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
+import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 
@@ -58,6 +59,11 @@ public interface ConnectService {
 
     @GET("reply_community.php")
     Call<CommunityListBean> setCommunityReply(
+            @QueryMap Map<String, String> options
+    );
+
+    @GET("check_scrap.php")
+    Call<OnlyErrBean> getCheckScrap(
             @QueryMap Map<String, String> options
     );
 }

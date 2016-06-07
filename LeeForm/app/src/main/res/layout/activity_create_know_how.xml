@@ -27,6 +27,7 @@
         android:padding="4dp">
 
         <GridView
+            android:scrollbars="none"
             android:id="@+id/grvCreateView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

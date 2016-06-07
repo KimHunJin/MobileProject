@@ -158,12 +158,12 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
                 it.setDataAndType(mImageCpatureUri, "image/*");
 
                 // 외부에 보여줄 크기를 200으로 설정
-                it.putExtra("outputX", 200);
-                it.putExtra("outputY", 200);
+                it.putExtra("outputX", 340);
+                it.putExtra("outputY", 164);
 
-                // 크랍할 비율을 1 : 1로 설정 (가로 : 세로)
-                it.putExtra("aspectX", 1);
-                it.putExtra("aspectY", 1);
+//                // 크랍할 비율을 1 : 1로 설정 (가로 : 세로)
+//                it.putExtra("aspectX", 1);
+//                it.putExtra("aspectY", 1);
 
                 it.putExtra("scale", true);
                 it.putExtra("return-data", true);

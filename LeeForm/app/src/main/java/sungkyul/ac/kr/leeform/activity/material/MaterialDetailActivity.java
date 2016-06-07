@@ -76,7 +76,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
         Log.e("getMaterial", "getMaterial");
         for (int i = 0; i < 4; i++) {
-            dataProvider.setHashFile("판자",R.drawable.panza);
+            dataProvider.setHashFile((i+1)+"",R.drawable.panza);
         }
     }
 
@@ -136,7 +136,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         final NumZeroForm n = new NumZeroForm(this);
         mDemoSlider.setNumLayout(n);
 //        mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
-        mDemoSlider.setPresetTransformer("Accordion");
+        mDemoSlider.setPresetTransformer("DepthPage");
         mDemoSlider.stopAutoCycle();
 
         //and data second. it is a must because you will except the data to be streamed into the pipline.
@@ -162,7 +162,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
-        Toast.makeText(this, coreSlider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, coreSlider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override

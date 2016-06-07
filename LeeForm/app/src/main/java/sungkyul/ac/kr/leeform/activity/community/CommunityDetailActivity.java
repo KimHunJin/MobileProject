@@ -95,8 +95,8 @@ public class CommunityDetailActivity extends AppCompatActivity {
                     setCommunityReply();
                     edtContents.setText("");
                     //스크린키보드
-                    InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    keyboard.hideSoftInputFromWindow(edtContents.getWindowToken(),0);
+                    InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    keyboard.hideSoftInputFromWindow(edtContents.getWindowToken(), 0);
                 }
             }
         });
@@ -126,13 +126,12 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         number = it.getExtras().getInt("Number");
-        Log.e("number",number+"");
+        Log.e("number", number + "");
         content.setText(it.getExtras().getString("contents"));
         userName.setText(it.getExtras().getString("name"));
         new DownloadImageTask(userImg).execute(it.getExtras().getString("image"));
 
         adapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -190,11 +189,10 @@ public class CommunityDetailActivity extends AppCompatActivity {
         ConnectService connectService = retrofit.create(ConnectService.class);
 
         Map<String, String> data = new HashMap<>();
-        Log.e("community_unique_key",number+"");
+        Log.e("community_unique_key", number + "");
         data.put("user_unique_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
-        data.put("community_unique_key", number +"");
+        data.put("community_unique_key", number + "");
         data.put("reply_community_contents", edtContents.getText().toString());
-
 
         Call<CommunityListBean> call = connectService.setCommunityReply(data);
 
@@ -206,7 +204,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
 
                 //CommunityBeanDetail로 디코딩
                 CommunityListBean decode = response.body();
-                Log.e("err",decode.getErr());
+                Log.e("err", decode.getErr());
                 if (decode.getErr().equals("0")) {
                     getCommunityReply();
                 }
