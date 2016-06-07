@@ -59,4 +59,8 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="spinner">
+        <item name="android:background">@drawable/spinnertest1</item>
+    </style>
 </resources>

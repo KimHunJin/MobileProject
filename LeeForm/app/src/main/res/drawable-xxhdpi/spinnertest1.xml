@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <layer-list>
+
+            <!-- 회살표를 넣기위해-->
+            <item>
+                <bitmap android:src="@drawable/ic_arrow_drop_down_2x"  android:gravity="right" />
+            </item>
+        </layer-list>
+    </item>
+</selector>
