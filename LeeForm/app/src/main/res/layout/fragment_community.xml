@@ -9,15 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
         android:background="@color/colorWhite">
 
         <ListView
             android:id="@+id/listCommunity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/colorLittleDarkWhite"
-            android:dividerHeight="10dp"
+            android:background="@color/colorLittleDarkWhite"
+            android:dividerHeight="-10dp"
             android:scrollbars="none"></ListView>
 
         <android.support.design.widget.FloatingActionButton

@@ -2,17 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/main_list_background"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
-    <ImageView
-        android:id="@+id/imgGridMaterial"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:scaleType="fitXY" />
+        android:layout_height="195dp"
+        android:background="@drawable/main_list_background"
+        android:orientation="vertical">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp">
+
+            <ImageView
+                android:id="@+id/imgGridMaterial"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/main_list_image_background" />
+        </FrameLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -55,5 +71,5 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-
+</LinearLayout>
 </LinearLayout>
