@@ -47,7 +47,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
     ArrayList<ReplyItem> listItem = new ArrayList<>();
     private static String URL = StaticURL.BASE_URL;
     int number;
-    TextView content, replyCount, userName, txtReplyRegister;
+    TextView content, replyCount, userName, txtReplyRegister, txtTime;
     ImageView userImg, imgBack;
     EditText edtContents;
     ListView lst;
@@ -107,6 +107,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
     }
 
     private void layoutSetting() {
+        txtTime=(TextView)header.findViewById(R.id.txtHeaderCommunityTime);
         content = (TextView) header.findViewById(R.id.txtHeaderContentCommunity);
         replyCount = (TextView) findViewById(R.id.txtHeaderReplyCount);
         userName = (TextView) header.findViewById(R.id.txtHeaderCommunityUserName);
@@ -133,6 +134,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
         Log.e("number", number + "");
         content.setText(it.getExtras().getString("contents"));
         userName.setText(it.getExtras().getString("name"));
+        txtTime.setText(it.getExtras().getString("time"));
         new DownloadImageTask(userImg).execute(it.getExtras().getString("image"));
 
         adapter.notifyDataSetChanged();

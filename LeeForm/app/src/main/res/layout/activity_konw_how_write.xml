@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".activity.knowhow.CreateKnowHowActivity">
+
+    <include layout="@layout/toolbar_custom_ok" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="깨알 노하우의 제목은?"
+            android:paddingLeft="10dp"
+            android:paddingTop="13dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGray"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/spnKnowCategory"
+                style="@style/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"></Spinner>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/colorBlack" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="난이도"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.35"
+                android:gravity="right|center">
+
+                <Button
+                    android:id="@+id/btnLevelHigh"
+                    android:layout_width="33dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/roundbtnselector"
+                    android:text="상"
+                    android:textColor="@color/colorWhite"
+                    />
+
+                <Button
+                    android:id="@+id/btnLevelMiddle"
+                    android:layout_width="33dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/roundbtnselector"
+                    android:text="중"
+                    android:textColor="@color/colorWhite"
+                    />
+
+                <Button
+                    android:id="@+id/btnLevelLow"
+                    android:layout_width="33dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/roundbtnselector"
+                    android:text="하"
+                    android:textColor="@color/colorWhite"
+                   />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="소요시간"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/spnMakingTime"
+                style="@style/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"></Spinner>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/colorBlack" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="소요비용"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="right"
+                >
+
+                <EditText
+                    android:id="@+id/edtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:hint="1000"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGray"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="23dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:text="원"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유튜브"
+            android:textColor="@color/colorGray"
+            android:textSize="10sp" />
+        <EditText
+            android:id="@+id/edtYoutubuCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:hint="유튜브 영상이 있다면 코드를 입력해주세요."
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGray"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+
+<LinearLayout
+    android:id="@+id/lineImgAdd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="12dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진/글 등록"
+        android:layout_marginBottom="6dp"
+        android:textColor="@color/colorGray"
+        android:textSize="10sp" />
+
+    <GridView
+        android:id="@+id/grdImgView"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:numColumns="2"
+        android:scrollbars="none">
+
+    </GridView>
+ </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:text="소품판매"
+        android:textColor="@color/colorGray"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="소품판매를 하실 건가요?"
+            android:textColor="@color/colorGray"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btnSellYes"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:background="@drawable/btnselector"
+            android:clickable="true"
+            android:text="YES"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btnSellNo"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:background="@drawable/btnselector"
+            android:text="NO"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
+    <!--소품 판매하는 경우에만-->
+    <LinearLayout
+        android:id="@+id/linearSell"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/edtSellAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:hint="판매수량"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorGray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/colorBlack" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/edtSellPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:hint="판매 가격"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorGray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="원"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
