@@ -49,7 +49,8 @@
             android:theme="@style/PreferencesTheme" />
         <activity
             android:name=".activity.navigation.MyPageActivity"
-            android:theme="@style/CustomNoActionBar" />
+            android:theme="@style/CustomNoActionBar"
+            />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

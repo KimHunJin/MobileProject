@@ -342,7 +342,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 //URL과 노하우 설명 가져오기
                 strUrl = data.getStringArrayListExtra("image");
