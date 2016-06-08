@@ -12,9 +12,8 @@
         android:layout_height="match_parent"
         android:horizontalSpacing="10dp"
         android:numColumns="2"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:verticalSpacing="10dp"></GridView>
+        android:verticalSpacing="-10dp"></GridView>
 
 </LinearLayout>

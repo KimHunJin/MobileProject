@@ -2,9 +2,9 @@ package sungkyul.ac.kr.leeform.activity.community;
 
 import android.content.Context;
 import android.content.Intent;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -41,6 +41,7 @@ import sungkyul.ac.kr.leeform.utils.TimeTransForm;
  * 커뮤니티 리스트에서 선택한 커뮤니티와 댓글을 나타낸다.
  */
 public class CommunityDetailActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     private CommunityReplyLIstAdapter adapter;
     ArrayList<ReplyItem> listItem = new ArrayList<>();
@@ -56,6 +57,9 @@ public class CommunityDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_detail);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
 
         //툴바 완료버튼 보이지 않게 하기
         ImageView imgOk = (ImageView) findViewById(R.id.imgOk);

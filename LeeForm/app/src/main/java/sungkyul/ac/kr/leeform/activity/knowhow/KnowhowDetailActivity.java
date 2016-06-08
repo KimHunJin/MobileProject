@@ -3,6 +3,7 @@ package sungkyul.ac.kr.leeform.activity.knowhow;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import sungkyul.ac.kr.leeform.R;
  */
 public class KnowHowDetailActivity extends AppCompatActivity {
     View layKnowhowDetail;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,8 +25,8 @@ public class KnowHowDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_knowhow_detail);
 
         //툴바 완료버튼 보이지 않게 하기
-//        TextView tvOK = (TextView) findViewById(R.id.imgOk);
-//        tvOK.setVisibility(View.INVISIBLE);
+        ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
+        imgOk.setVisibility(View.INVISIBLE);
 
         //뒤로가기 버튼
         ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
@@ -67,5 +69,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
      */
     private void initializeLayout() {
         layKnowhowDetail = findViewById(R.id.layKnowhowDetail);
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
     }
 }

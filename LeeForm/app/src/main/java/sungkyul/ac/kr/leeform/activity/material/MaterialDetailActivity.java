@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.SliderLayout;
@@ -30,6 +29,7 @@ import sungkyul.ac.kr.leeform.utils.NumZeroForm;
  * Created by KyungHee on 2016-05-19.
  */
 public class MaterialDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+    private Toolbar toolbar;
 
     private SliderLayout mDemoSlider;
     DataProvider dataProvider;
@@ -60,6 +60,10 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
      * 화면에 보여줄 정보 초기화
      */
     private void initializeLayout() {
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
+
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
         dataProvider = new DataProvider();
