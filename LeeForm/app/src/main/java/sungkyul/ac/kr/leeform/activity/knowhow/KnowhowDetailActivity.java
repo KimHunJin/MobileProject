@@ -22,7 +22,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_knowhow_detail);
+        setContentView(R.layout.activity_know_how_detail);
 
         //툴바 완료버튼 보이지 않게 하기
         ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
