@@ -28,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.knowhow.CreateKnowHowActivity;
 import sungkyul.ac.kr.leeform.activity.knowhow.KnowHowDetailActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.WriteKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CreateKnowHowActivity.class));
+                startActivity(new Intent(getActivity(), WriteKnowHowActivity.class));
             }
         });
 

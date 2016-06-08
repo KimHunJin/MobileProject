@@ -58,6 +58,7 @@
         <activity android:name=".activity.settings.NoticeActivity" />
         <activity android:name=".activity.member.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity"></activity>
+        <activity android:name=".activity.knowhow.WriteKnowHowActivity"></activity>
     </application>
 
 </manifest>

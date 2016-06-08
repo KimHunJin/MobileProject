@@ -67,6 +67,7 @@ public class CommunityFragment extends Fragment {
                 intent.putExtra("name",listItem.get(position).getcName());
                 intent.putExtra("time",listItem.get(position).getcTime());
                 intent.putExtra("contents",listItem.get(position).getcContent());
+
                 startActivity(intent);
             }
         });
