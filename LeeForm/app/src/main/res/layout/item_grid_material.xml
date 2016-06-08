@@ -27,11 +27,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/main_list_image_background" />
+                android:src="@drawable/material_list_image_background" />
         </FrameLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.3dp"
         android:background="@color/colorBlack"/>
 
     <RelativeLayout
