@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorLittleDarkWhite"
+            android:background="#e3e3e3"
             android:orientation="horizontal">
 
             <EditText
