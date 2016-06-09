@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_weight="0.499"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            style="@style/spinner"/>
 
     </LinearLayout>
 
