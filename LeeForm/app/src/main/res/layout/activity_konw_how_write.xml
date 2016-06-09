@@ -93,8 +93,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/roundbtnselector"
                     android:text="상"
-                    android:textColor="@color/colorWhite"
-                    />
+                    android:textColor="@color/colorWhite" />
 
                 <Button
                     android:id="@+id/btnLevelMiddle"
@@ -103,8 +102,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/roundbtnselector"
                     android:text="중"
-                    android:textColor="@color/colorWhite"
-                    />
+                    android:textColor="@color/colorWhite" />
 
                 <Button
                     android:id="@+id/btnLevelLow"
@@ -113,8 +111,7 @@
                     android:layout_marginRight="18dp"
                     android:background="@drawable/roundbtnselector"
                     android:text="하"
-                    android:textColor="@color/colorWhite"
-                   />
+                    android:textColor="@color/colorWhite" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -175,15 +172,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:gravity="right"
-                >
+                android:gravity="right">
 
                 <EditText
                     android:id="@+id/edtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
                     android:gravity="right"
                     android:hint="1000"
                     android:textColor="@color/colorBlack"
@@ -193,8 +189,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="23dp"
                     android:layout_gravity="center"
+                    android:layout_marginRight="23dp"
                     android:gravity="right"
                     android:text="원"
                     android:textColor="@color/colorBlack"
@@ -215,12 +211,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="6dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="유튜브"
             android:textColor="@color/colorGray"
             android:textSize="10sp" />
+
         <EditText
             android:id="@+id/edtYoutubuCode"
             android:layout_width="match_parent"
@@ -239,32 +237,33 @@
         android:layout_gravity="center"
         android:background="@color/colorBlack" />
 
-<LinearLayout
-    android:id="@+id/lineImgAdd"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="12dp"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진/글 등록"
-        android:layout_marginBottom="6dp"
-        android:textColor="@color/colorGray"
-        android:textSize="10sp" />
-
-    <GridView
-        android:id="@+id/grdImgView"
+    <LinearLayout
+        android:id="@+id/lineImgAdd"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:numColumns="2"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical">
 
-    </GridView>
- </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="사진/글 등록"
+            android:textColor="@color/colorGray"
+            android:textSize="10sp" />
+
+        <GridView
+            android:id="@+id/grdImgView"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:numColumns="2"
+            android:scrollbars="none">
+
+        </GridView>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

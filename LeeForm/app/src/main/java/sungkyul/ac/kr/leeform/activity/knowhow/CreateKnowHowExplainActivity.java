@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -154,20 +157,25 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
             // 카메라에서 가져올 경우
             case PICK_FROM_CAMERA: {
                 // 이미지 크랍
-                Intent it = new Intent("com.android.camera.action.CROP");
-                it.setDataAndType(mImageCpatureUri, "image/*");
 
-                // 외부에 보여줄 크기를 200으로 설정
-                it.putExtra("outputX", 340);
-                it.putExtra("outputY", 164);
-
-//                // 크랍할 비율을 1 : 1로 설정 (가로 : 세로)
-//                it.putExtra("aspectX", 1);
-//                it.putExtra("aspectY", 1);
-
-                it.putExtra("scale", true);
-                it.putExtra("return-data", true);
-                startActivityForResult(it, CROP_FROM_IMAGE);
+//                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
+                absoultePath = getPath(mImageCpatureUri);
+                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
+                Log.e("absolutePath",absoultePath);
+//                Intent it = new Intent("com.android.camera.action.CROP");
+//                it.setDataAndType(mImageCpatureUri, "image/*");
+//
+//                // 외부에 보여줄 크기를 200으로 설정
+//                it.putExtra("outputX", 340);
+//                it.putExtra("outputY", 164);
+//
+////                // 크랍할 비율을 1 : 1로 설정 (가로 : 세로)
+////                it.putExtra("aspectX", 1);
+////                it.putExtra("aspectY", 1);
+//
+//                it.putExtra("scale", true);
+//                it.putExtra("return-data", true);
+//                startActivityForResult(it, CROP_FROM_IMAGE);
                 break;
             }
             case CROP_FROM_IMAGE: {
@@ -199,6 +207,15 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(columnIndex);
     }
 
     // 크랍한 이미지 저장

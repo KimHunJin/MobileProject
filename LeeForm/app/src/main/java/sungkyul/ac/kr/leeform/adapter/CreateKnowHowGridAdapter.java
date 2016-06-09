@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
@@ -64,10 +66,13 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         Log.e("test", gridItem.getmImg() + "");
         Log.e("test", gridItem.getImgUrl() + "");
         if (gridItem.getmImg() != 0) {
-            gridViewHolder.imgGridCreate.setImageResource(gridItem.getmImg());
+            Log.e("what","what");
+            Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(160,160).centerCrop().into(gridViewHolder.imgGridCreate);
         }
         if (gridItem.getImgUrl() != null) {
-            gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
+            Log.e("omg","omg");
+            Picasso.with(inflater.getContext()).load(gridItem.getImgUrl()).resize(160,160).centerCrop().into(gridViewHolder.imgGridCreate);
+//            gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
         }
         return convertView;
     }

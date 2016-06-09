@@ -7,11 +7,13 @@
     android:orientation="horizontal">
 
     <sungkyul.ac.kr.leeform.utils.RoundImageView
+        android:id="@+id/imgKnowHowDetailUserInfo"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/kakao_default_profile_image" />
 
     <TextView
+        android:id="@+id/txtKnowHowDetailUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
