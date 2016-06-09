@@ -86,7 +86,7 @@ public class MainListAdapter extends BaseAdapter {
         }
         listItem = item.get(position);
 
-        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).into(viewHolder.imgMainList);
+        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).resize(340,164).centerCrop().into(viewHolder.imgMainList);
 
         checkLike(listItem.getmNumber()+"",viewHolder.imgMainLike);
         Log.e("real number", listItem.getmNumber()+"");
