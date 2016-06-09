@@ -16,7 +16,8 @@ public class MypageAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[]{"내가 쓴 노하우", "스크랩한 노하우"};
 
-    private Fragment[] fragments = new Fragment[]{new HomeFragment(),new MaterialFragment()};
+    //스크랩한 노하우, 내가 작성한 노하우 프레그먼트 만들어야해
+    private Fragment[] fragments = new Fragment[]{new HomeFragment(),new HomeFragment()};
     private Context context;
 
     public MypageAdapter(FragmentManager fm, Context context) {

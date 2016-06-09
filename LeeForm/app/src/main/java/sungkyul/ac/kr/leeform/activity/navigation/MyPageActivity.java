@@ -29,11 +29,11 @@ public class MyPageActivity extends AppCompatActivity {
         toolbar.setContentInsetsAbsolute(0, 0);
 
 
-        tabInitialization();
+       tabInitialization();
 
 
     }
-    private void tabInitialization() {
+   private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MypageAdapter mainFragmentAdapter = new MypageAdapter(getSupportFragmentManager(), MyPageActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
