@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,10 +18,12 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imgKnowHowDetailMain"
                 android:layout_width="match_parent"
                 android:layout_height="240dp" />
 
             <TextView
+                android:id="@+id/txtKnowHowDetailName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -29,6 +32,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/txtKnowHowDetailShortExplain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -38,6 +42,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/txtKnowHowDetailTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -102,19 +107,22 @@
                 android:layout_marginTop="15dp" />
 
             <ImageView
+                android:id="@+id/imgKnowHowDetailBuying"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/buying_btn_knowhow" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/colorUpdateToolbar">
-
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorUpdateToolbar">
+
+        <!--좋아요, 댓글 추가-->
+
+    </LinearLayout>
 </LinearLayout>

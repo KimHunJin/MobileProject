@@ -11,9 +11,10 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id="@+id/imgKnowHowDetailContentsPicture"
         android:layout_marginTop="4dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/testBlue"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 </LinearLayout>

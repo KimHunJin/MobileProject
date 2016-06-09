@@ -9,6 +9,7 @@ import retrofit2.http.QueryMap;
 import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
+import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
@@ -75,5 +76,10 @@ public interface ConnectService {
     @GET("cancel_scrap.php")
     Call<OnlyErrBean> unScrap(
             @QueryMap Map<String, String> options
+    );
+
+    @GET("writing_detail.php")
+    Call<KnowHowDetailBean> getKnowHowDetail(
+            @Query("writing_unique_key") String writing_unique_key
     );
 }
