@@ -51,4 +51,10 @@ dependencies {
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    //gcm
+    compile 'com.google.android.gms:play-services-gcm:9.0.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
