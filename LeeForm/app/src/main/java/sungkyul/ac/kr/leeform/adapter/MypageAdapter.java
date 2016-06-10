@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import sungkyul.ac.kr.leeform.fragment.CommunityFragment;
-import sungkyul.ac.kr.leeform.fragment.HomeFragment;
-import sungkyul.ac.kr.leeform.fragment.MaterialFragment;
+import sungkyul.ac.kr.leeform.fragment.MypageScrapFragment;
+import sungkyul.ac.kr.leeform.fragment.MypageWriteFragment;
 
 /**
  * Created by user on 2016-06-09.
@@ -17,7 +16,7 @@ public class MypageAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[]{"내가 쓴 노하우", "스크랩한 노하우"};
 
     //스크랩한 노하우, 내가 작성한 노하우 프레그먼트 만들어야해
-    private Fragment[] fragments = new Fragment[]{new HomeFragment(),new HomeFragment()};
+    private Fragment[] fragments = new Fragment[]{new MypageWriteFragment(),new MypageScrapFragment()};
     private Context context;
 
     public MypageAdapter(FragmentManager fm, Context context) {

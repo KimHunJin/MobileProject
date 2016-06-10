@@ -6,6 +6,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import sungkyul.ac.kr.leeform.R;
@@ -28,8 +30,19 @@ public class MyPageActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarBack);
         toolbar.setContentInsetsAbsolute(0, 0);
 
+        //뒤로가기 버튼
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-       tabInitialization();
+        ImageView imgOk=(ImageView)findViewById(R.id.imgOk);
+        imgOk.setVisibility(View.INVISIBLE);
+
+        tabInitialization();
 
 
     }

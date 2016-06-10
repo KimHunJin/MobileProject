@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.dao;
+﻿package sungkyul.ac.kr.leeform.dao;
 
 import java.util.Map;
 
@@ -88,5 +88,13 @@ public interface ConnectService {
     @GET("writing_list_latest.php")
     Call<KnowHowBean> getWritingListLatest(
             @Query("offset") int offset
+
+    @GET("written_by_user_list.php")
+    Call<KnowHowBean> getMyWriteKnowHow(
+            @Query("user_unique_key") String user_unique_key
+    );
+    @GET("scrap_list.php")
+    Call<KnowHowBean> getScrapKnowHow(
+            @Query("user_unique_key") String user_unique_key
     );
 }
