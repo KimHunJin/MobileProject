@@ -348,6 +348,8 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 //URL과 노하우 설명 가져오기
+                Log.e("resultCode",resultCode+"");
+                Log.e("requestCode",requestCode+"");
                 strUrl = data.getStringArrayListExtra("image");
                 strExplain = data.getStringArrayListExtra("explain");
                 init();
