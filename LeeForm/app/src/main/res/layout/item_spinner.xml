@@ -3,6 +3,6 @@
     android:id="@+id/tv_spitem"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:textSize="18dp"
+    android:textSize="13sp"
     android:textColor="@color/colorBlack"
-    android:gravity="center"/>
+    android:gravity="center" />
