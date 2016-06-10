@@ -49,6 +49,8 @@ public class CommunityFragment extends Fragment {
     boolean is_scroll = true;
     boolean is_refresh = true;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isScrollingUp =false;
+    private int mLastFirstVisibleItem = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,13 +83,21 @@ public class CommunityFragment extends Fragment {
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    fab1.setVisibility(View.VISIBLE);
-                } else {
-                    fab1.setVisibility(View.INVISIBLE);
+                final ListView lw = (ListView)view;
+                if (view.getId() == lw.getId()) {
+                    final int currentFirstVisibleItem = lw.getFirstVisiblePosition();
+                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                        isScrollingUp = false;
+                        fab1.hide();
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                        isScrollingUp = true;
+                        fab1.show();
+                    }
+
+                    mLastFirstVisibleItem = currentFirstVisibleItem;
+
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {

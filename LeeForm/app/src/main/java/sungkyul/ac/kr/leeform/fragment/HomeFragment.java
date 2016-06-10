@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
     private FloatingActionButton fab;
+    private boolean isScrollingUp =false;
+    private int mLastFirstVisibleItem = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private static String URL = StaticURL.BASE_URL;
@@ -145,13 +147,20 @@ public class HomeFragment extends Fragment {
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    fab.setVisibility(View.VISIBLE);
-                } else {
-                    fab.setVisibility(View.INVISIBLE);
+                final ListView lw = (ListView)view;
+                if (view.getId() == lw.getId()) {
+                    final int currentFirstVisibleItem = lw.getFirstVisiblePosition();
+                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                        isScrollingUp = false;
+                        fab.hide();
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                        isScrollingUp = true;
+                        fab.show();
+                    }
+
+                    mLastFirstVisibleItem = currentFirstVisibleItem;
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {
