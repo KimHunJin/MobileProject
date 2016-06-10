@@ -82,4 +82,13 @@ public interface ConnectService {
     Call<KnowHowDetailBean> getKnowHowDetail(
             @Query("writing_unique_key") String writing_unique_key
     );
+
+    @GET("written_by_user_list.php")
+    Call<KnowHowBean> getMyWriteKnowHow(
+            @Query("user_unique_key") String user_unique_key
+    );
+    @GET("scrap_list.php")
+    Call<KnowHowBean> getScrapKnowHow(
+            @Query("user_unique_key") String user_unique_key
+    );
 }
