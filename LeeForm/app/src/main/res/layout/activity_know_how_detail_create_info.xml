@@ -20,6 +20,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtKnowHowDetailLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -53,6 +54,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtKnowHowDetailMakeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -94,6 +96,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtKnowHowDetailMakingPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

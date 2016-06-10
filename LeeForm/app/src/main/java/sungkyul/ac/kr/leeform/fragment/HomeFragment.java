@@ -111,7 +111,10 @@ public class HomeFragment extends Fragment {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent itKnowhowDetail = new Intent(getActivity().getApplicationContext(), KnowHowDetailActivity.class);
+                Intent itKnowhowDetail = new Intent(getActivity(), KnowHowDetailActivity.class);
+                Log.e("img",listItem.get(position).getmUrl());
+                itKnowhowDetail.putExtra("image",listItem.get(position).getmUrl()+"");
+                itKnowhowDetail.putExtra("knowhowkey",listItem.get(position).getmNumber()+"");
                 startActivity(itKnowhowDetail);
 //                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }

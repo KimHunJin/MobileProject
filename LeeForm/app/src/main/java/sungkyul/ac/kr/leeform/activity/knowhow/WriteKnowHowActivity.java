@@ -49,7 +49,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String URL = StaticURL.BASE_URL; // api 기본 베이스 주소
     String imageStorageUrl = StaticURL.IMAGE_URL; // 이미지 저장 위치
     int serverResponseCode = 0;
-    int categoryposition;
+    String  categoryposition;
     String uploadFilePath; // 파일 경로
     String uploadFileName; // 파일 이름
     String writingUniqueKey;
@@ -103,7 +103,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) spnCategory.getSelectedItem().toString();
                 //categoryposition = (int) spnCategory.getSelectedItemPosition();
-                categoryposition=1;
+                categoryposition="거울";
                 selectedCategory = str;
             }
 
@@ -258,6 +258,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         gridItems.clear();
         for (int i = 0; i < strUrl.size(); i++) {
             gridItems.add(new CreateKnowHowItem(i, strUrl.get(i), strExplain.get(i)));
+            Log.e("strUrl",strUrl.get(i));
         }
         //사진 추가한 후 +이미지가 뜨도록 +이미지를 GridView에 추가
         gridItems.add(new CreateKnowHowItem(gridItems.size(), R.drawable.plus, "클릭"));
@@ -277,7 +278,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("user_unique_key", userUniqueKey);
 
         // data.put("writing_category_key", "1"); // 변경 필요
-        data.put("writing_category_key", Integer.toString(categoryposition));
+        data.put("category_name",categoryposition);
         data.put("writing_name", edtName.getText().toString());
         data.put("check_video", "1"); // 변경 필요
         // 지워 data.put("video_url", edtVideoUrl.getText().toString());
@@ -288,9 +289,10 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("level", level); // 변경 필요
         data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
         data.put("amount", edtSellAmount.getText().toString());
+        data.put("cost",edtSellPrice.getText().toString());
         //   data.put("sellprice",edtSellPrice.getText().toString());// 변경 필요
         Log.e("log",userUniqueKey+"");
-        Log.e("log",Integer.toString(categoryposition)+"");
+        Log.e("log",categoryposition);
         Log.e("log",edtName.getText().toString()+"");
         Log.e("log",check_sale+"");
         Log.e("log",edtYoutubuCode.getText().toString()+"");
@@ -298,9 +300,6 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         Log.e("log",selectedMakingTime+"");
         Log.e("log",level+"");
         Log.e("log",edtSellAmount.getText().toString()+"");
-
-
-
 
         Call<KnowHowWritingBean> call = connectService.setKnowGetKey(data);
         call.enqueue(new Callback<KnowHowWritingBean>() {
@@ -342,7 +341,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 //URL과 노하우 설명 가져오기
                 strUrl = data.getStringArrayListExtra("image");
@@ -362,7 +361,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         String boundary = "*****";
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
-        int maxBufferSize = 1 * 1024 * 1024;
+        int maxBufferSize = 10 * 1024 * 1024;
         File sourceFile = new File(sourceFileUri);
 
         if (!sourceFile.isFile()) {

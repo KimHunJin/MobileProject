@@ -5,8 +5,11 @@
 
             <!-- 회살표를 넣기위해-->
             <item>
-                <bitmap android:src="@drawable/ic_arrow_drop_down_2x"  android:gravity="right" />
+                <bitmap android:src="@drawable/ic_arrow_drop_down"  android:gravity="right"  android:layout_gravity="center_vertical"
+                    />
             </item>
+
         </layer-list>
     </item>
+
 </selector>
