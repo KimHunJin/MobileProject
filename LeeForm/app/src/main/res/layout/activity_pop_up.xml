@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="8dp"
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#111111"
-        android:orientation="vertical" >
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:gravity="center"
-            android:text="내용" />
+            android:gravity="left|center_vertical"
+            android:padding="8dp"
+            android:text="내용"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_ok"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
+                android:background="@color/colorAccentBasic"
                 android:gravity="center"
                 android:text="ok" />
 
@@ -36,11 +43,13 @@
                 android:id="@+id/btn_cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
+                android:background="@color/colorAccentBasic"
                 android:gravity="center"
                 android:text="cancel" />
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>
