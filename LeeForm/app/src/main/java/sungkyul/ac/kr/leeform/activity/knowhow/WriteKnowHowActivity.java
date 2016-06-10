@@ -87,7 +87,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         tvTitle.setText("노하우 작성");
         btnSellNo.setSelected(true);
         btnLevelHigh.setSelected(true);
-
+        check_sale = "0";
 
         ArrayAdapter<String> spinnerCategoryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, category);
         ArrayAdapter<String> spinnerMakingTimeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, makingTime);
@@ -176,6 +176,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 btnSellNo.setSelected(true);
                 linearSell.setVisibility(View.INVISIBLE);
                 check_sale = "0";
+                edtSellAmount.setText("0");
+                edtSellPrice.setText("0");
+
 
             }
         });
@@ -266,6 +269,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     }
 
     private void saveKnowGetKey() {
+        if(edtYoutubuCode.getText().toString().equals("")){
+            edtYoutubuCode.setText("0");
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())

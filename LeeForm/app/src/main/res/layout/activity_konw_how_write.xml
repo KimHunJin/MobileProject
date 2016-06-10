@@ -24,7 +24,8 @@
             android:paddingTop="13dp"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorGray"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
     <View
@@ -181,10 +182,11 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:gravity="right"
-                    android:hint="1000"
+                    android:hint="소모비용"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGray"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:background="@android:color/transparent"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -228,7 +230,8 @@
             android:hint="유튜브 영상이 있다면 코드를 입력해주세요."
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorGray"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
     <View
@@ -360,7 +363,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="0.5"
             android:gravity="center">
 
