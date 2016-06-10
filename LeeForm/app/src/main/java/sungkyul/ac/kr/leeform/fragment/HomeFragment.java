@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
     private boolean isScrollingUp =false;
     private int mLastFirstVisibleItem = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
+    ListView lst;
 
     private static String URL = StaticURL.BASE_URL;
 
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment {
         init();
     }
 
+    /*
     @Override
     public void onResume() {
         super.onResume();
@@ -80,14 +82,9 @@ public class HomeFragment extends Fragment {
             leeformParsing();
         }
     }
+    */
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        mView = inflater.inflate(R.layout.fragment_home, container, false);
-
+    private void initializeLayout(){
         adapter = new MainListAdapter(getContext(), R.layout.item_list_main, listItem);
 
         mSpinnerCategory = (Spinner) mView.findViewById(R.id.spnKnowCategory);
@@ -108,10 +105,22 @@ public class HomeFragment extends Fragment {
         mSpinnerCategory.setAdapter(mSpinnerCategoryAdapter); //스피너에 adapter 설정
         mSpinnerSort.setAdapter(mSpinnerSortAdapter);
 
-        ListView lst = (ListView) mView.findViewById(R.id.listMain);
+        lst = (ListView) mView.findViewById(R.id.listMain);
         lst.setAdapter(adapter);
 
         fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
+    }
+
+    private void initializeList(){
+        // 초기화하고 아이템가져오기
+        if(sort == true) {
+            latestParsing();
+        } else {
+            leeformParsing();
+        }
+    }
+
+    private void setListener(){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +191,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
+        mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 check++;
@@ -220,8 +229,23 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        initializeLayout();
+        init();
+        initializeList();
+        setListener();
+
         return mView;
     }
+
 
     void init() {
         offset = 0;
