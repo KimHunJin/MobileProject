@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="0.499"
-            android:dropDownSelector="@color/colorBlack"
             android:drawSelectorOnTop="true"
+            android:dropDownSelector="@color/colorBlack"
             android:textAlignment="center" />
 
         <View
@@ -33,12 +33,12 @@
 
         <Spinner
             android:id="@+id/spnKnowSort"
+            style="@style/spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_weight="0.499"
-            android:textAlignment="center"
-            style="@style/spinner"/>
+            android:textAlignment="center" />
 
     </LinearLayout>
 
@@ -53,14 +53,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ListView
-                android:id="@+id/listMain"
+            <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/swipe_refresh_widget"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorLittleDarkWhite"
-                android:dividerHeight="-10dp"
-                android:listSelector="@android:color/transparent"
-                android:scrollbars="none"></ListView>
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/listMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLittleDarkWhite"
+                    android:dividerHeight="-10dp"
+                    android:listSelector="@android:color/transparent"
+                    android:scrollbars="none"></ListView>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </RelativeLayout>
 

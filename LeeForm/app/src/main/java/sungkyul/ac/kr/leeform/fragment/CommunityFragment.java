@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,11 @@ public class CommunityFragment extends Fragment {
     ArrayList<CommunityItem> listItem;
     FloatingActionButton fab1;
     Intent intent;
+    int offset = 0;
+    int count = 0;
+    boolean is_scroll = true;
+    boolean is_refresh = true;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isScrollingUp =false;
     private int mLastFirstVisibleItem = 0;
 
@@ -62,13 +68,13 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(getContext(), CommunityDetailActivity.class);
-                Log.e("Number",listItem.get(position).getcNumber()+"");
+                Log.e("Number", listItem.get(position).getcNumber() + "");
                 /*intent.putExtra("Number",listItem.get(position).getcNumber());*/
                 intent.putExtra("Number", listItem.get(position).getcNumber());
-                intent.putExtra("image",listItem.get(position).getcImageURL());
-                intent.putExtra("name",listItem.get(position).getcName());
-                intent.putExtra("time",listItem.get(position).getcTime());
-                intent.putExtra("contents",listItem.get(position).getcContent());
+                intent.putExtra("image", listItem.get(position).getcImageURL());
+                intent.putExtra("name", listItem.get(position).getcName());
+                intent.putExtra("time", listItem.get(position).getcTime());
+                intent.putExtra("contents", listItem.get(position).getcContent());
 
                 startActivity(intent);
             }
@@ -89,11 +95,21 @@ public class CommunityFragment extends Fragment {
                     }
 
                     mLastFirstVisibleItem = currentFirstVisibleItem;
+
                 }
             }
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                    if (count != 0 && offset % 6 == 0) {
+                        if (is_scroll) {
+                            is_scroll = false;
+                            is_refresh = false;
+                            communityDetailList();
+                        }
 
+                    }
+                }
             }
         });
 
@@ -102,6 +118,14 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), CommunityCreateActivity.class));
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                init();
+                communityDetailList();
             }
         });
 
@@ -120,6 +144,7 @@ public class CommunityFragment extends Fragment {
         adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
         lst = (ListView) cView.findViewById(R.id.listCommunity);
         fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
+        swipeRefreshLayout = (SwipeRefreshLayout) cView.findViewById(R.id.communitySwipeRefresh);
     }
 
     @Override
@@ -132,6 +157,7 @@ public class CommunityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        init();
         communityDetailList();
 
     }
@@ -144,7 +170,7 @@ public class CommunityFragment extends Fragment {
 
         ConnectService connectService = retrofit.create(ConnectService.class);
         // http://14.63.196.255/api/community_list.php
-        Call<CommunityListBean> call = connectService.getCommunityList();
+        Call<CommunityListBean> call = connectService.getCommunityList(offset);
         call.enqueue(new Callback<CommunityListBean>() {
             @Override
             public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
@@ -153,7 +179,6 @@ public class CommunityFragment extends Fragment {
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getCommunity_list().size() + "");
-                listItem.clear();
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
 
@@ -163,9 +188,13 @@ public class CommunityFragment extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(),decode.getCommunity_list().get(i).getName(), decode.getCommunity_list().get(i).getReply_community_amount(), decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(),date));
+                    listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(), decode.getCommunity_list().get(i).getName(), decode.getCommunity_list().get(i).getReply_community_amount(), decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(), date));
                     //   decode.getCommunity_list().get(i).get
                 }
+                offset += Integer.parseInt(decode.getCount());
+                count += Integer.parseInt(decode.getCount());
+                swipeRefreshLayout.setRefreshing(false);
+                is_scroll=true;
                 adapter.notifyDataSetChanged();
             }
 
@@ -176,5 +205,11 @@ public class CommunityFragment extends Fragment {
         });
     }
 
-
+    void init() {
+        offset = 0;
+        count = 0;
+        is_scroll = true;
+        is_refresh = true;
+        listItem.clear();
+    }
 }

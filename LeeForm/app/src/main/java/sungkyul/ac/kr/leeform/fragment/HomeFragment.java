@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +40,17 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
 public class HomeFragment extends Fragment {
     private int check = 0;
     private View mView;
+    int offset = 0;
+    int count = 0;
+    boolean is_scroll = true;
+    boolean is_refresh = true;
+    boolean sort = true; // sort = true : 최신순, sort = false : 인기순
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
     private FloatingActionButton fab;
     private boolean isScrollingUp =false;
     private int mLastFirstVisibleItem = 0;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static String URL = StaticURL.BASE_URL;
 
@@ -65,7 +72,12 @@ public class HomeFragment extends Fragment {
         } else {
             check = 1;
         }
-        leeformParsing();
+        init();
+        if(sort == true) {
+            latestParsing();
+        } else {
+            leeformParsing();
+        }
     }
 
     @Nullable
@@ -106,6 +118,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout)mView.findViewById(R.id.swipe_refresh_widget);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                init();
+                if(sort == true) {
+                    latestParsing();
+                } else {
+                    leeformParsing();
+                }
+            }
+        });
+
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //리스트의 아이템 선택했을 때
             @Override
@@ -138,14 +163,32 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                    if (count != 0 && offset % 6 == 0) {
+                        if (is_scroll) {
+                            is_scroll = false;
+                            is_refresh = false;
+                            if(sort==true) {
+                                latestParsing();
+                            } else {
+                                leeformParsing();
+                            }
+                        }
 
+                    }
+                }
             }
         });
+        listItem.clear();
 //        init(); //메소드호출
-        leeformParsing();
+        if(sort == true) {
+            latestParsing();
+        } else {
+            leeformParsing();
+        }
 
 
-        mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
+         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 check++;
@@ -165,8 +208,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행 안되게
+                check++;
                 if (check > 2) {
-                    Toast.makeText(getActivity(), parent.getItemAtPosition(position) + "", Toast.LENGTH_SHORT).show();
+                    if(parent.getItemAtPosition(position).equals("인기순")) {
+                        sort = false;
+                        init();
+                        leeformParsing();
+                    } else {
+                        sort = true;
+                        init();
+                        latestParsing();
+                    }
+                    Log.e("sort",sort+"");
                 }
             }
 
@@ -179,9 +232,11 @@ public class HomeFragment extends Fragment {
     }
 
     void init() {
-        for (int i = 0; i < 10; i++) {
-//            listItem.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
-        }
+        offset = 0;
+        count = 0;
+        is_scroll = true;
+        is_refresh = true;
+        listItem.clear();
     }
 
     private void leeformParsing() {
@@ -191,7 +246,8 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Call<KnowHowBean> call = connectService.getWritingList();
+        Log.e("offset",offset+"");
+        Call<KnowHowBean> call = connectService.getWritingList(offset);
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
             public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
@@ -200,7 +256,7 @@ public class HomeFragment extends Fragment {
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getWriting_list().size() + "");
-                listItem.clear();
+
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
                     listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getPrice(),
@@ -211,6 +267,52 @@ public class HomeFragment extends Fragment {
                             decode.getWriting_list().get(i).getExplanation()
                     ));
                 }
+                offset += Integer.parseInt(decode.getCount());
+                count += Integer.parseInt(decode.getCount());
+                swipeRefreshLayout.setRefreshing(false);
+                is_scroll=true;
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<KnowHowBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
+    }
+
+    private void latestParsing() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Log.e("offset",offset+"");
+        Call<KnowHowBean> call = connectService.getWritingListLatest(offset);
+        call.enqueue(new Callback<KnowHowBean>() {
+            @Override
+            public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
+                Log.e("resonpse", response.code() + "");
+                KnowHowBean decode = response.body();
+                Log.e("err", decode.getErr());
+                Log.e("count", decode.getCount());
+                Log.e("list size", decode.getWriting_list().size() + "");
+
+                for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
+                    Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
+                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getPrice(),
+                            decode.getWriting_list().get(i).getMaking_time(),
+                            decode.getWriting_list().get(i).getScrap_amount(),
+                            decode.getWriting_list().get(i).getPicture_url(),
+                            decode.getWriting_list().get(i).getWriting_name(),
+                            decode.getWriting_list().get(i).getExplanation()
+                    ));
+                }
+                offset += Integer.parseInt(decode.getCount());
+                count += Integer.parseInt(decode.getCount());
+                swipeRefreshLayout.setRefreshing(false);
+                is_scroll=true;
                 adapter.notifyDataSetChanged();
             }
 
