@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         // 다른 프래그먼트 가면 초기화
         check = 1;
+        init();
     }
 
     @Override
@@ -179,13 +180,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        listItem.clear();
-//        init(); //메소드호출
-        if(sort == true) {
-            latestParsing();
-        } else {
-            leeformParsing();
-        }
 
 
          mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
@@ -212,12 +206,10 @@ public class HomeFragment extends Fragment {
                 if (check > 2) {
                     if(parent.getItemAtPosition(position).equals("인기순")) {
                         sort = false;
-                        init();
-                        leeformParsing();
+
                     } else {
                         sort = true;
-                        init();
-                        latestParsing();
+
                     }
                     Log.e("sort",sort+"");
                 }
