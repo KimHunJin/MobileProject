@@ -129,7 +129,6 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        communityDetailList();
 
         return cView;
 
@@ -152,6 +151,7 @@ public class CommunityFragment extends Fragment {
         super.onDestroyView();
         // 다른 프래그먼트 가면 초기화
         check = 1;
+        init();
     }
 
     @Override
