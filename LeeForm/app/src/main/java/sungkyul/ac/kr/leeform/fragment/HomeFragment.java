@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
     private FloatingActionButton fab;
+    private boolean isScrollingUp =false;
+    private int mLastFirstVisibleItem = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private static String URL = StaticURL.BASE_URL;
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         // 다른 프래그먼트 가면 초기화
         check = 1;
+        init();
     }
 
     @Override
@@ -145,13 +148,20 @@ public class HomeFragment extends Fragment {
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                    fab.setVisibility(View.VISIBLE);
-                } else {
-                    fab.setVisibility(View.INVISIBLE);
+                final ListView lw = (ListView)view;
+                if (view.getId() == lw.getId()) {
+                    final int currentFirstVisibleItem = lw.getFirstVisiblePosition();
+                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                        isScrollingUp = false;
+                        fab.hide();
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                        isScrollingUp = true;
+                        fab.show();
+                    }
+
+                    mLastFirstVisibleItem = currentFirstVisibleItem;
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {
@@ -170,13 +180,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        listItem.clear();
-//        init(); //메소드호출
-        if(sort == true) {
-            latestParsing();
-        } else {
-            leeformParsing();
-        }
 
 
          mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
@@ -203,12 +206,10 @@ public class HomeFragment extends Fragment {
                 if (check > 2) {
                     if(parent.getItemAtPosition(position).equals("인기순")) {
                         sort = false;
-                        init();
-                        leeformParsing();
+
                     } else {
                         sort = true;
-                        init();
-                        latestParsing();
+
                     }
                     Log.e("sort",sort+"");
                 }

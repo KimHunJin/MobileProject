@@ -94,6 +94,7 @@ public interface ConnectService {
     Call<KnowHowBean> getMyWriteKnowHow(
             @Query("user_unique_key") String user_unique_key
     );
+
     @GET("scrap_list.php")
     Call<KnowHowBean> getScrapKnowHow(
             @Query("user_unique_key") String user_unique_key
@@ -104,3 +105,4 @@ public interface ConnectService {
             @QueryMap Map<String, String> options
     );
 }
+

@@ -42,7 +42,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
     private String strContents;
     private Button btnOk, btnCancel;
     private EditText edtContents;
-    ImageView img;
+    ImageView img,imgOk,imgCancel;
 
     ArrayList<String> strUrl;
     ArrayList<String> strExplain;
@@ -56,16 +56,16 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         strUrl = it.getStringArrayListExtra("image"); // 이미지 배열 저장을 위한 리스트
         strExplain = it.getStringArrayListExtra("explain"); // 설명 저장을 위한 리스트
 
-        btnOk = (Button) findViewById(R.id.btnExplainOk);
-        btnCancel = (Button) findViewById(R.id.btnExplainCancel);
+       imgOk = (ImageView) findViewById(R.id.imgOk);
+       imgCancel = (ImageView) findViewById(R.id.imgBackOk);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
+               /* /*//*
                     추가작업
                     취소 했을 시 저장이 된 파일이 있다면 삭제
-                 */
+                /*//**/
                 finish();
             }
         });
@@ -105,7 +105,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         });
 
         // 버튼 클릭 했을 떄
-        btnOk.setOnClickListener(new View.OnClickListener() {
+        imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 strContents = edtContents.getText().toString();
@@ -117,7 +117,9 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
                     Intent i = new Intent();
                     i.putExtra("image", strUrl);
                     i.putExtra("explain", strExplain);
+
                     setResult(RESULT_OK, i);
+                    Log.e("result",RESULT_OK+"");
                     finish();
                 }
             }

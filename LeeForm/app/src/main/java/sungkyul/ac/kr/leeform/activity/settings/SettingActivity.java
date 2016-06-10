@@ -7,6 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,11 +27,19 @@ import sungkyul.ac.kr.leeform.utils.LoadActivityList;
  * Created by MiSeon on 2016-06-02.
  */
 public class SettingActivity extends PreferenceActivity {
+    private Toolbar toolbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_preference_screen_layout);
         addPreferencesFromResource(R.xml.pref_settings);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
+        //툴바 완료버튼 보이지 않게 하기
+        ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
+        imgOk.setVisibility(View.INVISIBLE);
+
 
         LoadActivityList.actList.add(SettingActivity.this);
 
