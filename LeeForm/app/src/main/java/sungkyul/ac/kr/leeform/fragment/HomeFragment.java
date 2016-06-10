@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -190,13 +191,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        mSpinnerCategory.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                check++;
+                return false;
+            }
+        });
+        mSpinnerSort.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                check++;
+                return false;
+            }
+        });
         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                check++;
                 // 처음에는 실행 안되게
-                if (check > 2) {
+                if (check > 0) {
                     Toast.makeText(getActivity(), parent.getItemAtPosition(position) + "", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -211,13 +224,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행 안되게
-                check++;
-                if (check > 2) {
+                if (check > 0) {
                     if(parent.getItemAtPosition(position).equals("인기순")) {
                         sort = false;
+                        init();
+                        initializeList();
 
                     } else {
                         sort = true;
+                        init();
+                        initializeList();
 
                     }
                     Log.e("sort",sort+"");
@@ -250,6 +266,7 @@ public class HomeFragment extends Fragment {
     void init() {
         offset = 0;
         count = 0;
+        check = 0;
         is_scroll = true;
         is_refresh = true;
         listItem.clear();
