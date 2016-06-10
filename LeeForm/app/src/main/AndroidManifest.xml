@@ -52,7 +52,9 @@
         <activity android:name=".activity.material.MaterialDetailActivity" />
         <activity android:name=".activity.search.MaterialSearchActivity" />
         <activity android:name=".activity.member.PurchaseListActivity" />
-        <activity android:name=".activity.gcm.PopUpActivity"/>
+        <activity android:name=".activity.gcm.PopUpActivity"
+            android:theme="@android:style/Theme.Translucent"
+            />
         <activity
             android:name=".activity.settings.SettingActivity"
             android:theme="@style/PreferencesTheme" />

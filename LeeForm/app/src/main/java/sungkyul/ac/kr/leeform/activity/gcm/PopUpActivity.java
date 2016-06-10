@@ -1,20 +1,17 @@
 package sungkyul.ac.kr.leeform.activity.gcm;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.intro.SplashActivity;
 
-public class PopUpActivity extends AppCompatActivity {
+public class PopUpActivity extends Activity {
 
 
     @Override
