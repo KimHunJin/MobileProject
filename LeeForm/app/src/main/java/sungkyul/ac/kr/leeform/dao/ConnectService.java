@@ -22,6 +22,7 @@ public interface ConnectService {
     //쿼리가 하나인 경우
     @GET("community_list.php")
     Call<CommunityListBean> getCommunityList(
+            @Query("offset") int offset
     );
 
     @GET("know_how_writing.php")
@@ -31,6 +32,7 @@ public interface ConnectService {
 
     @GET("writing_list.php")
     Call<KnowHowBean> getWritingList(
+            @Query("offset") int offset
     );
 
     @GET("community_writing.php")
@@ -81,5 +83,10 @@ public interface ConnectService {
     @GET("writing_detail.php")
     Call<KnowHowDetailBean> getKnowHowDetail(
             @Query("writing_unique_key") String writing_unique_key
+    );
+
+    @GET("writing_list_latest.php")
+    Call<KnowHowBean> getWritingListLatest(
+            @Query("offset") int offset
     );
 }
