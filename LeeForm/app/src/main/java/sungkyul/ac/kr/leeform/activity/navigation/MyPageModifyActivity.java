@@ -80,15 +80,7 @@ public class MyPageModifyActivity extends AppCompatActivity {
         layoutSetting();
         getUserDetails(); //값가져오기
 
-        Intent intent=getIntent();
-        intent.putExtra("BankName",edtBankName.getText().toString());
-        intent.putExtra("BankNumber",edtBankNumber.getText().toString());
-        intent.putExtra("AccountName",edtAccountName.getText().toString());
-        setResult(RESULT_OK,intent);
 
-        if(edtBankName.getText().toString().equals("")|edtBankNumber.getText().toString().equals("")|edtAccountName.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"은행명,계좌번호,계좌명의를 적어주세요",Toast.LENGTH_SHORT).show();
-        }
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +154,9 @@ public class MyPageModifyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 레이아웃 셋팅
+     */
     private void layoutSetting() {
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtAddress = (EditText) findViewById(R.id.edtAddress);
@@ -282,6 +277,10 @@ public class MyPageModifyActivity extends AppCompatActivity {
         return cursor.getString(columnIndex);
     }
 
+    /**
+     * 사용자의 정보를 가져와서
+     * ImageView, EditText에 뿌려주기
+     */
     private void getUserDetails() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -433,6 +432,10 @@ public class MyPageModifyActivity extends AppCompatActivity {
         } // End else block
     }
 
+    /**
+     * 사용자가 입력한 값으로 수정하기
+     * @param fileName
+     */
     private void setUserDetails(String fileName) {
 
 
@@ -444,6 +447,7 @@ public class MyPageModifyActivity extends AppCompatActivity {
         ConnectService connectService = retrofit.create(ConnectService.class);
         String userUniqueKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
         Map<String, String> data = new HashMap<>();
+        //이미지변경을 안했을 때
         if (fileName == null) {
 
             Toast.makeText(getApplicationContext(), fileName, Toast.LENGTH_SHORT).show();
@@ -456,7 +460,14 @@ public class MyPageModifyActivity extends AppCompatActivity {
             data.put("phone_number", edtPhoneNumber.getText().toString());
 
 
+            Intent intent=getIntent();
+            //판매자 등록할 때 은행명, 계좌번호, 계좌명 RegistSellerActivity로 보내기
+            intent.putExtra("bank_name", edtBankName.getText().toString());
+            intent.putExtra("account_number", edtBankNumber.getText().toString());
+            intent.putExtra("account_name", edtAccountName.getText().toString());
+            setResult(RESULT_OK,intent);
 
+        //이미지 변경을 했을 때
         } else {
             data.put("user_unique_key", userUniqueKey);
             data.put("name", edtUserName.getText().toString());

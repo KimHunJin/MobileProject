@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.activity.member;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,9 +38,9 @@ public class RegistSellerActivity extends AppCompatActivity {
     ImageView imgOk,imgBack;
     String URL = StaticURL.BASE_URL;
     String accountNumber;
-    String address;
+    String accountName;
     String bankName;
-    String accountName,a;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +55,8 @@ public class RegistSellerActivity extends AppCompatActivity {
                 finish();
             }
         });
-        imgOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        imgOk.setVisibility(View.INVISIBLE);
 
-            }
-        });
         btnRegistSeller = (Button) findViewById(R.id.btnRegistSeller);
 
         btnRegistSeller.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +68,19 @@ public class RegistSellerActivity extends AppCompatActivity {
                 startActivity(itMain);
                 finish();*/
                 getUserDetails();
+               // setUserDetails();
             }
         });
     }
-    private void getUserDetails(){
+
+    /**
+     * 사용자가 은행명,계좌번호,계좌명을 적지 않았을 경우
+     * MyPageModifyActivity.class 로 가서 작성하게 함
+     *
+     * parameter
+     * user_key
+     */
+    private void getUserDetails() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -83,47 +89,20 @@ public class RegistSellerActivity extends AppCompatActivity {
 
         ConnectService connectService = retrofit.create(ConnectService.class);
         String key = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
-
-        Map<String,String> data=new HashMap<>();
-        data.put("user_unique_key",key);
-        data.put("account_name",accountName);
-        data.put("account_number",accountNumber);
-        data.put("bank_name",bankName);
-
-
         final Call<UserBean> call = connectService.getUserDetail(key);
-        final Call<RegistBean> call2 = connectService.setResigster(data);
 
         call.enqueue(new Callback<UserBean>() {
             @Override
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
                 UserBean decodedResponse = response.body();
+                String accountNumber = decodedResponse.getMyinfo_detail().get(0).getAccount_number();
+                String bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
+                String accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
 
-
-                 accountNumber= decodedResponse.getMyinfo_detail().get(0).getAccount_number();
-                 address=decodedResponse.getMyinfo_detail().get(0).getAddress();
-                 bankName=decodedResponse.getMyinfo_detail().get(0).getBank_name();
-                 accountName=decodedResponse.getMyinfo_detail().get(0).getAccount_name();
-
-                if(accountNumber.equals("")|address.equals("")|bankName.equals("")|accountName.equals("")){
-                  Intent intent=new Intent(getApplicationContext(), MyPageModifyActivity.class);
-                   startActivityForResult(intent,2000);
-
-                }else {
-                    call2.enqueue(new Callback<RegistBean>() {
-                        @Override
-                        public void onResponse(Call<RegistBean> call, Response<RegistBean> response) {
-                            RegistBean decode= response.body();
-                            Log.e("rrrrrrrr",decode.getErr());
-                        }
-
-                        @Override
-                        public void onFailure(Call<RegistBean> call, Throwable t) {
-
-                        }
-                    });
+                if(accountName.equals("")|bankName.equals("")|accountNumber.equals("")){
+                    Intent intent=new Intent(getApplicationContext(),MyPageModifyActivity.class);
+                    startActivityForResult(intent,3000);
                 }
-
             }
 
             @Override
@@ -134,18 +113,42 @@ public class RegistSellerActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 사용자가 작성한 은행명,계좌번호,계좌명을 가져온다.
+     * 가져온 값이 널이 아닌 경우일 때만 setUserDetails() 호출
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RESULT_OK){
-            //액티비티가 정상적으로 종료
-            if(requestCode==1){
-                //호출된 액티비티에서 호출한 경우메나 처리
-                //등록하기버튼
+        if(resultCode==RESULT_OK){
+            if(requestCode==3000){
+                bankName=data.getExtras().getString("bank_name");
+                accountNumber=data.getExtras().getString("account_number");
+                accountName=data.getExtras().getString("account_name");
+                if(accountName.equals("")|bankName.equals("")|accountNumber.equals("")){
+                    Toast.makeText(getApplicationContext(),"널값저장",Toast.LENGTH_SHORT).show();
+                }else{
+                    setUserDetails();
+                }
+
             }
         }
     }
-    /* private void setRegister(){
+
+    /**
+     * 판매자등록을 한다.
+     *
+     * parameter
+     * key
+     * accountName
+     * accountNumber
+     * bankName
+     *
+     */
+    private void setUserDetails() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -153,34 +156,29 @@ public class RegistSellerActivity extends AppCompatActivity {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
+        String key = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
+        Map<String,String> data= new HashMap<>();
 
-        Map<String,String> data=new HashMap<>();
-        String user_key = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
-        data.put("user_unique_key",user_key);
+        data.put("user_unique_key",key);
+        data.put("account_name",accountName);
+        data.put("account_number",accountNumber);
+        data.put("bank_name",bankName);
 
-        final Call<UserBean> call = connectService.setResigster(data);
+        final Call<RegistBean> call = connectService.setResigster(data);
 
-        call.enqueue(new Callback<UserBean>() {
+        call.enqueue(new Callback<RegistBean>() {
             @Override
-            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
-                UserBean decodedResponse = response.body();
-                String accountNumber= decodedResponse.getMyinfo_detail().get(0).getAccount_number();
-                String address=decodedResponse.getMyinfo_detail().get(0).getAddress();
-                String bankName=decodedResponse.getMyinfo_detail().get(0).getBank_name();
-                String accountName=decodedResponse.getMyinfo_detail().get(0).getAccount_name();
+            public void onResponse(Call<RegistBean> call, Response<RegistBean> response) {
+                RegistBean decodedResponse = response.body();
 
-                if(accountNumber.equals("")|address.equals("")|bankName.equals("")|accountName.equals("")){
-                    Intent intent=new Intent(getApplicationContext(), MyPageModifyActivity.class);
-                    startActivity(intent);
-                }
-
+                Log.e("register",decodedResponse.getErr());
             }
 
             @Override
-            public void onFailure(Call<UserBean> call, Throwable t) {
+            public void onFailure(Call<RegistBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });
-    }*/
 
+    }
 }
