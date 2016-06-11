@@ -7,7 +7,8 @@
     <string name="community">내가 꾸미는 우리집만의 스토리를 나누세요.\n
             - 또 다른 제작 노하우\n
             - 소품 지식인! 묻고 답하기</string>
-
+    <string name="registSeller">판매자 등록을 하면 자신만의 노하우를 작성할 수 있습니다.\n
+    또한 인테리어 소품을 판매하여 수익을 얻을 수 있습니다.</string>
     <string name="kakao_app_key">6c0a3d60cf5f9f507b1147e3de03b630</string>
 
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to

@@ -57,7 +57,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String selectedCategory;
     String selectedMakingTime;
     Spinner spnCategory, spnMakingTime;
-    EditText edtName, edtPrice, edtSellAmount, edtSellPrice, edtYoutubuCode;
+    EditText edtName, edtCost, edtSellAmount, edtSellPrice, edtYoutubuCode;
     LinearLayout lineCreateView;
     ImageView imgOk, imgBack;
     TextView tvTitle;
@@ -82,10 +82,13 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_konw_how_write);
 
         layoutSetting();
+
         tvTitle.setText("노하우 작성");
+
+        //기본값
         btnSellNo.setSelected(true);
         btnLevelHigh.setSelected(true);
-        check_sale = "0";
+
 
         ArrayAdapter<String> spinnerCategoryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, category);
         ArrayAdapter<String> spinnerMakingTimeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, makingTime);
@@ -101,7 +104,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) spnCategory.getSelectedItem().toString();
                 //categoryposition = (int) spnCategory.getSelectedItemPosition();
-                categoryposition="거울";
+                //categoryposition="거울";
                 selectedCategory = str;
             }
 
@@ -140,9 +143,14 @@ public class WriteKnowHowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("strUrl", strUrl.size() + "");
-                saveKnowGetKey();
 
-                finish();
+               check();
+
+                if(check()==false){
+                    setting();
+                    saveKnowGetKey();
+                    finish();
+                }
             }
         });
 
@@ -173,10 +181,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 btnSellYes.setSelected(false);
                 btnSellNo.setSelected(true);
                 linearSell.setVisibility(View.INVISIBLE);
-                check_sale = "0";
-                edtSellAmount.setText("0");
-                edtSellPrice.setText("0");
-
+                check_sale="0";
 
             }
         });
@@ -210,23 +215,55 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
     }
 
-    /* public void level(View v){
-          switch (v.getId()){
-              case R.id.btnLevelHigh:
-                  btnLevelHigh.setSelected(true);
-                  btnLevelMiddle.setSelected(false);
-                  btnLevelLow.setSelected(false);
-              case R.id.btnLevelMiddle:
-                 btnLevelHigh.setSelected(false);
-                  btnLevelMiddle.setSelected(true);
-                  btnLevelLow.setSelected(false);
-              case R.id.btnLevelLow:
-                  btnLevelHigh.setSelected(false);
-                  btnLevelMiddle.setSelected(false);
-                  btnLevelLow.setSelected(true);
-          }
+    /**
+     * 기본값 셋팅
+     */
+  private void setting() {
 
-      }*/
+        check_sale = "0"; //판매NO
+        level=btnLevelHigh.getText().toString(); //레벨 상
+        edtSellAmount.setText("0"); //판매수량 0
+        edtSellPrice.setText("0"); //판매가격0
+        edtYoutubuCode.setText("0"); //youtubucode
+        edtCost.setText("0");
+
+    }
+
+   private boolean check(){
+        if(edtName.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"제목을 입력해주세요",Toast.LENGTH_SHORT).show();
+            return  true;
+        }
+       /* if(edtYoutubuCode.getText().toString().equals("")){
+           Toast.makeText(getApplicationContext(),"유튜브코드를 입력해주세요",Toast.LENGTH_SHORT).show();
+           return true;
+       }*/
+       if(edtCost.getText().toString().equals("")){
+           Toast.makeText(getApplicationContext(),"소모비용을 입력해주세요",Toast.LENGTH_SHORT).show();
+           return true;
+       }
+       if(check_sale.equals("1")){
+           if(edtSellAmount.getText().toString().equals("")){
+               Toast.makeText(getApplicationContext(),"판매수량을 입력해주세요",Toast.LENGTH_SHORT).show();
+               return true;
+           }
+           if(edtSellPrice.getText().toString().equals("")){
+               Toast.makeText(getApplicationContext(),"판매 가격을 입력해주세요",Toast.LENGTH_SHORT).show();
+               return  true;
+           }
+
+       }
+       if(spnCategory.getSelectedItem().toString().equals("카테고리")){
+           Toast.makeText(getApplicationContext(),"카테고리를 선택해주세요",Toast.LENGTH_SHORT).show();
+           return true;
+       }
+       if(spnMakingTime.getSelectedItem().toString().equals("소요시간")){
+           Toast.makeText(getApplicationContext(),"소요시간을 선택해주세요",Toast.LENGTH_SHORT).show();
+           return true;
+       }
+        return false;
+    }
+
     private void layoutSetting() {
         tvTitle = (TextView) findViewById(R.id.txtToolBarTitle);
         imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -242,7 +279,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         makingTime = getResources().getStringArray(R.array.makingTime);
 
         linearSell = (LinearLayout) findViewById(R.id.linearSell);
-        edtPrice = (EditText) findViewById(R.id.edtPrice);
+        edtCost = (EditText) findViewById(R.id.edtCost);
         edtYoutubuCode = (EditText) findViewById(R.id.edtYoutubuCode);
         btnSellYes = (Button) findViewById(R.id.btnSellYes);
         btnSellNo = (Button) findViewById(R.id.btnSellNo);
@@ -267,8 +304,8 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     }
 
     private void saveKnowGetKey() {
-        if(edtYoutubuCode.getText().toString().equals("")){
-            edtYoutubuCode.setText("0");
+        if(edtName.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"제목입력",Toast.LENGTH_SHORT).show();
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -282,25 +319,25 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("user_unique_key", userUniqueKey);
 
         // data.put("writing_category_key", "1"); // 변경 필요
-        data.put("category_name",categoryposition);
+        data.put("category_name",selectedCategory);
         data.put("writing_name", edtName.getText().toString());
         data.put("check_video", "1"); // 변경 필요
         // 지워 data.put("video_url", edtVideoUrl.getText().toString());
         data.put("check_sales", check_sale); //check_sale
         data.put("video_url", edtYoutubuCode.getText().toString()); //유튜브코드
-        data.put("price", edtPrice.getText().toString()); // 변경 필요
+        data.put("cost", edtCost.getText().toString()); // 변경 필요
         data.put("making_time", selectedMakingTime);
         data.put("level", level); // 변경 필요
         data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
         data.put("amount", edtSellAmount.getText().toString());
-        data.put("cost",edtSellPrice.getText().toString());
+        data.put("price",edtSellPrice.getText().toString());
         //   data.put("sellprice",edtSellPrice.getText().toString());// 변경 필요
         Log.e("log",userUniqueKey+"");
-        Log.e("log",categoryposition);
+        Log.e("log",selectedCategory);
         Log.e("log",edtName.getText().toString()+"");
         Log.e("log",check_sale+"");
         Log.e("log",edtYoutubuCode.getText().toString()+"");
-        Log.e("log",edtPrice.getText().toString()+"");
+        Log.e("log",edtCost.getText().toString()+"");
         Log.e("log",selectedMakingTime+"");
         Log.e("log",level+"");
         Log.e("log",edtSellAmount.getText().toString()+"");
