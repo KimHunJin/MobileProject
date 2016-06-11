@@ -77,7 +77,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     }
 
-    private void getUserImage(){
+    public void getUserImage(){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -94,7 +94,7 @@ public class MyPageActivity extends AppCompatActivity {
                 UserBean decodedResponse = response.body();
                 imgUrl=decodedResponse.getMyinfo_detail().get(0).getImg();
                 new DownloadImageTask(imgMypageUser).execute(imgUrl);
-                image=imgUrl;
+
 
 
             }
