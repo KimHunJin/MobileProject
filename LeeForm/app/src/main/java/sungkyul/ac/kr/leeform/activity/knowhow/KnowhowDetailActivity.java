@@ -62,7 +62,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
 
         Log.e("DetailKnowHowKey",knowHowKey.toString());
         Log.e("imag",imageUrl);
-        Picasso.with(getApplicationContext()).load(imageUrl).resize(500,300).centerCrop().into(imgKnowHowDetailMain);
+        Picasso.with(getApplicationContext()).load(imageUrl).resize(1080,720).centerCrop().into(imgKnowHowDetailMain);
         getItem(knowHowKey);
 
     }
@@ -81,8 +81,9 @@ public class KnowHowDetailActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView)itemView.findViewById(R.id.imgKnowHowDetailContentsPicture);
 
-        Picasso.with(getApplicationContext()).load(url).resize(420,240).centerCrop().into(imageView);
-
+        Picasso.with(getApplicationContext()).load(url).resize(1030,600).centerCrop().into(imageView);
+//        Picasso.with(getApplicationContext()).load(url).resize(3000,2000).onlyScaleDown().into(imageView);
+//        Picasso.with(getApplicationContext()).load(url).fit().into(imageView);
         TextView tv1 = (TextView) itemView.findViewById(R.id.tvKnowhowDetailExplain);
         tv1.setText(position + ". " + explain);
 
@@ -123,7 +124,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
             public void onResponse(Call<KnowHowDetailBean> call, Response<KnowHowDetailBean> response) {
                 KnowHowDetailBean decode = response.body();
                 Log.e("size",decode.getWriting_data1().size()+"");
-                Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(360,240).centerCrop().into(imgKnowHowDetailUserInfo);
+                Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(0,imgKnowHowDetailUserInfo.getHeight()).into(imgKnowHowDetailUserInfo);
                 txtKnowHowDetailLevel.setText(decode.getWriting_data1().get(0).getLevel().toString());
                 txtKnowHowDetailMakeTime.setText(decode.getWriting_data1().get(0).getMaking_time().toString());
                 txtKnowHowDetailMakingPrice.setText(decode.getWriting_data1().get(0).getPrice().toString());
