@@ -60,6 +60,7 @@
         <activity android:name=".activity.member.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity"></activity>
         <activity android:name=".activity.knowhow.WriteKnowHowActivity"></activity>
+        <activity android:name=".activity.navigation.MyPageModifyActivity"/>
     </application>
 
 </manifest>

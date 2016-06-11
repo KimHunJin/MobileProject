@@ -13,25 +13,22 @@ import android.widget.TextView;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 import sungkyul.ac.kr.leeform.adapter.MypageAdapter;
+import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 
 /**
  * Created by KyungHee on 2016-05-21.
  */
 public class MyPageActivity extends AppCompatActivity {
     private TabLayout tabLayout;
-    private Toolbar toolbar;
-    private TextView tvWriting, tvScrap;
+    private TextView  txtModify;
+    private ImageView imgBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        //툴바 완료버튼 보이지 않게 하기
-        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
-        toolbar.setContentInsetsAbsolute(0, 0);
-
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
+        imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,11 +36,16 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
-        ImageView imgOk=(ImageView)findViewById(R.id.imgOk);
-        imgOk.setVisibility(View.INVISIBLE);
+        txtModify=(TextView)findViewById(R.id.txtMypageModify);
+        txtModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),MyPageModifyActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tabInitialization();
-
 
     }
    private void tabInitialization() {
@@ -52,7 +54,6 @@ public class MyPageActivity extends AppCompatActivity {
         viewPager.setAdapter(mainFragmentAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.myPageTab);
-
         tabLayout.setupWithViewPager(viewPager);
 
     }
