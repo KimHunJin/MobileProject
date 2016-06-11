@@ -15,6 +15,7 @@
         android:layout_marginTop="4dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorWhite"
+        android:adjustViewBounds="true"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 </LinearLayout>
