@@ -13,6 +13,7 @@ import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
+import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 
 /**
@@ -102,6 +103,16 @@ public interface ConnectService {
 
     @GET("set_gcm.php")
     Call<OnlyErrBean> setGCMToken(
+            @QueryMap Map<String, String> options
+    );
+
+    @GET("myinfo_detail.php")
+    Call<UserBean> getUserDetail(
+            @Query("user_unique_key") String user_unique_key
+    );
+
+    @GET("modify_myinfo.php")
+    Call<UserBean> setUserDetail(
             @QueryMap Map<String, String> options
     );
 }

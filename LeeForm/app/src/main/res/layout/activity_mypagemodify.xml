@@ -26,6 +26,7 @@
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorToolBarTextColor"
             android:textSize="16sp"
+
              />
 
         <View
@@ -42,7 +43,8 @@
             android:hint="주소"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorToolBarTextColor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="@android:color/transparent"/>
 
         <View
             android:layout_width="match_parent"
@@ -64,7 +66,9 @@
                 android:hint="은행명"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorToolBarTextColor"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center"/>
 
             <View
                 android:layout_width="1dp"
@@ -78,9 +82,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:hint="계좌번호"
+                android:layout_gravity="center"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorToolBarTextColor"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@android:color/transparent"/>
 
             </LinearLayout>
         <View
@@ -96,7 +102,8 @@
             android:hint="핸드폰 번호"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorToolBarTextColor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="@android:color/transparent"/>
 
         <View
             android:layout_width="match_parent"

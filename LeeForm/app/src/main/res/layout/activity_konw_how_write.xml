@@ -176,7 +176,7 @@
                 android:gravity="right">
 
                 <EditText
-                    android:id="@+id/edtPrice"
+                    android:id="@+id/edtCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -344,7 +344,8 @@
                 android:hint="판매수량"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -375,7 +376,8 @@
                 android:hint="판매 가격"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
