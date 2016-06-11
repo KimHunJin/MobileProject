@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "97647406079",
+    "project_id": "leeform-c3015"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97647406079:android:e59c47068646b0da",
+        "android_client_info": {
+          "package_name": "sungkyul.ac.kr.leeform"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFnpwrPF14PmZDuLKbzi5hwppVc8kEXWY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

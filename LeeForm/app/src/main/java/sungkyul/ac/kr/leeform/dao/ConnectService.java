@@ -9,14 +9,14 @@ import retrofit2.http.QueryMap;
 import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
+import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
-import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 
 /**
- * Created by HunJin on 2016-05-22.
+ * Created by HunJin on 2016-06-10.
  */
 public interface ConnectService {
     //쿼리가 하나인 경우
@@ -98,6 +98,11 @@ public interface ConnectService {
     @GET("scrap_list.php")
     Call<KnowHowBean> getScrapKnowHow(
             @Query("user_unique_key") String user_unique_key
+    );
+
+    @GET("set_gcm.php")
+    Call<OnlyErrBean> setGCMToken(
+            @QueryMap Map<String, String> options
     );
 }
 

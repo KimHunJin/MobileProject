@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment {
     private boolean isScrollingUp =false;
     private int mLastFirstVisibleItem = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
+    ListView lst;
 
     private static String URL = StaticURL.BASE_URL;
 
@@ -64,6 +66,7 @@ public class HomeFragment extends Fragment {
         init();
     }
 
+    /*
     @Override
     public void onResume() {
         super.onResume();
@@ -80,14 +83,9 @@ public class HomeFragment extends Fragment {
             leeformParsing();
         }
     }
+    */
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        mView = inflater.inflate(R.layout.fragment_home, container, false);
-
+    private void initializeLayout(){
         adapter = new MainListAdapter(getContext(), R.layout.item_list_main, listItem);
 
         mSpinnerCategory = (Spinner) mView.findViewById(R.id.spnKnowCategory);
@@ -108,10 +106,22 @@ public class HomeFragment extends Fragment {
         mSpinnerCategory.setAdapter(mSpinnerCategoryAdapter); //스피너에 adapter 설정
         mSpinnerSort.setAdapter(mSpinnerSortAdapter);
 
-        ListView lst = (ListView) mView.findViewById(R.id.listMain);
+        lst = (ListView) mView.findViewById(R.id.listMain);
         lst.setAdapter(adapter);
 
         fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
+    }
+
+    private void initializeList(){
+        // 초기화하고 아이템가져오기
+        if(sort == true) {
+            latestParsing();
+        } else {
+            leeformParsing();
+        }
+    }
+
+    private void setListener(){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,13 +191,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-         mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
+        mSpinnerCategory.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                check++;
+                return false;
+            }
+        });
+        mSpinnerSort.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                check++;
+                return false;
+            }
+        });
+        mSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //카테고리 아이템 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                check++;
                 // 처음에는 실행 안되게
-                if (check > 2) {
+                if (check > 0) {
                     Toast.makeText(getActivity(), parent.getItemAtPosition(position) + "", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -202,13 +224,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행 안되게
-                check++;
-                if (check > 2) {
+                if (check > 0) {
                     if(parent.getItemAtPosition(position).equals("인기순")) {
                         sort = false;
+                        init();
+                        initializeList();
 
                     } else {
                         sort = true;
+                        init();
+                        initializeList();
 
                     }
                     Log.e("sort",sort+"");
@@ -220,12 +245,28 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        initializeLayout();
+        init();
+        initializeList();
+        setListener();
+
         return mView;
     }
+
 
     void init() {
         offset = 0;
         count = 0;
+        check = 0;
         is_scroll = true;
         is_refresh = true;
         listItem.clear();
