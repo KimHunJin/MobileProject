@@ -19,6 +19,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.credit.DemoCreditPage;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
@@ -54,6 +55,13 @@ public class KnowHowDetailActivity extends AppCompatActivity {
         });
 
         initializeLayout();
+
+        imgKnowHowDetailBuying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),DemoCreditPage.class));
+            }
+        });
 
 
         Intent it = getIntent();

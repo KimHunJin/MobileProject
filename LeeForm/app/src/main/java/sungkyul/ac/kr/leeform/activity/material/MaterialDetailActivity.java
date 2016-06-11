@@ -2,6 +2,7 @@ package sungkyul.ac.kr.leeform.activity.material;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.hkm.slider.Animations.DescriptionAnimation;
@@ -22,6 +24,7 @@ import com.hkm.slider.Tricks.ViewPagerEx;
 import java.util.HashMap;
 
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.credit.DemoCreditPage;
 import sungkyul.ac.kr.leeform.utils.DataProvider;
 import sungkyul.ac.kr.leeform.utils.NumZeroForm;
 
@@ -33,6 +36,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
     private SliderLayout mDemoSlider;
     DataProvider dataProvider;
+    private Button btnBuying;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,13 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
         initializeLayout();
         setupSlider();  // 이미지 슬라이드를 불러옵니다.
+
+        btnBuying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DemoCreditPage.class));
+            }
+        });
     }
 
     /**
@@ -67,6 +78,8 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
         dataProvider = new DataProvider();
+
+        btnBuying = (Button)findViewById(R.id.btnMaterialDetailBuying);
 
         getMaterialImageUrl();
     }
