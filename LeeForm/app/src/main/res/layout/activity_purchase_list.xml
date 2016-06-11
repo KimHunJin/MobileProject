@@ -2,20 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLittleDarkWhite"
     android:orientation="vertical">
 
     <!-- 상단바 -->
     <include layout="@layout/toolbar_custom_ok" />
 
-    <!--
-    <ListView
-        android:id="@+id/lstPurchaseList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"></ListView>
-        -->
     <ImageView
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/my_purchase_list_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
