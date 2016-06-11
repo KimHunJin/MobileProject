@@ -61,7 +61,7 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         }
 
         CreateKnowHowItem gridItem = item.get(position);
-        
+
         if (gridItem.getmImg() != 0) {
             Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(480,480).centerCrop().into(gridViewHolder.imgGridCreate);
         }

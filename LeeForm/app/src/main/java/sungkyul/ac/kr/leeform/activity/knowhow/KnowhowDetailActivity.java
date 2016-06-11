@@ -131,7 +131,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<KnowHowDetailBean> call, Response<KnowHowDetailBean> response) {
                 KnowHowDetailBean decode = response.body();
-                Log.e("size",decode.getWriting_data1().size()+"");
+                Log.e("size",decode.getWriting_data1().get(0).getImg()+"");
                 Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(0,imgKnowHowDetailUserInfo.getHeight()).into(imgKnowHowDetailUserInfo);
                 txtKnowHowDetailLevel.setText(decode.getWriting_data1().get(0).getLevel().toString());
                 txtKnowHowDetailMakeTime.setText(decode.getWriting_data1().get(0).getMaking_time().toString());
