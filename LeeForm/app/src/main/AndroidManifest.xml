@@ -102,6 +102,13 @@
             android:exported="false" />
 
         <activity android:name=".activity.credit.DemoCreditPage"></activity>
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="nicepaysample" />
+        </intent-filter>
     </application>
 
 </manifest>
