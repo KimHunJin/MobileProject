@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorLittleDarkWhite"
+                android:listSelector="@android:color/transparent"
                 android:dividerHeight="-10dp"
                 android:scrollbars="none"></ListView>
         </android.support.v4.widget.SwipeRefreshLayout>

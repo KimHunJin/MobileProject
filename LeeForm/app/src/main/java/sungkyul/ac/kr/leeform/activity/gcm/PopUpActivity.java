@@ -1,28 +1,23 @@
 package sungkyul.ac.kr.leeform.activity.gcm;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.intro.SplashActivity;
 
-public class PopUpActivity extends AppCompatActivity {
+public class PopUpActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up);
-        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 // 키잠금 해제하기
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD

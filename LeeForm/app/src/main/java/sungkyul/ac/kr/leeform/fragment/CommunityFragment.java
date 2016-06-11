@@ -61,6 +61,27 @@ public class CommunityFragment extends Fragment {
 
         layoutSetting();
 
+        setListener();
+
+        init();
+        getCommunityDetailList();
+
+        return cView;
+    }
+
+    /**
+     * Layout Setting
+     */
+    public void layoutSetting() {
+        listItem = new ArrayList<>();
+        //adapter를 통해 xml을 ArrayList에 설정한다.
+        adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
+        lst = (ListView) cView.findViewById(R.id.listCommunity);
+        fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
+        swipeRefreshLayout = (SwipeRefreshLayout) cView.findViewById(R.id.communitySwipeRefresh);
+    }
+
+    private void setListener(){
         //lst에 adqpter를 등록한다.
         lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
@@ -105,7 +126,7 @@ public class CommunityFragment extends Fragment {
                         if (is_scroll) {
                             is_scroll = false;
                             is_refresh = false;
-                            communityDetailList();
+                            getCommunityDetailList();
                         }
 
                     }
@@ -125,25 +146,9 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onRefresh() {
                 init();
-                communityDetailList();
+                getCommunityDetailList();
             }
         });
-
-
-        return cView;
-
-    }
-
-    /**
-     * Layout Setting
-     */
-    public void layoutSetting() {
-        listItem = new ArrayList<>();
-        //adapter를 통해 xml을 ArrayList에 설정한다.
-        adapter = new CommunityListAdapter(getContext(), R.layout.item_list_community, listItem);
-        lst = (ListView) cView.findViewById(R.id.listCommunity);
-        fab1 = (FloatingActionButton) cView.findViewById(R.id.fab1);
-        swipeRefreshLayout = (SwipeRefreshLayout) cView.findViewById(R.id.communitySwipeRefresh);
     }
 
     @Override
@@ -154,15 +159,17 @@ public class CommunityFragment extends Fragment {
         init();
     }
 
+    /*
     @Override
     public void onResume() {
         super.onResume();
         init();
-        communityDetailList();
-
+        getCommunityDetailList();
     }
+    */
 
-    public void communityDetailList() {
+
+    public void getCommunityDetailList() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
