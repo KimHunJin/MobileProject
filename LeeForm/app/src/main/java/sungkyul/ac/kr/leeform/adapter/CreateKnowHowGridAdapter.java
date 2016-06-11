@@ -1,8 +1,6 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,15 +61,12 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         }
 
         CreateKnowHowItem gridItem = item.get(position);
-        Log.e("test", gridItem.getmImg() + "");
-        Log.e("test", gridItem.getImgUrl() + "");
+        
         if (gridItem.getmImg() != 0) {
-            Log.e("what","what");
-            Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(160,160).centerCrop().into(gridViewHolder.imgGridCreate);
+            Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(480,480).centerCrop().into(gridViewHolder.imgGridCreate);
         }
         if (gridItem.getImgUrl() != null) {
-            Log.e("omg","omg");
-            Picasso.with(inflater.getContext()).load(gridItem.getImgUrl()).resize(160,160).centerCrop().into(gridViewHolder.imgGridCreate);
+            Picasso.with(inflater.getContext()).load("file://"+gridItem.getImgUrl().trim().toString()).resize(480,480).centerCrop().error(R.drawable.panza).into(gridViewHolder.imgGridCreate);
 //            gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
         }
         return convertView;

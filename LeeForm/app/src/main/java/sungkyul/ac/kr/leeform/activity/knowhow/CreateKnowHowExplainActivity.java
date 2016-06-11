@@ -109,7 +109,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 strContents = edtContents.getText().toString();
-                Log.e("picturePath", absoultePath + " ");
+                Log.w("picturePath", absoultePath + " ");
                 Log.e("contents", strContents + " ");
                 if (!absoultePath.equals("") && !strContents.equals("")) {
                     strUrl.add(absoultePath);
@@ -162,8 +162,8 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
 
 //                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
                 absoultePath = getPath(mImageCpatureUri);
-                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
-                Log.e("absolutePath",absoultePath);
+                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(930,501).centerCrop().into(img);
+                Log.w("absolutePath",absoultePath);
 //                Intent it = new Intent("com.android.camera.action.CROP");
 //                it.setDataAndType(mImageCpatureUri, "image/*");
 //
