@@ -292,7 +292,7 @@ public class HomeFragment extends Fragment {
 
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
-                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getPrice(),
+                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getCost(),
                             decode.getWriting_list().get(i).getMaking_time(),
                             decode.getWriting_list().get(i).getScrap_amount(),
                             decode.getWriting_list().get(i).getPicture_url(),
@@ -334,7 +334,7 @@ public class HomeFragment extends Fragment {
 
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
-                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getPrice(),
+                    listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getCost(),
                             decode.getWriting_list().get(i).getMaking_time(),
                             decode.getWriting_list().get(i).getScrap_amount(),
                             decode.getWriting_list().get(i).getPicture_url(),

@@ -16,9 +16,13 @@
 
         <EditText
             android:id="@+id/edtName"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:minHeight="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="top"
             android:hint="깨알 노하우의 제목은?"
             android:paddingLeft="10dp"
             android:paddingTop="13dp"
@@ -27,13 +31,38 @@
             android:textSize="13sp"
             android:background="@android:color/transparent"/>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center"
         android:background="@color/colorBlack" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/edtExplanation"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:minHeight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="top"
+            android:hint="깨알 노하우의 간단한 설명은?"
+            android:paddingLeft="10dp"
+            android:paddingTop="13dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGray"
+            android:textSize="13sp"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/colorBlack" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -177,12 +206,13 @@
 
                 <EditText
                     android:id="@+id/edtCost"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:gravity="right"
                     android:hint="소모비용"
+                    android:maxLength="7"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGray"
                     android:textSize="10sp"
@@ -225,6 +255,7 @@
             android:id="@+id/edtYoutubuCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_gravity="center"
             android:gravity="center"
             android:hint="유튜브 영상이 있다면 코드를 입력해주세요."
@@ -342,6 +373,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:hint="판매수량"
+                android:maxLength="2"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
                 android:textSize="10sp"
@@ -374,6 +406,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:hint="판매 가격"
+                android:maxLength="7"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
                 android:textSize="10sp"
