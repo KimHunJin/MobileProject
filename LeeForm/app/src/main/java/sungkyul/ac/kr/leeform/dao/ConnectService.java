@@ -18,16 +18,16 @@ import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
+import sungkyul.ac.kr.leeform.dto.UserModifyBean;
+
 //<<<<<<< HEAD
 //=======
-import sungkyul.ac.kr.leeform.dto.UserModifyBean;
-//>>>>>>> e21684f948a5ea0983759573431be556f6398c41
 
 /**
  * Created by HunJin on 2016-06-10.
  */
 public interface ConnectService {
-    //쿼리가 하나인 경우
+
     @GET("community_list.php")
     Call<CommunityListBean> getCommunityList(
             @Query("offset") int offset
@@ -122,6 +122,7 @@ public interface ConnectService {
     Call<UserModifyBean> setUserDetail(
             @QueryMap Map<String, String> options
     );
+
     @GET("set_sales_authority.php")
     Call<RegistBean> setResigster(
             @QueryMap Map<String, String> options

@@ -57,7 +57,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
     ImageView image, imgOk, imgBack;
     String URL = StaticURL.BASE_URL;
     private Toolbar toolbar;
-    private TextView txtToolbarTitle;;
+    private TextView txtToolbarTitle;
+    ;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -67,19 +68,16 @@ public class MyPageModifyActivity extends AppCompatActivity {
     String uploadFileName; // 파일 이름
     private ArrayList<String> strUrl = new ArrayList<>(); //파일 경로리스트
     private ArrayList<String> strExplain = new ArrayList<>(); //파일 설명 리스트트
-    String str;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypagemodify);
 
-
         layoutSetting();
         getUserDetails(); //값가져오기
 
-
-        toolbar.setContentInsetsAbsolute(0,0);
+        toolbar.setContentInsetsAbsolute(0, 0);
         txtToolbarTitle.setText("내 정보 수정");
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +86,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
         imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,10 +95,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
                         finish();
                     } else {
                         File file = new File(absoultePath);  // 파일을 만듬
-
                         uploadFileName = file.getName(); // 파일의 이름 추출
                         uploadFilePath = file.getPath(); // 파일의 경로 추출
-                        Log.e("file Name", file.getName());
 
                         new Thread(new Runnable() {
                             @Override
@@ -112,8 +106,7 @@ public class MyPageModifyActivity extends AppCompatActivity {
                         }).start();
 
                         setUserDetails(uploadFileName);
-
-                       finish();
+                        finish();
                     }
                 }
             }
@@ -146,12 +139,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
                         .setNeutralButton("사진촬영", cameraListener)
                         .setNegativeButton("앨범선택", albumListener)
                         .show();
-
-
             }
         });
-
-
     }
 
     /**
@@ -167,9 +156,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
         imgOk = (ImageView) findViewById(R.id.imgOk);
         image = (ImageView) findViewById(R.id.imgMypageUser);
         imgBack = (ImageView) findViewById(R.id.imgBackOk);
-        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
-        txtToolbarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        txtToolbarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
     }
 
     // 카메라 촬영 후 이미지 가져오기
@@ -189,6 +177,11 @@ public class MyPageModifyActivity extends AppCompatActivity {
         startActivityForResult(it, PICK_FROM_ALBUM);
     }
 
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -197,7 +190,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
             strExplain = data.getStringArrayListExtra("explain");
             return;
         }
-
         // 받아온 값이 있으면
         switch (requestCode) {
             // 앨범에서 가져오는 경우 카메라에서 가져오는 거와 같은 기능을 하기에 break 없이 진행
@@ -210,7 +202,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
                 absoultePath = getPath(mImageCpatureUri);
                 Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340, 260).centerCrop().into(image);
                 Log.e("absolutePath", absoultePath);
-
                 break;
             }
             case CROP_FROM_IMAGE: {
@@ -233,15 +224,12 @@ public class MyPageModifyActivity extends AppCompatActivity {
                     absoultePath = filePath; // 경로 반환
                     break;
                 }
-
                 File f = new File(mImageCpatureUri.getPath()); // 임시 파일 삭제
                 if (f.exists()) {
                     f.delete();
                 }
             }
-
         }
-
     }
 
     // 크랍한 이미지 저장
@@ -311,7 +299,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
                 edtPhoneNumber.setText(phoneNumber);
                 edtAccountName.setText(accountName);
                 new DownloadImageTask(image).execute(decodedResponse.getMyinfo_detail().get(0).getImg());
-
             }
 
             @Override
@@ -319,7 +306,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
                 Log.e("failure", t.getMessage());
             }
         });
-
     }
 
     public int uploadFile(String sourceFileUri) {
@@ -336,14 +322,11 @@ public class MyPageModifyActivity extends AppCompatActivity {
         File sourceFile = new File(sourceFileUri);
 
         if (!sourceFile.isFile()) {
-
             Log.e("uploadFile", "Source File not exist :" + sourceFileUri);
-
             return 0;
 
         } else {
             try {
-
                 // StaticURL 생성
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
                 java.net.URL url = new java.net.URL(upLoadServerUri);
@@ -405,7 +388,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
                         }
                     });
                 }
-
                 //close the streams //
                 fileInputStream.close();
                 dos.flush();
@@ -429,12 +411,12 @@ public class MyPageModifyActivity extends AppCompatActivity {
 
             }
             return serverResponseCode;
-
         } // End else block
     }
 
     /**
      * 사용자가 입력한 값으로 수정하기
+     *
      * @param fileName
      */
     private void setUserDetails(String fileName) {
@@ -450,7 +432,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
         Map<String, String> data = new HashMap<>();
         //이미지변경을 안했을 때
         if (fileName == null) {
-
             Toast.makeText(getApplicationContext(), fileName, Toast.LENGTH_SHORT).show();
             data.put("user_unique_key", userUniqueKey);
             data.put("name", edtUserName.getText().toString());
@@ -460,15 +441,14 @@ public class MyPageModifyActivity extends AppCompatActivity {
             data.put("account_name", edtAccountName.getText().toString());
             data.put("phone_number", edtPhoneNumber.getText().toString());
 
-
-            Intent intent=getIntent();
+            Intent intent = getIntent();
             //판매자 등록할 때 은행명, 계좌번호, 계좌명 RegistSellerActivity로 보내기
             intent.putExtra("bank_name", edtBankName.getText().toString());
             intent.putExtra("account_number", edtBankNumber.getText().toString());
             intent.putExtra("account_name", edtAccountName.getText().toString());
-            setResult(RESULT_OK,intent);
+            setResult(RESULT_OK, intent);
 
-        //이미지 변경을 했을 때
+            //이미지 변경을 했을 때
         } else {
             data.put("user_unique_key", userUniqueKey);
             data.put("name", edtUserName.getText().toString());
@@ -480,7 +460,6 @@ public class MyPageModifyActivity extends AppCompatActivity {
             data.put("account_name", edtAccountName.getText().toString());
 
         }
-
         final Call<UserModifyBean> call = connectService.setUserDetail(data);
 
         call.enqueue(new Callback<UserModifyBean>() {
@@ -499,6 +478,4 @@ public class MyPageModifyActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

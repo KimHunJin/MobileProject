@@ -29,6 +29,7 @@ import sungkyul.ac.kr.leeform.utils.LoadActivityList;
  */
 public class SettingActivity extends PreferenceActivity {
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class SettingActivity extends PreferenceActivity {
         ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
         imgOk.setVisibility(View.INVISIBLE);
 
-        TextView txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        TextView txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
         txtToolBarTitle.setText("설정");
 
         LoadActivityList.actList.add(SettingActivity.this);
@@ -104,7 +105,6 @@ public class SettingActivity extends PreferenceActivity {
 
                                     @Override
                                     public void onNotSignedUp() {
-//                                            redirectSignupActivity();
                                     }
 
                                     @Override

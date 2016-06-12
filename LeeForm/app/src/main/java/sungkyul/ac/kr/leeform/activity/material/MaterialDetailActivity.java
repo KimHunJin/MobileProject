@@ -23,7 +23,6 @@ import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -51,7 +50,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
     String material_unique_key;
     private ImageView imgMaterialDetailSeller;
     private TextView txtMaterialDetailName, txtMaterialDetailExplain, txtMaterialDetailCost, txtToolBarTitle;
-//    private TextView txtMaterialDetailSellerName;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,10 +74,8 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         });
 
         initializeLayout();
-
-
-        Log.e("material_unique_key", material_unique_key + "");
         getDetailInfo();
+
         btnBuying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,33 +91,15 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
         toolbar = (Toolbar) findViewById(R.id.toolbarBack);
         toolbar.setContentInsetsAbsolute(0, 0);
-
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-
         dataProvider = new DataProvider();
-
         btnBuying = (Button) findViewById(R.id.btnMaterialDetailBuying);
-
         txtMaterialDetailName = (TextView) findViewById(R.id.txtMaterialDetailName);
         txtMaterialDetailCost = (TextView) findViewById(R.id.txtMaterialDetailCost);
         txtMaterialDetailExplain = (TextView) findViewById(R.id.txtMaterialDetailExplain);
-//        txtMaterialDetailSellerName = (TextView) findViewById(R.id.txtMaterialDetailSellerName);
         txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
-        imgMaterialDetailSeller = (ImageView)findViewById(R.id.imgMaterialDetailSeller);
+        imgMaterialDetailSeller = (ImageView) findViewById(R.id.imgMaterialDetailSeller);
 
-    }
-
-    /**
-     * setHashFile(String, String) : 파일을 URL로 가져와 저장합니다.
-     * setHashFile(String, Integer) : 파일을 src로 가져와 저장합니다.
-     */
-    private void getMaterialImageUrl() {
-        // dataProvider에 이미지를 저장합니다.
-
-        Log.e("getMaterial", "getMaterial");
-        for (int i = 0; i < 4; i++) {
-//            dataProvider.setHashFile((i + 1) + "", R.drawable.panza);
-        }
     }
 
     // 이미지를 URL로 가져올 땐 이 부분을 사용합니다.
@@ -141,26 +120,6 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         }
     }
 
-    // 이미지를 src로 가져올 땐 이 부분을 사용합니다.
-    // URL로 가져오기 위해서는 이 부분을 주석처리 하면 됩니다.
-//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-//    protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
-//        for (String name : maps.keySet()) {
-//            TextSliderView textSliderView = new TextSliderView(this);
-//            // initialize a SliderLayout
-//            textSliderView
-//                    .description(name)
-//                    .image(maps.get(name))
-//                    .setScaleType(BaseSliderView.ScaleType.Fit)
-//                    .enableSaveImageByLongClick(getFragmentManager())
-//                    .setOnSliderClickListener(this);
-//            //add your extra information
-//            textSliderView.getBundle().putString("extra", name);
-//            mDemoSlider.addSlider(textSliderView);
-//        }
-//    }
-
-
     /**
      * 슬라이드를 통해 이미지를 처리하는 매서드입니다.
      */
@@ -177,13 +136,9 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.colorAccentBasic, R.color.colorAccent);
         final NumZeroForm n = new NumZeroForm(this);
         mDemoSlider.setNumLayout(n);
-//        mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
         mDemoSlider.setPresetTransformer("DepthPage");
         mDemoSlider.stopAutoCycle();
 
-        //and data second. it is a must because you will except the data to be streamed into the pipline.
-//        defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
-//       defaultCompleteSlider(dataProvider.getFileSrcHorizontal());
         defaultCompleteSlider(dataProvider.getFileSrcHorizontal());
     }
 
@@ -204,7 +159,7 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
 
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
-//        Toast.makeText(this, coreSlider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -213,6 +168,10 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
         mDemoSlider.stopAutoCycle();
     }
 
+    /**
+     * 재료의 디테일 정보를 가져온다.
+     * 재료이름, 재료가격, 재료설명, 재료 이미지
+     */
     private void getDetailInfo() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)
@@ -227,16 +186,14 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
                 MaterialDetailBean decode = response.body();
                 txtMaterialDetailName.setText(decode.getMaterial_detail1().get(0).getMaterial_name().toString());
                 txtToolBarTitle.setText(decode.getMaterial_detail1().get(0).getMaterial_name().toString());
-//                txtMaterialDetailSellerName.setText(decode.getMaterial_detail1().get(0).getSubcontractor_name());
                 txtMaterialDetailCost.setText(decode.getMaterial_detail1().get(0).getMaterial_price());
                 txtMaterialDetailExplain.setText(decode.getMaterial_detail1().get(0).getMaterial_explanation());
-                Picasso.with(getApplicationContext()).load(decode.getMaterial_detail1().get(0).getSubcontractor_image_url()).resize(100,45).centerCrop().into(imgMaterialDetailSeller);
+                Picasso.with(getApplicationContext()).load(decode.getMaterial_detail1().get(0).getSubcontractor_image_url()).resize(100, 45).centerCrop().into(imgMaterialDetailSeller);
 
                 for (int i = 0; i < decode.getMaterial_detail2().size(); i++) {
                     Log.e("file url", decode.getMaterial_detail2().get(i).getMaterial_picture_url().toString());
                     dataProvider.setHashFile((i + 1) + "", decode.getMaterial_detail2().get(i).getMaterial_picture_url().toString());
                 }
-
                 setupSlider();  // 이미지 슬라이드를 불러옵니다.
             }
 
@@ -246,5 +203,4 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
             }
         });
     }
-
 }

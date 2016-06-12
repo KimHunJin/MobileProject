@@ -49,7 +49,7 @@ public class CommunityFragment extends Fragment {
     boolean is_scroll = true;
     boolean is_refresh = true;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private boolean isScrollingUp =false;
+    private boolean isScrollingUp = false;
     private int mLastFirstVisibleItem = 0;
 
     @Override
@@ -60,9 +60,7 @@ public class CommunityFragment extends Fragment {
         cView = inflater.inflate(R.layout.fragment_community, container, false);
 
         layoutSetting();
-
         setListener();
-
         init();
         getCommunityDetailList();
 
@@ -81,7 +79,7 @@ public class CommunityFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) cView.findViewById(R.id.communitySwipeRefresh);
     }
 
-    private void setListener(){
+    private void setListener() {
         //lst에 adqpter를 등록한다.
         lst.setAdapter(adapter);
         //커뮤니티 목록 중 선택한 넘버 보내기
@@ -104,7 +102,7 @@ public class CommunityFragment extends Fragment {
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                final ListView lw = (ListView)view;
+                final ListView lw = (ListView) view;
                 if (view.getId() == lw.getId()) {
                     final int currentFirstVisibleItem = lw.getFirstVisiblePosition();
                     if (currentFirstVisibleItem > mLastFirstVisibleItem) {
@@ -119,6 +117,7 @@ public class CommunityFragment extends Fragment {
 
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {
@@ -159,16 +158,10 @@ public class CommunityFragment extends Fragment {
         init();
     }
 
-    /*
-    @Override
-    public void onResume() {
-        super.onResume();
-        init();
-        getCommunityDetailList();
-    }
-    */
-
-
+    /**
+     * 커뮤니티의 정보를 가져와
+     * ArrayList에 저장
+     */
     public void getCommunityDetailList() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -176,19 +169,15 @@ public class CommunityFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        // http://14.63.196.255/api/community_list.php
         Call<CommunityListBean> call = connectService.getCommunityList(offset);
         call.enqueue(new Callback<CommunityListBean>() {
             @Override
             public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
-                Log.e("resonpse", response.code() + "");
                 CommunityListBean decode = response.body(); //CommunityListBean 형식으로 디코딩
                 Log.e("err", decode.getErr());
-                Log.e("count", decode.getCount());
-                Log.e("list size", decode.getCommunity_list().size() + "");
+
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-
                     String date = decode.getCommunity_list().get(i).getCommunity_writing_date();
                     try {
                         date = TimeTransForm.formatTimeString(date);
@@ -196,12 +185,11 @@ public class CommunityFragment extends Fragment {
                         e.printStackTrace();
                     }
                     listItem.add(new CommunityItem(decode.getCommunity_list().get(i).getCommunity_unique_key(), decode.getCommunity_list().get(i).getName(), decode.getCommunity_list().get(i).getReply_community_amount(), decode.getCommunity_list().get(i).getCommunity_writing_contents(), decode.getCommunity_list().get(i).getImg(), date));
-                    //   decode.getCommunity_list().get(i).get
                 }
                 offset += Integer.parseInt(decode.getCount());
                 count += Integer.parseInt(decode.getCount());
                 swipeRefreshLayout.setRefreshing(false);
-                is_scroll=true;
+                is_scroll = true;
                 adapter.notifyDataSetChanged();
             }
 

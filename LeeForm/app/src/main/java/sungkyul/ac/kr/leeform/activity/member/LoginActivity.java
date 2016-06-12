@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("session use", Session.getCurrentSession().isOpenable() + "");
 
         if (Session.getCurrentSession().implicitOpen()) {
-            callback = new SessionCallback();                  // 이 두개의 함수 중요함
+            callback = new SessionCallback();
             Session.getCurrentSession().addCallback(callback);
             callback.onSessionOpened();
         } else {
-            callback = new SessionCallback();                  // 이 두개의 함수 중요함
+            callback = new SessionCallback();
             Session.getCurrentSession().addCallback(callback);
         }
     }

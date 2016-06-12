@@ -10,7 +10,7 @@ public class MaterialGridItem {
     private String mPrice;
 
 
-    public MaterialGridItem(int material_unique_key,String material_picture_url, String material_name, String material_price) {
+    public MaterialGridItem(int material_unique_key, String material_picture_url, String material_name, String material_price) {
         mKey = material_unique_key;
         mUrl = material_picture_url;
         mName = material_name;

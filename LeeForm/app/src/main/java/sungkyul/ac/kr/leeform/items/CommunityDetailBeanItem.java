@@ -12,8 +12,6 @@ public class CommunityDetailBeanItem {
     String material_price;
     String subcontractor_name;
     String subcontractor_image_url;
-    //String community_picture_url;
-
 
     public String getMaterial_explanation() {
         return material_explanation;

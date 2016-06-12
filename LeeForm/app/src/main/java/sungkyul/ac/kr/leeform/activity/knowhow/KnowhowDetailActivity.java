@@ -59,20 +59,16 @@ public class KnowHowDetailActivity extends AppCompatActivity {
         imgKnowHowDetailBuying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),DemoCreditPage.class));
+                startActivity(new Intent(getApplicationContext(), DemoCreditPage.class));
             }
         });
-
 
         Intent it = getIntent();
         String knowHowKey = it.getExtras().getString("knowhowkey");
         String imageUrl = it.getExtras().getString("image");
 
-        Log.e("DetailKnowHowKey",knowHowKey.toString());
-        Log.e("imag",imageUrl);
-        Picasso.with(getApplicationContext()).load(imageUrl).resize(1080,720).centerCrop().into(imgKnowHowDetailMain);
+        Picasso.with(getApplicationContext()).load(imageUrl).resize(1080, 720).centerCrop().into(imgKnowHowDetailMain);
         getItem(knowHowKey);
-
     }
 
     /**
@@ -87,11 +83,10 @@ public class KnowHowDetailActivity extends AppCompatActivity {
 
         itemView = View.inflate(getApplicationContext(), R.layout.item_knowhow_detail, null);
 
-        ImageView imageView = (ImageView)itemView.findViewById(R.id.imgKnowHowDetailContentsPicture);
+        ImageView imageView = (ImageView) itemView.findViewById(R.id.imgKnowHowDetailContentsPicture);
 
-        Picasso.with(getApplicationContext()).load(url).resize(1030,600).centerCrop().into(imageView);
-//        Picasso.with(getApplicationContext()).load(url).resize(3000,2000).onlyScaleDown().into(imageView);
-//        Picasso.with(getApplicationContext()).load(url).fit().into(imageView);
+        Picasso.with(getApplicationContext()).load(url).resize(1030, 600).centerCrop().into(imageView);
+
         TextView tv1 = (TextView) itemView.findViewById(R.id.tvKnowhowDetailExplain);
         tv1.setText(position + ". " + explain);
 
@@ -116,9 +111,8 @@ public class KnowHowDetailActivity extends AppCompatActivity {
         txtKnowHowDetailShortExplain = (TextView) findViewById(R.id.txtKnowHowDetailShortExplain);
         txtKnowHowDetailUserName = (TextView) findViewById(R.id.txtKnowHowDetailUserName);
         txtKnowHowDetailTime = (TextView) findViewById(R.id.txtKnowHowDetailTime);
-        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
     }
-
 
     private void getItem(String writingUniqueKey) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -126,14 +120,14 @@ public class KnowHowDetailActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Log.e("writingKey",writingUniqueKey);
+        Log.e("writingKey", writingUniqueKey);
         Call<KnowHowDetailBean> call = connectService.getKnowHowDetail(writingUniqueKey);
         call.enqueue(new Callback<KnowHowDetailBean>() {
             @Override
             public void onResponse(Call<KnowHowDetailBean> call, Response<KnowHowDetailBean> response) {
                 KnowHowDetailBean decode = response.body();
-                Log.e("size",decode.getWriting_data1().get(0).getImg()+"");
-                Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(0,imgKnowHowDetailUserInfo.getHeight()).into(imgKnowHowDetailUserInfo);
+                Log.e("size", decode.getWriting_data1().get(0).getImg() + "");
+                Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(0, imgKnowHowDetailUserInfo.getHeight()).into(imgKnowHowDetailUserInfo);
                 txtKnowHowDetailLevel.setText(decode.getWriting_data1().get(0).getLevel().toString());
                 txtKnowHowDetailMakeTime.setText(decode.getWriting_data1().get(0).getMaking_time().toString());
                 txtKnowHowDetailMakingPrice.setText(decode.getWriting_data1().get(0).getCost().toString());
@@ -153,6 +147,5 @@ public class KnowHowDetailActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

@@ -33,9 +33,7 @@ public class MypageWriteFragment extends Fragment {
     private int check = 0;
     private View mView;
     private MainListAdapter adapter;
-
     private static String URL = StaticURL.BASE_URL;
-
     ArrayList<MainListItem> listItem = new ArrayList<>();
 
     @Override
@@ -73,17 +71,13 @@ public class MypageWriteFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent itKnowhowDetail = new Intent(getActivity(), KnowHowDetailActivity.class);
-                Log.e("img",listItem.get(position).getmUrl());
-                itKnowhowDetail.putExtra("image",listItem.get(position).getmUrl()+"");
-                itKnowhowDetail.putExtra("knowhowkey",listItem.get(position).getmNumber()+"");
+                Log.e("img", listItem.get(position).getmUrl());
+                itKnowhowDetail.putExtra("image", listItem.get(position).getmUrl() + "");
+                itKnowhowDetail.putExtra("knowhowkey", listItem.get(position).getmNumber() + "");
                 startActivity(itKnowhowDetail);
-//                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }
         });
-
-
         leeformParsing();
-
         return mView;
     }
 
@@ -100,11 +94,8 @@ public class MypageWriteFragment extends Fragment {
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
             public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
-                Log.e("resonpse", response.code() + "");
                 KnowHowBean decode = response.body();
                 Log.e("err", decode.getErr());
-                Log.e("count", decode.getCount());
-              //  Log.e("list size", decode.getWriting_list().size() + "");
                 listItem.clear();
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
                     Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());

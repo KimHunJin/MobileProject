@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".activity.knowhow.CreateKnowHowActivity">
+    >
 
     <include layout="@layout/toolbar_custom_ok" />
 

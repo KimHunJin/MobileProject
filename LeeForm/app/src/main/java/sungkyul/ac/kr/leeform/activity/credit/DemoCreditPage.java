@@ -1,7 +1,7 @@
 package sungkyul.ac.kr.leeform.activity.credit;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -16,7 +16,7 @@ public class DemoCreditPage extends AppCompatActivity {
 
         String url = "https://web.nicepay.co.kr/smart/mainPay.jsp";
 
-        WebView webView = (WebView)findViewById(R.id.webViewCreditPage);
+        WebView webView = (WebView) findViewById(R.id.webViewCreditPage);
         webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
         webView.clearCache(true);
         webView.clearHistory();

@@ -13,7 +13,6 @@ import sungkyul.ac.kr.leeform.activity.intro.SplashActivity;
 
 public class PopUpActivity extends Activity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +22,13 @@ public class PopUpActivity extends Activity {
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                 // 화면 켜기
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        TextView tv = (TextView)findViewById(R.id.tv_content);
+        TextView tv = (TextView) findViewById(R.id.tv_content);
 
         Intent it = getIntent();
         String message = it.getExtras().getString("message");
         tv.setText(message);
 
-        Button btnOk = (Button)findViewById(R.id.btn_ok);
+        Button btnOk = (Button) findViewById(R.id.btn_ok);
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +38,7 @@ public class PopUpActivity extends Activity {
             }
         });
 
-        Button btnCancel = (Button)findViewById(R.id.btn_cancel);
+        Button btnCancel = (Button) findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

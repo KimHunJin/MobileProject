@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import sungkyul.ac.kr.leeform.MainActivity;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.member.LoginActivity;
 

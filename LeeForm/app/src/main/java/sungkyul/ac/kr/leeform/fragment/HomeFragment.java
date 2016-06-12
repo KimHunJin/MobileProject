@@ -49,13 +49,11 @@ public class HomeFragment extends Fragment {
     private MainListAdapter adapter;
     private Spinner mSpinnerCategory, mSpinnerSort;
     private FloatingActionButton fab;
-    private boolean isScrollingUp =false;
+    private boolean isScrollingUp = false;
     private int mLastFirstVisibleItem = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
     ListView lst;
-
     private static String URL = StaticURL.BASE_URL;
-
     ArrayList<MainListItem> listItem = new ArrayList<>();
 
     @Override
@@ -66,30 +64,11 @@ public class HomeFragment extends Fragment {
         init();
     }
 
-    /*
-    @Override
-    public void onResume() {
-        super.onResume();
-        // 다른 프래그먼트에 갔다가 오면
-        if (check == 1) {
-            check = 0;
-        } else {
-            check = 1;
-        }
-        init();
-        if(sort == true) {
-            latestParsing();
-        } else {
-            leeformParsing();
-        }
-    }
-    */
-
-    private void initializeLayout(){
+    private void initializeLayout() {
         adapter = new MainListAdapter(getContext(), R.layout.item_list_main, listItem);
 
         mSpinnerCategory = (Spinner) mView.findViewById(R.id.spnKnowCategory);
-        //(Spinner)findViewById(R.id.spnKnowCategory); 오류=>보여줄 View가 없어
+        //(Spinner)findViewById(R.id.spnKnowCategory); 오류=>보여줄 View가 없기 때문
         mSpinnerSort = (Spinner) mView.findViewById(R.id.spnKnowSort);
 
         String[] mCategory = getResources().getStringArray(R.array.category); //카테고리의 내용들을 배열(mCategory)에 저장
@@ -112,16 +91,16 @@ public class HomeFragment extends Fragment {
         fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
     }
 
-    private void initializeList(){
+    private void initializeList() {
         // 초기화하고 아이템가져오기
-        if(sort == true) {
+        if (sort == true) {
             latestParsing();
         } else {
             leeformParsing();
         }
     }
 
-    private void setListener(){
+    private void setListener() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,12 +108,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout)mView.findViewById(R.id.swipe_refresh_widget);
+        swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swipe_refresh_widget);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 init();
-                if(sort == true) {
+                if (sort == true) {
                     latestParsing();
                 } else {
                     leeformParsing();
@@ -147,18 +126,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent itKnowhowDetail = new Intent(getActivity(), KnowHowDetailActivity.class);
-                Log.e("img",listItem.get(position).getmUrl());
-                itKnowhowDetail.putExtra("image",listItem.get(position).getmUrl()+"");
-                itKnowhowDetail.putExtra("knowhowkey",listItem.get(position).getmNumber()+"");
+                Log.e("img", listItem.get(position).getmUrl());
+                itKnowhowDetail.putExtra("image", listItem.get(position).getmUrl() + "");
+                itKnowhowDetail.putExtra("knowhowkey", listItem.get(position).getmNumber() + "");
                 startActivity(itKnowhowDetail);
-//                Toast.makeText(getActivity(),(position+1) + "선택",Toast.LENGTH_SHORT).show();
             }
         });
 
         lst.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                final ListView lw = (ListView)view;
+                final ListView lw = (ListView) view;
                 if (view.getId() == lw.getId()) {
                     final int currentFirstVisibleItem = lw.getFirstVisiblePosition();
                     if (currentFirstVisibleItem > mLastFirstVisibleItem) {
@@ -168,10 +146,10 @@ public class HomeFragment extends Fragment {
                         isScrollingUp = true;
                         fab.show();
                     }
-
                     mLastFirstVisibleItem = currentFirstVisibleItem;
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount == totalItemCount) {
@@ -179,13 +157,12 @@ public class HomeFragment extends Fragment {
                         if (is_scroll) {
                             is_scroll = false;
                             is_refresh = false;
-                            if(sort==true) {
+                            if (sort == true) {
                                 latestParsing();
                             } else {
                                 leeformParsing();
                             }
                         }
-
                     }
                 }
             }
@@ -225,7 +202,7 @@ public class HomeFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 처음에는 실행 안되게
                 if (check > 0) {
-                    if(parent.getItemAtPosition(position).equals("인기순")) {
+                    if (parent.getItemAtPosition(position).equals("인기순")) {
                         sort = false;
                         init();
                         initializeList();
@@ -236,7 +213,7 @@ public class HomeFragment extends Fragment {
                         initializeList();
 
                     }
-                    Log.e("sort",sort+"");
+                    Log.e("sort", sort + "");
                 }
             }
 
@@ -253,7 +230,6 @@ public class HomeFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mView = inflater.inflate(R.layout.fragment_home, container, false);
-
         initializeLayout();
         init();
         initializeList();
@@ -261,7 +237,6 @@ public class HomeFragment extends Fragment {
 
         return mView;
     }
-
 
     void init() {
         offset = 0;
@@ -279,7 +254,7 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Log.e("offset",offset+"");
+        Log.e("offset", offset + "");
         Call<KnowHowBean> call = connectService.getWritingList(offset);
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
@@ -303,7 +278,7 @@ public class HomeFragment extends Fragment {
                 offset += Integer.parseInt(decode.getCount());
                 count += Integer.parseInt(decode.getCount());
                 swipeRefreshLayout.setRefreshing(false);
-                is_scroll=true;
+                is_scroll = true;
                 adapter.notifyDataSetChanged();
             }
 
@@ -321,7 +296,7 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Log.e("offset",offset+"");
+        Log.e("offset", offset + "");
         Call<KnowHowBean> call = connectService.getWritingListLatest(offset);
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
@@ -345,7 +320,7 @@ public class HomeFragment extends Fragment {
                 offset += Integer.parseInt(decode.getCount());
                 count += Integer.parseInt(decode.getCount());
                 swipeRefreshLayout.setRefreshing(false);
-                is_scroll=true;
+                is_scroll = true;
                 adapter.notifyDataSetChanged();
             }
 

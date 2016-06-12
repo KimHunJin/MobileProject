@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.net.URLDecoder;
 
 import sungkyul.ac.kr.leeform.MainActivity;
-import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.gcm.PopUpActivity;
 
 /**
@@ -97,7 +95,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         // 만약 팝업 알림 설정이 켜져있으면 실행한다.
         // 팝업으로 사용할 액티비티를 호출할 인텐트를 작성한다.
-        Intent popupIntent = new Intent(getApplicationContext(),PopUpActivity.class)
+        Intent popupIntent = new Intent(getApplicationContext(), PopUpActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         popupIntent.putExtra("message", message);
         // 그리고 호출한다.

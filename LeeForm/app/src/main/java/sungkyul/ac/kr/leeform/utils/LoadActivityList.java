@@ -12,8 +12,8 @@ public class LoadActivityList {
     public static ArrayList<Activity> actList = new ArrayList<Activity>();
 
     // 저장한 모든 액티비티 종료
-    public void closeActivity(){
-        for(int i=0; i< actList.size();i++){
+    public void closeActivity() {
+        for (int i = 0; i < actList.size(); i++) {
             actList.get(i).finish();
         }
     }

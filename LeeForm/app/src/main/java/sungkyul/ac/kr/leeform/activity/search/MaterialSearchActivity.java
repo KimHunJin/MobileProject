@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,9 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.MaterialListBean;
-import sungkyul.ac.kr.leeform.items.MainListItem;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -34,7 +31,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * Created by KyungHee on 2016-05-22.
  * 재료 검색
  */
-public class MaterialSearchActivity extends AppCompatActivity implements View.OnClickListener{
+public class MaterialSearchActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText edtSearch;
     private GridView grvMaterial;
     private MaterialGridAdapter mAdapter;
@@ -68,22 +65,23 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     gridItems.clear();
                     getSearchResult(v.getText().toString());
-                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
                     return true;
                 }
                 return false;
             }
         });
-
-
     }
 
+    /**
+     * 레이아웃 셋팅
+     */
     void layoutSetting() {
         imgBack = (ImageView) findViewById(R.id.imgBackSearch);
         imgSearch = (ImageView) findViewById(R.id.imgSearchOk);
         edtSearch = (EditText) findViewById(R.id.edtToolBarSearch);
         toolbar = (Toolbar) findViewById(R.id.toolbarSearch);
-        keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Override
@@ -103,12 +101,17 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
                 // 검색
                 gridItems.clear();
                 getSearchResult(edtSearch.getText().toString());
-                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
                 break;
             }
         }
     }
 
+    /**
+     * 검색한 재료 정보 가져오기
+     *
+     * @param text
+     */
     private void getSearchResult(String text) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)
@@ -122,8 +125,7 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
             public void onResponse(Call<MaterialListBean> call, Response<MaterialListBean> response) {
                 MaterialListBean decode = response.body();
                 for (int i = 0; i < (decode.getSearch_data().size()); i++) {
-                    //   decode.getCommunity_list().get(i).get
-                    gridItems.add(new MaterialGridItem(decode.getSearch_data().get(i).getMaterial_unique_key(),decode.getSearch_data().get(i).getMaterial_picture_url(),decode.getSearch_data().get(i).getMaterial_name(),decode.getSearch_data().get(i).getMaterial_price()));
+                    gridItems.add(new MaterialGridItem(decode.getSearch_data().get(i).getMaterial_unique_key(), decode.getSearch_data().get(i).getMaterial_picture_url(), decode.getSearch_data().get(i).getMaterial_name(), decode.getSearch_data().get(i).getMaterial_price()));
                 }
                 mAdapter.notifyDataSetChanged();
             }

@@ -10,8 +10,6 @@ public class CommunityItem {
     private String cContent;
     private String cImageURL;
     private String cTime;
-    //private int cImg;
-
 
     public String getcTime() {
         return cTime;

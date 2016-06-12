@@ -24,7 +24,6 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
-import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -33,7 +32,6 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * 노하우 검색
  */
 public class KnowHowSearchActivity extends AppCompatActivity implements View.OnClickListener {
-
     private Toolbar toolbar;
     private EditText edtSearch;
     private ImageView imgBack, imgSearch;
@@ -65,28 +63,25 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
         edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     listItems.clear();
                     getSearchResult(v.getText().toString());
-                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
                 }
                 return false;
             }
         });
     }
 
-    void init() {
-        for (int i = 0; i < 10; i++) {
-//            listItems.add(new MainListItem(i, "23,000", "4", "2000",R.drawable.tables2)); //리스트에 추가
-        }
-    }
-
+    /**
+     * 레이아웃 셋팅
+     */
     void layoutSetting() {
         imgSearch = (ImageView) findViewById(R.id.imgSearchOk);
         edtSearch = (EditText) findViewById(R.id.edtToolBarSearch);
         imgBack = (ImageView) findViewById(R.id.imgBackSearch);
         toolbar = (Toolbar) findViewById(R.id.toolbarSearch);
-        keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Override
@@ -106,12 +101,17 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
                 // 검색
                 listItems.clear();
                 getSearchResult(edtSearch.getText().toString());
-                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
                 break;
             }
         }
     }
 
+    /**
+     * 검색한 노하우의 가격, 제작시간, 스크랩 수, 이미지 url, 제목, 간단한 설명 가져오기
+     *
+     * @param text
+     */
     private void getSearchResult(String text) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)

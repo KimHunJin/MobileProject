@@ -4,7 +4,6 @@ package sungkyul.ac.kr.leeform.items;
  * Created by HunJin on 2016-05-10.
  */
 public class MainListItem {
-
     private int mNumber;
     private String mCost;
     private String mTime;

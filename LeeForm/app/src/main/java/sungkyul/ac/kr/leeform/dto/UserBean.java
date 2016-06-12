@@ -3,7 +3,6 @@ package sungkyul.ac.kr.leeform.dto;
 import java.util.List;
 
 import sungkyul.ac.kr.leeform.items.UserBeanItem;
-import sungkyul.ac.kr.leeform.items.UserInfoBeanItem;
 
 /**
  * Created by user on 2016-06-11.

@@ -57,7 +57,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by HunJin on 2016-05-09.
- * <p/>
+ * <p>
  * 애플리케이션의 기본이 되는 메인 액티비티입니다.
  */
 public class MainActivity extends AppCompatActivity {
@@ -110,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
         userNickName = it.getExtras().getString("NickName");
         userImagePath = it.getExtras().getString("Image");
 
-
-        Log.e("userIdMain", userId + " : " + userNickName + " : " + userImagePath);
         tabInitialization();
         initializeLayout();
         setListener();
@@ -128,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 boolean sentToken = sharedPreferences
                         .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
                 if (sentToken) {
-                    Log.e("sentToken",R.string.gcm_send_message+"");
+                    Log.e("sentToken", R.string.gcm_send_message + "");
                 } else {
-                    Log.e("information",R.string.token_error_message+"");
+                    Log.e("information", R.string.token_error_message + "");
                 }
             }
         };
@@ -187,40 +185,29 @@ public class MainActivity extends AppCompatActivity {
      * setUser() 메서드를 호출합니다.
      */
     private void checkUser() {
-        Log.e("userid", userId + "");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Log.e("abcd", "abcd" + userNickName + " " + userImagePath);
         ConnectService connectService = retrofit.create(ConnectService.class);
         Call<UserInfoBean> call = connectService.getUserInfo(userId + "");
-        Log.e("call", "call");
         call.enqueue(new Callback<UserInfoBean>() {
             @Override
             public void onResponse(Call<UserInfoBean> call, Response<UserInfoBean> response) {
-                Log.e("resonpse", response.code() + "");
                 UserInfoBean decode = response.body();
                 Log.e("err", decode.getErr());
                 String err = decode.getErr();
                 if (err.equals("0")) {
-                    Log.e("yse", "yes");
                     userUniqueKey = decode.getKakao_user_info().get(0).getUser_unique_key();
                     userNickNameIn = decode.getKakao_user_info().get(0).getName();
                     userImagePathIn = decode.getKakao_user_info().get(0).getImg();
 
                     SaveDataMemberInfo.setAppPreferences(getApplicationContext(), "user_key", userUniqueKey);
-                    Log.e("user_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
-
-
                     navigationSetting();
-
                 } else if (err.equals("4")) {
-                    Log.e("sibar", "sibar");
                     setUser(userId, userNickName, userImagePath);
                 }
-
             }
 
             @Override
@@ -236,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
     private void navigationSetting() {
 
         txtNavUserNickName.setText(userNickNameIn);
-        Log.e("userImagePath", userImagePathIn);
         if (userImagePath != null) {
             userImageSetting();
         }
@@ -415,8 +401,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void registerReceiver(){
-        if(!isReceiverRegistered) {
+    private void registerReceiver() {
+        if (!isReceiverRegistered) {
             LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                     new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
             isReceiverRegistered = true;
