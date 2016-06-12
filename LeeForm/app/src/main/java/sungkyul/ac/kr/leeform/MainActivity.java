@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    String[] item;
+
     Handler handler = new Handler();
 
     /**
@@ -313,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] item = getResources().getStringArray(R.array.nav);
+        item = getResources().getStringArray(R.array.nav);
 
         if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
             item[2] = "판매 내역";

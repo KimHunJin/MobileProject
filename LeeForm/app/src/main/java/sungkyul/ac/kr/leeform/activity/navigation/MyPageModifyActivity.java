@@ -12,10 +12,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.usermgmt.response.model.User;
@@ -60,6 +62,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
     EditText edtUserName, edtAddress, edtBankName, edtBankNumber, edtPhoneNumber, edtAccountName;
     ImageView image, imgOk, imgBack;
     String URL = StaticURL.BASE_URL;
+    private Toolbar toolbar;
+    private TextView txtToolbarTitle;;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -81,6 +85,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
         getUserDetails(); //값가져오기
 
 
+        toolbar.setContentInsetsAbsolute(0,0);
+        txtToolbarTitle.setText("내 정보 수정");
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +173,8 @@ public class MyPageModifyActivity extends AppCompatActivity {
         imgOk = (ImageView) findViewById(R.id.imgOk);
         image = (ImageView) findViewById(R.id.imgMypageUser);
         imgBack = (ImageView) findViewById(R.id.imgBackOk);
-
+        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
+        txtToolbarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
 
     }
 

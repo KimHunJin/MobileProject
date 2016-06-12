@@ -33,7 +33,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView imgKnowHowDetailMain, imgKnowHowDetailUserInfo, imgKnowHowDetailBuying;
     private TextView txtKnowHowDetailName, txtKnowHowDetailShortExplain, txtKnowHowDetailTime, txtKnowHowDetailUserName;
-    private TextView txtKnowHowDetailLevel, txtKnowHowDetailMakeTime, txtKnowHowDetailMakingPrice;
+    private TextView txtKnowHowDetailLevel, txtKnowHowDetailMakeTime, txtKnowHowDetailMakingPrice, txtToolBarTitle;
 
 
     @Override
@@ -116,6 +116,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
         txtKnowHowDetailShortExplain = (TextView) findViewById(R.id.txtKnowHowDetailShortExplain);
         txtKnowHowDetailUserName = (TextView) findViewById(R.id.txtKnowHowDetailUserName);
         txtKnowHowDetailTime = (TextView) findViewById(R.id.txtKnowHowDetailTime);
+        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
     }
 
 
@@ -140,6 +141,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
                 txtKnowHowDetailShortExplain.setText(decode.getWriting_data1().get(0).getExplanation().toString());
                 txtKnowHowDetailUserName.setText(decode.getWriting_data1().get(0).getName().toString());
                 txtKnowHowDetailTime.setText(decode.getWriting_data1().get(0).getWriting_date());
+                txtToolBarTitle.setText(decode.getWriting_data1().get(0).getWriting_name());
 
                 for (int i = 0; i < decode.getWriting_data2().size(); i++) {
                     makeKnowhowItem(i + 1, decode.getWriting_data2().get(i).getWriting_contents().toString(), decode.getWriting_data2().get(i).getPicture_url().toString());

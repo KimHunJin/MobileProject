@@ -70,7 +70,7 @@
         <activity android:name=".activity.member.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity" />
         <activity android:name=".activity.knowhow.WriteKnowHowActivity" />
-        <activity android:name=".activity.navigation.MyPageModifyActivity" />
+        <activity android:name=".activity.member.PurchaseListActivity"/>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

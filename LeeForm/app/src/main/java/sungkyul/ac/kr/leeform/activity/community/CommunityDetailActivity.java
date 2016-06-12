@@ -47,7 +47,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
     ArrayList<ReplyItem> listItem = new ArrayList<>();
     private static String URL = StaticURL.BASE_URL;
     int number;
-    TextView content, replyCount, userName, txtReplyRegister, txtTime;
+    TextView content, replyCount, userName, txtReplyRegister, txtTime, txtToolBarTitle;
     ImageView userImg, imgBack;
     EditText edtContents;
     ListView lst;
@@ -114,6 +114,7 @@ public class CommunityDetailActivity extends AppCompatActivity {
         userImg = (ImageView) header.findViewById(R.id.imgHeaderCommunityDetail);
         txtReplyRegister = (TextView) findViewById(R.id.txtCommunityReplyRegister);
         edtContents = (EditText) findViewById(R.id.edtCommunityReplyContents);
+        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
     }
 
     /**
