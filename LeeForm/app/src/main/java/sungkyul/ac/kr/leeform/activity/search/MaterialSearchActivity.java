@@ -59,7 +59,7 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
 
     void init() {
         for (int i = 0; i < 10; i++) {
-            gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
+          //  gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
         }
     }
 

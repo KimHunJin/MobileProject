@@ -1,19 +1,15 @@
 package sungkyul.ac.kr.leeform.items;
 
 /**
- * Created by MiSeon on 2016-05-30.
- * json을 받아줄 클래스를 생성
- * json의 키에 해당하는 값들을 변수 이름으로 지정
+ * Created by user on 2016-06-12.
  */
-public class CommunityDetailBeanItem {
-    String material_unique_key;
+public class MaterialDetailBeanItem {
+    int material_unique_key;
     String material_name;
     String material_explanation;
     String material_price;
     String subcontractor_name;
     String subcontractor_image_url;
-    //String community_picture_url;
-
 
     public String getMaterial_explanation() {
         return material_explanation;
@@ -39,11 +35,11 @@ public class CommunityDetailBeanItem {
         this.material_price = material_price;
     }
 
-    public String getMaterial_unique_key() {
+    public int getMaterial_unique_key() {
         return material_unique_key;
     }
 
-    public void setMaterial_unique_key(String material_unique_key) {
+    public void setMaterial_unique_key(int material_unique_key) {
         this.material_unique_key = material_unique_key;
     }
 
