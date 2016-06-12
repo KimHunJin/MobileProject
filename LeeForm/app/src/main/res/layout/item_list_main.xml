@@ -81,6 +81,9 @@
                     android:text="노하우의 제목"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp"
+                    android:singleLine="true"
+                    android:maxLength="10"
+                    android:ellipsize="end"
                     android:textStyle="bold" />
 
                 <TextView
@@ -88,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:singleLine="true"
                     android:text="노하우의 간단한 키워드"
                     android:textColor="@color/colorToolBarTextColor"
                     android:textSize="13sp" />

@@ -2,6 +2,7 @@ package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.EndString;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -90,8 +92,8 @@ public class MainListAdapter extends BaseAdapter {
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());
         viewHolder.txtMainTime.setText(listItem.getmTime());
-        viewHolder.txtMainName.setText(listItem.getmName());
-        viewHolder.txtMainKeyWord.setText(listItem.getmKeyWord());
+        viewHolder.txtMainName.setText(EndString.endString(listItem.getmName().toString(),15));
+        viewHolder.txtMainKeyWord.setText(EndString.endString(listItem.getmKeyWord().toString(),15));
 
         viewHolder.imgMainLike.setOnClickListener(new View.OnClickListener() {
             @Override
