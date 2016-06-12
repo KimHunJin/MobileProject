@@ -78,7 +78,7 @@ public class MyPageModifyActivity extends AppCompatActivity {
         getUserDetails(); //값가져오기
 
         toolbar.setContentInsetsAbsolute(0, 0);
-        txtToolbarTitle.setText("내 정보 수정");
+        txtToolbarTitle.setText("프로필 수정");
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

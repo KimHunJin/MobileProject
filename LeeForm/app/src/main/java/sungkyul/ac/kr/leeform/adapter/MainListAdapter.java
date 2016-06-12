@@ -131,7 +131,6 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("real err", decodedResponse.getErr());
                 if (decodedResponse.getErr().equals("3")) {
                     img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
                 } else {
@@ -164,7 +163,6 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("like err", errCode);
                 img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
             }
 
@@ -183,8 +181,6 @@ public class MainListAdapter extends BaseAdapter {
 
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
-        Log.e("key", key);
-        Log.e("writing_key", writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -195,7 +191,6 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("unlike err", errCode);
                 img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
             }
 
@@ -214,8 +209,6 @@ public class MainListAdapter extends BaseAdapter {
 
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
-        Log.e("key", key);
-        Log.e("writing_key", writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -226,7 +219,6 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("real err", decodedResponse.getErr());
                 if (decodedResponse.getErr().equals("3")) {
                     // 삭제 구문
                     unLikeWrite(writingKey, img);
