@@ -11,6 +11,7 @@ public class UserBeanItem {
     String bank_name;
     String account_number;
     String phone_number;
+    String account_name;
 
     public String getName() {
         return name;
@@ -66,5 +67,13 @@ public class UserBeanItem {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
     }
 }

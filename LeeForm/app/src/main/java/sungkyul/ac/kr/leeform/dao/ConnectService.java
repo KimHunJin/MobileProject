@@ -14,9 +14,14 @@ import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.MaterialListBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
+import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
+<<<<<<< HEAD
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
+=======
+import sungkyul.ac.kr.leeform.dto.UserModify;
+>>>>>>> e21684f948a5ea0983759573431be556f6398c41
 
 /**
  * Created by HunJin on 2016-06-10.
@@ -114,7 +119,11 @@ public interface ConnectService {
     );
 
     @GET("modify_myinfo.php")
-    Call<UserBean> setUserDetail(
+    Call<UserModify> setUserDetail(
+            @QueryMap Map<String, String> options
+    );
+    @GET("set_sales_authority.php")
+    Call<RegistBean> setResigster(
             @QueryMap Map<String, String> options
     );
 

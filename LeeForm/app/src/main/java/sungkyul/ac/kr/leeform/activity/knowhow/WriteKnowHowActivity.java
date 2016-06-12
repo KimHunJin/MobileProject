@@ -47,7 +47,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String URL = StaticURL.BASE_URL; // api 기본 베이스 주소
     String imageStorageUrl = StaticURL.IMAGE_URL; // 이미지 저장 위치
     int serverResponseCode = 0;
-    String  categoryposition;
+    String categoryposition;
     String uploadFilePath; // 파일 경로
     String uploadFileName; // 파일 이름
     String writingUniqueKey;
@@ -144,9 +144,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("strUrl", strUrl.size() + "");
 
-               check();
+                check();
 
-                if(check()==false){
+                if (check() == false) {
                     setting();
                     saveKnowGetKey();
                     finish();
@@ -181,7 +181,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 btnSellYes.setSelected(false);
                 btnSellNo.setSelected(true);
                 linearSell.setVisibility(View.INVISIBLE);
-                check_sale="0";
+                check_sale = "0";
 
             }
         });
@@ -218,10 +218,10 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     /**
      * 기본값 셋팅
      */
-  private void setting() {
+    private void setting() {
 
         check_sale = "0"; //판매NO
-        level=btnLevelHigh.getText().toString(); //레벨 상
+        level = btnLevelHigh.getText().toString(); //레벨 상
         edtSellAmount.setText("0"); //판매수량 0
         edtSellPrice.setText("0"); //판매가격0
         edtYoutubuCode.setText("0"); //youtubucode
@@ -229,38 +229,38 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
     }
 
-   private boolean check(){
-        if(edtName.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"제목을 입력해주세요",Toast.LENGTH_SHORT).show();
-            return  true;
+    private boolean check() {
+        if (edtName.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+            return true;
         }
        /* if(edtYoutubuCode.getText().toString().equals("")){
            Toast.makeText(getApplicationContext(),"유튜브코드를 입력해주세요",Toast.LENGTH_SHORT).show();
            return true;
        }*/
-       if(edtCost.getText().toString().equals("")){
-           Toast.makeText(getApplicationContext(),"소모비용을 입력해주세요",Toast.LENGTH_SHORT).show();
-           return true;
-       }
-       if(check_sale.equals("1")){
-           if(edtSellAmount.getText().toString().equals("")){
-               Toast.makeText(getApplicationContext(),"판매수량을 입력해주세요",Toast.LENGTH_SHORT).show();
-               return true;
-           }
-           if(edtSellPrice.getText().toString().equals("")){
-               Toast.makeText(getApplicationContext(),"판매 가격을 입력해주세요",Toast.LENGTH_SHORT).show();
-               return  true;
-           }
+        if (edtCost.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "소모비용을 입력해주세요", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (check_sale.equals("1")) {
+            if (edtSellAmount.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "판매수량을 입력해주세요", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            if (edtSellPrice.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "판매 가격을 입력해주세요", Toast.LENGTH_SHORT).show();
+                return true;
+            }
 
-       }
-       if(spnCategory.getSelectedItem().toString().equals("카테고리")){
-           Toast.makeText(getApplicationContext(),"카테고리를 선택해주세요",Toast.LENGTH_SHORT).show();
-           return true;
-       }
-       if(spnMakingTime.getSelectedItem().toString().equals("소요시간")){
-           Toast.makeText(getApplicationContext(),"소요시간을 선택해주세요",Toast.LENGTH_SHORT).show();
-           return true;
-       }
+        }
+        if (spnCategory.getSelectedItem().toString().equals("카테고리")) {
+            Toast.makeText(getApplicationContext(), "카테고리를 선택해주세요", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (spnMakingTime.getSelectedItem().toString().equals("소요시간")) {
+            Toast.makeText(getApplicationContext(), "소요시간을 선택해주세요", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         return false;
     }
 
@@ -296,7 +296,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         gridItems.clear();
         for (int i = 0; i < strUrl.size(); i++) {
             gridItems.add(new CreateKnowHowItem(i, strUrl.get(i), strExplain.get(i)));
-            Log.e("strUrl",strUrl.get(i));
+            Log.e("strUrl", strUrl.get(i));
         }
         //사진 추가한 후 +이미지가 뜨도록 +이미지를 GridView에 추가
         gridItems.add(new CreateKnowHowItem(gridItems.size(), R.drawable.plus, "클릭"));
@@ -304,8 +304,8 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     }
 
     private void saveKnowGetKey() {
-        if(edtName.getText().toString().equals("")){
-            Toast.makeText(getApplicationContext(),"제목입력",Toast.LENGTH_SHORT).show();
+        if (edtName.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "제목입력", Toast.LENGTH_SHORT).show();
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -319,7 +319,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("user_unique_key", userUniqueKey);
 
         // data.put("writing_category_key", "1"); // 변경 필요
-        data.put("category_name",selectedCategory);
+        data.put("category_name", selectedCategory);
         data.put("writing_name", edtName.getText().toString());
         data.put("check_video", "1"); // 변경 필요
         // 지워 data.put("video_url", edtVideoUrl.getText().toString());
@@ -330,17 +330,17 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("level", level); // 변경 필요
         data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
         data.put("amount", edtSellAmount.getText().toString());
-        data.put("price",edtSellPrice.getText().toString());
+        data.put("price", edtSellPrice.getText().toString());
         //   data.put("sellprice",edtSellPrice.getText().toString());// 변경 필요
-        Log.e("log",userUniqueKey+"");
-        Log.e("log",selectedCategory);
-        Log.e("log",edtName.getText().toString()+"");
-        Log.e("log",check_sale+"");
-        Log.e("log",edtYoutubuCode.getText().toString()+"");
-        Log.e("log",edtCost.getText().toString()+"");
-        Log.e("log",selectedMakingTime+"");
-        Log.e("log",level+"");
-        Log.e("log",edtSellAmount.getText().toString()+"");
+        Log.e("log", userUniqueKey + "");
+        Log.e("log", selectedCategory);
+        Log.e("log", edtName.getText().toString() + "");
+        Log.e("log", check_sale + "");
+        Log.e("log", edtYoutubuCode.getText().toString() + "");
+        Log.e("log", edtCost.getText().toString() + "");
+        Log.e("log", selectedMakingTime + "");
+        Log.e("log", level + "");
+        Log.e("log", edtSellAmount.getText().toString() + "");
 
         Call<KnowHowWritingBean> call = connectService.setKnowGetKey(data);
         call.enqueue(new Callback<KnowHowWritingBean>() {
@@ -385,8 +385,8 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 //URL과 노하우 설명 가져오기
-                Log.e("resultCode",resultCode+"");
-                Log.e("requestCode",requestCode+"");
+                Log.e("resultCode", resultCode + "");
+                Log.e("requestCode", requestCode + "");
                 strUrl = data.getStringArrayListExtra("image");
                 strExplain = data.getStringArrayListExtra("explain");
                 init();
