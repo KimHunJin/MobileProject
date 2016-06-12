@@ -12,6 +12,15 @@ public class MaterialListBean {
     private String err;
     private String count;
     private List<MaterialListBeanItem> material_list;
+    private List<MaterialListBeanItem> search_data;
+
+    public List<MaterialListBeanItem> getSearch_data() {
+        return search_data;
+    }
+
+    public void setSearch_data(List<MaterialListBeanItem> search_data) {
+        this.search_data = search_data;
+    }
 
     public String getErr() {
         return err;

@@ -121,9 +121,9 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
             @Override
             public void onResponse(Call<MaterialListBean> call, Response<MaterialListBean> response) {
                 MaterialListBean decode = response.body();
-                for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
+                for (int i = 0; i < (decode.getSearch_data().size()); i++) {
                     //   decode.getCommunity_list().get(i).get
-                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getMaterial_unique_key(),decode.getMaterial_list().get(i).getMaterial_picture_url(),decode.getMaterial_list().get(i).getMaterial_name(),decode.getMaterial_list().get(i).getMaterial_price()));
+                    gridItems.add(new MaterialGridItem(decode.getSearch_data().get(i).getMaterial_unique_key(),decode.getSearch_data().get(i).getMaterial_picture_url(),decode.getSearch_data().get(i).getMaterial_name(),decode.getSearch_data().get(i).getMaterial_price()));
                 }
                 mAdapter.notifyDataSetChanged();
             }
