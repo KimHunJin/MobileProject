@@ -11,7 +11,7 @@ import sungkyul.ac.kr.leeform.fragment.MypageWriteFragment;
 /**
  * Created by user on 2016-06-09.
  */
-public class MypageAdapter extends FragmentPagerAdapter {
+public class MypageFragmentAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[]{"내가 쓴 노하우", "스크랩한 노하우"};
 
@@ -19,7 +19,7 @@ public class MypageAdapter extends FragmentPagerAdapter {
     private Fragment[] fragments = new Fragment[]{new MypageWriteFragment(),new MypageScrapFragment()};
     private Context context;
 
-    public MypageAdapter(FragmentManager fm, Context context) {
+    public MypageFragmentAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }

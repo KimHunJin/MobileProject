@@ -18,11 +18,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
-import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
-import sungkyul.ac.kr.leeform.adapter.MypageAdapter;
+import sungkyul.ac.kr.leeform.adapter.MypageFragmentAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.UserBean;
-import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
@@ -79,7 +77,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
-        MypageAdapter mainFragmentAdapter = new MypageAdapter(getSupportFragmentManager(), MyPageActivity.this);
+        MypageFragmentAdapter mainFragmentAdapter = new MypageFragmentAdapter(getSupportFragmentManager(), MyPageActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.myPageTab);

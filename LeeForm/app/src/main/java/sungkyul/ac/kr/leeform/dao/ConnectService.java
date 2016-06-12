@@ -19,9 +19,8 @@ import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 //<<<<<<< HEAD
-import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 //=======
-import sungkyul.ac.kr.leeform.dto.UserModify;
+import sungkyul.ac.kr.leeform.dto.UserModifyBean;
 //>>>>>>> e21684f948a5ea0983759573431be556f6398c41
 
 /**
@@ -120,7 +119,7 @@ public interface ConnectService {
     );
 
     @GET("modify_myinfo.php")
-    Call<UserModify> setUserDetail(
+    Call<UserModifyBean> setUserDetail(
             @QueryMap Map<String, String> options
     );
     @GET("set_sales_authority.php")

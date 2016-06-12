@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kakao.usermgmt.response.model.User;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedOutputStream;
@@ -30,7 +29,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,15 +40,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
-import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
-import sungkyul.ac.kr.leeform.dto.UserModify;
-import sungkyul.ac.kr.leeform.items.ReplyItem;
+import sungkyul.ac.kr.leeform.dto.UserModifyBean;
 import sungkyul.ac.kr.leeform.utils.DownloadImageTask;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
-import sungkyul.ac.kr.leeform.utils.TimeTransForm;
 
 /**
  * Created by user on 2016-06-10.
@@ -487,12 +481,12 @@ public class MyPageModifyActivity extends AppCompatActivity {
 
         }
 
-        final Call<UserModify> call = connectService.setUserDetail(data);
+        final Call<UserModifyBean> call = connectService.setUserDetail(data);
 
-        call.enqueue(new Callback<UserModify>() {
+        call.enqueue(new Callback<UserModifyBean>() {
             @Override
-            public void onResponse(Call<UserModify> call, Response<UserModify> response) {
-                UserModify decode = response.body();
+            public void onResponse(Call<UserModifyBean> call, Response<UserModifyBean> response) {
+                UserModifyBean decode = response.body();
                 Log.e("ModifyErr", decode.getErr() + "");
                 if (decode.getErr().equals("0")) {
                     Toast.makeText(getApplicationContext(), "수정되었습니다.", Toast.LENGTH_SHORT).show();
@@ -500,7 +494,7 @@ public class MyPageModifyActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserModify> call, Throwable t) {
+            public void onFailure(Call<UserModifyBean> call, Throwable t) {
                 Log.e("failure", t.getMessage());
             }
         });

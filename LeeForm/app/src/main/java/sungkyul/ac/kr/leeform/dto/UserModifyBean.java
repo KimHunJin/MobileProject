@@ -3,7 +3,7 @@ package sungkyul.ac.kr.leeform.dto;
 /**
  * Created by user on 2016-06-11.
  */
-public class UserModify {
+public class UserModifyBean {
     String err;
     String user_unique_key;
     String name;
