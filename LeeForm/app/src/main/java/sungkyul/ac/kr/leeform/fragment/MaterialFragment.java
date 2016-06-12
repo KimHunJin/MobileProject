@@ -86,6 +86,16 @@ public class MaterialFragment extends Fragment {
 
         init();
         getMaterialDetailList();
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent it = new Intent(getActivity(),MaterialDetailActivity.class);
+                Log.e("material_unique_key",gridItems.get(position).getmKey()+"");
+                it.putExtra("material_unique_key",gridItems.get(position).getmKey()+"");
+                startActivity(it);
+            }
+        });
         return mView;
     }
 
@@ -173,8 +183,8 @@ public class MaterialFragment extends Fragment {
                 //Log.e("getmKey", decode.getMaterial_list().get(1).getmKey()+"");
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getmKey(), decode.getMaterial_list().get(i).getmName(), decode.getMaterial_list().get(i).getmPrice(), decode.getMaterial_list().get(i).getmUrl()));
                     //   decode.getCommunity_list().get(i).get
+                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getMaterial_unique_key(),decode.getMaterial_list().get(i).getMaterial_picture_url(),decode.getMaterial_list().get(i).getMaterial_name(),decode.getMaterial_list().get(i).getMaterial_price()));
                 }
                 offset += Integer.parseInt(decode.getCount());
                 count += Integer.parseInt(decode.getCount());

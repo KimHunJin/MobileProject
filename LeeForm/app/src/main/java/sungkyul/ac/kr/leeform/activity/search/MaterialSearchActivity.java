@@ -1,9 +1,13 @@
 package sungkyul.ac.kr.leeform.activity.search;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -12,9 +16,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.KnowHowBean;
+import sungkyul.ac.kr.leeform.dto.MaterialListBean;
+import sungkyul.ac.kr.leeform.items.MainListItem;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by KyungHee on 2016-05-22.
@@ -26,6 +40,7 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
     private MaterialGridAdapter mAdapter;
     private Toolbar toolbar;
     private ImageView imgBack, imgSearch;
+    private InputMethodManager keyboard;
 
     ArrayList<MaterialGridItem> gridItems = new ArrayList<>();
 
@@ -47,7 +62,20 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
 
         grvMaterial.setAdapter(mAdapter);
 
-        init();
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    gridItems.clear();
+                    getSearchResult(v.getText().toString());
+                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
     }
 
     void layoutSetting() {
@@ -55,12 +83,7 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
         imgSearch = (ImageView) findViewById(R.id.imgSearchOk);
         edtSearch = (EditText) findViewById(R.id.edtToolBarSearch);
         toolbar = (Toolbar) findViewById(R.id.toolbarSearch);
-    }
-
-    void init() {
-        for (int i = 0; i < 10; i++) {
-          //  gridItems.add(new MaterialGridItem(i, "판자", R.drawable.panza));
-        }
+        keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Override
@@ -78,8 +101,38 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
             }
             case R.id.imgSearchOk: {
                 // 검색
+                gridItems.clear();
+                getSearchResult(edtSearch.getText().toString());
+                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
                 break;
             }
         }
+    }
+
+    private void getSearchResult(String text) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<MaterialListBean> call = connectService.getMaterialSearch(text);
+        call.enqueue(new Callback<MaterialListBean>() {
+            @Override
+            public void onResponse(Call<MaterialListBean> call, Response<MaterialListBean> response) {
+                MaterialListBean decode = response.body();
+                for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
+                    //   decode.getCommunity_list().get(i).get
+                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getMaterial_unique_key(),decode.getMaterial_list().get(i).getMaterial_picture_url(),decode.getMaterial_list().get(i).getMaterial_name(),decode.getMaterial_list().get(i).getMaterial_price()));
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<MaterialListBean> call, Throwable t) {
+
+            }
+        });
+
     }
 }

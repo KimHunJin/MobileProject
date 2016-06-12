@@ -141,5 +141,10 @@ public interface ConnectService {
     Call<KnowHowBean> getKnowHowSearch(
             @Query("data") String data
     );
+
+    @GET("search_material.php")
+    Call<MaterialListBean> getMaterialSearch(
+            @Query("data") String data
+    );
 }
 
