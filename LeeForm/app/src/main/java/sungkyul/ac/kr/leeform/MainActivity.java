@@ -46,6 +46,7 @@ import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.service.RegistrationIntentService;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
@@ -351,6 +352,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getAuthority() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        String userKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
+        final Call<UserBean> call = connectService.getUserDetail(userKey);
+
+        call.enqueue(new Callback<UserBean>() {
+            @Override
+            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
+
+                UserBean decode = response.body();
+                String authority = decode.getMyinfo_detail().get(0).getAuthority();
+                Log.e("authority", authority);
+            }
+
+            @Override
+            public void onFailure(Call<UserBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
+    }
+
 
     /**
      * 뒤로가기 키를 눌렀을 때
