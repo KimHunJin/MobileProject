@@ -12,9 +12,11 @@ import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
+import sungkyul.ac.kr.leeform.dto.MaterialListBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
+import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 
 /**
  * Created by HunJin on 2016-06-10.
@@ -114,6 +116,11 @@ public interface ConnectService {
     @GET("modify_myinfo.php")
     Call<UserBean> setUserDetail(
             @QueryMap Map<String, String> options
+    );
+
+    @GET("material_list.php")
+    Call<MaterialListBean> getMaterialList(
+            @Query("offset") int offset
     );
 }
 

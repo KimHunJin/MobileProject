@@ -8,10 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
 
 /**
  * Created by KyungHee on 2016-05-12.
@@ -22,6 +25,8 @@ public class MaterialGridAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<MaterialGridItem> item;
     private int layout;
+    String errCode = "0";
+    MaterialGridItem gridItem;
 
     public MaterialGridAdapter(Context context, int layout, ArrayList<MaterialGridItem> item) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,14 +58,19 @@ public class MaterialGridAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parent, false);
             gridViewHolder.txtGridMaterial = (TextView) convertView.findViewById(R.id.txtGridMaterialName);
             gridViewHolder.imgGridMaterial = (ImageView) convertView.findViewById(R.id.imgGridMaterial);
+            gridViewHolder.txtGridMaterialCost = (TextView)convertView.findViewById(R.id.txtGridMaterialCost);
             convertView.setTag(gridViewHolder);
         } else {
             gridViewHolder = (GridViewHolder) convertView.getTag();
         }
 
         MaterialGridItem gridItem = item.get(position);
-        gridViewHolder.imgGridMaterial.setImageResource(gridItem.getmImg());
-        gridViewHolder.txtGridMaterial.setText(gridItem.getmName());
+
+        Picasso.with(inflater.getContext()).load(gridItem.getMaterial_picture_url()).into(gridViewHolder.imgGridMaterial);
+
+        //gridViewHolder.imgGridMaterial.setImageResource(gridItem.getmUrl());
+        gridViewHolder.txtGridMaterial.setText(gridItem.getMaterial_name());
+        gridViewHolder.txtGridMaterialCost.setText(gridItem.getMaterial_price());
 
         return convertView;
     }
@@ -68,5 +78,6 @@ public class MaterialGridAdapter extends BaseAdapter {
     class GridViewHolder {
         private ImageView imgGridMaterial;
         private TextView txtGridMaterial;
+        private TextView txtGridMaterialCost;
     }
 }
