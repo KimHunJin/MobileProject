@@ -17,7 +17,6 @@ public class SaveDataMemberInfo {
         prefEditor.commit();
     }
 
-
     public static String getAppPreferences
             (Context context, String key) {
         String returnValue = null;

@@ -79,16 +79,16 @@ public class CommunityDetailActivity extends AppCompatActivity {
         //adapter를 통해 item.list.reply.xml을 ArrayList(listItem)에 설정한다.
         adapter = new CommunityReplyLIstAdapter(getApplicationContext(), R.layout.item_list_reply, listItem);
         lst = (ListView) findViewById(R.id.replyList);
-        //lst에 adapter를 등록한다.
+        //lst 윗부분에 넣기
         lst.addHeaderView(header);
+        //lst에 adapter를 등록한다.
         lst.setAdapter(adapter);
-
-        //리스트 윗부분에 넣기
 
         layoutSetting();
         getCommunityDetail();
         getCommunityReply();
 
+        //댓글 등록 시
         txtReplyRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,15 +106,18 @@ public class CommunityDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 레이아웃 셋팅
+     */
     private void layoutSetting() {
-        txtTime=(TextView)header.findViewById(R.id.txtHeaderCommunityTime);
+        txtTime = (TextView) header.findViewById(R.id.txtHeaderCommunityTime);
         content = (TextView) header.findViewById(R.id.txtHeaderContentCommunity);
         replyCount = (TextView) findViewById(R.id.txtHeaderReplyCount);
         userName = (TextView) header.findViewById(R.id.txtHeaderCommunityUserName);
         userImg = (ImageView) header.findViewById(R.id.imgHeaderCommunityDetail);
         txtReplyRegister = (TextView) findViewById(R.id.txtCommunityReplyRegister);
         edtContents = (EditText) findViewById(R.id.edtCommunityReplyContents);
-        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
     }
 
     /**
@@ -187,6 +190,10 @@ public class CommunityDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 커뮤니티 댓글 작성 부분
+     * 사용자 유저 키와 댓글 내용, 커뮤니티 키를 서버에 보낸다.
+     */
     private void setCommunityReply() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -196,7 +203,6 @@ public class CommunityDetailActivity extends AppCompatActivity {
         ConnectService connectService = retrofit.create(ConnectService.class);
 
         Map<String, String> data = new HashMap<>();
-        Log.e("community_unique_key", number + "");
         data.put("user_unique_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key"));
         data.put("community_unique_key", number + "");
         data.put("reply_community_contents", edtContents.getText().toString());
@@ -206,12 +212,10 @@ public class CommunityDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<CommunityListBean>() {
             @Override
             public void onResponse(Call<CommunityListBean> call, Response<CommunityListBean> response) {
-                Log.e("response", response.code() + "");
-                Log.e("selectnumber", number + "");
 
                 //CommunityBeanDetail로 디코딩
                 CommunityListBean decode = response.body();
-                Log.e("err", decode.getErr());
+
                 if (decode.getErr().equals("0")) {
                     getCommunityReply();
                 }

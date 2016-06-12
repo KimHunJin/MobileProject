@@ -1,6 +1,5 @@
 package sungkyul.ac.kr.leeform.activity.member;
 
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,14 +18,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import sungkyul.ac.kr.leeform.MainActivity;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageModifyActivity;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
-import sungkyul.ac.kr.leeform.utils.LoadActivityList;
-import sungkyul.ac.kr.leeform.utils.SaveData;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -35,7 +31,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  */
 public class RegistSellerActivity extends AppCompatActivity {
     Button btnRegistSeller;
-    ImageView imgOk,imgBack;
+    ImageView imgOk, imgBack;
     String URL = StaticURL.BASE_URL;
     String accountNumber;
     String accountName;
@@ -46,8 +42,8 @@ public class RegistSellerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_seller);
 
-        imgBack=(ImageView)findViewById(R.id.imgBackOk);
-        imgOk=(ImageView)findViewById(R.id.imgOk);
+        imgBack = (ImageView) findViewById(R.id.imgBackOk);
+        imgOk = (ImageView) findViewById(R.id.imgOk);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +58,7 @@ public class RegistSellerActivity extends AppCompatActivity {
         btnRegistSeller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             /*   SaveData.setAppPreferences(getApplicationContext(), "isSeller", "true");
-                LoadActivityList.actList.clear();
-                Intent itMain = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(itMain);
-                finish();*/
                 getUserDetails();
-                // setUserDetails();
             }
         });
     }
@@ -76,7 +66,7 @@ public class RegistSellerActivity extends AppCompatActivity {
     /**
      * 사용자가 은행명,계좌번호,계좌명을 적지 않았을 경우
      * MyPageModifyActivity.class 로 가서 작성하게 함
-     *
+     * <p>
      * parameter
      * user_key
      */
@@ -99,9 +89,9 @@ public class RegistSellerActivity extends AppCompatActivity {
                 String bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
                 String accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
 
-                if(accountName.equals("")|bankName.equals("")|accountNumber.equals("")){
-                    Intent intent=new Intent(getApplicationContext(),MyPageModifyActivity.class);
-                    startActivityForResult(intent,3000);
+                if (accountName.equals("") | bankName.equals("") | accountNumber.equals("")) {
+                    Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
+                    startActivityForResult(intent, 3000);
                 }
             }
 
@@ -110,12 +100,12 @@ public class RegistSellerActivity extends AppCompatActivity {
                 Log.e("failure", t.getMessage());
             }
         });
-
     }
 
     /**
      * 사용자가 작성한 은행명,계좌번호,계좌명을 가져온다.
      * 가져온 값이 널이 아닌 경우일 때만 setUserDetails() 호출
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -123,30 +113,28 @@ public class RegistSellerActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            if(requestCode==3000){
-                bankName=data.getExtras().getString("bank_name");
-                accountNumber=data.getExtras().getString("account_number");
-                accountName=data.getExtras().getString("account_name");
-                if(accountName.equals("")|bankName.equals("")|accountNumber.equals("")){
-                    Toast.makeText(getApplicationContext(),"널값저장",Toast.LENGTH_SHORT).show();
-                }else{
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 3000) {
+                bankName = data.getExtras().getString("bank_name");
+                accountNumber = data.getExtras().getString("account_number");
+                accountName = data.getExtras().getString("account_name");
+                if (accountName.equals("") | bankName.equals("") | accountNumber.equals("")) {
+                    Toast.makeText(getApplicationContext(), "널값저장", Toast.LENGTH_SHORT).show();
+                } else {
                     setUserDetails();
                 }
-
             }
         }
     }
 
     /**
      * 판매자등록을 한다.
-     *
+     * <p>
      * parameter
      * key
      * accountName
      * accountNumber
      * bankName
-     *
      */
     private void setUserDetails() {
 
@@ -157,12 +145,12 @@ public class RegistSellerActivity extends AppCompatActivity {
 
         ConnectService connectService = retrofit.create(ConnectService.class);
         String key = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
-        Map<String,String> data= new HashMap<>();
+        Map<String, String> data = new HashMap<>();
 
-        data.put("user_unique_key",key);
-        data.put("account_name",accountName);
-        data.put("account_number",accountNumber);
-        data.put("bank_name",bankName);
+        data.put("user_unique_key", key);
+        data.put("account_name", accountName);
+        data.put("account_number", accountNumber);
+        data.put("bank_name", bankName);
 
         final Call<RegistBean> call = connectService.setResigster(data);
 
@@ -171,7 +159,7 @@ public class RegistSellerActivity extends AppCompatActivity {
             public void onResponse(Call<RegistBean> call, Response<RegistBean> response) {
                 RegistBean decodedResponse = response.body();
 
-                Log.e("register",decodedResponse.getErr());
+                Log.e("register", decodedResponse.getErr());
             }
 
             @Override

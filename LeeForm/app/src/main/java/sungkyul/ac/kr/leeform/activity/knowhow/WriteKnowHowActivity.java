@@ -48,7 +48,6 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String URL = StaticURL.BASE_URL; // api 기본 베이스 주소
     String imageStorageUrl = StaticURL.IMAGE_URL; // 이미지 저장 위치
     int serverResponseCode = 0;
-    String categoryposition;
     String uploadFilePath; // 파일 경로
     String uploadFileName; // 파일 이름
     String writingUniqueKey;
@@ -58,14 +57,12 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String selectedCategory;
     String selectedMakingTime;
     Spinner spnCategory, spnMakingTime;
-    EditText edtName, edtCost, edtSellAmount, edtSellPrice, edtYoutubuCode,edtExplanation;
+    EditText edtName, edtCost, edtSellAmount, edtSellPrice, edtYoutubuCode, edtExplanation;
     LinearLayout lineCreateView;
     ImageView imgOk, imgBack;
     TextView tvTitle;
     Toolbar toolbar;
-
     Button btnSellYes, btnSellNo, btnLevelHigh, btnLevelMiddle, btnLevelLow;
-
 
     String[] category;
     String[] makingTime;
@@ -85,15 +82,14 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
         layoutSetting();
 
-        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
-        toolbar.setContentInsetsAbsolute(0,0);
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
 
         tvTitle.setText("노하우 작성");
 
         //기본값
         btnSellNo.setSelected(true);
         btnLevelHigh.setSelected(true);
-
 
         ArrayAdapter<String> spinnerCategoryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, category);
         ArrayAdapter<String> spinnerMakingTimeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, makingTime);
@@ -104,12 +100,11 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         spnCategory.setAdapter(spinnerCategoryAdapter); //스피너에 adapter 설정
         spnMakingTime.setAdapter(spinnerMakingTimeAdapter);
 
+        //노하우 카테고리 선택 시
         spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) spnCategory.getSelectedItem().toString();
-                //categoryposition = (int) spnCategory.getSelectedItemPosition();
-                //categoryposition="거울";
                 selectedCategory = str;
             }
 
@@ -118,11 +113,12 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
             }
         });
+
+        //제작 시간 선택 시
         spnMakingTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) spnMakingTime.getSelectedItem().toString();
-
                 selectedMakingTime = str;
             }
 
@@ -134,8 +130,10 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
         cAdapter = new CreateKnowHowGridAdapter(getApplicationContext(), R.layout.item_grid_create, gridItems);
         grvCreate.setAdapter(cAdapter);
+
         check_sale = "0"; //판매NO
         level = btnLevelHigh.getText().toString(); //레벨 상
+
         init();
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -148,18 +146,15 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("strUrl", strUrl.size() + "");
-
                 check();
 
                 if (check() == false) {
-                   // setting();
-                    saveKnowGetKey();
+                    writeKnowHow();
                     finish();
                 }
             }
         });
-
+        // + 이미지 클릭 시
         grvCreate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -171,7 +166,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //판매 Yes 버튼 클릭시
         btnSellYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +176,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 check_sale = "1";
             }
         });
+        //판매 No 버튼 클릭시
         btnSellNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +187,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
             }
         });
+        //난이도 상 버튼 클릭시
         btnLevelHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +197,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 level = btnLevelHigh.getText().toString();
             }
         });
+        //난이도 중 버튼 클릭시
         btnLevelMiddle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,6 +207,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 level = btnLevelMiddle.getText().toString();
             }
         });
+        //난이도 하 버튼 클릭시
         btnLevelLow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,31 +217,21 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 level = btnLevelLow.getText().toString();
             }
         });
-
     }
 
     /**
-     * 기본값 셋팅
+     * 반드시 입력해야하는 값들이
+     * 널값인지 체크
+     *
+     * @return
      */
-    private void setting() {
-
-        edtSellAmount.setText("0"); //판매수량 0
-        edtSellPrice.setText("0"); //판매가격0
-        edtYoutubuCode.setText("0"); //youtubucode
-        edtCost.setText("0");
-
-    }
-
     private boolean check() {
         if (edtName.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
             return true;
         }
-       /* if(edtYoutubuCode.getText().toString().equals("")){
-           Toast.makeText(getApplicationContext(),"유튜브코드를 입력해주세요",Toast.LENGTH_SHORT).show();
-           return true;
-       }*/
-        if(edtExplanation.getText().toString().equals("")){
+
+        if (edtExplanation.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "설명을 입력해주세요", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -272,6 +261,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * 레이아웃 셋팅
+     */
     private void layoutSetting() {
         tvTitle = (TextView) findViewById(R.id.txtToolBarTitle);
         imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -279,13 +271,10 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         edtName = (EditText) findViewById(R.id.edtName);
         lineCreateView = (LinearLayout) findViewById(R.id.lineImgAdd);
         grvCreate = (GridView) findViewById(R.id.grdImgView);
-
         spnCategory = (Spinner) findViewById(R.id.spnKnowCategory);
         spnMakingTime = (Spinner) findViewById(R.id.spnMakingTime);
-
         category = getResources().getStringArray(R.array.category);
         makingTime = getResources().getStringArray(R.array.makingTime);
-
         linearSell = (LinearLayout) findViewById(R.id.linearSell);
         edtCost = (EditText) findViewById(R.id.edtCost);
         edtYoutubuCode = (EditText) findViewById(R.id.edtYoutubuCode);
@@ -294,95 +283,100 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         btnLevelHigh = (Button) findViewById(R.id.btnLevelHigh);
         btnLevelMiddle = (Button) findViewById(R.id.btnLevelMiddle);
         btnLevelLow = (Button) findViewById(R.id.btnLevelLow);
-
         edtSellAmount = (EditText) findViewById(R.id.edtSellAmount);
         edtSellPrice = (EditText) findViewById(R.id.edtSellPrice);
-        edtExplanation = (EditText)findViewById(R.id.edtExplanation);
+        edtExplanation = (EditText) findViewById(R.id.edtExplanation);
     }
 
+    /**
+     * 초기화
+     */
     private void init() {
         gridItems.clear();
         for (int i = 0; i < strUrl.size(); i++) {
             gridItems.add(new CreateKnowHowItem(i, strUrl.get(i), strExplain.get(i)));
-            Log.e("strUrl", strUrl.get(i));
         }
         //사진 추가한 후 +이미지가 뜨도록 +이미지를 GridView에 추가
         gridItems.add(new CreateKnowHowItem(gridItems.size(), R.drawable.plus, "클릭"));
         cAdapter.notifyDataSetChanged();
     }
 
-    private void saveKnowGetKey() {
-       /* if (edtName.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "제목입력", Toast.LENGTH_SHORT).show();
-        }*/
+    /**
+     * 기본값 셋팅
+     * 소요비용, 유튜브코드, 판매량, 판매가격이 널값인 경우
+     * 0으로 셋팅
+     */
+    private void setting() {
+        if (edtCost.getText().toString().equals("")) {
+            edtCost.setText("0");
+        }
+        if (edtYoutubuCode.getText().toString().equals("")) {
+            edtYoutubuCode.setText("0");
+        }
+        if (edtSellAmount.getText().toString().equals("")) {
+            edtSellAmount.setText("0");
+        }
+        if (edtSellPrice.getText().toString().equals("")) {
+            edtSellPrice.setText("0");
+        }
+    }
+
+    /**
+     * 노하우 작성시 입력한 값들을 서버에 보내기
+     * <p>
+     * parameter
+     * user_unique_key
+     * category_name
+     * writing_name
+     * check_sales
+     * video_url
+     * cost
+     * making_time
+     * price
+     * level
+     * writing_explanation
+     * amount
+     */
+    private void writeKnowHow() {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ConnectService connectService = retrofit.create(ConnectService.class);
         String userUniqueKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
-        Log.e("userUniqueKey", userUniqueKey);
+
         Map<String, String> data = new HashMap<>();
 
+        setting();
 
-
-        if(edtCost.getText().toString().equals("")){
-            edtCost.setText("0");
-        }
-        if(edtYoutubuCode.getText().toString().equals("")){
-            edtYoutubuCode.setText("0");
-        }
-        if(edtSellAmount.getText().toString().equals("")){
-            edtSellAmount.setText("0");
-        }
-        if(edtSellPrice.getText().toString().equals("")){
-            edtSellPrice.setText("0");
-        }
         data.put("user_unique_key", userUniqueKey);
-
-        // data.put("writing_category_key", "1"); // 변경 필요
         data.put("category_name", selectedCategory);
         data.put("writing_name", edtName.getText().toString());
         data.put("check_video", "1"); // 변경 필요
-        // 지워 data.put("video_url", edtVideoUrl.getText().toString());
-        data.put("check_sales", check_sale); //check_sale
-        data.put("video_url", edtYoutubuCode.getText().toString()); //유튜브코드
-        data.put("cost", edtCost.getText().toString()); // 변경 필요
+        data.put("check_sales", check_sale);
+        data.put("video_url", edtYoutubuCode.getText().toString());
+        data.put("cost", edtCost.getText().toString()); //소요비용
         data.put("making_time", selectedMakingTime);
-        data.put("level", level); // 변경 필요
-        data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
+        data.put("level", level);
+        data.put("writing_explanation", "수고가 많습니다.");
         data.put("amount", edtSellAmount.getText().toString());
         data.put("price", edtSellPrice.getText().toString());
-        data.put("writing_explanation",edtExplanation.getText().toString());
-        //   data.put("sellprice",edtSellPrice.getText().toString());// 변경 필요
-        Log.e("log", userUniqueKey + "");
-        Log.e("log", selectedCategory);
-        Log.e("log", edtName.getText().toString() + "");
-        Log.e("log", check_sale + "");
-        Log.e("log", edtYoutubuCode.getText().toString() + "");
-        Log.e("log", edtCost.getText().toString() + "");
-        Log.e("log", selectedMakingTime + "");
-        Log.e("log", level + "");
-        Log.e("log", edtSellAmount.getText().toString() + "");
-        Log.e("logEx",edtExplanation.getText().toString()+"");
+        data.put("writing_explanation", edtExplanation.getText().toString());
 
         Call<KnowHowWritingBean> call = connectService.setKnowGetKey(data);
         call.enqueue(new Callback<KnowHowWritingBean>() {
             @Override
             public void onResponse(Call<KnowHowWritingBean> call, Response<KnowHowWritingBean> response) {
                 KnowHowWritingBean decode = response.body();
-                Log.e("err", decode.getErr());
                 writingUniqueKey = decode.getWriting_unique_key().get(0).getWriting_unique_key();
-                Log.e("writing_key", writingUniqueKey);
 
                 for (int i = 0; i < strUrl.size(); i++) { // 생성한 노하우의 수만큼 반복
                     File file = new File(strUrl.get(i));  // 파일을 만듬
                     final String contents = strExplain.get(i); // 설명 추출
                     uploadFileName = file.getName(); // 파일의 이름 추출
                     uploadFilePath = file.getPath(); // 파일의 경로 추출
-                    Log.e("file Name", file.getName());
 
-                    // writing_unique_key를 가져오는 함수가 필요하다.
 
                     new Thread(new Runnable() {
                         @Override
@@ -402,15 +396,20 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data        parameter
+     *                    StringArrayList image
+     *                    StringArrayList explain
+     *                    액티비티로 돌아왔을 때 이미지와 설명을 추가한다.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK) {
                 //URL과 노하우 설명 가져오기
-                Log.e("resultCode", resultCode + "");
-                Log.e("requestCode", requestCode + "");
                 strUrl = data.getStringArrayListExtra("image");
                 strExplain = data.getStringArrayListExtra("explain");
                 init();
@@ -418,6 +417,12 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 이미지 올리는 메서드
+     *
+     * @param sourceFileUri
+     * @return
+     */
     public int uploadFile(String sourceFileUri) {
         String fileName = sourceFileUri;
 
@@ -432,14 +437,10 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         File sourceFile = new File(sourceFileUri);
 
         if (!sourceFile.isFile()) {
-
             Log.e("uploadFile", "Source File not exist :" + sourceFileUri);
-
             return 0;
-
         } else {
             try {
-
                 // StaticURL 생성
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
                 java.net.URL url = new java.net.URL(upLoadServerUri);
@@ -473,14 +474,12 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
                 while (bytesRead > 0) {
-
                     dos.write(buffer, 0, bufferSize);
                     bytesAvailable = fileInputStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
                 }
-
                 // multipart 방식으로 파일 전송
                 dos.writeBytes(lineEnd);
                 dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
@@ -492,7 +491,6 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                         + serverResponseMessage + ": " + serverResponseCode);
 
                 if (serverResponseCode == 200) {
-
                     runOnUiThread(new Runnable() {
                         public void run() {
 
@@ -501,31 +499,23 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                         }
                     });
                 }
-
                 //close the streams //
                 fileInputStream.close();
                 dos.flush();
                 dos.close();
-
             } catch (MalformedURLException ex) {
-
                 ex.printStackTrace();
-
                 runOnUiThread(new Runnable() {
                     public void run() {
                         Toast.makeText(getApplicationContext(), "MalformedURLException",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
             } catch (Exception e) {
-
                 e.printStackTrace();
-
             }
             return serverResponseCode;
-
         } // End else block
     }
 
@@ -558,7 +548,6 @@ public class WriteKnowHowActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<KnowHowWritingBean> call, Response<KnowHowWritingBean> response) {
                 KnowHowWritingBean des = response.body();
-                Log.e("success", "success");
                 Log.e("err", des.getErr());
             }
 

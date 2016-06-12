@@ -18,20 +18,15 @@ public class DataProvider {
         file_maps = new HashMap<>();
         file_maps_src = new HashMap<>();
     }
-
     public HashMap<String, String> getFileSrcHorizontal() {
         return file_maps;
     }
-
     public HashMap<String, Integer> getFileSrc() {
         return file_maps_src;
     }
-
     public void setHashFile(String fileNmae, String url) {
-
         file_maps.put(fileNmae, url);
     }
-
     public void setHashFile(String fileNmae, int url) {
 
         file_maps_src.put(fileNmae, url);

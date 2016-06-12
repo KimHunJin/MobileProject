@@ -44,7 +44,6 @@ public class MyPageActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
 
-
         txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
         txtToolBarTitle.setText("마이페이지");
 
@@ -57,11 +56,10 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
-
         imgMypageUser = (ImageView) findViewById(R.id.imgMypageUser);
 
         getUserImage();
-        //new DownloadImageTask(userImg).execute(it.getExtras().getString("image"));
+
         txtModify = (TextView) findViewById(R.id.txtMypageModify);
         txtModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,19 +70,23 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
         tabInitialization();
-
     }
 
+    /**
+     * 탭 초기화
+     */
     private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MypageFragmentAdapter mainFragmentAdapter = new MypageFragmentAdapter(getSupportFragmentManager(), MyPageActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
-
         tabLayout = (TabLayout) findViewById(R.id.myPageTab);
         tabLayout.setupWithViewPager(viewPager);
 
     }
 
+    /**
+     * 유저 이미지 가져오기
+     */
     public void getUserImage() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -102,8 +104,6 @@ public class MyPageActivity extends AppCompatActivity {
                 UserBean decodedResponse = response.body();
                 imgUrl = decodedResponse.getMyinfo_detail().get(0).getImg();
                 new DownloadImageTask(imgMypageUser).execute(imgUrl);
-
-
             }
 
             @Override
@@ -112,6 +112,4 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

@@ -61,7 +61,7 @@ public class CommunityListAdapter extends BaseAdapter {
             viewHolder.txtContent = (TextView) convertView.findViewById(R.id.contentCommunity);
             viewHolder.txtReplyCount = (TextView) convertView.findViewById(R.id.txtReplyCount);
             viewHolder.txtImg = (ImageView) convertView.findViewById(R.id.img);
-            viewHolder.txtCommunityTime = (TextView)convertView.findViewById(R.id.txtCommunityTime);
+            viewHolder.txtCommunityTime = (TextView) convertView.findViewById(R.id.txtCommunityTime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -71,7 +71,6 @@ public class CommunityListAdapter extends BaseAdapter {
         viewHolder.txtContent.setText(listItem.getcContent());
         viewHolder.txtReplyCount.setText(listItem.getcCount());
         viewHolder.txtCommunityTime.setText(listItem.getcTime());
-        // viewHolder.txtImg.setImageResource(listItem.getcImg());
         Picasso.with(inflater.getContext()).load(listItem.getcImageURL()).into(viewHolder.txtImg);
         return convertView;
     }

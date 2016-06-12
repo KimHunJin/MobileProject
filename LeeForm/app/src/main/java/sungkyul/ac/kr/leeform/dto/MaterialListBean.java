@@ -2,7 +2,6 @@ package sungkyul.ac.kr.leeform.dto;
 
 import java.util.List;
 
-import sungkyul.ac.kr.leeform.items.MaterialGridItem;
 import sungkyul.ac.kr.leeform.items.MaterialListBeanItem;
 
 /**

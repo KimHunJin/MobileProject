@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,11 +38,10 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
     private static final int CROP_FROM_IMAGE = 2;
 
     private String absoultePath;
-
     private Uri mImageCpatureUri;
     private String strContents;
-    private Button btnOk, btnCancel;
     private EditText edtContents;
+
     ImageView img, imgOk, imgCancel;
 
     private Toolbar toolbar;
@@ -60,10 +58,10 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         strUrl = it.getStringArrayListExtra("image"); // 이미지 배열 저장을 위한 리스트
         strExplain = it.getStringArrayListExtra("explain"); // 설명 저장을 위한 리스트
 
-        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
-        toolbar.setContentInsetsAbsolute(0,0);
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
 
-        TextView txtTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        TextView txtTitle = (TextView) findViewById(R.id.txtToolBarTitle);
         txtTitle.setText("노하우 추가하기");
 
         imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -72,10 +70,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* /*//*
-                    추가작업
-                    취소 했을 시 저장이 된 파일이 있다면 삭제
-                /*//**/
+
                 finish();
             }
         });
@@ -119,8 +114,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 strContents = edtContents.getText().toString();
-                Log.w("picturePath", absoultePath + " ");
-                Log.e("contents", strContents + " ");
+
                 if (!absoultePath.equals("") && !strContents.equals("")) {
                     strUrl.add(absoultePath);
                     strExplain.add(strContents);
@@ -153,13 +147,17 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         startActivityForResult(it, PICK_FROM_ALBUM);
     }
 
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
             return;
         }
-
         // 받아온 값이 있으면
         switch (requestCode) {
             // 앨범에서 가져오는 경우 카메라에서 가져오는 거와 같은 기능을 하기에 break 없이 진행
@@ -168,26 +166,12 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
             }
             // 카메라에서 가져올 경우
             case PICK_FROM_CAMERA: {
-                // 이미지 크랍
 
-//                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
+                // 이미지 크랍
                 absoultePath = getPath(mImageCpatureUri);
                 Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(930, 501).centerCrop().into(img);
                 Log.w("absolutePath", absoultePath);
-//                Intent it = new Intent("com.android.camera.action.CROP");
-//                it.setDataAndType(mImageCpatureUri, "image/*");
-//
-//                // 외부에 보여줄 크기를 200으로 설정
-//                it.putExtra("outputX", 340);
-//                it.putExtra("outputY", 164);
-//
-////                // 크랍할 비율을 1 : 1로 설정 (가로 : 세로)
-////                it.putExtra("aspectX", 1);
-////                it.putExtra("aspectY", 1);
-//
-//                it.putExtra("scale", true);
-//                it.putExtra("return-data", true);
-//                startActivityForResult(it, CROP_FROM_IMAGE);
+
                 break;
             }
             case CROP_FROM_IMAGE: {
@@ -216,9 +200,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
                     f.delete();
                 }
             }
-
         }
-
     }
 
     private String getPath(Uri uri) {

@@ -74,35 +74,31 @@ public class MainListAdapter extends BaseAdapter {
             viewHolder.txtMainTime = (TextView) convertView.findViewById(R.id.txtListTime);
             viewHolder.txtMainLike = (TextView) convertView.findViewById(R.id.txtListLike);
             viewHolder.imgMainList = (ImageView) convertView.findViewById(R.id.imgListItem);
-            viewHolder.txtMainName = (TextView)convertView.findViewById(R.id.txtListName);
-            viewHolder.txtMainKeyWord = (TextView)convertView.findViewById(R.id.txtListKeyWord);
-            viewHolder.imgMainLike = (ImageView)convertView.findViewById(R.id.imgMainListLike);
+            viewHolder.txtMainName = (TextView) convertView.findViewById(R.id.txtListName);
+            viewHolder.txtMainKeyWord = (TextView) convertView.findViewById(R.id.txtListKeyWord);
+            viewHolder.imgMainLike = (ImageView) convertView.findViewById(R.id.imgMainListLike);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         listItem = item.get(position);
 
-        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).resize(1020,492).centerCrop().into(viewHolder.imgMainList);
+        Picasso.with(inflater.getContext()).load(listItem.getmUrl()).resize(1020, 492).centerCrop().into(viewHolder.imgMainList);
 
-        checkLike(listItem.getmNumber()+"",viewHolder.imgMainLike);
-        Log.e("real number", listItem.getmNumber()+"");
-//        mairListImageSetting(viewHolder.imgMainList,listItem.getmUrl());
-        Log.e("real url", listItem.getmUrl());
+        checkLike(listItem.getmNumber() + "", viewHolder.imgMainLike);
+
         viewHolder.txtMainCost.setText(listItem.getmCost());
         viewHolder.txtMainLike.setText(listItem.getmLike());
         viewHolder.txtMainTime.setText(listItem.getmTime());
         viewHolder.txtMainName.setText(listItem.getmName());
         viewHolder.txtMainKeyWord.setText(listItem.getmKeyWord());
 
-
         viewHolder.imgMainLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkUncheck(listItem.getmNumber()+"",viewHolder.imgMainLike, viewHolder.txtMainLike, Integer.parseInt(listItem.getmLike()));
+                checkUncheck(listItem.getmNumber() + "", viewHolder.imgMainLike, viewHolder.txtMainLike, Integer.parseInt(listItem.getmLike()));
             }
         });
-
 
         return convertView;
     }
@@ -125,8 +121,6 @@ public class MainListAdapter extends BaseAdapter {
 
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
-        Log.e("key", key);
-        Log.e("writing_key",writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -138,7 +132,7 @@ public class MainListAdapter extends BaseAdapter {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
                 Log.e("real err", decodedResponse.getErr());
-                if(decodedResponse.getErr().equals("3")) {
+                if (decodedResponse.getErr().equals("3")) {
                     img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
                 } else {
                     img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
@@ -160,8 +154,6 @@ public class MainListAdapter extends BaseAdapter {
 
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
-        Log.e("key", key);
-        Log.e("writing_key",writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -172,7 +164,7 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("like err",errCode);
+                Log.e("like err", errCode);
                 img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
             }
 
@@ -192,7 +184,7 @@ public class MainListAdapter extends BaseAdapter {
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
         Log.e("key", key);
-        Log.e("writing_key",writingKey);
+        Log.e("writing_key", writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -203,7 +195,7 @@ public class MainListAdapter extends BaseAdapter {
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
-                Log.e("unlike err",errCode);
+                Log.e("unlike err", errCode);
                 img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
             }
 
@@ -223,7 +215,7 @@ public class MainListAdapter extends BaseAdapter {
         Map<String, String> data = new HashMap<>();
         String key = SaveDataMemberInfo.getAppPreferences(inflater.getContext(), "user_key");
         Log.e("key", key);
-        Log.e("writing_key",writingKey);
+        Log.e("writing_key", writingKey);
         data.put("user_unique_key", key); //user_unique_key 가져오기
         data.put("writing_unique_key", writingKey);
 
@@ -235,18 +227,16 @@ public class MainListAdapter extends BaseAdapter {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
                 Log.e("real err", decodedResponse.getErr());
-                if(decodedResponse.getErr().equals("3")) {
+                if (decodedResponse.getErr().equals("3")) {
                     // 삭제 구문
-                    unLikeWrite(writingKey,img);
-//                    img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_unlike));
-                    listItem.setmLike(like-1+"");
-                    txt.setText(like-1+"");
+                    unLikeWrite(writingKey, img);
+                    listItem.setmLike(like - 1 + "");
+                    txt.setText(like - 1 + "");
                 } else {
                     // 좋아요 구문
-                    likeWrite(writingKey,img);
-//                    img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
-                    listItem.setmLike(like+1+"");
-                    txt.setText(like+1+"");
+                    likeWrite(writingKey, img);
+                    listItem.setmLike(like + 1 + "");
+                    txt.setText(like + 1 + "");
                 }
             }
 

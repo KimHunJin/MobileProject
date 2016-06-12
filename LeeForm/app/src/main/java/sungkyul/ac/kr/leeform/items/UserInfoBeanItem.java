@@ -6,7 +6,6 @@ package sungkyul.ac.kr.leeform.items;
  * json의 키에 해당하는 값들을 변수 이름으로 지정
  */
 public class UserInfoBeanItem {
-
     String user_unique_key;
     String kakao_unique_key;
     String img;

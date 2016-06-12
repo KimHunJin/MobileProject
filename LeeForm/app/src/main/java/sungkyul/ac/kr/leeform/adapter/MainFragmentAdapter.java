@@ -1,15 +1,10 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
-import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.fragment.CommunityFragment;
 import sungkyul.ac.kr.leeform.fragment.HomeFragment;
 import sungkyul.ac.kr.leeform.fragment.MaterialFragment;
@@ -22,7 +17,7 @@ import sungkyul.ac.kr.leeform.fragment.MaterialFragment;
 public class MainFragmentAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[]{"노하우", "재료", "커뮤니티"};
-    private Fragment[] fragments = new Fragment[]{new HomeFragment(),new MaterialFragment(),new CommunityFragment()};
+    private Fragment[] fragments = new Fragment[]{new HomeFragment(), new MaterialFragment(), new CommunityFragment()};
     private Context context;
 
     public MainFragmentAdapter(FragmentManager fm, Context context) {
@@ -39,8 +34,6 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return PAGE_COUNT;
     }
-
-
 
     @Override
     public CharSequence getPageTitle(int position) {

@@ -30,7 +30,6 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         this.layout = layout;
     }
 
-
     @Override
     public int getCount() {
         return item.size();
@@ -63,11 +62,10 @@ public class CreateKnowHowGridAdapter extends BaseAdapter {
         CreateKnowHowItem gridItem = item.get(position);
 
         if (gridItem.getmImg() != 0) {
-            Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(480,480).centerCrop().into(gridViewHolder.imgGridCreate);
+            Picasso.with(inflater.getContext()).load(gridItem.getmImg()).resize(480, 480).centerCrop().into(gridViewHolder.imgGridCreate);
         }
         if (gridItem.getImgUrl() != null) {
-            Picasso.with(inflater.getContext()).load("file://"+gridItem.getImgUrl().trim().toString()).resize(480,480).centerCrop().error(R.drawable.panza).into(gridViewHolder.imgGridCreate);
-//            gridViewHolder.imgGridCreate.setImageBitmap(BitmapFactory.decodeFile(gridItem.getImgUrl()));
+            Picasso.with(inflater.getContext()).load("file://" + gridItem.getImgUrl().trim().toString()).resize(480, 480).centerCrop().error(R.drawable.panza).into(gridViewHolder.imgGridCreate);
         }
         return convertView;
     }
