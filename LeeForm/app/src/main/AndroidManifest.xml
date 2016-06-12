@@ -64,10 +64,11 @@
             android:value="@string/kakao_app_key" />
 
         <activity android:name=".activity.settings.NoticeActivity" />
-        <activity android:name=".activity.member.RegistSellerActivity" />
+        <activity android:name=".activity.navigation.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity" />
         <activity android:name=".activity.knowhow.WriteKnowHowActivity" />
-        <activity android:name=".activity.member.PurchaseListActivity"/>
+        <activity android:name=".activity.navigation.PurchaseListActivity"/>
+        <activity android:name=".activity.navigation.SaleListActivity"></activity>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

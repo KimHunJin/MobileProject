@@ -38,9 +38,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import sungkyul.ac.kr.leeform.activity.member.PurchaseListActivity;
-import sungkyul.ac.kr.leeform.activity.member.RegistSellerActivity;
+import sungkyul.ac.kr.leeform.activity.navigation.PurchaseListActivity;
+import sungkyul.ac.kr.leeform.activity.navigation.RegistSellerActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
+import sungkyul.ac.kr.leeform.activity.navigation.SaleListActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
@@ -357,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         // 판매자 등록이 된상태면 판매내역으로
                         if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
-                            Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
+                            Intent itSetting = new Intent(getApplicationContext(), SaleListActivity.class);
                             startActivity(itSetting);
                         }
                         // 판매자 등록이 안되어 있으면 판매자 등록으로
