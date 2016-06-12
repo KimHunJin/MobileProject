@@ -145,7 +145,7 @@ public class MainListAdapter extends BaseAdapter {
         });
     }
 
-    private void likeWrite(String writingKey, final ImageView img) {
+    private void likeWrite(final String writingKey, final ImageView img) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -164,6 +164,7 @@ public class MainListAdapter extends BaseAdapter {
                 OnlyErrBean decodedResponse = response.body();
                 errCode = decodedResponse.getErr();
                 img.setImageDrawable(inflater.getContext().getResources().getDrawable(R.drawable.main_list_like));
+                push(writingKey);
             }
 
             @Override
@@ -235,6 +236,27 @@ public class MainListAdapter extends BaseAdapter {
             @Override
             public void onFailure(Call<OnlyErrBean> call, Throwable t) {
                 Log.e("onFailure", t.getMessage());
+            }
+        });
+    }
+
+    private void push(String writingUniqueKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<OnlyErrBean> call = connectService.push(writingUniqueKey);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+
             }
         });
     }

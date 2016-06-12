@@ -155,5 +155,10 @@ public interface ConnectService {
 
     @GET("license_list.php")
     Call<LicenseBean> getLicense();
+
+    @GET("PushAlarm.php")
+    Call<OnlyErrBean> push(
+            @Query("writing_unique_key") String writing_unique_key
+    );
 }
 
