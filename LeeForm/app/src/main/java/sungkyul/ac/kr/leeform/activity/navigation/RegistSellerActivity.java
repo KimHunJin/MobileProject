@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.activity.member;
+package sungkyul.ac.kr.leeform.activity.navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
-import sungkyul.ac.kr.leeform.activity.navigation.MyPageModifyActivity;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;

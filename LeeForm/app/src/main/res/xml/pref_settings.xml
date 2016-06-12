@@ -19,7 +19,7 @@
 
     <PreferenceCategory android:title="고객지원"  >
         <Preference
-            android:title="이용약관"
+            android:title="공지사항"
             android:key="notice" />
         <Preference
             android:title="About Us"
