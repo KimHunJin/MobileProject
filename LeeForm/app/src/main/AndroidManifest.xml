@@ -37,7 +37,7 @@
             android:name=".activity.member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
         <activity
-            android:name=".activity.knowhow.KnowHowDetailActivity"
+            android:name=".activity.knowhow.DetailKnowHowActivity"
             android:theme="@style/CustomNoActionBar" />
         <activity
             android:name=".activity.community.CommunityCreateActivity"
