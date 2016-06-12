@@ -24,9 +24,12 @@
             app:tabTextColor="@color/colorToolBarTextColor" />
 
         <android.support.v4.view.ViewPager
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/mainViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:background="@color/colorLittleDarkWhite">
         </android.support.v4.view.ViewPager>
     </LinearLayout>

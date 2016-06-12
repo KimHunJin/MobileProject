@@ -1,4 +1,4 @@
-package sungkyul.ac.kr.leeform.activity.member;
+﻿package sungkyul.ac.kr.leeform.activity.member;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +18,7 @@ import sungkyul.ac.kr.leeform.items.MainListItem;
  * Created by KyungHee on 2016-05-20.
  */
 public class PurchaseListActivity extends AppCompatActivity {
-
+    private Toolbar toolbar;
     ListView lstPurchaseList;
     private MainListAdapter adapter;
     ArrayList<MainListItem> listItem = new ArrayList<>();
