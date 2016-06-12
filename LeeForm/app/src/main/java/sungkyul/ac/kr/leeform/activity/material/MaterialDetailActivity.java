@@ -23,7 +23,6 @@ import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.util.HashMap;
 
 import retrofit2.Call;
