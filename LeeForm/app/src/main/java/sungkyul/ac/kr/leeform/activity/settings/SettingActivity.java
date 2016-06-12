@@ -74,6 +74,24 @@ public class SettingActivity extends PreferenceActivity {
                 return true;
             }
         });
+
+        Preference aboutUs = findPreference("aboutUs");
+        aboutUs.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
+                return true;
+            }
+        });
+
+        Preference license = findPreference("license");
+        license.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(getApplicationContext(), LicenseActivity.class));
+                return true;
+            }
+        });
     }
 
     private void redirectLoginActivity() {

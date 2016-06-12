@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.navigation.MyPageModifyActivity"/>
+        <activity android:name=".activity.navigation.MyPageModifyActivity" />
         <activity
             android:name=".activity.member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
@@ -67,7 +67,7 @@
         <activity android:name=".activity.member.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity" />
         <activity android:name=".activity.knowhow.WriteKnowHowActivity" />
-        <activity android:name=".activity.member.PurchaseListActivity"/>
+        <activity android:name=".activity.member.PurchaseListActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -98,14 +98,20 @@
             android:name=".service.RegistrationIntentService"
             android:exported="false" />
 
-        <activity android:name=".activity.credit.DemoCreditPage"></activity>
+        <activity android:name=".activity.credit.DemoCreditPage" />
 
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
+
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
+
             <data android:scheme="nicepaysample" />
         </intent-filter>
+
+        <activity android:name=".activity.settings.AboutUsActivity" />
+        <activity android:name=".activity.settings.LicenseActivity" />
+        <activity android:name=".activity.settings.LicenseDetailActivity"></activity>
     </application>
 
 </manifest>

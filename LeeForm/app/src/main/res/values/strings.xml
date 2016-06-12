@@ -17,4 +17,44 @@
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
 
+    <string name="AboutUs">
+        Do It Yourself\n
+        당신도 할 수 있습니다!\n
+        노하우를 보고\n
+        노하우를 따라하세요.\n
+        손쉽게 만드는 인테리어 소품!\n
+        \n
+        커뮤니티를 통해\n
+        소통도 할 수 있어요.
+    </string>
+
+    <string name="createBy">
+            美人 못하는게 없는 서버 개발자\n
+            <b>김경희</b>\n\n
+
+            美女 언어의 마술사, 프론트 엔드 개발자\n
+            <b>김미선</b>\n\n
+
+            天才 기획도, 디자인도 문제없어! 기디발자\n
+            <b>김용훈</b>\n\n
+
+            人間 조용히 묻어가는 개발자\n
+            <b>김헌진</b>
+    </string>
+
+    <string name="footer">
+        한 학기 동안 수고 많았어~\n
+        이런 저런 실패도 겪었고\n
+        잠도 못자고 많이 힘들었을텐데\n
+        열심히 해줘서 다들 고마워 ^^\n\n
+        다들 방학 잘 보내고!\n
+        우리 팀원들 모두 GOD 이니까\n
+        어디서든 잘 할 수 있을거야!\n
+        다음 학기에 다들 바쁘겠지?\n
+        나만 여유롭게 놀러가는구나...☆\n
+        기념품 챙겨올게!!\n
+        \n
+        Copyright ⓒ 2016 LeeForm. All rights reserved.
+    </string>
+
 </resources>
