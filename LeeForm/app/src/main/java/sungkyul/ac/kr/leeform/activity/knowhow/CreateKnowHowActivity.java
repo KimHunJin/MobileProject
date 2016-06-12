@@ -3,6 +3,7 @@ package sungkyul.ac.kr.leeform.activity.knowhow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -50,6 +51,8 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     String uploadFileName; // 파일 이름
     String writingUniqueKey;
 
+    Toolbar toolbar;
+
     EditText edtName, edtVideoUrl, edtMakingTime;
 
     ImageView imgOk;
@@ -67,6 +70,9 @@ public class CreateKnowHowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_know_how);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0,0);
 
         //툴바 텍스트 변경
         TextView tv = (TextView) findViewById(R.id.txtToolBarTitle);

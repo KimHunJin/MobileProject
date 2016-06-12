@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -40,6 +41,8 @@ public class SettingActivity extends PreferenceActivity {
         ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
         imgOk.setVisibility(View.INVISIBLE);
 
+        TextView txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        txtToolBarTitle.setText("설정");
 
         LoadActivityList.actList.add(SettingActivity.this);
 

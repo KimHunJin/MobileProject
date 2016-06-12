@@ -115,5 +115,10 @@ public interface ConnectService {
     Call<UserBean> setUserDetail(
             @QueryMap Map<String, String> options
     );
+
+    @GET("search.php")
+    Call<KnowHowBean> getKnowHowSearch(
+            @Query("data") String data
+    );
 }
 

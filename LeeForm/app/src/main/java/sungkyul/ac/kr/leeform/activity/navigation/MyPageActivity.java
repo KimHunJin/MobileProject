@@ -32,14 +32,23 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  */
 public class MyPageActivity extends AppCompatActivity {
     private TabLayout tabLayout;
-    private TextView  txtModify;
-    private ImageView imgBack,imgMypageUser;
+    private TextView txtModify, txtToolBarTitle;
+    private ImageView imgBack, imgMypageUser;
     private static String URL = StaticURL.BASE_URL;
-     String imgUrl,image;
+    String imgUrl, image;
+
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0,0);
+
+        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        txtToolBarTitle.setText("My Page");
 
         //뒤로가기 버튼
         imgBack = (ImageView) findViewById(R.id.imgBackOk);
@@ -51,23 +60,24 @@ public class MyPageActivity extends AppCompatActivity {
         });
 
 
-        imgMypageUser=(ImageView)findViewById(R.id.imgMypageUser);
+        imgMypageUser = (ImageView) findViewById(R.id.imgMypageUser);
 
         getUserImage();
         //new DownloadImageTask(userImg).execute(it.getExtras().getString("image"));
-        txtModify=(TextView)findViewById(R.id.txtMypageModify);
+        txtModify = (TextView) findViewById(R.id.txtMypageModify);
         txtModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),MyPageModifyActivity.class);
-                intent.putExtra("imageurl",image);
+                Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
+                intent.putExtra("imageurl", image);
                 startActivity(intent);
             }
         });
         tabInitialization();
 
     }
-   private void tabInitialization() {
+
+    private void tabInitialization() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MypageAdapter mainFragmentAdapter = new MypageAdapter(getSupportFragmentManager(), MyPageActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
@@ -77,7 +87,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     }
 
-    private void getUserImage(){
+    private void getUserImage() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -92,9 +102,9 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
                 UserBean decodedResponse = response.body();
-                imgUrl=decodedResponse.getMyinfo_detail().get(0).getImg();
+                imgUrl = decodedResponse.getMyinfo_detail().get(0).getImg();
                 new DownloadImageTask(imgMypageUser).execute(imgUrl);
-                image=imgUrl;
+                image = imgUrl;
 
 
             }
@@ -105,7 +115,6 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

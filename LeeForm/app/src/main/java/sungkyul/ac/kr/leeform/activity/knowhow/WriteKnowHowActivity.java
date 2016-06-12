@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -61,6 +62,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     LinearLayout lineCreateView;
     ImageView imgOk, imgBack;
     TextView tvTitle;
+    Toolbar toolbar;
 
     Button btnSellYes, btnSellNo, btnLevelHigh, btnLevelMiddle, btnLevelLow;
 
@@ -82,6 +84,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_konw_how_write);
 
         layoutSetting();
+
+        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0,0);
 
         tvTitle.setText("노하우 작성");
 

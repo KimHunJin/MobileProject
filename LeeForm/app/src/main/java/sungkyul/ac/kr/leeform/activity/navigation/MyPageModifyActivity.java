@@ -12,10 +12,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.usermgmt.response.model.User;
@@ -53,6 +55,8 @@ public class MyPageModifyActivity extends AppCompatActivity{
     String URL = StaticURL.BASE_URL;
     private Uri mImageCpatureUri;
     private String absoultePath;
+    TextView txtToolBarTitle;
+    Toolbar toolbar;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -62,6 +66,8 @@ public class MyPageModifyActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypagemodify);
 
+        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0,0);
 
         layoutSetting();
         getUserDetails();
@@ -214,8 +220,11 @@ public class MyPageModifyActivity extends AppCompatActivity{
         edtBankName=(EditText)findViewById(R.id.edtBankName);
         edtBankNumber=(EditText)findViewById(R.id.edtBankNumber);
         edtPhoneNumber=(EditText)findViewById(R.id.edtPhoneNumber);
+        txtToolBarTitle = (TextView)findViewById(R.id.txtToolBarTitle);
         imgOk=(ImageView)findViewById(R.id.imgOk);
         image=(ImageView)findViewById(R.id.imgMypageUser);
+
+        txtToolBarTitle.setText("내 정보 수정하기");
 
         Intent intent=getIntent();
         new DownloadImageTask(image).execute(intent.getExtras().getString("imageurl"));
