@@ -32,6 +32,7 @@ import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.SaveData;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
@@ -55,6 +56,16 @@ public class HomeFragment extends Fragment {
     ListView lst;
     private static String URL = StaticURL.BASE_URL;
     ArrayList<MainListItem> listItem = new ArrayList<>();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SaveData.getAppPreferences(getActivity().getApplicationContext(), "isAuthority").equals("1")) {
+            fab.setVisibility(View.VISIBLE);
+        }else{
+            fab.setVisibility(View.INVISIBLE);
+        }
+    }
 
     @Override
     public void onDestroyView() {

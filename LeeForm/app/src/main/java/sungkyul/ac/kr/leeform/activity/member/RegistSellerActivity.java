@@ -24,6 +24,7 @@ import sungkyul.ac.kr.leeform.activity.navigation.MyPageModifyActivity;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
+import sungkyul.ac.kr.leeform.utils.SaveData;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -89,9 +90,9 @@ public class RegistSellerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
                 UserBean decodedResponse = response.body();
-                String accountNumber = decodedResponse.getMyinfo_detail().get(0).getAccount_number();
-                String bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
-                String accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
+                accountNumber = decodedResponse.getMyinfo_detail().get(0).getAccount_number();
+                bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
+                accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
 
                 if(accountName == null | bankName == null | accountNumber == null){
                     Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
@@ -104,7 +105,7 @@ public class RegistSellerActivity extends AppCompatActivity {
                     return;
                 }
 
-
+                setUserDetails();
             }
 
             @Override
@@ -170,8 +171,9 @@ public class RegistSellerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegistBean> call, Response<RegistBean> response) {
                 RegistBean decodedResponse = response.body();
-
-                Log.e("register", decodedResponse.getErr());
+                SaveData.setAppPreferences(getApplicationContext(), "isAuthority","1");
+                Toast.makeText(RegistSellerActivity.this, "등록되셨습니다.", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

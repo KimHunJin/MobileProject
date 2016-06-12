@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabInitialization();
         initializeLayout();
+        getAuthority();
         setListener();
         checkUser();
         gcm();
@@ -326,8 +327,10 @@ public class MainActivity extends AppCompatActivity {
 
         item = getResources().getStringArray(R.array.nav);
 
-        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
+        if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
             item[2] = "판매 내역";
+        }else{
+            item[2] = "판매자 등록";
         }
 
         lstNavItem = (ListView) slidingMenu.findViewById(R.id.lstNavItem);
@@ -353,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
                     // 판매자 등록
                     case 2:
                         // 판매자 등록이 된상태면 판매내역으로
-                        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
+                        if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
                             Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
                             startActivity(itSetting);
                         }
@@ -391,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
 
                 UserBean decode = response.body();
                 String authority = decode.getMyinfo_detail().get(0).getAuthority();
-                Log.e("authority", authority);
+                SaveData.setAppPreferences(getApplicationContext(), "isAuthority",authority);
             }
 
             @Override
@@ -470,6 +473,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver();
+        setListener();
     }
 
 }
