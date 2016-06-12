@@ -38,9 +38,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.PurchaseListActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.RegistSellerActivity;
-import sungkyul.ac.kr.leeform.activity.navigation.MyPageActivity;
 import sungkyul.ac.kr.leeform.activity.navigation.SaleListActivity;
 import sungkyul.ac.kr.leeform.activity.search.KnowHowSearchActivity;
 import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
@@ -63,6 +63,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * 애플리케이션의 기본이 되는 메인 액티비티입니다.
  */
 public class MainActivity extends AppCompatActivity {
+    ViewPager viewPager;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
@@ -307,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
                 ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
                 if (tabLayout.getSelectedTabPosition() == 2) {
                     imgSearch.setVisibility(View.INVISIBLE);
@@ -425,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
      * 탭 뷰 초기화
      */
     private void tabInitialization() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.mainViewPager);
+        viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), MainActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
 
