@@ -28,7 +28,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * Created by YongHoon on 2016-05-18.
  * 노하우 상세정보
  */
-public class KnowHowDetailActivity extends AppCompatActivity {
+public class DetailKnowHowActivity extends AppCompatActivity {
     StringBuffer sbContent;
     View layKnowhowDetail;
     private LinearLayout btnKnowHowDetailShare;

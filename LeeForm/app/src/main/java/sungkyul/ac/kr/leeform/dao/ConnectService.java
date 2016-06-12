@@ -12,8 +12,10 @@ import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
+import sungkyul.ac.kr.leeform.dto.LicenseBean;
 import sungkyul.ac.kr.leeform.dto.MaterialDetailBean;
 import sungkyul.ac.kr.leeform.dto.MaterialListBean;
+import sungkyul.ac.kr.leeform.dto.NoticeBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
@@ -147,5 +149,11 @@ public interface ConnectService {
     Call<MaterialListBean> getMaterialSearch(
             @Query("data") String data
     );
+
+    @GET("notice_list.php")
+    Call<NoticeBean> getNotice();
+
+    @GET("license_list.php")
+    Call<LicenseBean> getLicense();
 }
 

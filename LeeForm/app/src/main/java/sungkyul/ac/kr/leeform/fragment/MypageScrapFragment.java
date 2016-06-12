@@ -18,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
-import sungkyul.ac.kr.leeform.activity.knowhow.KnowHowDetailActivity;
+import sungkyul.ac.kr.leeform.activity.knowhow.DetailKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
@@ -72,7 +72,7 @@ public class MypageScrapFragment extends Fragment {
             //리스트의 아이템 선택했을 때
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent itKnowhowDetail = new Intent(getActivity(), KnowHowDetailActivity.class);
+                Intent itKnowhowDetail = new Intent(getActivity(), DetailKnowHowActivity.class);
                 Log.e("img", listItem.get(position).getmUrl());
                 itKnowhowDetail.putExtra("image", listItem.get(position).getmUrl() + "");
                 itKnowhowDetail.putExtra("knowhowkey", listItem.get(position).getmNumber() + "");

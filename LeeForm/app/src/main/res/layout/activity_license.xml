@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorWhite"
-    tools:context="sungkyul.ac.kr.leeform.activity.settings.NoticeActivity">
+    tools:context="sungkyul.ac.kr.leeform.activity.settings.LicenseActivity">
 
-    <include layout="@layout/toolbar_custom_ok"/>
+    <include layout="@layout/toolbar_custom_ok" />
 
     <ListView
-        android:id="@+id/lstNotice"
+        android:id="@+id/lstLicense"
         android:layout_width="match_parent"
-        android:divider="@color/colorRelativeDark"
         android:dividerHeight="1dp"
+        android:divider="@color/colorGray"
         android:layout_height="match_parent"></ListView>
 
 </LinearLayout>
