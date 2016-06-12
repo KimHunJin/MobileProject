@@ -13,6 +13,15 @@ public class KnowHowBean {
     String err;
     String count;
     List<WritingBeanItem> writing_list;
+    List<WritingBeanItem> search_data;
+
+    public List<WritingBeanItem> getSearch_data() {
+        return search_data;
+    }
+
+    public void setSearch_data(List<WritingBeanItem> search_data) {
+        this.search_data = search_data;
+    }
 
     public String getErr() {
         return err;

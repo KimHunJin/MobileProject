@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +44,9 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
     private String strContents;
     private Button btnOk, btnCancel;
     private EditText edtContents;
-    ImageView img,imgOk,imgCancel;
+    ImageView img, imgOk, imgCancel;
+
+    private Toolbar toolbar;
 
     ArrayList<String> strUrl;
     ArrayList<String> strExplain;
@@ -56,8 +60,14 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
         strUrl = it.getStringArrayListExtra("image"); // 이미지 배열 저장을 위한 리스트
         strExplain = it.getStringArrayListExtra("explain"); // 설명 저장을 위한 리스트
 
-       imgOk = (ImageView) findViewById(R.id.imgOk);
-       imgCancel = (ImageView) findViewById(R.id.imgBackOk);
+        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0,0);
+
+        TextView txtTitle = (TextView)findViewById(R.id.txtToolBarTitle);
+        txtTitle.setText("노하우 추가하기");
+
+        imgOk = (ImageView) findViewById(R.id.imgOk);
+        imgCancel = (ImageView) findViewById(R.id.imgBackOk);
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +129,7 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
                     i.putExtra("explain", strExplain);
 
                     setResult(RESULT_OK, i);
-                    Log.e("result",RESULT_OK+"");
+                    Log.e("result", RESULT_OK + "");
                     finish();
                 }
             }
@@ -162,8 +172,8 @@ public class CreateKnowHowExplainActivity extends AppCompatActivity {
 
 //                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(340,260).centerCrop().into(img);
                 absoultePath = getPath(mImageCpatureUri);
-                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(930,501).centerCrop().into(img);
-                Log.w("absolutePath",absoultePath);
+                Picasso.with(getApplicationContext()).load(mImageCpatureUri).resize(930, 501).centerCrop().into(img);
+                Log.w("absolutePath", absoultePath);
 //                Intent it = new Intent("com.android.camera.action.CROP");
 //                it.setDataAndType(mImageCpatureUri, "image/*");
 //

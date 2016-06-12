@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.8"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:gravity="center"
             android:hint="검색내용"
             android:textColor="@color/colorWhite"

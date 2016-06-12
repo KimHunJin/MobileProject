@@ -1,18 +1,32 @@
 package sungkyul.ac.kr.leeform.activity.search;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.KnowHowBean;
+import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by YongHoon on 2016-05-23.
@@ -25,6 +39,7 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
     private ImageView imgBack, imgSearch;
     private MainListAdapter mainListAdapter;
     private ListView lst;
+    private InputMethodManager keyboard;
 
     ArrayList<MainListItem> listItems = new ArrayList<>();
 
@@ -47,7 +62,17 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
         lst = (ListView) findViewById(R.id.listKnowHowSearch);
         lst.setAdapter(mainListAdapter);
 
-        init();
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    listItems.clear();
+                    getSearchResult(v.getText().toString());
+                    keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
+                }
+                return false;
+            }
+        });
     }
 
     void init() {
@@ -61,6 +86,7 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
         edtSearch = (EditText) findViewById(R.id.edtToolBarSearch);
         imgBack = (ImageView) findViewById(R.id.imgBackSearch);
         toolbar = (Toolbar) findViewById(R.id.toolbarSearch);
+        keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Override
@@ -78,8 +104,45 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
             }
             case R.id.imgSearchOk: {
                 // 검색
+                listItems.clear();
+                getSearchResult(edtSearch.getText().toString());
+                keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(),0);
                 break;
             }
         }
+    }
+
+    private void getSearchResult(String text) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<KnowHowBean> call = connectService.getKnowHowSearch(text);
+        call.enqueue(new Callback<KnowHowBean>() {
+            @Override
+            public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
+                KnowHowBean decode = response.body();
+                for (int i = 0; i < decode.getSearch_data().size(); i++) {
+                    listItems.add(new MainListItem(
+                                    Integer.parseInt(decode.getSearch_data().get(i).getWriting_unique_key()),
+                                    decode.getSearch_data().get(i).getPrice(),
+                                    decode.getSearch_data().get(i).getMaking_time(),
+                                    decode.getSearch_data().get(i).getScrap_amount(),
+                                    decode.getSearch_data().get(i).getPicture_url(),
+                                    decode.getSearch_data().get(i).getWriting_name(),
+                                    decode.getSearch_data().get(i).getExplanation()
+                            )
+                    );
+                }
+                mainListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<KnowHowBean> call, Throwable t) {
+
+            }
+        });
     }
 }

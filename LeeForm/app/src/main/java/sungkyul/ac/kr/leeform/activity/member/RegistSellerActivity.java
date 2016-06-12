@@ -68,7 +68,7 @@ public class RegistSellerActivity extends AppCompatActivity {
                 startActivity(itMain);
                 finish();*/
                 getUserDetails();
-               // setUserDetails();
+                // setUserDetails();
             }
         });
     }
