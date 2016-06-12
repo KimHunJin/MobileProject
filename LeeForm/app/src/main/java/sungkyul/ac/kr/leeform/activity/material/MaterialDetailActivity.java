@@ -131,7 +131,6 @@ public class MaterialDetailActivity extends AppCompatActivity implements BaseSli
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
-                    .description(name)
                     .image(maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .enableSaveImageByLongClick(getFragmentManager())
