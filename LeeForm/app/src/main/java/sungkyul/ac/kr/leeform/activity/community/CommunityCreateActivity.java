@@ -21,17 +21,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
-import sungkyul.ac.kr.leeform.utils.StaticURL;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * Created by MiSeon on 2016-05-18.
  * 커뮤니티 작성
  */
 public class CommunityCreateActivity extends AppCompatActivity {
-    ImageView camera, album;
     EditText edtCommunity;
     Toolbar toolbar;
+    TextView txtToolBarTitle;
+    ImageView imgBack, imgOk;
     private static String URL = StaticURL.BASE_URL;
 
     @Override
@@ -39,15 +40,13 @@ public class CommunityCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_create);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
-        toolbar.setContentInsetsAbsolute(0, 0);
+        layoutSetting();
 
+        toolbar.setContentInsetsAbsolute(0, 0);
         //툴바 텍스트 변경
-        TextView tv = (TextView) findViewById(R.id.txtToolBarTitle);
-        tv.setText("커뮤니티 작성");
+        txtToolBarTitle.setText("커뮤니티 작성");
 
         //뒤로가기 버튼
-        ImageView imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,15 +54,15 @@ public class CommunityCreateActivity extends AppCompatActivity {
             }
         });
 
-        edtCommunity = (EditText) findViewById(R.id.edtCommunity);
-
-        ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
+        //확인 버튼
         imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edtCommunity.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(),"내용을 입력해주세요",Toast.LENGTH_SHORT).show();
-                }else {
+                //내용을 작성하지 않았을 때 메시지 띄우기
+                if (edtCommunity.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    //내용을 작성했을 때
                     setCommunityCreate();
                     finish();
                 }
@@ -71,6 +70,21 @@ public class CommunityCreateActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 레이아웃 셋팅
+     */
+    private void layoutSetting() {
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
+        imgBack = (ImageView) findViewById(R.id.imgBackOk);
+        edtCommunity = (EditText) findViewById(R.id.edtCommunity);
+        imgOk = (ImageView) findViewById(R.id.imgOk);
+    }
+
+    /**
+     * 커뮤니티 작성하기
+     * 서버에 커뮤니티 내용과 작성자 키 보내기
+     */
     private void setCommunityCreate() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -79,10 +93,10 @@ public class CommunityCreateActivity extends AppCompatActivity {
 
         String content = edtCommunity.getText().toString();
         Map<String, String> data = new HashMap<>();
-        String key = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
-        Log.e("key", key);
-        Log.e("Content", content);
-        data.put("user_unique_key", key); //user_unique_key 가져오기
+
+        String userKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
+
+        data.put("user_unique_key", userKey);
         data.put("community_writing_contents", content);
 
         ConnectService connectService = retrofit.create(ConnectService.class);
@@ -91,8 +105,10 @@ public class CommunityCreateActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CommunityWritingBean> call, Response<CommunityWritingBean> response) {
                 CommunityWritingBean decodedResponse = response.body();
-                Log.e("err", decodedResponse.getErr());
-                Toast.makeText(getApplicationContext(), "완료", Toast.LENGTH_SHORT).show();
+                //Err값이 0이면 성공
+                if (decodedResponse.getErr().equals("0")) {
+                    Toast.makeText(getApplicationContext(), "완료", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
