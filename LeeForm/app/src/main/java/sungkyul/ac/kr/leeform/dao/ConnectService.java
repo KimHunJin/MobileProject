@@ -128,7 +128,6 @@ public interface ConnectService {
             @QueryMap Map<String, String> options
     );
 
-<<<<<<< HEAD
     @GET("material_list.php")
     Call<MaterialListBean> getMaterialList(
             @Query("offset") int offset
@@ -137,11 +136,11 @@ public interface ConnectService {
     @GET("material_detail.php")
     Call<MaterialDetailBean> getMaterialDetail(
             @Query("material_unique_key") String material_unique_key
-=======
+    );
+
     @GET("search.php")
     Call<KnowHowBean> getKnowHowSearch(
             @Query("data") String data
->>>>>>> 4578777d0d094ea5c8d441b662e9e782e1a068e3
     );
 }
 
