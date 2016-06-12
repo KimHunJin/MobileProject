@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
+import sungkyul.ac.kr.leeform.utils.EndString;
 
 /**
  * Created by KyungHee on 2016-05-12.
@@ -65,7 +66,7 @@ public class MaterialGridAdapter extends BaseAdapter {
         gridItem = item.get(position);
 
         Picasso.with(inflater.getContext()).load(gridItem.getmUrl()).into(gridViewHolder.imgGridMaterial);
-        gridViewHolder.txtGridMaterial.setText(gridItem.getmName());
+        gridViewHolder.txtGridMaterial.setText(EndString.endString(gridItem.getmName(),12));
         gridViewHolder.txtGridMaterialCost.setText(gridItem.getmPrice());
 
         return convertView;
