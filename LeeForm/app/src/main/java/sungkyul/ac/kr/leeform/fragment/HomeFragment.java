@@ -32,6 +32,7 @@ import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.items.MainListItem;
+import sungkyul.ac.kr.leeform.utils.SaveData;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
@@ -55,6 +56,16 @@ public class HomeFragment extends Fragment {
     ListView lst;
     private static String URL = StaticURL.BASE_URL;
     ArrayList<MainListItem> listItem = new ArrayList<>();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SaveData.getAppPreferences(getActivity().getApplicationContext(), "isAuthority").equals("1")) {
+            fab.setVisibility(View.VISIBLE);
+        }else{
+            fab.setVisibility(View.INVISIBLE);
+        }
+    }
 
     @Override
     public void onDestroyView() {
@@ -126,7 +137,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent itKnowhowDetail = new Intent(getActivity(), KnowHowDetailActivity.class);
-                Log.e("img", listItem.get(position).getmUrl());
                 itKnowhowDetail.putExtra("image", listItem.get(position).getmUrl() + "");
                 itKnowhowDetail.putExtra("knowhowkey", listItem.get(position).getmNumber() + "");
                 startActivity(itKnowhowDetail);
@@ -213,7 +223,6 @@ public class HomeFragment extends Fragment {
                         initializeList();
 
                     }
-                    Log.e("sort", sort + "");
                 }
             }
 
@@ -254,19 +263,13 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Log.e("offset", offset + "");
         Call<KnowHowBean> call = connectService.getWritingList(offset);
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
             public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
-                Log.e("resonpse", response.code() + "");
                 KnowHowBean decode = response.body();
-                Log.e("err", decode.getErr());
-                Log.e("count", decode.getCount());
-                Log.e("list size", decode.getWriting_list().size() + "");
 
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-                    Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
                     listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getCost(),
                             decode.getWriting_list().get(i).getMaking_time(),
                             decode.getWriting_list().get(i).getScrap_amount(),
@@ -296,19 +299,13 @@ public class HomeFragment extends Fragment {
                 .build();
 
         ConnectService connectService = retrofit.create(ConnectService.class);
-        Log.e("offset", offset + "");
         Call<KnowHowBean> call = connectService.getWritingListLatest(offset);
         call.enqueue(new Callback<KnowHowBean>() {
             @Override
             public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
-                Log.e("resonpse", response.code() + "");
                 KnowHowBean decode = response.body();
-                Log.e("err", decode.getErr());
-                Log.e("count", decode.getCount());
-                Log.e("list size", decode.getWriting_list().size() + "");
 
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-                    Log.e("imgUrl", decode.getWriting_list().get(i).getPicture_url());
                     listItem.add(new MainListItem(Integer.parseInt(decode.getWriting_list().get(i).getWriting_unique_key()), decode.getWriting_list().get(i).getCost(),
                             decode.getWriting_list().get(i).getMaking_time(),
                             decode.getWriting_list().get(i).getScrap_amount(),

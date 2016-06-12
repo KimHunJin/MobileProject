@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import sungkyul.ac.kr.leeform.activity.navigation.MyPageModifyActivity;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
+import sungkyul.ac.kr.leeform.utils.SaveData;
 import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
@@ -30,6 +32,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * Created by YongHoon on 2016-06-01.
  */
 public class RegistSellerActivity extends AppCompatActivity {
+    Toolbar toolbar;
     Button btnRegistSeller;
     ImageView imgOk, imgBack;
     String URL = StaticURL.BASE_URL;
@@ -41,6 +44,8 @@ public class RegistSellerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_seller);
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
 
         imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -85,14 +90,22 @@ public class RegistSellerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
                 UserBean decodedResponse = response.body();
-                String accountNumber = decodedResponse.getMyinfo_detail().get(0).getAccount_number();
-                String bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
-                String accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
+                accountNumber = decodedResponse.getMyinfo_detail().get(0).getAccount_number();
+                bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
+                accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
 
+                if(accountName == null | bankName == null | accountNumber == null){
+                    Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
+                    startActivityForResult(intent, 3000);
+                    return;
+                }
                 if (accountName.equals("") | bankName.equals("") | accountNumber.equals("")) {
                     Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
                     startActivityForResult(intent, 3000);
+                    return;
                 }
+
+                setUserDetails();
             }
 
             @Override
@@ -158,8 +171,9 @@ public class RegistSellerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegistBean> call, Response<RegistBean> response) {
                 RegistBean decodedResponse = response.body();
-
-                Log.e("register", decodedResponse.getErr());
+                SaveData.setAppPreferences(getApplicationContext(), "isAuthority","1");
+                Toast.makeText(RegistSellerActivity.this, "등록되셨습니다.", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

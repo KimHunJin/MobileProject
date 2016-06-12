@@ -46,6 +46,7 @@ import sungkyul.ac.kr.leeform.activity.search.MaterialSearchActivity;
 import sungkyul.ac.kr.leeform.activity.settings.SettingActivity;
 import sungkyul.ac.kr.leeform.adapter.MainFragmentAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.service.RegistrationIntentService;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabInitialization();
         initializeLayout();
+        getAuthority();
         setListener();
         checkUser();
         gcm();
@@ -301,10 +303,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
+                if (tabLayout.getSelectedTabPosition() == 2) {
+                    imgSearch.setVisibility(View.INVISIBLE);
+                } else {
+                    imgSearch.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         item = getResources().getStringArray(R.array.nav);
 
-        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
+        if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
             item[2] = "판매 내역";
+        }else{
+            item[2] = "판매자 등록";
         }
 
         lstNavItem = (ListView) slidingMenu.findViewById(R.id.lstNavItem);
@@ -330,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
                     // 판매자 등록
                     case 2:
                         // 판매자 등록이 된상태면 판매내역으로
-                        if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
+                        if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
                             Intent itSetting = new Intent(getApplicationContext(), SettingActivity.class);
                             startActivity(itSetting);
                         }
@@ -351,6 +377,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getAuthority() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        String userKey = SaveDataMemberInfo.getAppPreferences(getApplicationContext(), "user_key");
+        final Call<UserBean> call = connectService.getUserDetail(userKey);
+
+        call.enqueue(new Callback<UserBean>() {
+            @Override
+            public void onResponse(Call<UserBean> call, Response<UserBean> response) {
+
+                UserBean decode = response.body();
+                String authority = decode.getMyinfo_detail().get(0).getAuthority();
+                SaveData.setAppPreferences(getApplicationContext(), "isAuthority",authority);
+            }
+
+            @Override
+            public void onFailure(Call<UserBean> call, Throwable t) {
+                Log.e("failure", t.getMessage());
+            }
+        });
+    }
+
 
     /**
      * 뒤로가기 키를 눌렀을 때
@@ -420,6 +473,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver();
+        setListener();
     }
 
 }
