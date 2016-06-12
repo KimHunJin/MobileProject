@@ -69,8 +69,7 @@ public class MaterialGridAdapter extends BaseAdapter {
 
         Picasso.with(inflater.getContext()).load(gridItem.getmUrl()).into(gridViewHolder.imgGridMaterial);
         //gridViewHolder.imgGridMaterial.setImageResource(gridItem.getmUrl());
-        gridViewHolder.txtGridMaterial.setText("왜안돼 짜쯩나네");
-
+        gridViewHolder.txtGridMaterial.setText(gridItem.getmName());
         //gridViewHolder.txtGridMaterial.setText(gridItem.getmName());
         gridViewHolder.txtGridMaterialCost.setText(gridItem.getmPrice());
 
