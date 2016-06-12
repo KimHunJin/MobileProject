@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * Created by YongHoon on 2016-06-01.
  */
 public class RegistSellerActivity extends AppCompatActivity {
+    Toolbar toolbar;
     Button btnRegistSeller;
     ImageView imgOk, imgBack;
     String URL = StaticURL.BASE_URL;
@@ -41,6 +43,8 @@ public class RegistSellerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_seller);
+        toolbar = (Toolbar) findViewById(R.id.toolbarBack);
+        toolbar.setContentInsetsAbsolute(0, 0);
 
         imgBack = (ImageView) findViewById(R.id.imgBackOk);
         imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -89,10 +93,18 @@ public class RegistSellerActivity extends AppCompatActivity {
                 String bankName = decodedResponse.getMyinfo_detail().get(0).getBank_name();
                 String accountName = decodedResponse.getMyinfo_detail().get(0).getAccount_name();
 
+                if(accountName == null | bankName == null | accountNumber == null){
+                    Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
+                    startActivityForResult(intent, 3000);
+                    return;
+                }
                 if (accountName.equals("") | bankName.equals("") | accountNumber.equals("")) {
                     Intent intent = new Intent(getApplicationContext(), MyPageModifyActivity.class);
                     startActivityForResult(intent, 3000);
+                    return;
                 }
+
+
             }
 
             @Override
