@@ -29,7 +29,9 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * 노하우 상세정보
  */
 public class KnowHowDetailActivity extends AppCompatActivity {
+    StringBuffer sbContent;
     View layKnowhowDetail;
+    private LinearLayout btnKnowHowDetailShare;
     private Toolbar toolbar;
     private ImageView imgKnowHowDetailMain, imgKnowHowDetailUserInfo, imgKnowHowDetailBuying;
     private TextView txtKnowHowDetailName, txtKnowHowDetailShortExplain, txtKnowHowDetailTime, txtKnowHowDetailUserName;
@@ -40,6 +42,9 @@ public class KnowHowDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_know_how_detail);
+
+        // 공유할때 보낼 컨텐츠 담을 버퍼 생성
+        sbContent = new StringBuffer();
 
         //툴바 완료버튼 보이지 않게 하기
         ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
@@ -60,6 +65,17 @@ public class KnowHowDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), DemoCreditPage.class));
+            }
+        });
+
+        btnKnowHowDetailShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itSendContent = new Intent();
+                itSendContent.setAction(Intent.ACTION_SEND);
+                itSendContent.putExtra(Intent.EXTRA_TEXT, sbContent.toString());
+                itSendContent.setType("text/plain");
+                startActivity(itSendContent);
             }
         });
 
@@ -98,6 +114,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
      * 화면에 보여줄 정보 초기화
      */
     private void initializeLayout() {
+        btnKnowHowDetailShare = (LinearLayout)findViewById(R.id.btnKnowHowDetailShare);
         layKnowhowDetail = findViewById(R.id.layKnowhowDetail);
         toolbar = (Toolbar) findViewById(R.id.toolbarBack);
         toolbar.setContentInsetsAbsolute(0, 0);
@@ -137,8 +154,23 @@ public class KnowHowDetailActivity extends AppCompatActivity {
                 txtKnowHowDetailTime.setText(decode.getWriting_data1().get(0).getWriting_date());
                 txtToolBarTitle.setText(decode.getWriting_data1().get(0).getWriting_name());
 
+                sbContent.append(decode.getWriting_data1().get(0).getWriting_name().toString()+
+                        "\n" +
+                        decode.getWriting_data1().get(0).getExplanation().toString() +
+                        "\n\n"+
+                        "난이도 : " + decode.getWriting_data1().get(0).getLevel().toString() + " / " +
+                        "소요시간 : " + decode.getWriting_data1().get(0).getCost().toString() + " / " +
+                        "소요비용 : " + decode.getWriting_data1().get(0).getCost().toString() +
+                        "\n\n" +
+                        "제작방법" +
+                        "\n"
+                );
                 for (int i = 0; i < decode.getWriting_data2().size(); i++) {
                     makeKnowhowItem(i + 1, decode.getWriting_data2().get(i).getWriting_contents().toString(), decode.getWriting_data2().get(i).getPicture_url().toString());
+                    sbContent.append((i+1) + ". " + decode.getWriting_data2().get(i).getWriting_contents().toString());
+                    if(i+1 != decode.getWriting_data2().size()){
+                        sbContent.append("\n");
+                    }
                 }
             }
 

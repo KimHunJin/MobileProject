@@ -134,6 +134,7 @@
 
         <!--좋아요, 댓글 추가-->
         <LinearLayout
+            android:id="@+id/btnKnowHowDetailShare"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_weight="1"
