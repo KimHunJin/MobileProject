@@ -33,7 +33,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.navigation.MyPageModifyActivity"/>
-        <activity android:name=".activity.member.RegistSellerActivity"/>
         <activity
             android:name=".activity.member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
@@ -53,7 +52,6 @@
         <activity android:name=".activity.search.KnowHowSearchActivity" />
         <activity android:name=".activity.material.MaterialDetailActivity" />
         <activity android:name=".activity.search.MaterialSearchActivity" />
-        <activity android:name=".activity.member.PurchaseListActivity" />
         <activity
             android:name=".activity.gcm.PopUpActivity"
             android:theme="@android:style/Theme.Translucent" />

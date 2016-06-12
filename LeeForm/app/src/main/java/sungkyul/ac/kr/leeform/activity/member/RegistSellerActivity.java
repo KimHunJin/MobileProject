@@ -1,11 +1,10 @@
-﻿package sungkyul.ac.kr.leeform.activity.member;
+package sungkyul.ac.kr.leeform.activity.member;
 
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +35,6 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  */
 public class RegistSellerActivity extends AppCompatActivity {
     Button btnRegistSeller;
-    Toolbar toolbar;
     ImageView imgOk,imgBack;
     String URL = StaticURL.BASE_URL;
     String accountNumber;
@@ -48,8 +46,6 @@ public class RegistSellerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_seller);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbarBack);
-        toolbar.setContentInsetsAbsolute(0,0);
         imgBack=(ImageView)findViewById(R.id.imgBackOk);
         imgOk=(ImageView)findViewById(R.id.imgOk);
 
@@ -72,7 +68,7 @@ public class RegistSellerActivity extends AppCompatActivity {
                 startActivity(itMain);
                 finish();*/
                 getUserDetails();
-               // setUserDetails();
+                // setUserDetails();
             }
         });
     }
