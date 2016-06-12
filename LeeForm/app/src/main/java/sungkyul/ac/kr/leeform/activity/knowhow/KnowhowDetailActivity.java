@@ -136,7 +136,7 @@ public class KnowHowDetailActivity extends AppCompatActivity {
                 Picasso.with(getApplicationContext()).load(decode.getWriting_data1().get(0).getImg()).resize(0,imgKnowHowDetailUserInfo.getHeight()).into(imgKnowHowDetailUserInfo);
                 txtKnowHowDetailLevel.setText(decode.getWriting_data1().get(0).getLevel().toString());
                 txtKnowHowDetailMakeTime.setText(decode.getWriting_data1().get(0).getMaking_time().toString());
-                txtKnowHowDetailMakingPrice.setText(decode.getWriting_data1().get(0).getPrice().toString());
+                txtKnowHowDetailMakingPrice.setText(decode.getWriting_data1().get(0).getCost().toString());
                 txtKnowHowDetailName.setText(decode.getWriting_data1().get(0).getWriting_name().toString());
                 txtKnowHowDetailShortExplain.setText(decode.getWriting_data1().get(0).getExplanation().toString());
                 txtKnowHowDetailUserName.setText(decode.getWriting_data1().get(0).getName().toString());

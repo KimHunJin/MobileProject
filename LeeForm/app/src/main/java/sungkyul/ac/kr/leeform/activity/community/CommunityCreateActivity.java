@@ -57,12 +57,16 @@ public class CommunityCreateActivity extends AppCompatActivity {
 
         edtCommunity = (EditText) findViewById(R.id.edtCommunity);
 
-        ImageView tv2 = (ImageView) findViewById(R.id.imgOk);
-        tv2.setOnClickListener(new View.OnClickListener() {
+        ImageView imgOk = (ImageView) findViewById(R.id.imgOk);
+        imgOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCommunityCreate();
-                finish();
+                if(edtCommunity.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(),"내용을 입력해주세요",Toast.LENGTH_SHORT).show();
+                }else {
+                    setCommunityCreate();
+                    finish();
+                }
             }
         });
     }

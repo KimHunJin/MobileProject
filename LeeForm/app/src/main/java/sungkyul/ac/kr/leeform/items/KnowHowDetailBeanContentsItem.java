@@ -13,6 +13,15 @@ public class KnowHowDetailBeanContentsItem {
     String level;
     String making_time;
     String price;
+    String cost;
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
 
     public String getPicture_url() {
         return picture_url;

@@ -13,6 +13,15 @@ public class WritingBeanItem {
     String picture_url;
     String scrap_amount;
     String explanation;
+    String cost;
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
 
     public String getScrap_amount() {
         return scrap_amount;

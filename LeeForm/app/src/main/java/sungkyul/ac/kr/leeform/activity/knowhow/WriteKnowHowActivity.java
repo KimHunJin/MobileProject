@@ -58,7 +58,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     String selectedCategory;
     String selectedMakingTime;
     Spinner spnCategory, spnMakingTime;
-    EditText edtName, edtCost, edtSellAmount, edtSellPrice, edtYoutubuCode;
+    EditText edtName, edtCost, edtSellAmount, edtSellPrice, edtYoutubuCode,edtExplanation;
     LinearLayout lineCreateView;
     ImageView imgOk, imgBack;
     TextView tvTitle;
@@ -134,7 +134,8 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
         cAdapter = new CreateKnowHowGridAdapter(getApplicationContext(), R.layout.item_grid_create, gridItems);
         grvCreate.setAdapter(cAdapter);
-
+        check_sale = "0"; //판매NO
+        level = btnLevelHigh.getText().toString(); //레벨 상
         init();
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +153,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
                 check();
 
                 if (check() == false) {
-                    setting();
+                   // setting();
                     saveKnowGetKey();
                     finish();
                 }
@@ -225,8 +226,6 @@ public class WriteKnowHowActivity extends AppCompatActivity {
      */
     private void setting() {
 
-        check_sale = "0"; //판매NO
-        level = btnLevelHigh.getText().toString(); //레벨 상
         edtSellAmount.setText("0"); //판매수량 0
         edtSellPrice.setText("0"); //판매가격0
         edtYoutubuCode.setText("0"); //youtubucode
@@ -243,8 +242,12 @@ public class WriteKnowHowActivity extends AppCompatActivity {
            Toast.makeText(getApplicationContext(),"유튜브코드를 입력해주세요",Toast.LENGTH_SHORT).show();
            return true;
        }*/
+        if(edtExplanation.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "설명을 입력해주세요", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         if (edtCost.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "소모비용을 입력해주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "소요비용을 입력해주세요", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (check_sale.equals("1")) {
@@ -294,7 +297,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
 
         edtSellAmount = (EditText) findViewById(R.id.edtSellAmount);
         edtSellPrice = (EditText) findViewById(R.id.edtSellPrice);
-
+        edtExplanation = (EditText)findViewById(R.id.edtExplanation);
     }
 
     private void init() {
@@ -309,9 +312,9 @@ public class WriteKnowHowActivity extends AppCompatActivity {
     }
 
     private void saveKnowGetKey() {
-        if (edtName.getText().toString().equals("")) {
+       /* if (edtName.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "제목입력", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -321,6 +324,20 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         Log.e("userUniqueKey", userUniqueKey);
         Map<String, String> data = new HashMap<>();
 
+
+
+        if(edtCost.getText().toString().equals("")){
+            edtCost.setText("0");
+        }
+        if(edtYoutubuCode.getText().toString().equals("")){
+            edtYoutubuCode.setText("0");
+        }
+        if(edtSellAmount.getText().toString().equals("")){
+            edtSellAmount.setText("0");
+        }
+        if(edtSellPrice.getText().toString().equals("")){
+            edtSellPrice.setText("0");
+        }
         data.put("user_unique_key", userUniqueKey);
 
         // data.put("writing_category_key", "1"); // 변경 필요
@@ -336,6 +353,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         data.put("writing_explanation", "수고가 많습니다."); // 변경 필요
         data.put("amount", edtSellAmount.getText().toString());
         data.put("price", edtSellPrice.getText().toString());
+        data.put("writing_explanation",edtExplanation.getText().toString());
         //   data.put("sellprice",edtSellPrice.getText().toString());// 변경 필요
         Log.e("log", userUniqueKey + "");
         Log.e("log", selectedCategory);
@@ -346,6 +364,7 @@ public class WriteKnowHowActivity extends AppCompatActivity {
         Log.e("log", selectedMakingTime + "");
         Log.e("log", level + "");
         Log.e("log", edtSellAmount.getText().toString() + "");
+        Log.e("logEx",edtExplanation.getText().toString()+"");
 
         Call<KnowHowWritingBean> call = connectService.setKnowGetKey(data);
         call.enqueue(new Callback<KnowHowWritingBean>() {
