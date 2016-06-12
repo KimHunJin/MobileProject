@@ -1,6 +1,7 @@
 package sungkyul.ac.kr.leeform.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class MaterialGridAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<MaterialGridItem> item;
     private int layout;
-    String errCode = "0";
+    //String errCode = "0";
     MaterialGridItem gridItem;
 
     public MaterialGridAdapter(Context context, int layout, ArrayList<MaterialGridItem> item) {
@@ -64,13 +65,14 @@ public class MaterialGridAdapter extends BaseAdapter {
             gridViewHolder = (GridViewHolder) convertView.getTag();
         }
 
-        MaterialGridItem gridItem = item.get(position);
+        gridItem = item.get(position);
 
-        Picasso.with(inflater.getContext()).load(gridItem.getMaterial_picture_url()).into(gridViewHolder.imgGridMaterial);
-
+        Picasso.with(inflater.getContext()).load(gridItem.getmUrl()).into(gridViewHolder.imgGridMaterial);
         //gridViewHolder.imgGridMaterial.setImageResource(gridItem.getmUrl());
-        gridViewHolder.txtGridMaterial.setText(gridItem.getMaterial_name());
-        gridViewHolder.txtGridMaterialCost.setText(gridItem.getMaterial_price());
+        gridViewHolder.txtGridMaterial.setText("왜안돼 짜쯩나네");
+
+        //gridViewHolder.txtGridMaterial.setText(gridItem.getmName());
+        gridViewHolder.txtGridMaterialCost.setText(gridItem.getmPrice());
 
         return convertView;
     }

@@ -12,16 +12,17 @@ import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
 import sungkyul.ac.kr.leeform.dto.KnowHowWritingBean;
+import sungkyul.ac.kr.leeform.dto.MaterialDetailBean;
 import sungkyul.ac.kr.leeform.dto.MaterialListBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import sungkyul.ac.kr.leeform.items.MaterialGridItem;
-=======
+//=======
 import sungkyul.ac.kr.leeform.dto.UserModify;
->>>>>>> e21684f948a5ea0983759573431be556f6398c41
+//>>>>>>> e21684f948a5ea0983759573431be556f6398c41
 
 /**
  * Created by HunJin on 2016-06-10.
@@ -130,6 +131,11 @@ public interface ConnectService {
     @GET("material_list.php")
     Call<MaterialListBean> getMaterialList(
             @Query("offset") int offset
+    );
+
+    @GET("material_detail.php")
+    Call<MaterialDetailBean> getMaterialDetail(
+            @Query("material_unique_key") String material_unique_key
     );
 }
 

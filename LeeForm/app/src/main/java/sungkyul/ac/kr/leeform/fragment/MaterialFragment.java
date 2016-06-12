@@ -105,16 +105,16 @@ public class MaterialFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                intent = new Intent(getContext(), MaterialListBean.class);
-                Log.e("Number", gridItems.get(position).getMaterial_unique_key() + "");
+                //intent = new Intent(getContext(), MaterialListBean.class);
+                //Log.e("Number", gridItems.get(position).getmKey() + "");
 
-                intent.putExtra("Number", gridItems.get(position).getMaterial_unique_key());
-                intent.putExtra("image", gridItems.get(position).getMaterial_picture_url());
-                intent.putExtra("name", gridItems.get(position).getMaterial_name());
-                intent.putExtra("price", gridItems.get(position).getMaterial_price());
+                //intent.putExtra("Number", gridItems.get(position).getmKey());
+                //intent.putExtra("image", gridItems.get(position).getmUrl());
+                //intent.putExtra("name", gridItems.get(position).getmName());
+                //intent.putExtra("price", gridItems.get(position).getmPrice());
                 //intent.putExtra("contents", gridItems.get(position).getcContent());
 
-                startActivity(intent);
+                //startActivity(intent);
             }
         });
 
@@ -170,16 +170,10 @@ public class MaterialFragment extends Fragment {
                 Log.e("err", decode.getErr());
                 Log.e("count", decode.getCount());
                 Log.e("list size", decode.getMaterial_list().size() + "");
+                //Log.e("getmKey", decode.getMaterial_list().get(1).getmKey()+"");
                 //커뮤니티 목록 개수만큼 list에 CommunityItem(작성자이름, 댓글개수, 커뮤니티 내용, 작성자이미지) 추가
                 for (int i = 0; i < Integer.parseInt(decode.getCount()); i++) {
-
-                    //try {
-                    //    String date = decode.getMaterial_list().get(i).getMaterial_writing_date();
-                    //    date = TimeTransForm.formatTimeString(date);
-                    //} catch (ParseException e) {
-                    //    e.printStackTrace();
-                    //}
-                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getMaterial_unique_key(), decode.getMaterial_list().get(i).getMaterial_name(), decode.getMaterial_list().get(i).getMaterial_price(), decode.getMaterial_list().get(i).getMaterial_picture_url()));
+                    gridItems.add(new MaterialGridItem(decode.getMaterial_list().get(i).getmKey(), decode.getMaterial_list().get(i).getmName(), decode.getMaterial_list().get(i).getmPrice(), decode.getMaterial_list().get(i).getmUrl()));
                     //   decode.getCommunity_list().get(i).get
                 }
                 offset += Integer.parseInt(decode.getCount());

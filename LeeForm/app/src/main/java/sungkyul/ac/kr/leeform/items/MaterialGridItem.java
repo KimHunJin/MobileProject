@@ -4,50 +4,48 @@ package sungkyul.ac.kr.leeform.items;
  * Created by KyungHee on 2016-05-12.
  */
 public class MaterialGridItem {
-    private int material_unique_key;
-    private String material_name;
-    private String material_picture_url;
-    private String material_price;
+    private int mKey;
+    private String mName;
+    private String mUrl;
+    private String mPrice;
 
-    /*
-    public MaterialGridItem(int material_unique_key,String material_picture_url, String material_name, String price) {
+
+    public MaterialGridItem(int material_unique_key,String material_picture_url, String material_name, String material_price) {
         mKey = material_unique_key;
         mUrl = material_picture_url;
         mName = material_name;
-        mPrice = price;
-    }*/
-
-    public String getMaterial_name() {
-        return material_name;
+        mPrice = material_price;
     }
 
-    public void setMaterial_name(String material_name) {
-        this.material_name = material_name;
+    public int getmKey() {
+        return mKey;
     }
 
-    public String getMaterial_picture_url() {
-        return material_picture_url;
+    public void setmKey(int mKey) {
+        this.mKey = mKey;
     }
 
-    public void setMaterial_picture_url(String material_picture_url) {
-        this.material_picture_url = material_picture_url;
+    public String getmName() {
+        return mName;
     }
 
-    public String getMaterial_price() {
-        return material_price;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public void setMaterial_price(String material_price) {
-        this.material_price = material_price;
+    public String getmPrice() {
+        return mPrice;
     }
 
-    public int getMaterial_unique_key() {
-        return material_unique_key;
+    public void setmPrice(String mPrice) {
+        this.mPrice = mPrice;
     }
 
-    public void setMaterial_unique_key(int material_unique_key) {
-        this.material_unique_key = material_unique_key;
+    public String getmUrl() {
+        return mUrl;
     }
 
-
+    public void setmUrl(String mUrl) {
+        this.mUrl = mUrl;
+    }
 }
