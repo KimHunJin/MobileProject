@@ -154,15 +154,14 @@ public class KnowHowDetailActivity extends AppCompatActivity {
                 txtKnowHowDetailTime.setText(decode.getWriting_data1().get(0).getWriting_date());
                 txtToolBarTitle.setText(decode.getWriting_data1().get(0).getWriting_name());
 
-                sbContent.append("★" + decode.getWriting_data1().get(0).getWriting_name().toString() + "★" +
-                        "\n" +
+                sbContent.append("★" + decode.getWriting_data1().get(0).getWriting_name().toString() + "★\n" +
                         decode.getWriting_data1().get(0).getExplanation().toString() +
                         "\n\n"+
                         "난이도 : " + decode.getWriting_data1().get(0).getLevel().toString() + " / " +
                         "소요시간 : " + decode.getWriting_data1().get(0).getCost().toString() + " / " +
                         "소요비용 : " + decode.getWriting_data1().get(0).getCost().toString() +
                         "\n\n" +
-                        "<" + "제작방법" + ">" +
+                        "<제작방법>" +
                         "\n"
                 );
                 for (int i = 0; i < decode.getWriting_data2().size(); i++) {

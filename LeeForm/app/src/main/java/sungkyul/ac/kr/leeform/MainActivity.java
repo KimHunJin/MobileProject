@@ -302,6 +302,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
+                if (tabLayout.getSelectedTabPosition() == 2) {
+                    imgSearch.setVisibility(View.INVISIBLE);
+                } else {
+                    imgSearch.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         item = getResources().getStringArray(R.array.nav);
 
         if (SaveData.getAppPreferences(getApplicationContext(), "isSeller").equals("true")) {
