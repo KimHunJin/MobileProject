@@ -305,29 +305,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                ImageView imgSearch = (ImageView)findViewById(R.id.imgSearch);
-                if (tabLayout.getSelectedTabPosition() == 2) {
-                    imgSearch.setVisibility(View.INVISIBLE);
-                } else {
-                    imgSearch.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
         item = getResources().getStringArray(R.array.nav);
 
         if (SaveData.getAppPreferences(getApplicationContext(), "isAuthority").equals("1")) {
@@ -428,6 +405,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void tabInitialization() {
         viewPager = (ViewPager) findViewById(R.id.mainViewPager);
+        viewPager.setOffscreenPageLimit(2);
         MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(getSupportFragmentManager(), MainActivity.this);
         viewPager.setAdapter(mainFragmentAdapter);
 
