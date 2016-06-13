@@ -100,6 +100,11 @@ public class HomeFragment extends Fragment {
         lst.setAdapter(adapter);
 
         fab = (FloatingActionButton) mView.findViewById(R.id.fab); //작성하기 버튼
+        if(SaveData.getAppPreferences(getContext(), "isAuthority").equals("1")) {
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void initializeList() {
@@ -152,7 +157,7 @@ public class HomeFragment extends Fragment {
                     if (currentFirstVisibleItem > mLastFirstVisibleItem) {
                         isScrollingUp = false;
                         fab.hide();
-                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem && SaveData.getAppPreferences(getContext(), "isAuthority").equals("1")) {
                         isScrollingUp = true;
                         fab.show();
                     }
