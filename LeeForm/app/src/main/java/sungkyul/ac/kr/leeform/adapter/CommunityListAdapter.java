@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.items.CommunityItem;
+import sungkyul.ac.kr.leeform.utils.EndString;
 
 /**
  * Created by MiSeon on 2016-05-16.
@@ -68,7 +69,12 @@ public class CommunityListAdapter extends BaseAdapter {
         }
         CommunityItem listItem = item.get(position);
         viewHolder.txtUserName.setText(listItem.getcName());
-        viewHolder.txtContent.setText(listItem.getcContent());
+        String contents = listItem.getcContent();
+        if (contents.length() > 70) {
+            viewHolder.txtContent.setText(EndString.endString(contents, 70));
+        } else {
+            viewHolder.txtContent.setText(listItem.getcContent());
+        }
         viewHolder.txtReplyCount.setText(listItem.getcCount());
         viewHolder.txtCommunityTime.setText(listItem.getcTime());
         Picasso.with(inflater.getContext()).load(listItem.getcImageURL()).into(viewHolder.txtImg);
