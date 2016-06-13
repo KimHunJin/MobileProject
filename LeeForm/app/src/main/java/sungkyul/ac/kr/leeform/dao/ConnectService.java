@@ -23,10 +23,8 @@ import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.UserModifyBean;
+import sungkyul.ac.kr.leeform.dto.WritingDetailReplyListBean;
 import sungkyul.ac.kr.leeform.dto.getAlarmStateBean;
-
-//<<<<<<< HEAD
-//=======
 
 /**
  * Created by HunJin on 2016-06-10.
@@ -172,6 +170,16 @@ public interface ConnectService {
     @GET("check_push_alarm.php")
     Call<getAlarmStateBean> checkAlarmState(
             @Query("user_unique_key") String user_unique_key
+    );
+
+    @GET("view_reply_writing.php")
+    Call<WritingDetailReplyListBean> getWritingDetailReply(
+            @Query("writing_unique_key") String writing_unique_key
+    );
+
+    @GET("reply_writing.php")
+    Call<OnlyErrBean> setWritingDetailReply(
+            @QueryMap Map<String, String> options
     );
 }
 

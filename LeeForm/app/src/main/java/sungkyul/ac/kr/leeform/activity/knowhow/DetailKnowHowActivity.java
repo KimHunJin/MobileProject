@@ -22,6 +22,7 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.credit.DemoCreditPage;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
+import sungkyul.ac.kr.leeform.dto.WritingDetailReplyListBean;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
@@ -31,12 +32,12 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
 public class DetailKnowHowActivity extends AppCompatActivity {
     StringBuffer sbContent;
     View layKnowhowDetail;
-    private LinearLayout btnKnowHowDetailShare;
+    private LinearLayout btnKnowHowDetailShare, btnKnowHowDetailReply, btnKnowHowDetailScrap;
     private Toolbar toolbar;
     private ImageView imgKnowHowDetailMain, imgKnowHowDetailUserInfo, imgKnowHowDetailBuying;
     private TextView txtKnowHowDetailName, txtKnowHowDetailShortExplain, txtKnowHowDetailTime, txtKnowHowDetailUserName;
     private TextView txtKnowHowDetailLevel, txtKnowHowDetailMakeTime, txtKnowHowDetailMakingPrice, txtToolBarTitle;
-
+    private TextView txtKnowHowDetailReplyCount, txtKnowHowDetailScrapCount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,11 +81,23 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         });
 
         Intent it = getIntent();
-        String knowHowKey = it.getExtras().getString("knowhowkey");
+        final String knowHowKey = it.getExtras().getString("knowhowkey");
         String imageUrl = it.getExtras().getString("image");
 
         Picasso.with(getApplicationContext()).load(imageUrl).resize(1080, 720).centerCrop().into(imgKnowHowDetailMain);
         getItem(knowHowKey);
+
+        getKnowHowReplyCount(knowHowKey);
+
+        btnKnowHowDetailReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(),DetailKnowHowReplyActivity.class);
+                it.putExtra("key",knowHowKey);
+                startActivity(it);
+                overridePendingTransition(R.anim.commons_slide_bottom_to_up, R.anim.commons_slide_bottom_to_up);
+            }
+        });
     }
 
     /**
@@ -129,6 +142,10 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         txtKnowHowDetailUserName = (TextView) findViewById(R.id.txtKnowHowDetailUserName);
         txtKnowHowDetailTime = (TextView) findViewById(R.id.txtKnowHowDetailTime);
         txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
+        btnKnowHowDetailReply = (LinearLayout)findViewById(R.id.btnKnowHowReply);
+        btnKnowHowDetailScrap = (LinearLayout)findViewById(R.id.btnKnowHowScrap);
+        txtKnowHowDetailScrapCount = (TextView)findViewById(R.id.txtKnowHowDetailScrapCount);
+        txtKnowHowDetailReplyCount = (TextView)findViewById(R.id.txtKnowHowDetailReplyCount);
     }
 
     private void getItem(String writingUniqueKey) {
@@ -175,6 +192,27 @@ public class DetailKnowHowActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<KnowHowDetailBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getKnowHowReplyCount(String writingUniqueKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<WritingDetailReplyListBean> call = connectService.getWritingDetailReply(writingUniqueKey);
+        call.enqueue(new Callback<WritingDetailReplyListBean>() {
+            @Override
+            public void onResponse(Call<WritingDetailReplyListBean> call, Response<WritingDetailReplyListBean> response) {
+                WritingDetailReplyListBean decode = response.body();
+                txtKnowHowDetailReplyCount.setText(decode.getReply_list().size()+"");
+            }
+
+            @Override
+            public void onFailure(Call<WritingDetailReplyListBean> call, Throwable t) {
 
             }
         });
