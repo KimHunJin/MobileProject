@@ -14,6 +14,15 @@ public class KnowHowDetailBeanContentsItem {
     String making_time;
     String price;
     String cost;
+    String scrap_amount;
+
+    public String getScrap_amount() {
+        return scrap_amount;
+    }
+
+    public void setScrap_amount(String scrap_amount) {
+        this.scrap_amount = scrap_amount;
+    }
 
     public String getCost() {
         return cost;

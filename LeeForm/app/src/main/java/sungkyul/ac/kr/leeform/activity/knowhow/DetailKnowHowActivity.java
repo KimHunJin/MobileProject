@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +25,9 @@ import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.credit.DemoCreditPage;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowDetailBean;
+import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
+import sungkyul.ac.kr.leeform.dto.WritingDetailReplyListBean;
+import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
@@ -31,12 +37,14 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
 public class DetailKnowHowActivity extends AppCompatActivity {
     StringBuffer sbContent;
     View layKnowhowDetail;
-    private LinearLayout btnKnowHowDetailShare;
+    private ImageView imgScrapImage;
+    private LinearLayout btnKnowHowDetailShare, btnKnowHowDetailReply, btnKnowHowDetailScrap;
     private Toolbar toolbar;
     private ImageView imgKnowHowDetailMain, imgKnowHowDetailUserInfo, imgKnowHowDetailBuying;
     private TextView txtKnowHowDetailName, txtKnowHowDetailShortExplain, txtKnowHowDetailTime, txtKnowHowDetailUserName;
     private TextView txtKnowHowDetailLevel, txtKnowHowDetailMakeTime, txtKnowHowDetailMakingPrice, txtToolBarTitle;
-
+    private TextView txtKnowHowDetailReplyCount, txtKnowHowDetailScrapCount;
+    private boolean isScrap = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,12 +87,43 @@ public class DetailKnowHowActivity extends AppCompatActivity {
             }
         });
 
+
         Intent it = getIntent();
-        String knowHowKey = it.getExtras().getString("knowhowkey");
+        final String knowHowKey = it.getExtras().getString("knowhowkey");
         String imageUrl = it.getExtras().getString("image");
 
         Picasso.with(getApplicationContext()).load(imageUrl).resize(1080, 720).centerCrop().into(imgKnowHowDetailMain);
         getItem(knowHowKey);
+
+        getKnowHowReplyCount(knowHowKey);
+
+        scrapCheck(knowHowKey);
+
+        btnKnowHowDetailReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(),DetailKnowHowReplyActivity.class);
+                it.putExtra("key",knowHowKey);
+                startActivity(it);
+                overridePendingTransition(R.anim.commons_slide_bottom_to_up, R.anim.commons_slide_bottom_to_up);
+            }
+        });
+
+        btnKnowHowDetailScrap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 스크랩 처리
+                if(isScrap == true) {
+                    // 스크랩 취소
+                    cancelScrap(knowHowKey);
+                } else {
+                    // 스크랩
+                    setScrap(knowHowKey);
+                }
+                scrapCheck(knowHowKey);
+            }
+        });
+
     }
 
     /**
@@ -129,6 +168,11 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         txtKnowHowDetailUserName = (TextView) findViewById(R.id.txtKnowHowDetailUserName);
         txtKnowHowDetailTime = (TextView) findViewById(R.id.txtKnowHowDetailTime);
         txtToolBarTitle = (TextView) findViewById(R.id.txtToolBarTitle);
+        btnKnowHowDetailReply = (LinearLayout)findViewById(R.id.btnKnowHowReply);
+        btnKnowHowDetailScrap = (LinearLayout)findViewById(R.id.btnKnowHowScrap);
+        txtKnowHowDetailScrapCount = (TextView)findViewById(R.id.txtKnowHowDetailScrapCount);
+        txtKnowHowDetailReplyCount = (TextView)findViewById(R.id.txtKnowHowDetailReplyCount);
+        imgScrapImage = (ImageView)findViewById(R.id.imgScrapImage);
     }
 
     private void getItem(String writingUniqueKey) {
@@ -153,6 +197,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
                 txtKnowHowDetailUserName.setText(decode.getWriting_data1().get(0).getName().toString());
                 txtKnowHowDetailTime.setText(decode.getWriting_data1().get(0).getWriting_date());
                 txtToolBarTitle.setText(decode.getWriting_data1().get(0).getWriting_name());
+                txtKnowHowDetailScrapCount.setText(decode.getWriting_data1().get(0).getScrap_amount().toString());
 
                 sbContent.append("★" + decode.getWriting_data1().get(0).getWriting_name().toString() + "★\n" +
                         decode.getWriting_data1().get(0).getExplanation().toString() +
@@ -171,6 +216,133 @@ public class DetailKnowHowActivity extends AppCompatActivity {
                         sbContent.append("\n");
                     }
                 }
+            }
+
+            @Override
+            public void onFailure(Call<KnowHowDetailBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getKnowHowReplyCount(String writingUniqueKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<WritingDetailReplyListBean> call = connectService.getWritingDetailReply(writingUniqueKey);
+        call.enqueue(new Callback<WritingDetailReplyListBean>() {
+            @Override
+            public void onResponse(Call<WritingDetailReplyListBean> call, Response<WritingDetailReplyListBean> response) {
+                WritingDetailReplyListBean decode = response.body();
+                txtKnowHowDetailReplyCount.setText(decode.getReply_list().size()+"");
+            }
+
+            @Override
+            public void onFailure(Call<WritingDetailReplyListBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void scrapCheck(final String writingKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_unique_key", SaveDataMemberInfo.getAppPreferences(getApplicationContext(),"user_key"));
+        map.put("writing_unique_key",writingKey);
+        Call<OnlyErrBean> call = connectService.getCheckScrap(map);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+                OnlyErrBean decode = response.body();
+                if(decode.getErr()=="3") {
+                    isScrap = true;
+                    imgScrapImage.setImageDrawable(getResources().getDrawable(R.drawable.knowhow_like));
+                } else if(decode.getErr()=="5") {
+                    isScrap = false;
+                    imgScrapImage.setImageDrawable(getResources().getDrawable(R.drawable.knowhow_unlike));
+                }
+                getKnowHowScrapCount(writingKey);
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void cancelScrap(String writingKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_unique_key",SaveDataMemberInfo.getAppPreferences(getApplicationContext(),"user_key"));
+        map.put("writing_unique_key",writingKey);
+
+        Call<OnlyErrBean> call = connectService.unScrap(map);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void setScrap(String writingKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_unique_key",SaveDataMemberInfo.getAppPreferences(getApplicationContext(),"user_key"));
+        map.put("writing_unique_key",writingKey);
+
+        Call<OnlyErrBean> call = connectService.setScrap(map);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getKnowHowScrapCount(String writingUniqueKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Log.e("writingKey", writingUniqueKey);
+        Call<KnowHowDetailBean> call = connectService.getKnowHowDetail(writingUniqueKey);
+        call.enqueue(new Callback<KnowHowDetailBean>() {
+            @Override
+            public void onResponse(Call<KnowHowDetailBean> call, Response<KnowHowDetailBean> response) {
+                KnowHowDetailBean decode = response.body();
+                txtKnowHowDetailScrapCount.setText(decode.getWriting_data1().get(0).getScrap_amount().toString());
+
             }
 
             @Override

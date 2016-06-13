@@ -3,9 +3,11 @@ package sungkyul.ac.kr.leeform.dao;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import sungkyul.ac.kr.leeform.dto.AlarmCheckBean;
 import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
 import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.CommunityWritingBean;
@@ -21,9 +23,8 @@ import sungkyul.ac.kr.leeform.dto.RegistBean;
 import sungkyul.ac.kr.leeform.dto.UserBean;
 import sungkyul.ac.kr.leeform.dto.UserInfoBean;
 import sungkyul.ac.kr.leeform.dto.UserModifyBean;
-
-//<<<<<<< HEAD
-//=======
+import sungkyul.ac.kr.leeform.dto.WritingDetailReplyListBean;
+import sungkyul.ac.kr.leeform.dto.getAlarmStateBean;
 
 /**
  * Created by HunJin on 2016-06-10.
@@ -159,6 +160,26 @@ public interface ConnectService {
     @GET("PushAlarm.php")
     Call<OnlyErrBean> push(
             @Query("writing_unique_key") String writing_unique_key
+    );
+
+    @GET("set_push_alarm.php")
+    Call<AlarmCheckBean> change(
+            @Query("user_unique_key") String user_unique_key
+    );
+
+    @GET("check_push_alarm.php")
+    Call<getAlarmStateBean> checkAlarmState(
+            @Query("user_unique_key") String user_unique_key
+    );
+
+    @GET("view_reply_writing.php")
+    Call<WritingDetailReplyListBean> getWritingDetailReply(
+            @Query("writing_unique_key") String writing_unique_key
+    );
+
+    @GET("reply_writing.php")
+    Call<OnlyErrBean> setWritingDetailReply(
+            @QueryMap Map<String, String> options
     );
 }
 

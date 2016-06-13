@@ -25,6 +25,8 @@
 
     <ListView
         android:scrollbars="none"
+        android:divider="@color/colorBlack"
+        android:dividerHeight="0.5dp"
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

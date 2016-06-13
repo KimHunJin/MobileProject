@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.navigation.MyPageModifyActivity"/>
+        <activity android:name=".activity.navigation.MyPageModifyActivity" />
         <activity
             android:name=".activity.member.RegisterActivity"
             android:theme="@style/CustomNoActionBar" />
@@ -51,7 +51,7 @@
         <activity android:name=".activity.search.MaterialSearchActivity" />
         <activity
             android:name=".activity.gcm.PopUpActivity"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.settings.SettingActivity"
             android:theme="@style/PreferencesTheme" />
@@ -67,8 +67,8 @@
         <activity android:name=".activity.navigation.RegistSellerActivity" />
         <activity android:name=".activity.intro.SplashActivity" />
         <activity android:name=".activity.knowhow.WriteKnowHowActivity" />
-        <activity android:name=".activity.navigation.PurchaseListActivity"/>
-        <activity android:name=".activity.navigation.SaleListActivity"></activity>
+        <activity android:name=".activity.navigation.PurchaseListActivity" />
+        <activity android:name=".activity.navigation.SaleListActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -99,18 +99,22 @@
             android:name=".service.RegistrationIntentService"
             android:exported="false" />
 
-        <activity android:name=".activity.credit.DemoCreditPage"></activity>
+        <activity android:name=".activity.credit.DemoCreditPage" />
 
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
+
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
+
             <data android:scheme="nicepaysample" />
         </intent-filter>
 
-        <activity android:name=".activity.settings.AboutUsActivity"/>
-        <activity android:name=".activity.settings.LicenseActivity"/>
-        <activity android:name=".activity.settings.LicenseDetailActivity"/>
+        <activity android:name=".activity.settings.AboutUsActivity" />
+        <activity android:name=".activity.settings.LicenseActivity" />
+        <activity android:name=".activity.settings.LicenseDetailActivity" />
+        <activity android:name=".activity.knowhow.DetailKnowHowReplyActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
     </application>
 
 </manifest>

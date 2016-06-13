@@ -124,7 +124,13 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onResponse(Call<KnowHowBean> call, Response<KnowHowBean> response) {
                 KnowHowBean decode = response.body();
-                for (int i = 0; i < decode.getSearch_data().size(); i++) {
+                int size;
+                if(decode.getErr()=="0") {
+                    size = decode.getSearch_data().size();
+                } else {
+                    size = 0;
+                }
+                for (int i = 0; i < size; i++) {
                     listItems.add(new MainListItem(
                                     Integer.parseInt(decode.getSearch_data().get(i).getWriting_unique_key()),
                                     decode.getSearch_data().get(i).getPrice(),

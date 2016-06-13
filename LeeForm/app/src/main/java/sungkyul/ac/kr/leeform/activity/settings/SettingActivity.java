@@ -3,6 +3,7 @@ package sungkyul.ac.kr.leeform.activity.settings;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -19,9 +21,19 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.util.helper.log.Logger;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.activity.member.LoginActivity;
+import sungkyul.ac.kr.leeform.dao.ConnectService;
+import sungkyul.ac.kr.leeform.dto.AlarmCheckBean;
+import sungkyul.ac.kr.leeform.dto.getAlarmStateBean;
 import sungkyul.ac.kr.leeform.utils.LoadActivityList;
+import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
+import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 /**
  * 설정
@@ -29,7 +41,7 @@ import sungkyul.ac.kr.leeform.utils.LoadActivityList;
  */
 public class SettingActivity extends PreferenceActivity {
     private Toolbar toolbar;
-
+    CheckBoxPreference checkPush;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +68,17 @@ public class SettingActivity extends PreferenceActivity {
             }
         });
 
+        checkPush = (CheckBoxPreference) findPreference("useNotice");
+
+        checkPush();
+
+        checkPush.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                chacngePush();
+                return true;
+            }
+        });
 
         Preference leaveLeeForm = findPreference("leaveLeeForm");
         leaveLeeForm.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -140,5 +163,59 @@ public class SettingActivity extends PreferenceActivity {
                                 dialog.dismiss();
                             }
                         }).show();
+    }
+
+
+    private void chacngePush() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<AlarmCheckBean> call = connectService.change(SaveDataMemberInfo.getAppPreferences(getApplicationContext(),"user_key"));
+        call.enqueue(new Callback<AlarmCheckBean>() {
+            @Override
+            public void onResponse(Call<AlarmCheckBean> call, Response<AlarmCheckBean> response) {
+                AlarmCheckBean decode = response.body();
+                if(decode.getSet_alarm()==1) {
+                    checkPush.setChecked(true);
+                } else {
+                    checkPush.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AlarmCheckBean> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void checkPush() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<getAlarmStateBean> call = connectService.checkAlarmState(SaveDataMemberInfo.getAppPreferences(getApplicationContext(),"user_key"));
+        call.enqueue(new Callback<getAlarmStateBean>() {
+            @Override
+            public void onResponse(Call<getAlarmStateBean> call, Response<getAlarmStateBean> response) {
+                getAlarmStateBean decode = response.body();
+                if(decode.getSet_alarm().get(0).getSet_alarm()==1) {
+                    checkPush.setChecked(true);
+                } else {
+                    checkPush.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<getAlarmStateBean> call, Throwable t) {
+
+            }
+        });
     }
 }
