@@ -3,12 +3,12 @@ package sungkyul.ac.kr.leeform.activity.knowhow;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.adapter.CommunityReplyLIstAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
-import sungkyul.ac.kr.leeform.dto.CommunityDetailBean;
-import sungkyul.ac.kr.leeform.dto.CommunityListBean;
 import sungkyul.ac.kr.leeform.dto.OnlyErrBean;
 import sungkyul.ac.kr.leeform.dto.WritingDetailReplyListBean;
 import sungkyul.ac.kr.leeform.items.ReplyItem;
@@ -34,7 +32,7 @@ import sungkyul.ac.kr.leeform.utils.SaveDataMemberInfo;
 import sungkyul.ac.kr.leeform.utils.StaticURL;
 
 public class DetailKnowHowReplyActivity extends Activity {
-
+    LinearLayout layKnowhowDetailReply;
     EditText edtContents;
     TextView txtRegist;
     ListView lstReply;
@@ -55,7 +53,6 @@ public class DetailKnowHowReplyActivity extends Activity {
         number = Integer.parseInt(it.getExtras().getString("key"));
 
         layoutSetting();
-
         lstReply.setAdapter(adapter);
 
         Log.e("numer", number + "");
@@ -78,9 +75,17 @@ public class DetailKnowHowReplyActivity extends Activity {
                 }
             }
         });
+
+        layKnowhowDetailReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void layoutSetting() {
+        layKnowhowDetailReply = (LinearLayout)findViewById(R.id.layKnowhowDetailReply);
         edtContents = (EditText) findViewById(R.id.edtKnowHowDetailReplyContents);
         txtRegist = (TextView) findViewById(R.id.txtKnowHowDetailReplyRegister);
         adapter = new CommunityReplyLIstAdapter(getApplicationContext(), R.layout.item_list_reply, listItem);
@@ -152,4 +157,9 @@ public class DetailKnowHowReplyActivity extends Activity {
 
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.commons_slide_up_to_bottom, R.anim.commons_slide_up_to_bottom);
+    }
 }
