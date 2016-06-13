@@ -20,26 +20,45 @@
     <string name="AboutUs">
         Do It Yourself\n
         당신도 할 수 있습니다!\n
-        노하우를 보고\n
-        노하우를 따라하세요.\n
+        노하우를 공유하고\n
+        직접 인테리어 소품을 제작해보세요.\n
         손쉽게 만드는 인테리어 소품!\n
         \n
-        커뮤니티를 통해\n
-        소통도 할 수 있어요.
+        ■ 노하우 공유\n
+        인테리어 소품 제작 노하우 공유\n
+        \n
+        ■ 소품 판매 및 구입\n
+        직접 제작한 인테리어 소품을 판매 및 구입\n
+        \n
+        ■ 재료 구매\n
+        노하우에 사용된 재료를 손쉽게 구매\n
+        \n
+        ■ 커뮤니티\n
+        소품제작 팁 공유 및 회원간 소통\n
     </string>
 
     <string name="createBy">
-            美人 못하는게 없는 서버 개발자\n
+            서버 개발\n
             <b>김경희</b>\n\n
 
-            美女 언어의 마술사, 프론트 엔드 개발자\n
+            프론트 엔드 개발\n
             <b>김미선</b>\n\n
 
-            天才 기획도, 디자인도 문제없어! 기디발자\n
+            기획 및 디자인\n
             <b>김용훈</b>\n\n
 
-            人間 조용히 묻어가는 개발자\n
-            <b>김헌진</b>
+            개발 총괄\n
+            <b>김헌진</b>\n\n
+    </string>
+
+    <string name="thanks_mesaage">
+        내가 꾸미는 우리집, <b>내꾸우</b>를 이용해 주셔서 감사합니다.\n
+        문제점이나 제안사항을 아래의 이메일 주소로 보내시주면\n
+        더 나은 앱으로 만들어가는데 큰 도움이 됩니다. 감사합니다.\n
+    </string>
+
+    <string name="mail">
+        kelomg@naver.com\n\n
     </string>
 
     <string name="footer">
@@ -53,8 +72,10 @@
         다음 학기에 다들 바쁘겠지?\n
         나만 여유롭게 놀러가는구나...☆\n
         기념품 챙겨올게!!\n
-        \n
-        Copyright ⓒ 2016 LeeForm. All rights reserved.
+    </string>
+
+    <string name="copyright">
+        Copyright ⓒ 2016 LeeForm. All rights reserved.\n
     </string>
 
 </resources>
