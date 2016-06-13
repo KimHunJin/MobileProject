@@ -278,7 +278,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
 
     }
 
-    private void cancelScrap(String writingKey) {
+    private void cancelScrap(final String writingKey) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -293,7 +293,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         call.enqueue(new Callback<OnlyErrBean>() {
             @Override
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
-
+                push(writingKey);
             }
 
             @Override
@@ -347,6 +347,27 @@ public class DetailKnowHowActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<KnowHowDetailBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void push(String writingUniqueKey) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(StaticURL.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ConnectService connectService = retrofit.create(ConnectService.class);
+        Call<OnlyErrBean> call = connectService.push(writingUniqueKey);
+        call.enqueue(new Callback<OnlyErrBean>() {
+            @Override
+            public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<OnlyErrBean> call, Throwable t) {
 
             }
         });

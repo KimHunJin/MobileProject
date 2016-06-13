@@ -1,6 +1,7 @@
 package sungkyul.ac.kr.leeform.activity.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,6 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.knowhow.DetailKnowHowActivity;
 import sungkyul.ac.kr.leeform.adapter.MainListAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.KnowHowBean;
@@ -69,6 +72,17 @@ public class KnowHowSearchActivity extends AppCompatActivity implements View.OnC
                     keyboard.hideSoftInputFromWindow(edtSearch.getWindowToken(), 0);
                 }
                 return false;
+            }
+        });
+
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //리스트의 아이템 선택했을 때
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent itKnowhowDetail = new Intent(getApplicationContext(), DetailKnowHowActivity.class);
+                itKnowhowDetail.putExtra("image", listItems.get(position).getmUrl() + "");
+                itKnowhowDetail.putExtra("knowhowkey", listItems.get(position).getmNumber() + "");
+                startActivity(itKnowhowDetail);
             }
         });
     }

@@ -1,13 +1,16 @@
 package sungkyul.ac.kr.leeform.activity.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -21,6 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.material.MaterialDetailActivity;
 import sungkyul.ac.kr.leeform.adapter.MaterialGridAdapter;
 import sungkyul.ac.kr.leeform.dao.ConnectService;
 import sungkyul.ac.kr.leeform.dto.MaterialListBean;
@@ -69,6 +73,16 @@ public class MaterialSearchActivity extends AppCompatActivity implements View.On
                     return true;
                 }
                 return false;
+            }
+        });
+
+        grvMaterial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent it = new Intent(getApplicationContext(), MaterialDetailActivity.class);
+                Log.e("material_unique_key", gridItems.get(position).getmKey() + "");
+                it.putExtra("material_unique_key", gridItems.get(position).getmKey() + "");
+                startActivity(it);
             }
         });
     }

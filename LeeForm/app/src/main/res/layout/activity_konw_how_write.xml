@@ -205,6 +205,7 @@
                 android:gravity="right">
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/edtCost"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
@@ -406,6 +407,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:hint="판매 가격"
+                android:inputType="number"
                 android:maxLength="7"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
