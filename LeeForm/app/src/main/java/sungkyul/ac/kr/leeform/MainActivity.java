@@ -115,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         tabInitialization();
         initializeLayout();
-        getAuthority();
-        setListener();
         checkUser();
+        setListener();
+        getAuthority();
         gcm();
     }
 
@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UserBean> call, Response<UserBean> response) {
 
                 UserBean decode = response.body();
-                String authority = decode.getMyinfo_detail().get(0).getAuthority();
+                String authority = decode.getMyinfo_detail().get(0).getAuthority().toString();
                 SaveData.setAppPreferences(getApplicationContext(), "isAuthority",authority);
             }
 

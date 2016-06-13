@@ -2,10 +2,7 @@
 <resources>
     <string-array name="category">
         <item>카테고리</item>
-        <item>나</item>
-        <item>다</item>
-        <item>라</item>
-        <item>마</item>
+        <item>구현 중...</item>
     </string-array>
 
     <string-array name="sort">
