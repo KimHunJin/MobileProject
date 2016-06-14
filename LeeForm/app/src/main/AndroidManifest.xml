@@ -24,7 +24,7 @@
         android:theme="@style/CustomNoActionBar">
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".activity.member.LoginActivity"
+            android:name=".activity.intro.SplashActivity"
             android:theme="@style/CustomNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,7 +65,7 @@
 
         <activity android:name=".activity.settings.NoticeActivity" />
         <activity android:name=".activity.navigation.RegistSellerActivity" />
-        <activity android:name=".activity.intro.SplashActivity" />
+        <activity android:name=".activity.member.LoginActivity" />
         <activity android:name=".activity.knowhow.WriteKnowHowActivity" />
         <activity android:name=".activity.navigation.PurchaseListActivity" />
         <activity android:name=".activity.navigation.SaleListActivity" />

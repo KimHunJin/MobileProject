@@ -34,7 +34,8 @@ import sungkyul.ac.kr.leeform.utils.StaticURL;
  * Created by YongHoon on 2016-05-18.
  * 노하우 상세정보
  */
-public class DetailKnowHowActivity extends AppCompatActivity {
+public class
+DetailKnowHowActivity extends AppCompatActivity {
     StringBuffer sbContent;
     View layKnowhowDetail;
     private ImageView imgScrapImage;
@@ -293,7 +294,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         call.enqueue(new Callback<OnlyErrBean>() {
             @Override
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
-                push(writingKey);
+
             }
 
             @Override
@@ -304,7 +305,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
 
     }
 
-    private void setScrap(String writingKey) {
+    private void setScrap(final String writingKey) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(StaticURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -319,7 +320,7 @@ public class DetailKnowHowActivity extends AppCompatActivity {
         call.enqueue(new Callback<OnlyErrBean>() {
             @Override
             public void onResponse(Call<OnlyErrBean> call, Response<OnlyErrBean> response) {
-
+                push(writingKey);
             }
 
             @Override
