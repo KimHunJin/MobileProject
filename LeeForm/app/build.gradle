@@ -2,30 +2,19 @@ apply plugin: 'com.android.application'
 
 android {
     // *** 제출할 때 이부분 수정 요망 (매우 중요)
-    signingConfigs {
-        config {
-            keyAlias 'mos_key'
-            keyPassword 'ahrl7520'
-            storeFile file('../mos_key.jks')
-            storePassword 'ahrl7520'
-        }
-    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "sungkyul.ac.kr.leeform"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            signingConfig signingConfigs.config
         }
     }
 }

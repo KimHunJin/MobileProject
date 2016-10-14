@@ -26,6 +26,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeResponseCallback;
+import com.kakao.usermgmt.response.model.UserProfile;
 import com.navdrawer.SimpleSideDrawer;
 
 import java.io.InputStream;
@@ -108,16 +112,35 @@ public class MainActivity extends AppCompatActivity {
         // 로그아웃 할 때 열려있는 액티비티 모두 닫기 위해 리스트에 저장
         LoadActivityList.actList.add(MainActivity.this);
 
-        Intent it = getIntent();
-        userId = it.getExtras().getLong("UserId");
-        userNickName = it.getExtras().getString("NickName");
-        userImagePath = it.getExtras().getString("Image");
+//        Intent it = getIntent();
+//        userId = it.getExtras().getLong("UserId");
+//        userNickName = it.getExtras().getString("NickName");
+//        userImagePath = it.getExtras().getString("Image");
+
+        UserManagement.requestMe(new MeResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+
+            }
+
+            @Override
+            public void onNotSignedUp() {
+
+            }
+
+            @Override
+            public void onSuccess(UserProfile profile) {
+                userId = profile.getId();
+                userNickName = profile.getNickname();
+                userImagePath = profile.getThumbnailImagePath();
+            }
+        });
 
         tabInitialization();
         initializeLayout();
         checkUser();
         setListener();
-        getAuthority();
+//        getAuthority();
         gcm();
     }
 

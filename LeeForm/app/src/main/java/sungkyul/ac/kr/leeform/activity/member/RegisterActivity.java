@@ -68,9 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
     // 로그인 성공시
     private void redirectMainActivity(long userId, String nickName, String imagePath) {
         Intent it = new Intent(this, MainActivity.class);
-        it.putExtra("UserId", userId);
-        it.putExtra("NickName", nickName);
-        it.putExtra("Image", imagePath);
+//        it.putExtra("UserId", userId);
+//        it.putExtra("NickName", nickName);
+//        it.putExtra("Image", imagePath);
         startActivity(it);
         overridePendingTransition(0, 0);
         finish();
