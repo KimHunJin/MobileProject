@@ -1,5 +1,6 @@
 package sungkyul.ac.kr.leeform.activity.member;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.auth.ISessionCallback;
@@ -21,6 +23,8 @@ import java.security.NoSuchAlgorithmException;
 import sungkyul.ac.kr.leeform.MainActivity;
 import sungkyul.ac.kr.leeform.R;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
+
+import static com.kakao.util.helper.Utility.getPackageInfo;
 
 /**
  * Created by HunJin on 2016-05-14.
@@ -36,21 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.e("MY KEY HASH:",
-                        Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
 
         // 취소버튼 눌렀을 때 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
@@ -117,6 +106,28 @@ public class LoginActivity extends AppCompatActivity {
         //핸들러 작동
         backPressCloseHandler.onBackPressed();
         Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * HashKey를 얻기 위한 메서드
+     * @param context
+     * @return
+     */
+    public static String getKeyHash(final Context context) {
+        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
+        if (packageInfo == null)
+            return null;
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                return android.util.Base64.encodeToString(md.digest(), android.util.Base64.NO_WRAP);
+            } catch (NoSuchAlgorithmException e) {
+                Log.w(TAG, "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+        return null;
     }
 
 }
