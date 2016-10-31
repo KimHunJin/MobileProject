@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,47 +29,48 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/material_list_image_background" />
         </FrameLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/colorBlack"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/colorBlack" />
 
-        <TextView
-            android:id="@+id/txtGridMaterialName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:text="판자"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/txtGridMaterialName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:text="판자"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
 
 
-        <TextView
-            android:id="@+id/txtGridMaterialCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentBottom="true"
-            android:text="3,000"
-            android:textColor="@color/colorBlack"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txtGridMaterialCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="3,000"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
 
-        <ImageView
-            android:src="@drawable/knowhow_item_money"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_toLeftOf="@id/txtGridMaterialCost"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:layout_toLeftOf="@id/txtGridMaterialCost"
+                android:src="@drawable/knowhow_item_money" />
+        </RelativeLayout>
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>
