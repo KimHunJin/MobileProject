@@ -22,6 +22,7 @@ import java.security.NoSuchAlgorithmException;
 
 import sungkyul.ac.kr.leeform.MainActivity;
 import sungkyul.ac.kr.leeform.R;
+import sungkyul.ac.kr.leeform.activity.kakao.BaseActivity;
 import sungkyul.ac.kr.leeform.utils.BackPressCloseHandler;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
@@ -30,7 +31,7 @@ import static com.kakao.util.helper.Utility.getPackageInfo;
  * Created by HunJin on 2016-05-14.
  * 로그인 (카카오)
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     final static String TAG = "LoginActivity";
     private SessionCallback callback;
@@ -81,21 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                 Logger.e(exception);
             }
         }
-    }
-
-
-    protected void redirectSignupActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
-        final Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
-    }
-
-    protected void redirectMainActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
-        final Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
     }
 
     /**

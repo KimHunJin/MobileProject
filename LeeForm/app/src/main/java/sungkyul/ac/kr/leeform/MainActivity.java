@@ -133,12 +133,13 @@ public class MainActivity extends AppCompatActivity {
                 userId = profile.getId();
                 userNickName = profile.getNickname();
                 userImagePath = profile.getThumbnailImagePath();
+                Log.e(TAG + "success", "id : " + userId + " name : " + userNickName + " img : " + userImagePath);
+                checkUser();
             }
         });
 
         tabInitialization();
         initializeLayout();
-        checkUser();
         setListener();
 //        getAuthority();
         gcm();
@@ -183,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        Log.e(TAG + "setUser",userNickName + " : " + userImagePath);
+
         Map<String, String> data = new HashMap<>();
         data.put("kakao_unique_key", userId + "");
         data.put("img", userImagePath);
@@ -212,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
      * setUser() 메서드를 호출합니다.
      */
     private void checkUser() {
+        Log.e(TAG + "checkUser",userId+"");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -248,6 +252,8 @@ public class MainActivity extends AppCompatActivity {
      * 네비게이션 세팅 (사용자 이미지, 닉네임)
      */
     private void navigationSetting() {
+
+        Log.e(TAG, userNickNameIn);
 
         txtNavUserNickName.setText(userNickNameIn);
         if (userImagePath != null) {
@@ -479,5 +485,4 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver();
         setListener();
     }
-
 }
